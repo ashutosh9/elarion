@@ -55,6 +55,16 @@ public class Animation {
 		return (OneScene)scenes.get(x);
 	}
 	
+/*	@SuppressWarnings("unused")
+	private Image getSceneImage(int x){
+		return scenes.get(x).getImage();
+	}
+	
+	@SuppressWarnings("unused")
+	private int getTotalScenes(){
+		return scenes.size();
+	}*/
+	
 	private class OneScene{
 		Image pic;
 		long endTime;
@@ -62,6 +72,10 @@ public class Animation {
 		public OneScene(Image pic, long endTime){
 			this.pic = pic;
 			this.endTime = endTime;
+		}
+		
+		public Image getImage(){
+			return pic;
 		}
 		
 	}
