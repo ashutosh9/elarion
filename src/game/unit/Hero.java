@@ -9,7 +9,7 @@ import game.player.Player;
 import game.race.Race;
 import game.spells.Talent;
 
-public class Hero implements IUnit {
+public class Hero extends Unit {
 
 	//combat - left/right move,stand,attack,cast,die
 	/*	private Sprite leftHeadingSprite;
