@@ -12,6 +12,10 @@ public class KeyMap {
 				mc.stop();
 			}
 			
+			if(keyCode == KeyEvent.VK_1){
+				mc.exit();
+			}
+			
 		}
 		if(i==2) { //released
 			

@@ -25,6 +25,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 	private static Player currentPlayer;
 	private static MainClass mc;
 	private boolean running;
+	private boolean exited;
 	
 	public static void main(String args[]){
 		field = new Field(500,500);
@@ -58,15 +59,17 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void run() {
 		s = new Screen();
 		try {
-			DisplayMode dm = s.findCompatibleMode(modes);
-			s.setFullScreen(dm);
-			Window w = s.getFullScreenWindow();
-			w.setFocusTraversalKeysEnabled(false);
-			w.addKeyListener(this);
-			running = true;
-			loadimages();
-			if(loaded){
-			movieLoop();
+				DisplayMode dm = s.findCompatibleMode(modes);
+				s.setFullScreen(dm);
+				Window w = s.getFullScreenWindow();
+				w.setFocusTraversalKeysEnabled(false);
+				w.addKeyListener(this);
+				running = true;
+				loadimages();
+				if(loaded){
+				while(!exited){
+					movieLoop();
+				}
 			}
 		} finally {
 			s.restoreScreen();
@@ -76,6 +79,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void movieLoop() {
 		long startingTime = System.currentTimeMillis();
 		long cumTime = startingTime;
+		//while(!running) - draw menu 
 		while(running){
 			long timePassed = System.currentTimeMillis() - cumTime;
 			cumTime += timePassed;
@@ -162,7 +166,11 @@ public class MainClass implements KeyListener,MouseInputListener {
 	}
 
 	public void stop() {
-		running = false;
+		running = !running;
+	}	
+	
+	public void exit() {
+		exited = true;
 	}	
 
 	@Override
