@@ -1,171 +1,238 @@
 package game.unit;
 
+import java.util.ArrayList;
+
 import game.main.Animation;
 
 public class GraphicalData {
 	//WMM = World Map Movement; BF = Battle Field
-	private Animation WMMUp;
-	private Animation WMMDown;
-	private Animation WMMLeft;
-	private Animation WMMRight;
-	private Animation WMMUpRight;
-	private Animation WMMUpLeft;
-	private Animation WMMDownRight;
-	private Animation WMMDownLeft;
+	private Animation wMMUp;
+	private Animation wMMDown;
+	private Animation wMMLeft;
+	private Animation wMMRight;
+	private Animation wMMUpRight;
+	private Animation wMMUpLeft;
+	private Animation wMMDownRight;
+	private Animation wMMDownLeft;
 	
-	private Animation BFMovementLeft;
-	private Animation BFMovementRight;
-	private Animation BFStandLeft;
-	private Animation BFStandRight;
-	private Animation BFDieLeft;
-	private Animation BFDieRight;
-	private Animation BFAttackLeft;
-	private Animation BFAttackRight;
-	private Animation BFCastLeft;
-	private Animation BFCastRight;
+	private Animation bFMovementLeft;
+	private Animation bFMovementRight;
+	private Animation bFStandLeft;
+	private Animation bFStandRight;
+	private Animation bFDieLeft;
+	private Animation bFDieRight;
+	private Animation bFAttackLeft;
+	private Animation bFAttackRight;
+	private Animation bFCastLeft;
+	private Animation bFCastRight;
+	
+	private ArrayList<Animation> graphicalData = new ArrayList<Animation>();
 	
 	public void setWorldMapMovementUp(Animation wMMUp) {
-		WMMUp = wMMUp;
+		this.wMMUp = wMMUp;
 	}
 	
 	public Animation getWorldMapMovementUp() {
-		return WMMUp;
+		return wMMUp;
 	}
 	
 	public void setWorldMapMovementDown(Animation wMMDown) {
-		WMMDown = wMMDown;
+		this.wMMDown = wMMDown;
 	}
 	
 	public Animation getWorldMapMovementDown() {
-		return WMMDown;
+		return wMMDown;
 	}
 	
 	public void setWorldMapMovementLeft(Animation wMMLeft) {
-		WMMLeft = wMMLeft;
+		this.wMMLeft = wMMLeft;
 	}
 	
 	public Animation getWorldMapMovementLeft() {
-		return WMMLeft;
+		return wMMLeft;
 	}
 	
 	public void setWorldMapMovementRight(Animation wMMRight) {
-		WMMRight = wMMRight;
+		this.wMMRight = wMMRight;
 	}
 	
 	public Animation getWorldMapMovementRight() {
-		return WMMRight;
+		return wMMRight;
 	}
 	
 	public void setWorldMapMovementUpRight(Animation wMMUpRight) {
-		WMMUpRight = wMMUpRight;
+		this.wMMUpRight = wMMUpRight;
 	}
 	
 	public Animation getWorldMapMovementUpRight() {
-		return WMMUpRight;
+		return wMMUpRight;
 	}
 	
 	public void setWorldMapMovementUpLeft(Animation wMMUpLeft) {
-		WMMUpLeft = wMMUpLeft;
+		this.wMMUpLeft = wMMUpLeft;
 	}
 	
 	public Animation getWorldMapMovementUpLeft() {
-		return WMMUpLeft;
+		return wMMUpLeft;
 	}
 	
 	public void setWorldMapMovementDownRight(Animation wMMDownRight) {
-		WMMDownRight = wMMDownRight;
+		this.wMMDownRight = wMMDownRight;
 	}
 	
 	public Animation getWorldMapMovementDownRight() {
-		return WMMDownRight;
+		return wMMDownRight;
 	}
 	
 	public void setWorldMapMovementDownLeft(Animation wMMDownLeft) {
-		WMMDownLeft = wMMDownLeft;
+		this.wMMDownLeft = wMMDownLeft;
 	}
 	
 	public Animation getWorldMapMovementDownLeft() {
-		return WMMDownLeft;
+		return wMMDownLeft;
 	}
 	
 	public void setBattleFieldMovementLeft(Animation bFMovementLeft) {
-		BFMovementLeft = bFMovementLeft;
+		this.bFMovementLeft = bFMovementLeft;
 	}
 	
 	public Animation getBattleFieldMovementLeft() {
-		return BFMovementLeft;
+		return bFMovementLeft;
 	}
 	
 	public void setBattleFieldMovementRight(Animation bFMovementRight) {
-		BFMovementRight = bFMovementRight;
+		this.bFMovementRight = bFMovementRight;
 	}
 	
 	public Animation getBattleFieldMovementRight() {
-		return BFMovementRight;
+		return bFMovementRight;
 	}
 	
 	public void setBattleFieldStandLeft(Animation bFStandLeft) {
-		BFStandLeft = bFStandLeft;
+		this.bFStandLeft = bFStandLeft;
 	}
 	
 	public Animation getBattleFieldStandLeft() {
-		return BFStandLeft;
+		return bFStandLeft;
 	}
 	
 	public void setBattleFieldStandRight(Animation bFStandRight) {
-		BFStandRight = bFStandRight;
+		this.bFStandRight = bFStandRight;
 	}
 	
 	public Animation getBattleFieldStandRight() {
-		return BFStandRight;
+		return bFStandRight;
 	}
 	
 	public void setBattleFieldDieLeft(Animation bFDieLeft) {
-		BFDieLeft = bFDieLeft;
+		this.bFDieLeft = bFDieLeft;
 	}
 	
 	public Animation getBattleFieldDieLeft() {
-		return BFDieLeft;
+		return bFDieLeft;
 	}
 	
 	public void setBattleFieldDieRight(Animation bFDieRight) {
-		BFDieRight = bFDieRight;
+		this.bFDieRight = bFDieRight;
 	}
 	
 	public Animation getBattleFieldDieRight() {
-		return BFDieRight;
+		return bFDieRight;
 	}
 	
 	public void setBattleFieldAttackLeft(Animation bFAttackLeft) {
-		BFAttackLeft = bFAttackLeft;
+		this.bFAttackLeft = bFAttackLeft;
 	}
 	
 	public Animation getBattleFieldAttackLeft() {
-		return BFAttackLeft;
+		return bFAttackLeft;
 	}
 	
 	public void setBattleFieldAttackRight(Animation bFAttackRight) {
-		BFAttackRight = bFAttackRight;
+		this.bFAttackRight = bFAttackRight;
 	}
 	
 	public Animation getBattleFieldAttackRight() {
-		return BFAttackRight;
+		return bFAttackRight;
 	}
 	
 	public void setBattleFieldCastLeft(Animation bFCastLeft) {
-		BFCastLeft = bFCastLeft;
+		this.bFCastLeft = bFCastLeft;
 	}
 	
 	public Animation getBattleFieldCastLeft() {
-		return BFCastLeft;
+		return bFCastLeft;
 	}
 	
 	public void setBattleFieldCastRight(Animation bFCastRight) {
-		BFCastRight = bFCastRight;
+		this.bFCastRight = bFCastRight;
 	}
 	
 	public Animation getBattleFieldCastRight() {
-		return BFCastRight;
+		return bFCastRight;
+	}
+	
+	public ArrayList<Animation> getGraphicalData(){
+		
+		if(wMMUp!=null){
+		graphicalData.add(wMMUp);
+		}
+		if(wMMDown!=null){
+			graphicalData.add(wMMDown);
+		}
+		if(wMMLeft!=null){
+			graphicalData.add(wMMLeft);
+		}
+		if(wMMRight!=null){
+			graphicalData.add(wMMRight);
+		}
+		
+		if(wMMUpLeft!=null){
+			graphicalData.add(wMMUpLeft);
+		}
+		if(wMMDownRight!=null){
+			graphicalData.add(wMMDownRight);
+		}
+		if(wMMDownLeft!=null){
+			graphicalData.add(wMMDownLeft);
+		}
+		if(wMMUpRight!=null){
+			graphicalData.add(wMMUpRight);
+		}	
+		
+		
+		if(bFAttackLeft!=null){
+			graphicalData.add(bFAttackLeft);
+		}	
+		if(bFAttackRight!=null){
+			graphicalData.add(bFAttackRight);
+		}
+		if(bFCastLeft!=null){
+			graphicalData.add(bFCastLeft);
+		}
+		if(bFCastRight!=null){
+			graphicalData.add(bFCastRight);
+		}
+		if(bFDieLeft!=null){
+			graphicalData.add(bFDieLeft);
+		}
+		if(bFDieRight!=null){
+			graphicalData.add(bFDieRight);
+		}
+		if(bFMovementLeft!=null){
+			graphicalData.add(bFMovementLeft);
+		}
+		if(bFMovementRight!=null){
+			graphicalData.add(bFMovementRight);
+		}
+		if(bFStandLeft!=null){
+			graphicalData.add(bFStandLeft);
+		}
+		if(bFStandRight!=null){
+			graphicalData.add(bFStandRight);
+		}
+		
+		return graphicalData;		
 	}
 	
 }
