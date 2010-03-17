@@ -23,6 +23,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 	private boolean loaded;
 	private static Field field;
 	private static Player currentPlayer;
+	private static MainClass mc;
+	private boolean running;
 	
 	public static void main(String args[]){
 		field = new Field(500,500);
@@ -38,7 +40,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 			playerList.add(playerRed);
 		}
 		TurnSystem turnSystem = new TurnSystem(playerList);*/
-		MainClass mc = new MainClass();
+		mc = new MainClass();
 		// this will be the main graphics class
 		// it will get the current player from the turn system
 		mc.run();
@@ -61,6 +63,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 			Window w = s.getFullScreenWindow();
 			w.setFocusTraversalKeysEnabled(false);
 			w.addKeyListener(this);
+			running = true;
 			loadimages();
 			if(loaded){
 			movieLoop();
@@ -73,7 +76,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void movieLoop() {
 		long startingTime = System.currentTimeMillis();
 		long cumTime = startingTime;
-		while(cumTime - startingTime < 5000){
+		while(running){
 			long timePassed = System.currentTimeMillis() - cumTime;
 			cumTime += timePassed;
 			a.update(timePassed);
@@ -158,9 +161,13 @@ public class MainClass implements KeyListener,MouseInputListener {
 		loaded = true;
 	}
 
+	public void stop() {
+		running = false;
+	}	
+
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyPressed(KeyEvent e) {
+		KeyMap km = new KeyMap(e,mc,1);
 		
 	}
 
@@ -216,7 +223,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}		
+	}
+	
 }
 
 
