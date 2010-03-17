@@ -124,6 +124,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 	}
 
 	public void loadimages() {
+		//load every image
 		field.initImages();
 		//Image img1 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg"); //field.initImages();
 		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
