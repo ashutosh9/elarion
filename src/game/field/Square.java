@@ -1,6 +1,8 @@
 package game.field;
 
-import game.building.Event;
+import game.building.Building;
+import game.building.BuildingEvent;
+import game.unit.Hero;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -10,18 +12,18 @@ public class Square {
 	private int y;
 	private boolean passable;
 	private Image img;
-	private Image buildingImg;
-	private Event event;
+	private BuildingEvent event;
 	private boolean isWater;
-	private boolean isOccupied;
-	//private Type type;
+	private boolean containsCollectible;
+	private Building building;
+	private Hero hero;
 	//private Tooltip tooltip;
 	
 	
 	public Square(int x, int y){
 		this.x = x;
 		this.y = y;
-		isOccupied = false;
+		setHero(null);
 	}
 	
 	public int getX(){
@@ -48,31 +50,19 @@ public class Square {
 		return isWater;
 	}
 	
-	public Event getSquareEvent(){
+	public BuildingEvent getSquareEvent(){
 		return event;
-	}
-	
-	public void setOccupied(boolean b){
-		isOccupied = b;
-	}
-	
-	public boolean getOccupied(){
-		return isOccupied;
 	}
 	
 	//public Tooltip getTooltip(){
 	//	return Tooltip;
 	//}
 	
-	//public Type getType(){
-	//	return type;
-	//}
-	
 	public Image getBuildingImage(){
-		return buildingImg;
+		return building.getImage();
 	}
 	
-	public void setSquareEvent(Event e){
+	public void setSquareEvent(BuildingEvent e){
 		event = e;
 	}
 	
@@ -94,9 +84,17 @@ public class Square {
 	}
 	
 	public void setBuildingImage(Image img){
-		buildingImg = img; 
+		building.setImage(img); 
 		//Toolkit.getDefaultToolkit().getImage("");
 		// different types for now
+	}
+
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+
+	public Hero getHero() {
+		return hero;
 	}
 	
 	// set visibility for every player

@@ -46,11 +46,11 @@ public class Hero extends Unit {
 	
 	public void setHeroLocation(int x, int y,Field f){
 		if(this.x != 0 && this.y != 0){
-			f.getSquare(this.x, this.y).setOccupied(false);
+			f.getSquare(this.x, this.y).setHero(null); //Occupied(false);
 		}
 		this.x = x;
 		this.y = y;
-		f.getSquare(x, y).setOccupied(true);
+		f.getSquare(x, y).setHero(this); //Occupied(true);
 	}
 
 	public void setOwner(Player owner) {

@@ -64,6 +64,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 				Window w = s.getFullScreenWindow();
 				w.setFocusTraversalKeysEnabled(false);
 				w.addKeyListener(this);
+				loaded = false;
 				running = true;
 				loadimages();
 				if(loaded){
@@ -80,7 +81,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 		long startingTime = System.currentTimeMillis();
 		long cumTime = startingTime;
 		//while(!running) - draw menu 
-		while(running){
+		while(running && !exited){
 			long timePassed = System.currentTimeMillis() - cumTime;
 			cumTime += timePassed;
 			a.update(timePassed);
@@ -172,10 +173,18 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void exit() {
 		exited = true;
 	}	
+	
+	public static Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public static void setCurrentPlayer(Player currentPlayer) {
+		MainClass.currentPlayer = currentPlayer;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		KeyMap km = new KeyMap(e,mc,1);
+		KeyMap km = new KeyMap(e,mc,1,field);
 		
 	}
 

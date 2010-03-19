@@ -1,5 +1,5 @@
 package game.building;
 
-public class Event {
+public class BuildingEvent {
 
 }
