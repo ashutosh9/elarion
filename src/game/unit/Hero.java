@@ -25,6 +25,16 @@ public class Hero extends Unit {
 	private Player owner;
 	private Square currentSquare;
 	private Race race;
+	private int heading;
+	// for heading 
+	// 1 = up
+	// 2 = down
+	// 3 = left
+	// 4 = right
+	// 13 = upLeft
+	// 14 = upRight
+	// 23 = downLeft
+	// 24 = downRight
 	// to include combat stats and graphical data as different classes
 	
 	
@@ -76,6 +86,15 @@ public class Hero extends Unit {
 	public Race getRace() {
 		return race;
 	}
+
+	public void setHeading(int heading) {
+		this.heading = heading;
+	}
+
+	public int getHeading() {
+		return heading;
+	}
+	
 	
 //	public getAnimations(){
 //		return race.getHeroAnimations;

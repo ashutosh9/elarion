@@ -117,6 +117,15 @@ public class MainClass implements KeyListener,MouseInputListener {
 				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
 				g.drawImage(img
 						, Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
+				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
+					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
+					//checks the direction the hero is moving and then draws the hero Image in dependency of the direction and on different part of the current 
+					//square, after stopped moving - set the hero location to the next square , activate animation for standing ( if any ) and 
+					//set previous square hero to null and sprite for movement to null, the hero animation is drawn depending on his heading
+					/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
+					//the moving sprite image location will equal the square location + some pixels for the movement itself
+					//the movement orientation will depend on the heading
+				}
 				/*if(turnSystem.getCurrentPlayer().getMainHero().getCurrentSquare() == field.getSquare(j, i)) {
 					//draw hero
 				}*/
