@@ -2,12 +2,10 @@ package game.field;
 
 import game.Interface.Tooltip;
 import game.building.Building;
-import game.building.BuildingEvent;
 import game.item.Item;
 import game.unit.Hero;
 
 import java.awt.Image;
-import java.awt.Toolkit;
 
 public class Square {
 	private int x;
@@ -25,6 +23,7 @@ public class Square {
 		this.x = x;
 		this.y = y;
 		setHero(null);
+		tooltip = new Tooltip("");
 	}
 	
 	public int getX(){

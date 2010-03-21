@@ -11,13 +11,15 @@ public class Field {
 	private int width;
 	private Square[][] s;
 	private Terrain grass;
-	private Terrain water;
+	//private Terrain water;
+	//private Image grassImg;
 	
 	public Field(int width, int height){
-		Image waterImg = Toolkit.getDefaultToolkit().getImage("TODO");
+		//Image waterImg = Toolkit.getDefaultToolkit().getImage("to be done");
+		//grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
+		//water.setImg(waterImg);
 		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
-		water.setImg(waterImg);
-		grass.setImg(grassImg);
+		grass = new Terrain(grassImg);
 		s = new Square[width][height];
 		for(int x=1; x<width; x++) {
 			for(int y=1; y<height; y++) {
