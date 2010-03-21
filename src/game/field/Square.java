@@ -21,6 +21,7 @@ public class Square {
 	
 	
 	public Square(int x, int y){
+		//set tooltip to terrain tooltip
 		this.x = x;
 		this.y = y;
 		setHero(null);
@@ -75,6 +76,7 @@ public class Square {
 	}
 
 	public void setBuilding(Building building) {
+		//set tooltip to building tooltip
 		this.building = building;
 	}
 
@@ -91,6 +93,7 @@ public class Square {
 	}
 
 	public void setCollectibleItem(Item collectibleItem) {
+		//set tooltip to collectible tooltip 
 		this.collectibleItem = collectibleItem;
 	}
 
