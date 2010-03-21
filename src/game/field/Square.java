@@ -1,7 +1,9 @@
 package game.field;
 
+import game.Interface.Tooltip;
 import game.building.Building;
 import game.building.BuildingEvent;
+import game.item.Item;
 import game.unit.Hero;
 
 import java.awt.Image;
@@ -11,13 +13,11 @@ public class Square {
 	private int x;
 	private int y;
 	private boolean passable;
-	private Image img;
-	private BuildingEvent event;
-	private boolean isWater;
-	private boolean containsCollectible;
 	private Building building;
 	private Hero hero;
-	//private Tooltip tooltip;
+	private Terrain terrain;
+	private Tooltip tooltip;
+	private Item collectibleItem;
 	
 	
 	public Square(int x, int y){
@@ -34,36 +34,16 @@ public class Square {
 		return y;
 	}
 	
-	public boolean getPassable(){
+	public boolean isPassable(){
 		return passable;
 	}
 	
-	public Image getImage(){
-		return img;
+	public Tooltip getTooltip(){
+		return tooltip;
 	}
 	
-	public void setIsWater(boolean b){
-		isWater = b;
-	}
-	
-	public boolean isWater(){
-		return isWater;
-	}
-	
-	public BuildingEvent getSquareEvent(){
-		return event;
-	}
-	
-	//public Tooltip getTooltip(){
-	//	return Tooltip;
-	//}
-	
-	public Image getBuildingImage(){
-		return building.getImage();
-	}
-	
-	public void setSquareEvent(BuildingEvent e){
-		event = e;
+	public void setTooltip(String s){
+		tooltip.setTooltip(s);
 	}
 	
 	public void setX(int x){
@@ -78,15 +58,12 @@ public class Square {
 		this.passable = passable;
 	}
 	
-	public void setTerrainImage(){
-		img = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
-		// different images for different types
+	public void setTerrain(Terrain t){
+		terrain = t;
 	}
-	
-	public void setBuildingImage(Image img){
-		building.setImage(img); 
-		//Toolkit.getDefaultToolkit().getImage("");
-		// different types for now
+
+	public Terrain getTerrain(){
+		return terrain;
 	}
 
 	public void setHero(Hero hero) {
@@ -96,7 +73,29 @@ public class Square {
 	public Hero getHero() {
 		return hero;
 	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
+
+	public Building getBuilding() {
+		return building;
+	}
 	
-	// set visibility for every player
+	public Image getImage(){
+		return terrain.getImg();
+	}
+	
+	public Image getBuildingImage(){
+		return building.getImage();
+	}
+
+	public void setCollectibleItem(Item collectibleItem) {
+		this.collectibleItem = collectibleItem;
+	}
+
+	public Item getCollectibleItem() {
+		return collectibleItem;
+	}
 
 }

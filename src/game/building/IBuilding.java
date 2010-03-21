@@ -10,7 +10,7 @@ public interface IBuilding {
 		
 		public abstract int getY();
 		
-		public abstract Type getType();
+		public abstract BuildingType getType();
 		
 		public abstract boolean getPassable();
 		
@@ -26,7 +26,7 @@ public interface IBuilding {
 		
 		public abstract void setY(int y);
 		
-		public abstract void setType(Type t);
+		public abstract void setType(BuildingType t);
 		
 		public abstract void setPassable(boolean b);
 		

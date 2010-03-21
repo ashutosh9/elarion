@@ -10,13 +10,20 @@ public class Field {
 	private int height;
 	private int width;
 	private Square[][] s;
+	private Terrain grass;
+	private Terrain water;
 	
 	public Field(int width, int height){
+		Image waterImg = Toolkit.getDefaultToolkit().getImage("TODO");
+		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
+		water.setImg(waterImg);
+		grass.setImg(grassImg);
 		s = new Square[width][height];
 		for(int x=1; x<width; x++) {
 			for(int y=1; y<height; y++) {
 				s[x][y] = new Square(x,y); // if square == water - add new animation to animations array list
-				s[x][y].setTerrainImage();
+				s[x][y].setTerrain(grass);
+				s[x][y].setTooltip("Grass");
 			}
 		}
 		

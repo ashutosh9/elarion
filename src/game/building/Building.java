@@ -31,7 +31,7 @@ public class Building implements IBuilding {
 	}
 
 	@Override
-	public Type getType() {
+	public BuildingType getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -90,7 +90,7 @@ public class Building implements IBuilding {
 	}
 
 	@Override
-	public void setType(Type t) {
+	public void setType(BuildingType t) {
 		// TODO Auto-generated method stub
 		
 	}

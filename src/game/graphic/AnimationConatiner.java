@@ -18,5 +18,13 @@ public class AnimationConatiner {
 		sprites.add(s);
 	}
 	
+	public ArrayList<Animation> getAnimations(){
+		return animations;
+	}
+	
+	public ArrayList<Sprite> getSprites(){
+		return sprites;
+	}
+	
 	
 }

@@ -39,7 +39,7 @@ public class PathfindingSystem {
 					Square neighbourSquare = field.getSquare(xp, xy);
 					PathNode neighbourNode = new PathNode(neighbourSquare);
 					
-					if((!neighbourSquare.isWater()) && (neighbourSquare.getPassable())) {
+					if((!neighbourSquare.getTerrain().isWater()) && (neighbourSquare.isPassable())) {
 						int nextStepCost = currentNode.getGoCost() + getMovementCost();
 						neighbourNode.setVisited(true);
 						if (nextStepCost < neighbourNode.getGoCost()) {

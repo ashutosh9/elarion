@@ -29,6 +29,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 	
 	public static void main(String args[]){
 		field = new Field(500,500);
+		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		Player playerRed = new Player();
 		currentPlayer = playerRed;
