@@ -126,6 +126,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 					/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
 					//the moving sprite image location will equal the square location + some pixels for the movement itself
 					//the movement orientation will depend on the heading
+					//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
+					// else draw a single image
 				}
 				/*if(turnSystem.getCurrentPlayer().getMainHero().getCurrentSquare() == field.getSquare(j, i)) {
 					//draw hero
