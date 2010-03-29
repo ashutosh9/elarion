@@ -15,6 +15,15 @@ public class GraphicalData {
 	private Animation wMMDownRight;
 	private Animation wMMDownLeft;
 	
+	private Animation wMMUpStand;
+	private Animation wMMDownStand;
+	private Animation wMMLeftStand;
+	private Animation wMMRightStand;
+	private Animation wMMUpRightStand;
+	private Animation wMMUpLeftStand;
+	private Animation wMMDownRightStand;
+	private Animation wMMDownLeftStand;
+	
 	private Animation bFMovementLeft;
 	private Animation bFMovementRight;
 	private Animation bFStandLeft;
@@ -92,6 +101,70 @@ public class GraphicalData {
 		return wMMDownLeft;
 	}
 	
+	public Animation getwMMUpStand() {
+		return wMMUpStand;
+	}
+
+	public void setwMMUpStand(Animation wMMUpStand) {
+		this.wMMUpStand = wMMUpStand;
+	}
+
+	public Animation getwMMDownStand() {
+		return wMMDownStand;
+	}
+
+	public void setwMMDownStand(Animation wMMDownStand) {
+		this.wMMDownStand = wMMDownStand;
+	}
+
+	public Animation getwMMLeftStand() {
+		return wMMLeftStand;
+	}
+
+	public void setwMMLeftStand(Animation wMMLeftStand) {
+		this.wMMLeftStand = wMMLeftStand;
+	}
+
+	public Animation getwMMRightStand() {
+		return wMMRightStand;
+	}
+
+	public void setwMMRightStand(Animation wMMRightStand) {
+		this.wMMRightStand = wMMRightStand;
+	}
+
+	public Animation getwMMUpRightStand() {
+		return wMMUpRightStand;
+	}
+
+	public void setwMMUpRightStand(Animation wMMUpRightStand) {
+		this.wMMUpRightStand = wMMUpRightStand;
+	}
+
+	public Animation getwMMUpLeftStand() {
+		return wMMUpLeftStand;
+	}
+
+	public void setwMMUpLeftStand(Animation wMMUpLeftStand) {
+		this.wMMUpLeftStand = wMMUpLeftStand;
+	}
+
+	public Animation getwMMDownRightStand() {
+		return wMMDownRightStand;
+	}
+
+	public void setwMMDownRightStand(Animation wMMDownRightStand) {
+		this.wMMDownRightStand = wMMDownRightStand;
+	}
+
+	public Animation getwMMDownLeftStand() {
+		return wMMDownLeftStand;
+	}
+
+	public void setwMMDownLeftStand(Animation wMMDownLeftStand) {
+		this.wMMDownLeftStand = wMMDownLeftStand;
+	}
+
 	public void setBattleFieldMovementLeft(Animation bFMovementLeft) {
 		this.bFMovementLeft = bFMovementLeft;
 	}
