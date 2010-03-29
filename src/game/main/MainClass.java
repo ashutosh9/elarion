@@ -1,6 +1,7 @@
 package game.main;
 
 import game.Interface.Screen;
+import game.building.Building;
 import game.field.Field;
 import game.player.Player;
 import game.unit.Hero;
@@ -120,6 +121,13 @@ public class MainClass implements KeyListener,MouseInputListener {
 						, Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
 				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
 					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
+					if(hero.isMoving()){
+						g.drawImage(hero.getCurrentMovingSprite().getImage(),Math.round(hero.getCurrentMovingSprite().getX())
+								,Math.round(hero.getCurrentMovingSprite().getY()),null); // to finish the formula so it works for the current
+						//condition - adding and decrementing by one ( because of the two loops
+					} else {
+						g.drawImage(hero.getStandAnimation().getImage(), Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
+					}
 					//checks the direction the hero is moving and then draws the hero Image in dependency of the direction and on different part of the current 
 					//square, after stopped moving - set the hero location to the next square , activate animation for standing ( if any ) and 
 					//set previous square hero to null and sprite for movement to null, the hero animation is drawn depending on his heading
@@ -128,6 +136,21 @@ public class MainClass implements KeyListener,MouseInputListener {
 					//the movement orientation will depend on the heading
 					//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
 					// else draw a single image
+					//start moving method :
+					//-ismoving = true
+					//-setheading 
+					//-start the sprite for that heading
+					//-set currentmovingsprite to that sprite
+					//-location of the sprite = location of square
+					//-when sprite = moved all way long = > sprite = 0 ; 
+					//-currentmovingsprite = null
+					//-hero location = next square
+					//-ismoving = false
+					//-hero animation for still
+				}
+				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding() != null){
+					Building building = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding();
+					g.drawImage(building.getImage(), Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
 				}
 				/*if(turnSystem.getCurrentPlayer().getMainHero().getCurrentSquare() == field.getSquare(j, i)) {
 					//draw hero
