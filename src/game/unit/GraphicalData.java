@@ -6,6 +6,7 @@ import game.main.Animation;
 
 public class GraphicalData {
 	//WMM = World Map Movement; BF = Battle Field
+	//WMM sprites WIP
 	private Animation wMMUp;
 	private Animation wMMDown;
 	private Animation wMMLeft;
