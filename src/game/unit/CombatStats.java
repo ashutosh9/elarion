@@ -2,10 +2,15 @@ package game.unit;
 
 public class CombatStats {
 
-	private double strenght;
-	private double agility;
-	private double stamina;
-	private double intelligence;
+	private double strenght; //defines damage and 0.5x defense
+	private double agility;  // defines ranged damage
+	private double stamina;  // defines health and 0.5x defense
+	private double intelligence; // defines mana and spell damage 
+	private double defense;
+	private double speed;
+	private double initiative;
+	private double morale; // from items , building , spells
+	private double luck;  // from items , buildings , spells
 	private double health;
 	private double mana;
 	
@@ -41,6 +46,46 @@ public class CombatStats {
 		return intelligence;
 	}
 	
+	public void setDefense(double defense) {
+		this.defense = defense;
+	}
+
+	public double getDefense() {
+		return defense;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setInitiative(double initiative) {
+		this.initiative = initiative;
+	}
+
+	public double getInitiative() {
+		return initiative;
+	}
+
+	public void setMorale(double morale) {
+		this.morale = morale;
+	}
+
+	public double getMorale() {
+		return morale;
+	}
+
+	public void setLuck(double luck) {
+		this.luck = luck;
+	}
+
+	public double getLuck() {
+		return luck;
+	}
+
 	public void setHealth(double health) {
 		this.health = health;
 	}
