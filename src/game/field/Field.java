@@ -18,7 +18,7 @@ public class Field {
 		//Image waterImg = Toolkit.getDefaultToolkit().getImage("to be done");
 		//grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
 		//water.setImg(waterImg);
-		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
+		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass2.png");
 		grass = new Terrain(grassImg);
 		s = new Square[width][height];
 		for(int x=1; x<width; x++) {
