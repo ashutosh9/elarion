@@ -86,8 +86,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 		while(running && !exited){
 			long timePassed = System.currentTimeMillis() - cumTime;
 			cumTime += timePassed;
-			a.update(timePassed);
-			sprite.update(timePassed);
+			//a.update(timePassed);
+			//sprite.update(timePassed);
 			//update sprites and animations
 			update();
 			
@@ -158,8 +158,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 				//g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"),i*30,j*30,null);
 			}
 		}
-		g.drawImage(a.getImage(), 0, 0, null);
-		g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
+		//g.drawImage(a.getImage(), 0, 0, null);
+		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
 		g.drawImage(face1,1060,30,null);
 		g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
@@ -173,31 +173,31 @@ public class MainClass implements KeyListener,MouseInputListener {
 		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
 		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
 //		Image face2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 2.png");
-		Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
+		/*Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
 		Image a2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/2.png");
 		Image a3 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/3.png");
 		Image a4 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/4.png");
 		Image a5 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/5.png");
 		Image a6 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/6.png");
-		Image a7 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/7.png");
+		Image a7 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/7.png"); /*
 		
 		//test animation
-		a = new Animation();
+		/*a = new Animation();
 		a.addScene(a1,200);
 		a.addScene(a2,200);
 		a.addScene(a3,150);
 		a.addScene(a4,200);
 		a.addScene(a5,200);
 		a.addScene(a6,200);
-		a.addScene(a7,200);
+		a.addScene(a7,200); */
 		
-		sprite = new Sprite(a);
+		/*sprite = new Sprite(a);
 		sprite.setVelocityOfX(0.3f);
 		sprite.setVelocityOfY(0.3f);
 		sprite.setX(200);
 		sprite.setY(200);
 		sprite.setToMoveX(600f);
-		sprite.setToMoveY(0f);
+		sprite.setToMoveY(0f); */
 		loaded = true;
 	}
 
