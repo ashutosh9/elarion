@@ -40,9 +40,11 @@ public class Hero extends Unit {
 	private boolean moving;
 	private Sprite currentMovingSprite;
 	private GraphicalData graphicalData;
+	private Animation currentAnimation;
 	// to include combat stats and graphical data as different classes
 	
 	public Hero(){
+		heading = 1;
 		graphicalData = new GraphicalData();
 	}
 	
@@ -99,6 +101,14 @@ public class Hero extends Unit {
 		this.heading = heading;
 	}
 
+	public void setCurrentAnimation(Animation currentAnimation) {
+		this.currentAnimation = currentAnimation;
+	}
+
+	public Animation getCurrentAnimation() {
+		return currentAnimation;
+	}
+
 	public int getHeading() {
 		return heading;
 	}
@@ -153,6 +163,41 @@ public class Hero extends Unit {
 			return graphicalData.getwMMDownRightStand();
 		}
 		return null;
+	}
+	
+	public void moveOneSquare() {
+		
+		moving = true;
+		
+		if(heading==1){
+			setCurrentAnimation(graphicalData.getWorldMapMovementUp());
+			
+			// to create sprites from moving animations!!
+			
+		}
+		if(heading==2){
+			setCurrentAnimation(graphicalData.getWorldMapMovementDown());
+		}
+		if(heading==3){
+			setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
+		}
+		if(heading==4){
+			setCurrentAnimation(graphicalData.getWorldMapMovementRight());
+		}
+		if(heading==13){
+			setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
+		}
+		if(heading==14){
+			setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
+		}
+		if(heading==23){
+			setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
+		}
+		if(heading==24){
+			setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
+		}
+		setCurrentAnimation(graphicalData.getWorldMapMovementUp()); // default
+		
 	}
 	
 	

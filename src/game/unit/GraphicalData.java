@@ -388,6 +388,17 @@ public class GraphicalData {
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/west/0090.png");
 		wMMRight.addScene(buffer, timeForScene);
 		
+		wMMRightStand = wMMRight;
+		wMMLeftStand = wMMLeft;
+		wMMUpStand = wMMUp;
+		wMMDownStand = wMMDown;
+		wMMUpLeftStand = wMMUpLeft;
+		wMMUpRightStand = wMMUpRight;
+		wMMDownLeftStand = wMMDownLeft;
+		wMMDownRightStand = wMMDownRight;
+		
+		getGraphicalData();
+		
 	}
 	
 	public void setWorldMapMovementUp(Animation wMMUp) {
