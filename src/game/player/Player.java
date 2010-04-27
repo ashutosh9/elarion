@@ -28,6 +28,8 @@ public class Player {
 	private Resource sulfur = new Resource("sulfur",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg"));
 	private Resource wood = new Resource("wood",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg"));
 	private Square currentView;
+	private int currentViewAbsX; //absolute 
+	private int currentViewAbsY;
 	private boolean humanPlayer;
 	private Race race;
 	
@@ -126,6 +128,22 @@ public class Player {
 
 	public Race getRace() {
 		return race;
+	}
+
+	public void setCurrentViewAbsX(int currentViewAbsX) {
+		this.currentViewAbsX = currentViewAbsX;
+	}
+
+	public int getCurrentViewAbsX() {
+		return currentViewAbsX;
+	}
+
+	public void setCurrentViewAbsY(int currentViewAbsY) {
+		this.currentViewAbsY = currentViewAbsY;
+	}
+
+	public int getCurrentViewAbsY() {
+		return currentViewAbsY;
 	}
 
 }

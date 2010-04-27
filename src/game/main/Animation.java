@@ -51,6 +51,14 @@ public class Animation {
 		return totalTime;
 	}
 	
+	public ArrayList<Image> getImages(){
+		ArrayList<Image> list = new ArrayList<Image>();
+		for(OneScene s : scenes) {
+			list.add(s.getImage());
+		}
+		return list;
+	}
+	
 	private OneScene getScene(int x){
 		return (OneScene)scenes.get(x);
 	}

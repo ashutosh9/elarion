@@ -38,12 +38,14 @@ public class Hero extends Unit {
 	// 23 = downLeft
 	// 24 = downRight
 	private boolean moving;
-	private Sprite currentMovingSprite;
+	private Sprite currentSprite;
 	private GraphicalData graphicalData;
 	private Animation currentAnimation;
 	// to include combat stats and graphical data as different classes
 	
 	public Hero(){
+		x = 1;
+		y = 1;
 		heading = 1;
 		graphicalData = new GraphicalData();
 	}
@@ -65,11 +67,10 @@ public class Hero extends Unit {
 	}
 	
 	public void setHeroLocation(int x, int y,Field f){
-		if(this.x != 0 && this.y != 0){
+		if(this==f.getSquare(this.x, this.y).getHero()){
 			f.getSquare(this.x, this.y).setHero(null); //Occupied(false);
 		}
-		this.x = x;
-		this.y = y;
+		setCurrentSquare(f.getSquare(x, y));
 		f.getSquare(x, y).setHero(this); //Occupied(true);
 	}
 
@@ -81,8 +82,10 @@ public class Hero extends Unit {
 		return owner;
 	}
 
-	public void setCurrentSquare(Square currentSquare) {
+	private void setCurrentSquare(Square currentSquare) {
 		this.currentSquare = currentSquare;
+		this.x = currentSquare.getX();
+		this.y = currentSquare.getY();
 	}
 
 	public Square getCurrentSquare() {
@@ -122,11 +125,11 @@ public class Hero extends Unit {
 	}
 
 	public void setCurrentMovingSprite(Sprite currentMovingSprite) {
-		this.currentMovingSprite = currentMovingSprite;
+		this.currentSprite = currentMovingSprite;
 	}
 
-	public Sprite getCurrentMovingSprite() {
-		return currentMovingSprite;
+	public Sprite getCurrentSprite() {
+		return currentSprite;
 	}
 
 	public void setGraphicalData(GraphicalData graphicalData) {
@@ -165,14 +168,15 @@ public class Hero extends Unit {
 		return null;
 	}
 	
-	public void moveOneSquare() {
+	public void moveOneSquare(Field f) {
 		
 		moving = true;
 		
 		if(heading==1){
 			setCurrentAnimation(graphicalData.getWorldMapMovementUp());
-			
+			f.getSquare(currentSquare.getX(), (currentSquare.getY() - 1));
 			// to create sprites from moving animations!!
+			//set hero location to 1 square further ( depends on direction )
 			
 		}
 		if(heading==2){
@@ -196,7 +200,7 @@ public class Hero extends Unit {
 		if(heading==24){
 			setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
 		}
-		setCurrentAnimation(graphicalData.getWorldMapMovementUp()); // default
+		
 		
 	}
 	
