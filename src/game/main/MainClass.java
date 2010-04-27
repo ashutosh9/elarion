@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.event.MouseInputListener;
 
@@ -28,15 +29,23 @@ public class MainClass implements KeyListener,MouseInputListener {
 	private boolean running;
 	private boolean exited;
 	
+	
+	//for testing
+	private int z=1;
+	private static Hero h;
+	
 	public static void main(String args[]){
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		Player playerRed = new Player();
 		currentPlayer = playerRed;
-		Hero h = new Hero();
+		h = new Hero();
 		currentPlayer.newHero(h,30, 20, field);
+		field.getSquare(30, 20).setHero(h);
 		currentPlayer.setCurrentView(field.getSquare(30, 30));
+		currentPlayer.setCurrentViewAbsX(22);
+		currentPlayer.setCurrentViewAbsY(22);
 		
 /*		playerRed.Activate();
 		if(playerRed.isActive()){
@@ -105,6 +114,10 @@ public class MainClass implements KeyListener,MouseInputListener {
 	}
 	
 	private void update() {
+		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
+		for(Animation anim : a) {
+			// add all images
+		}
 		//gets all animations from the animations arrayList and updates them
 		//gets all sprites from the sprites arrayList and updates them
 		//a.update(timePassed);
@@ -118,14 +131,15 @@ public class MainClass implements KeyListener,MouseInputListener {
 			for(int j=1;j<36;j++){
 				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
 				g.drawImage(img
-						, Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
+						, Math.round((j-3)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-3)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
 				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
 					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
 					if(hero.isMoving()){
-						g.drawImage(hero.getCurrentMovingSprite().getImage(),Math.round(hero.getCurrentMovingSprite().getX())
-								,Math.round(hero.getCurrentMovingSprite().getY()),null); // to finish the formula so it works for the current
+						g.drawImage(hero.getCurrentSprite().getImage(),Math.round(hero.getCurrentSprite().getX())
+								,Math.round(hero.getCurrentSprite().getY()),null); // to finish the formula so it works for the current
 						//condition - adding and decrementing by one ( because of the two loops
 					} else {
+						hero.setHeading(1);
 						g.drawImage(hero.getStandAnimation().getImage(), Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
 					}
 					//checks the direction the hero is moving and then draws the hero Image in dependency of the direction and on different part of the current 
@@ -158,9 +172,20 @@ public class MainClass implements KeyListener,MouseInputListener {
 				//g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"),i*30,j*30,null);
 			}
 		}
+		if(z==8) {
+			int h = currentPlayer.getCurrentViewAbsX();
+			currentPlayer.setCurrentViewAbsX(h+1);
+			h = currentPlayer.getCurrentViewAbsY();
+			currentPlayer.setCurrentViewAbsY(h+1);
+		}
+		if(z==10) {
+			z=1; 
+		}
+		z++;
 		//g.drawImage(a.getImage(), 0, 0, null);
 		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
 		g.drawImage(face1,1060,30,null);
+		//g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/east/0151.png"),100,100,null);
 		g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
 		///
