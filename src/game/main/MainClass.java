@@ -31,7 +31,6 @@ public class MainClass implements KeyListener,MouseInputListener {
 	
 	
 	//for testing
-	private int z=1;
 	private static Hero h;
 	
 	public static void main(String args[]){
@@ -43,9 +42,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 		h = new Hero();
 		currentPlayer.newHero(h,30, 20, field);
 		field.getSquare(30, 20).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(30, 30));
-		currentPlayer.setCurrentViewAbsX(22);
-		currentPlayer.setCurrentViewAbsY(22);
+		currentPlayer.setCurrentView(field.getSquare(30, 20));
+		currentPlayer.setCurrentViewAbsX(0);
+		currentPlayer.setCurrentViewAbsY(0);
 		
 /*		playerRed.Activate();
 		if(playerRed.isActive()){
@@ -98,7 +97,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 			//a.update(timePassed);
 			//sprite.update(timePassed);
 			//update sprites and animations
-			update();
+			update(timePassed);
 			
 			
 			Graphics2D g = s.getGraphics();
@@ -113,10 +112,10 @@ public class MainClass implements KeyListener,MouseInputListener {
 		}
 	}
 	
-	private void update() {
+	private void update(long timePassed) {
 		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
 		for(Animation anim : a) {
-			// add all images
+			anim.update(timePassed);
 		}
 		//gets all animations from the animations arrayList and updates them
 		//gets all sprites from the sprites arrayList and updates them
@@ -127,40 +126,50 @@ public class MainClass implements KeyListener,MouseInputListener {
 
 	public void draw(Graphics g){
 		//draw buildings (maybe state 1 ,2 ,3 etc for animating)
-		for(int i=1;i<28;i++){
-			for(int j=1;j<36;j++){
+		//checks the direction the hero is moving and then draws the hero Image in dependency of the direction and on different part of the current 
+		//square, after stopped moving - set the hero location to the next square , activate animation for standing ( if any ) and 
+		//set previous square hero to null and sprite for movement to null, the hero animation is drawn depending on his heading
+		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
+		//the moving sprite image location will equal the square location + some pixels for the movement itself
+		//the movement orientation will depend on the heading
+		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
+		// else draw a single image
+		//start moving method :
+		//-ismoving = true
+		//-setheading 
+		//-start the sprite for that heading
+		//-set currentmovingsprite to that sprite
+		//-location of the sprite = location of square
+		//-when sprite = moved all way long = > sprite = 0 ; 
+		//-currentmovingsprite = null
+		//-hero location = next square
+		//-ismoving = false
+		//-hero animation for still
+		for(int i=1;i<24;i++){
+			for(int j=1;j<35;j++){
 				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
 				g.drawImage(img
-						, Math.round((j-3)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-3)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
+						, Math.round((j-2)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-2)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
+			}
+		}
+		for(int i=1;i<24;i++){
+			for(int j=1;j<35;j++){
+				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
 				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
 					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
 					if(hero.isMoving()){
+
 						g.drawImage(hero.getCurrentSprite().getImage(),Math.round(hero.getCurrentSprite().getX())
 								,Math.round(hero.getCurrentSprite().getY()),null); // to finish the formula so it works for the current
 						//condition - adding and decrementing by one ( because of the two loops
 					} else {
 						hero.setHeading(1);
-						g.drawImage(hero.getStandAnimation().getImage(), Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
+						g.drawImage(hero.getStandAnimation().getImage(), Math.round((j-1)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()),
+								Math.round((i-1)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
+						if(hero.getStandAnimation().getImages().isEmpty()){
+							System.out.print(1);
+						}
 					}
-					//checks the direction the hero is moving and then draws the hero Image in dependency of the direction and on different part of the current 
-					//square, after stopped moving - set the hero location to the next square , activate animation for standing ( if any ) and 
-					//set previous square hero to null and sprite for movement to null, the hero animation is drawn depending on his heading
-					/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
-					//the moving sprite image location will equal the square location + some pixels for the movement itself
-					//the movement orientation will depend on the heading
-					//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
-					// else draw a single image
-					//start moving method :
-					//-ismoving = true
-					//-setheading 
-					//-start the sprite for that heading
-					//-set currentmovingsprite to that sprite
-					//-location of the sprite = location of square
-					//-when sprite = moved all way long = > sprite = 0 ; 
-					//-currentmovingsprite = null
-					//-hero location = next square
-					//-ismoving = false
-					//-hero animation for still
 				}
 				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding() != null){
 					Building building = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding();
@@ -172,21 +181,29 @@ public class MainClass implements KeyListener,MouseInputListener {
 				//g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"),i*30,j*30,null);
 			}
 		}
-		if(z==8) {
-			int h = currentPlayer.getCurrentViewAbsX();
-			currentPlayer.setCurrentViewAbsX(h+1);
-			h = currentPlayer.getCurrentViewAbsY();
-			currentPlayer.setCurrentViewAbsY(h+1);
+		
+		
+		if(currentPlayer.getCurrentViewAbsX()==40) {
+			currentPlayer.setCurrentViewAbsX(0);
+			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()+1), currentPlayer.getCurrentView().getY()));
+		}		
+		if(currentPlayer.getCurrentViewAbsY()==40) {
+			currentPlayer.setCurrentViewAbsY(0);
+			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()+1)));
 		}
-		if(z==10) {
-			z=1; 
+		if(currentPlayer.getCurrentViewAbsX()==-40) {
+			currentPlayer.setCurrentViewAbsX(0);
+			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()-1), currentPlayer.getCurrentView().getY()));
+		}		
+		if(currentPlayer.getCurrentViewAbsY()==-40) {
+			currentPlayer.setCurrentViewAbsY(0);
+			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()-1)));
 		}
-		z++;
 		//g.drawImage(a.getImage(), 0, 0, null);
 		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
-		g.drawImage(face1,1060,30,null);
+		//g.drawImage(face1,1060,30,null);
 		//g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/east/0151.png"),100,100,null);
-		g.drawImage(bg, 0, 0, null);
+		//g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
 		///
 	}
@@ -234,7 +251,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 		exited = true;
 	}	
 	
-	public static Player getCurrentPlayer() {
+	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
 
@@ -244,8 +261,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,1,field);
-		
 	}
 
 	@Override
