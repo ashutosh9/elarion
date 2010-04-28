@@ -40,9 +40,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 		Player playerRed = new Player();
 		currentPlayer = playerRed;
 		h = new Hero();
-		currentPlayer.newHero(h,30, 20, field);
-		field.getSquare(30, 20).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(30, 20));
+		currentPlayer.newHero(h,5, 5, field);
+		field.getSquare(5, 5).setHero(h);
+		currentPlayer.setCurrentView(field.getSquare(1, 1));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		
@@ -145,32 +145,59 @@ public class MainClass implements KeyListener,MouseInputListener {
 		//-hero location = next square
 		//-ismoving = false
 		//-hero animation for still
+		
+		for(int x=-2;x<33;x++){
+			for(int y=-2;y<22;y++){
+				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+				g.drawImage(img
+						, Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+									currentPlayer.getCurrentViewAbsY()), null);
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
+					Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
+					if(hero.isMoving()){
+
+						g.drawImage(hero.getCurrentSprite().getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+								currentPlayer.getCurrentViewAbsY()-10), null); // to finish the formula so it works for the current
+						//condition - adding and decrementing by one ( because of the two loops
+					} else {
+						hero.setHeading(1);
+						g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+								currentPlayer.getCurrentViewAbsY()-10), null);
+					}
+				}
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding() != null){
+					Building building = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding();
+					g.drawImage(building.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()), null);
+				}
+			}
+		}
 		for(int i=1;i<24;i++){
 			for(int j=1;j<35;j++){
-				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
-				g.drawImage(img
-						, Math.round((j-2)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-2)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
+				
+				//Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
+				//g.drawImage(img
+				//		, Math.round((j-2)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-2)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
 			}
 		}
 		for(int i=1;i<24;i++){
 			for(int j=1;j<35;j++){
 				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
-				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
-					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
-					if(hero.isMoving()){
-
-						g.drawImage(hero.getCurrentSprite().getImage(),Math.round(hero.getCurrentSprite().getX())
-								,Math.round(hero.getCurrentSprite().getY()),null); // to finish the formula so it works for the current
-						//condition - adding and decrementing by one ( because of the two loops
-					} else {
-						hero.setHeading(1);
-						g.drawImage(hero.getStandAnimation().getImage(), Math.round((j-1)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()),
-								Math.round((i-1)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
-						if(hero.getStandAnimation().getImages().isEmpty()){
-							System.out.print(1);
-						}
-					}
-				}
+//				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
+//					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
+//					if(hero.isMoving()){
+//
+//						g.drawImage(hero.getCurrentSprite().getImage(),Math.round(hero.getCurrentSprite().getX())
+//								,Math.round(hero.getCurrentSprite().getY()),null); // to finish the formula so it works for the current
+//						//condition - adding and decrementing by one ( because of the two loops
+//					} else {
+//						hero.setHeading(1);
+//						g.drawImage(hero.getStandAnimation().getImage() , Math.round((j-2)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-2)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
+//						if(hero.getStandAnimation().getImages().isEmpty()){
+//							System.out.print(1);
+//						}
+//					}
+//				}
 				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding() != null){
 					Building building = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding();
 					g.drawImage(building.getImage(), Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
