@@ -21,36 +21,64 @@ public class KeyMap {
 			if(keyCode == KeyEvent.VK_DOWN){
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
-				x--;
+				y--;
 				if(f.getSquare(x, y)!=null){
-				mc.getCurrentPlayer().setCurrentView(f.getSquare(x, y));
+					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
+					mc.getCurrentPlayer().setCurrentViewAbsY(temp-1);
+				}
+				if(f.getSquare(x,y)==null){
+					System.out.print("X= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getX());
+					System.out.print(" Y= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getY());
 				}
 			}
 			
 			if(keyCode == KeyEvent.VK_UP){
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
-				x++;
+				y++;
 				if(f.getSquare(x, y)!=null){
-				mc.getCurrentPlayer().setCurrentView(f.getSquare(x, y));
+					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
+					mc.getCurrentPlayer().setCurrentViewAbsY(temp+1);
+				}
+				if(f.getSquare(x,y)==null){
+					System.out.print("X= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getX());
+					System.out.print(" Y= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getY());
 				}
 			}
 			
 			if(keyCode == KeyEvent.VK_LEFT){
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
-				y--;
+				x++;
 				if(f.getSquare(x, y)!=null){
-				mc.getCurrentPlayer().setCurrentView(f.getSquare(x, y));
+					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
+					mc.getCurrentPlayer().setCurrentViewAbsX(temp+1);
+				}
+				if(f.getSquare(x,y)==null){
+					System.out.print("X= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getX());
+					System.out.print(" Y= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getY());
 				}
 			}
 			
 			if(keyCode == KeyEvent.VK_RIGHT){
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
-				y++;
+				x--;
 				if(f.getSquare(x, y)!=null){
-				mc.getCurrentPlayer().setCurrentView(f.getSquare(x, y));	
+					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
+					mc.getCurrentPlayer().setCurrentViewAbsX(temp-1);
+				}
+				if(f.getSquare(x,y)==null){
+					System.out.print("X= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getX());
+					System.out.print(" Y= ");
+					System.out.print(mc.getCurrentPlayer().getCurrentView().getY());
 				}
 			}
 			
