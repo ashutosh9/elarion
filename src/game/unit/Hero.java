@@ -129,6 +129,7 @@ public class Hero extends Unit {
 	}
 
 	public Sprite getCurrentSprite() {
+
 		return currentSprite;
 	}
 
@@ -148,16 +149,16 @@ public class Hero extends Unit {
 			return graphicalData.getwMMDownStand();
 		}
 		if(heading==3){
-			return graphicalData.getwMMLeftStand();
-		}
-		if(heading==4){
 			return graphicalData.getwMMRightStand();
 		}
+		if(heading==4){
+			return graphicalData.getwMMLeftStand();
+		}
 		if(heading==13){
-			return graphicalData.getwMMUpLeftStand();
+			return graphicalData.getwMMUpRightStand();
 		}
 		if(heading==14){
-			return graphicalData.getwMMUpRightStand();
+			return graphicalData.getwMMUpLeftStand();
 		}
 		if(heading==23){
 			return graphicalData.getwMMDownLeftStand();
@@ -168,39 +169,114 @@ public class Hero extends Unit {
 		return null;
 	}
 	
-	public void moveOneSquare(Field f) {
+	public void moveOneSquare(int heading, Field f) {
+		if(moving==false){
+			
+			Square s = f.getSquare(currentSquare.getX(), currentSquare.getY());
+			
+			moving=true;
+			
+			int toMoveX = 0;
+			int toMoveY = 0;
+			
+			this.heading = heading;
+			
+			if(heading==1){
+				setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
+				toMoveY=-40;
+				//this.setHeroLocation((currentSquare.getX()), (currentSquare.getY()-1), f);
+			}
+			if(heading==2){
+				setCurrentAnimation(graphicalData.getWorldMapMovementDown());
+				toMoveY=40;
+				//this.setHeroLocation((currentSquare.getX()), (currentSquare.getY()+1), f);
+			}
+			if(heading==3){
+				setCurrentAnimation(graphicalData.getWorldMapMovementRight());
+				toMoveX=-40;
+				//this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()), f);
+			}
+			if(heading==4){
+				setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
+				toMoveX=40;
+				//this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()), f);
+			}
+			if(heading==13){
+				setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
+				toMoveY=-40;
+				toMoveX=-40;
+				//this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()-1), f);
+				
+			}
+			if(heading==14){
+				setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
+				toMoveY=-40;
+				toMoveX=40;
+				//this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()-1), f);
+			}
+			if(heading==23){
+				setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
+				toMoveY=40;
+				toMoveX=-40;
+				//this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()+1), f);
+			}
+			if(heading==24){
+				setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
+				toMoveY=40;
+				toMoveX=40;
+				//this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()+1), f);
+			}
+			
+			currentSprite = new Sprite(currentAnimation);
+			if(toMoveX < 0){
+				currentSprite.setVelocityOfX(-0.3f);
+				toMoveX = Math.abs(toMoveX);
+			} else {
+			currentSprite.setVelocityOfX(0.3f);
+			}
+			if(toMoveY < 0){
+				currentSprite.setVelocityOfY(-0.3f);
+				toMoveY = Math.abs(toMoveY);
+			} else {
+			currentSprite.setVelocityOfY(0.3f);
+			}
+			currentSprite.setToMoveX(toMoveX);
+			currentSprite.setToMoveY(toMoveY);
+			currentSprite.setX(0);
+			currentSprite.setY(0);
+		}
+	}
+	
+	public void movedOneSquare(Field f){
 		
-		moving = true;
+		moving = false;
 		
 		if(heading==1){
-			setCurrentAnimation(graphicalData.getWorldMapMovementUp());
-			f.getSquare(currentSquare.getX(), (currentSquare.getY() - 1));
-			// to create sprites from moving animations!!
-			//set hero location to 1 square further ( depends on direction )
-			
+			this.setHeroLocation((currentSquare.getX()), (currentSquare.getY()-1), f);
 		}
 		if(heading==2){
-			setCurrentAnimation(graphicalData.getWorldMapMovementDown());
+			this.setHeroLocation((currentSquare.getX()), (currentSquare.getY()+1), f);
 		}
 		if(heading==3){
-			setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
+			this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()), f);
 		}
 		if(heading==4){
-			setCurrentAnimation(graphicalData.getWorldMapMovementRight());
+			this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()), f);
 		}
 		if(heading==13){
-			setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
+			this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()-1), f);
 		}
 		if(heading==14){
-			setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
+			this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()-1), f);
 		}
 		if(heading==23){
-			setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
+			this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()+1), f);
 		}
 		if(heading==24){
-			setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
+			this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()+1), f);
 		}
 		
+		//execution of events that are on the new hero location
 		
 	}
 	

@@ -20,17 +20,23 @@ public class Sprite {
 	}
 	//add CHECK of something like if (sprite.getVelocityOfX == 0 && sprite.getVelocityOfY == 0){ sprite = null }
 	public void update(long timePassed){
+		
 		this.timePassed += timePassed;
+		
 		if((toMoveX != 0) && (movedX >= toMoveX) || (toMoveX == 0)) {
 			velocityX = 0;
 		}
+		
 		if((toMoveY != 0) && (movedY >= toMoveY) || (toMoveY == 0)) {
 			velocityY = 0;
 		}
+		
 		x += velocityX * timePassed;
-		movedX += velocityX * timePassed;
+		movedX +=Math.abs(velocityX * timePassed);
+		
 		y += velocityY * timePassed;
-		movedY += velocityY * timePassed;
+		movedY +=Math.abs(velocityY * timePassed);
+		
 		a.update(timePassed);
 
 	}
@@ -94,11 +100,29 @@ public class Sprite {
 	public int getHeight(){
 		return a.getImage().getHeight(null);
 	}
+	
 	public void setAnimation(Animation a) {
 		this.a = a;
 	}
+	
 	public Animation getAnimation() {
 		return a;
+	}
+	
+	public float getMovedX() {
+		return movedX;
+	}
+	
+	public void setMovedX(float movedX) {
+		this.movedX = movedX;
+	}
+	
+	public float getMovedY() {
+		return movedY;
+	}
+	
+	public void setMovedY(float movedY) {
+		this.movedY = movedY;
 	}
 	
 }

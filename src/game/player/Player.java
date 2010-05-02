@@ -14,6 +14,7 @@ import game.unit.Hero;
 public class Player {
 	
 	private Hero mainHero;
+	private Hero selectedHero;
 	private ArrayList<Hero> heroes = new ArrayList<Hero>(20);
 	private ArrayList<Hero> deadHeroes = new ArrayList<Hero>(30);
 	private Color color;
@@ -144,6 +145,14 @@ public class Player {
 
 	public int getCurrentViewAbsY() {
 		return currentViewAbsY;
+	}
+
+	public void selectHero(Hero selectedHero) {
+		this.selectedHero = selectedHero;
+	}
+
+	public Hero getSelectedHero() {
+		return selectedHero;
 	}
 
 }
