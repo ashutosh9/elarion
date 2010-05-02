@@ -6,6 +6,19 @@ import game.field.Square;
 
 public class Building {
 
+	Image img;
+	
+
+	public void setImage(Image i) {
+		img = i;
+		
+	}
+	
+	public Image getImage() {
+		return img;	
+	}
+	
+	/*
 	public BuildingEvent getEvent() {
 		return null;
 	}
@@ -50,15 +63,6 @@ public class Building {
 		
 	}
 
-	public void setImage(Image i) {
-
-		
-	}
-	
-	public Image getImage() {
-		return null;	
-	}
-
 	public void setEvent(BuildingEvent e) {
 
 		
@@ -94,4 +98,5 @@ public class Building {
 		
 	}
 
+	*/
 }

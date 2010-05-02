@@ -28,6 +28,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 	private static MainClass mc;
 	private boolean running;
 	private boolean exited;
+	//private Sprite heroSprite;
 	
 	
 	//for testing
@@ -41,6 +42,10 @@ public class MainClass implements KeyListener,MouseInputListener {
 		currentPlayer = playerRed;
 		h = new Hero();
 		currentPlayer.newHero(h,5, 5, field);
+		currentPlayer.selectHero(h);
+		Building building = new Building();
+		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
+		field.getSquare(6, 6).setBuilding(building);
 		field.getSquare(5, 5).setHero(h);
 		currentPlayer.setCurrentView(field.getSquare(1, 1));
 		currentPlayer.setCurrentViewAbsX(0);
@@ -69,15 +74,15 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void run() {
 		s = new Screen();
 		try {
-				DisplayMode dm = s.findCompatibleMode(modes);
-				s.setFullScreen(dm);
-				Window w = s.getFullScreenWindow();
-				w.setFocusTraversalKeysEnabled(false);
-				w.addKeyListener(this);
-				loaded = false;
-				running = true;
-				loadimages();
-				if(loaded){
+			DisplayMode dm = s.findCompatibleMode(modes);
+			s.setFullScreen(dm);
+			Window w = s.getFullScreenWindow();
+			w.setFocusTraversalKeysEnabled(false);
+			w.addKeyListener(this);
+			loaded = false;
+			running = true;
+			loadimages();
+			if(loaded){
 				while(!exited){
 					movieLoop();
 				}
@@ -117,6 +122,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 		for(Animation anim : a) {
 			anim.update(timePassed);
 		}
+		if(h.getCurrentSprite() != null) {
+			h.getCurrentSprite().update(timePassed);
+		}
 		//gets all animations from the animations arrayList and updates them
 		//gets all sprites from the sprites arrayList and updates them
 		//a.update(timePassed);
@@ -145,71 +153,56 @@ public class MainClass implements KeyListener,MouseInputListener {
 		//-hero location = next square
 		//-ismoving = false
 		//-hero animation for still
-		
 		for(int x=-2;x<33;x++){
 			for(int y=-2;y<22;y++){
+				
 				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+				
 				g.drawImage(img
 						, Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
 									currentPlayer.getCurrentViewAbsY()), null);
-				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
-					Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
-					if(hero.isMoving()){
-
-						g.drawImage(hero.getCurrentSprite().getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()-10), null); // to finish the formula so it works for the current
-						//condition - adding and decrementing by one ( because of the two loops
-					} else {
-						hero.setHeading(1);
-						g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()-10), null);
-					}
-				}
+				
 				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding() != null){
+					
 					Building building = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding();
 					g.drawImage(building.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
 							currentPlayer.getCurrentViewAbsY()), null);
+					
 				}
+		
 			}
-		}
-		for(int i=1;i<24;i++){
-			for(int j=1;j<35;j++){
+		}		
+		
+		for(int x=-2;x<33;x++){
+			for(int y=-2;y<22;y++){
 				
-				//Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
-				//g.drawImage(img
-				//		, Math.round((j-2)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-2)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
-			}
-		}
-		for(int i=1;i<24;i++){
-			for(int j=1;j<35;j++){
-				Image img = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getImage();
-//				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero() != null){
-//					Hero hero = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getHero();
-//					if(hero.isMoving()){
+				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+				
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
+					
+					Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
+
+//						int heroX = Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10);
+//						int heroY = Math.round((y)*img.getHeight(null) - currentPlayer.getCurrentViewAbsY()-10);					
 //
-//						g.drawImage(hero.getCurrentSprite().getImage(),Math.round(hero.getCurrentSprite().getX())
-//								,Math.round(hero.getCurrentSprite().getY()),null); // to finish the formula so it works for the current
-//						//condition - adding and decrementing by one ( because of the two loops
-//					} else {
-//						hero.setHeading(1);
-//						g.drawImage(hero.getStandAnimation().getImage() , Math.round((j-2)*img.getWidth(null) + currentPlayer.getCurrentViewAbsX()), Math.round((i-2)*img.getHeight(null) + currentPlayer.getCurrentViewAbsY()), null);
-//						if(hero.getStandAnimation().getImages().isEmpty()){
-//							System.out.print(1);
-//						}
-//					}
-//				}
-				if(field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding() != null){
-					Building building = field.getSquare((currentPlayer.getCurrentView().getX() + j - 1), (currentPlayer.getCurrentView().getY() + i - 1)).getBuilding();
-					g.drawImage(building.getImage(), Math.round((j-1)*img.getWidth(null)), Math.round((i-1)*img.getHeight(null)), null);
+//						g.drawImage(heroSprite.getImage(), Math.round(heroSprite.getX())
+//								, Math.round(heroSprite.getY()), null); 
+					if(hero.isMoving()){
+						g.drawImage(hero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+hero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()-10+hero.getCurrentSprite().getY()), null);
+						if(Math.abs(hero.getCurrentSprite().getX())>=40 || Math.abs(hero.getCurrentSprite().getY())>=40) {
+							hero.movedOneSquare(field);
+						}
+					} else {
+						//hero.setHeading(23);
+						g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+								currentPlayer.getCurrentViewAbsY()-10), null);
+					}
+					
 				}
-				/*if(turnSystem.getCurrentPlayer().getMainHero().getCurrentSquare() == field.getSquare(j, i)) {
-					//draw hero
-				}*/
-				//g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"),i*30,j*30,null);
+				
 			}
 		}
-		
-		
 		if(currentPlayer.getCurrentViewAbsX()==40) {
 			currentPlayer.setCurrentViewAbsX(0);
 			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()+1), currentPlayer.getCurrentView().getY()));
@@ -228,9 +221,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 		}
 		//g.drawImage(a.getImage(), 0, 0, null);
 		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
-		//g.drawImage(face1,1060,30,null);
-		//g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/east/0151.png"),100,100,null);
-		//g.drawImage(bg, 0, 0, null);
+		g.drawImage(face1,1060,30,null);
+		g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
 		///
 	}
@@ -242,31 +234,31 @@ public class MainClass implements KeyListener,MouseInputListener {
 		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
 		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
 //		Image face2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 2.png");
-		/*Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
-		Image a2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/2.png");
-		Image a3 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/3.png");
-		Image a4 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/4.png");
-		Image a5 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/5.png");
-		Image a6 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/6.png");
-		Image a7 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/7.png"); /*
+//		Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
+//		Image a2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/2.png");
+//		Image a3 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/3.png");
+//		Image a4 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/4.png");
+//		Image a5 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/5.png");
+//		Image a6 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/6.png");
+//		Image a7 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/7.png");
 		
 		//test animation
-		/*a = new Animation();
-		a.addScene(a1,200);
-		a.addScene(a2,200);
-		a.addScene(a3,150);
-		a.addScene(a4,200);
-		a.addScene(a5,200);
-		a.addScene(a6,200);
-		a.addScene(a7,200); */
-		
-		/*sprite = new Sprite(a);
-		sprite.setVelocityOfX(0.3f);
-		sprite.setVelocityOfY(0.3f);
-		sprite.setX(200);
-		sprite.setY(200);
-		sprite.setToMoveX(600f);
-		sprite.setToMoveY(0f); */
+//		a = new Animation();
+//		a.addScene(a1,200);
+//		a.addScene(a2,200);
+//		a.addScene(a3,150);
+//		a.addScene(a4,200);
+//		a.addScene(a5,200);
+//		a.addScene(a6,200);
+//		a.addScene(a7,200); 
+//		
+//		sprite = new Sprite(a);
+//		sprite.setVelocityOfX(-0.3f);
+//		sprite.setVelocityOfY(0.3f);
+//		sprite.setX(200);
+//		sprite.setY(200);
+//		sprite.setToMoveX(200f);
+//		sprite.setToMoveY(0f); 
 		loaded = true;
 	}
 

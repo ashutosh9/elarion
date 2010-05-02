@@ -58,6 +58,38 @@ public class KeyMap {
 				}
 			}
 			
+			if(keyCode == KeyEvent.VK_S){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(2, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_W){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(1, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_A){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(3, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_D){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(4, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_Q){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(13, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_E){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(14, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_Z){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(23, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_C){
+				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(24, f);
+			}
+			
 		}
 		if(i==2) { //released
 			

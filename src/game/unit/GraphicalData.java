@@ -13,8 +13,8 @@ public class GraphicalData {
 	private Animation wMMDown;
 	private Animation wMMLeft;
 	private Animation wMMRight;
-	private Animation wMMUpRight;
 	private Animation wMMUpLeft;
+	private Animation wMMUpRight;
 	private Animation wMMDownRight;
 	private Animation wMMDownLeft;
 	
@@ -22,8 +22,8 @@ public class GraphicalData {
 	private Animation wMMDownStand;
 	private Animation wMMLeftStand;
 	private Animation wMMRightStand;
-	private Animation wMMUpRightStand;
 	private Animation wMMUpLeftStand;
+	private Animation wMMUpRightStand;
 	private Animation wMMDownRightStand;
 	private Animation wMMDownLeftStand;
 	
@@ -42,7 +42,7 @@ public class GraphicalData {
 	
 	public GraphicalData() {
 		
-		long timeForScene = 30;
+		long timeForScene = 200;
 		
 		wMMLeft = new Animation();
 		
@@ -130,91 +130,91 @@ public class GraphicalData {
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/north/0130.png");
 		wMMUp.addScene(buffer, timeForScene);
 		
-		wMMUpLeft = new Animation();
-		
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0131.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0132.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0133.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0134.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0135.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0136.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0137.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0138.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0139.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0140.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0141.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0142.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0143.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0144.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0145.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0146.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0147.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0148.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0149.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0150.png");
-		wMMUpLeft.addScene(buffer, timeForScene);
-		
 		wMMUpRight = new Animation();
 		
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0131.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0132.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0133.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0134.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0135.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0136.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0137.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0138.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0139.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0140.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0141.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0142.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0143.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0144.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0145.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0146.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0147.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0148.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0149.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0150.png");
+		wMMUpRight.addScene(buffer, timeForScene);
+		
+		wMMUpLeft = new Animation();
+		
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0091.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0092.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0093.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0094.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0095.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0096.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0097.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0098.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0099.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0100.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0101.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0102.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0103.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0104.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0105.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0106.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0107.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0108.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0109.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0110.png");
-		wMMUpRight.addScene(buffer, timeForScene);
+		wMMUpLeft.addScene(buffer, timeForScene);
 		
 		wMMDown = new Animation();
 		
@@ -409,15 +409,15 @@ public class GraphicalData {
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/south/0031.png");
 		wMMDownStand.addScene(buffer, timeForScene);
 		
-		wMMUpLeftStand = new Animation();
-		
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0131.png");
-		wMMUpLeftStand.addScene(buffer, timeForScene);
-		
 		wMMUpRightStand = new Animation();
 		
-		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0091.png");
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northeast/0131.png");
 		wMMUpRightStand.addScene(buffer, timeForScene);
+		
+		wMMUpLeftStand = new Animation();
+		
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/northwest/0091.png");
+		wMMUpLeftStand.addScene(buffer, timeForScene);
 		
 		wMMDownLeftStand = new Animation();
 		
@@ -466,19 +466,19 @@ public class GraphicalData {
 	}
 	
 	public void setWorldMapMovementUpRight(Animation wMMUpRight) {
-		this.wMMUpRight = wMMUpRight;
+		this.wMMUpLeft = wMMUpRight;
 	}
 	
 	public Animation getWorldMapMovementUpRight() {
-		return wMMUpRight;
+		return wMMUpLeft;
 	}
 	
 	public void setWorldMapMovementUpLeft(Animation wMMUpLeft) {
-		this.wMMUpLeft = wMMUpLeft;
+		this.wMMUpRight = wMMUpLeft;
 	}
 	
 	public Animation getWorldMapMovementUpLeft() {
-		return wMMUpLeft;
+		return wMMUpRight;
 	}
 	
 	public void setWorldMapMovementDownRight(Animation wMMDownRight) {
@@ -530,19 +530,19 @@ public class GraphicalData {
 	}
 
 	public Animation getwMMUpRightStand() {
-		return wMMUpRightStand;
-	}
-
-	public void setwMMUpRightStand(Animation wMMUpRightStand) {
-		this.wMMUpRightStand = wMMUpRightStand;
-	}
-
-	public Animation getwMMUpLeftStand() {
 		return wMMUpLeftStand;
 	}
 
+	public void setwMMUpRightStand(Animation wMMUpRightStand) {
+		this.wMMUpLeftStand = wMMUpRightStand;
+	}
+
+	public Animation getwMMUpLeftStand() {
+		return wMMUpRightStand;
+	}
+
 	public void setwMMUpLeftStand(Animation wMMUpLeftStand) {
-		this.wMMUpLeftStand = wMMUpLeftStand;
+		this.wMMUpRightStand = wMMUpLeftStand;
 	}
 
 	public Animation getwMMDownRightStand() {
@@ -656,8 +656,8 @@ public class GraphicalData {
 			graphicalData.add(wMMRight);
 		}
 		
-		if(wMMUpLeft!=null){
-			graphicalData.add(wMMUpLeft);
+		if(wMMUpRight!=null){
+			graphicalData.add(wMMUpRight);
 		}
 		if(wMMDownRight!=null){
 			graphicalData.add(wMMDownRight);
@@ -665,8 +665,8 @@ public class GraphicalData {
 		if(wMMDownLeft!=null){
 			graphicalData.add(wMMDownLeft);
 		}
-		if(wMMUpRight!=null){
-			graphicalData.add(wMMUpRight);
+		if(wMMUpLeft!=null){
+			graphicalData.add(wMMUpLeft);
 		}	
 		
 		
