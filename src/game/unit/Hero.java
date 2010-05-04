@@ -170,9 +170,9 @@ public class Hero extends Unit {
 	}
 	
 	public void moveOneSquare(int heading, Field f) {
-		if(moving==false){
+		//check if movement points are enough for moving 
+		if(moving==false && checkIfPassable(heading,f)==true){
 			
-			Square s = f.getSquare(currentSquare.getX(), currentSquare.getY());
 			
 			moving=true;
 			
@@ -247,6 +247,43 @@ public class Hero extends Unit {
 		}
 	}
 	
+	private boolean checkIfPassable(int heading,Field f) {
+		
+		Square nextSquare = new Square((currentSquare.getX()), (currentSquare.getY()));
+		
+		if(heading==1){
+			nextSquare = f.getSquare((currentSquare.getX()), (currentSquare.getY()-1));
+		}
+		if(heading==2){
+			nextSquare = f.getSquare((currentSquare.getX()), (currentSquare.getY()+1));
+		}
+		if(heading==3){
+			nextSquare = f.getSquare((currentSquare.getX()-1), (currentSquare.getY()));
+		}
+		if(heading==4){
+			nextSquare = f.getSquare((currentSquare.getX()+1), (currentSquare.getY()));
+		}
+		if(heading==13){
+			nextSquare = f.getSquare((currentSquare.getX()-1), (currentSquare.getY()-1));
+		}
+		if(heading==14){
+			nextSquare = f.getSquare((currentSquare.getX()+1), (currentSquare.getY()-1));
+		}
+		if(heading==23){
+			nextSquare = f.getSquare((currentSquare.getX()-1), (currentSquare.getY()+1));
+		}
+		if(heading==24){
+			nextSquare = f.getSquare((currentSquare.getX()+1), (currentSquare.getY()+1));
+		}
+		
+		if(!nextSquare.isPassable()) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+
 	public void movedOneSquare(Field f){
 		
 		moving = false;
@@ -275,6 +312,8 @@ public class Hero extends Unit {
 		if(heading==24){
 			this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()+1), f);
 		}
+		
+		//remove movement points
 		
 		//execution of events that are on the new hero location
 		
