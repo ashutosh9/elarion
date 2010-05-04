@@ -22,6 +22,7 @@ public class Hero extends Unit {
 	private ArrayList<Talent> taletTree = new ArrayList<Talent>(100);
 	@SuppressWarnings("unused")
 	private ArrayList<Item> inventory = new ArrayList<Item>(100);
+	private ArrayList<Unit> units = new ArrayList<Unit>(8);
 	private int x; //upper left coordinate ON SCREEN
 	private int y; //upper left coordinate ON SCREEN
 	private Player owner;
