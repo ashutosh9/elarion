@@ -7,7 +7,7 @@ public class CombatStats {
 	private double stamina;  // defines health and 0.5x defense
 	private double intelligence; // defines mana and spell damage 
 	private double defense;
-	private double speed;
+	private double movementpoints;	// how many titles can the unit walk
 	private double initiative;
 	private double morale; // from items , building , spells
 	private double luck;  // from items , buildings , spells
@@ -52,14 +52,6 @@ public class CombatStats {
 
 	public double getDefense() {
 		return defense;
-	}
-
-	public void setSpeed(double speed) {
-		this.speed = speed;
-	}
-
-	public double getSpeed() {
-		return speed;
 	}
 
 	public void setInitiative(double initiative) {
