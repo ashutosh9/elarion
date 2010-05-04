@@ -46,6 +46,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 		Building building = new Building();
 		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
 		field.getSquare(6, 6).setBuilding(building);
+		field.getSquare(6, 6).setPassable(false);
 		field.getSquare(5, 5).setHero(h);
 		currentPlayer.setCurrentView(field.getSquare(1, 1));
 		currentPlayer.setCurrentViewAbsX(0);
@@ -182,11 +183,6 @@ public class MainClass implements KeyListener,MouseInputListener {
 					
 					Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
 
-//						int heroX = Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10);
-//						int heroY = Math.round((y)*img.getHeight(null) - currentPlayer.getCurrentViewAbsY()-10);					
-//
-//						g.drawImage(heroSprite.getImage(), Math.round(heroSprite.getX())
-//								, Math.round(heroSprite.getY()), null); 
 					if(hero.isMoving()){
 						g.drawImage(hero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+hero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
 							currentPlayer.getCurrentViewAbsY()-10+hero.getCurrentSprite().getY()), null);
@@ -233,6 +229,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 		//Image img1 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg"); //field.initImages();
 		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
 		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
+		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
 //		Image face2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 2.png");
 //		Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
 //		Image a2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/2.png");

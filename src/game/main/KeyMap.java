@@ -7,7 +7,11 @@ import java.awt.event.KeyEvent;
 public class KeyMap {
 	
 	KeyMap(KeyEvent e,MainClass mc,int i,Field f){
+		
 		int keyCode = e.getKeyCode();
+		
+		int speed = 5;
+		
 		if(i==1){//pressed
 			
 			if(keyCode == KeyEvent.VK_ESCAPE){
@@ -24,7 +28,7 @@ public class KeyMap {
 				y++;
 				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
 					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
-					mc.getCurrentPlayer().setCurrentViewAbsY(temp+1);
+					mc.getCurrentPlayer().setCurrentViewAbsY(temp+speed);
 				}
 			}
 			
@@ -34,7 +38,7 @@ public class KeyMap {
 				y--;
 				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
 					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
-					mc.getCurrentPlayer().setCurrentViewAbsY(temp-1);
+					mc.getCurrentPlayer().setCurrentViewAbsY(temp-speed);
 				}
 			}
 			
@@ -44,7 +48,7 @@ public class KeyMap {
 				x--;
 				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
 					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
-					mc.getCurrentPlayer().setCurrentViewAbsX(temp-1);
+					mc.getCurrentPlayer().setCurrentViewAbsX(temp-speed);
 				}
 			}
 			
@@ -54,7 +58,7 @@ public class KeyMap {
 				x++;
 				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
 					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
-					mc.getCurrentPlayer().setCurrentViewAbsX(temp+1);
+					mc.getCurrentPlayer().setCurrentViewAbsX(temp+speed);
 				}
 			}
 			
@@ -92,7 +96,6 @@ public class KeyMap {
 			
 		}
 		if(i==2) { //released
-			
 		}
 		
 		if(i==3) { //typed

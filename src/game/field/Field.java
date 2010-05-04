@@ -26,6 +26,7 @@ public class Field {
 				s[x][y] = new Square(x,y); // if square == water - add new animation to animations array list
 				s[x][y].setTerrain(grass);
 				s[x][y].setTooltip("Grass");
+				s[x][y].setPassable(true);
 			}
 		}
 		
