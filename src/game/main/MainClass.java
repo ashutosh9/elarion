@@ -330,87 +330,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 
 
 
-/*	
- * 
- * 			RenderingHints rh = new RenderingHints(
+/*	 
+   			RenderingHints rh = new RenderingHints(
 					RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
-			g.setRenderingHints(rh);
-			
-			
-			
-@SuppressWarnings("serial")
-public class MainClass extends JFrame {
-	
-	private Screen screen;
-	private boolean loaded;
-	private static Field field;
-	
-	public static void main(String[] args) {		
-		field = new Field(500,500);
-		DisplayMode dm = new DisplayMode(1280,800,16,DisplayMode.REFRESH_RATE_UNKNOWN);
-		MainClass mc = new MainClass();
-		mc.run(dm);		
-	}
-
-	
-	public void run(DisplayMode dm){
-		setBackground(Color.PINK);
-		setForeground(Color.WHITE);
-		setFont(new Font("Arial", Font.PLAIN, 24));
-		
-		loaded = false;
-		
-		screen = new Screen();
-		try{
-			screen.setFullScreen(dm);
-			loadimages();
-			try{
-				Thread.sleep(5000);
-			}catch(Exception ex) {}
-		}finally{
-			screen.restoreScreen();
-		}
-	}
-	
-	private void loadimages() {
-		field.initImages();
-		loaded = true;
-		repaint();
-	}
-
-	public void paint(Graphics g){
-		if(g instanceof Graphics2D){
-			Graphics2D g2 = (Graphics2D) g;
-			g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		}
-		if(loaded){
-		g.drawString("MOST AWESOME GAME EVER",200,300);
-		//g.drawImage(asd,0,0,null);
-		//za po natat16ni paint-vaniq se vika repaint();
-		}
-	}
-
-}
-
-
-	private Image img;
-
-
-	public MainClass() {
-			setTitle("Game");
-			setSize(1000,800);
-			setResizable(false);
-			setBackground(Color.BLACK);
-			
-			setVisible(true);
-	}
-	
-	void paint() {
-		repaint();
-	}
-	
-	public void setBGimage(String s) {
-		img = Toolkit.getDefaultToolkit().getImage(s);
-	}
+			g.setRenderingHints(rh);	
  */
