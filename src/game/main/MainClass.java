@@ -199,19 +199,19 @@ public class MainClass implements KeyListener,MouseInputListener {
 				
 			}
 		}
-		if(currentPlayer.getCurrentViewAbsX()==40) {
+		if(currentPlayer.getCurrentViewAbsX()>=40) {
 			currentPlayer.setCurrentViewAbsX(0);
 			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()+1), currentPlayer.getCurrentView().getY()));
 		}		
-		if(currentPlayer.getCurrentViewAbsY()==40) {
+		if(currentPlayer.getCurrentViewAbsY()>=40) {
 			currentPlayer.setCurrentViewAbsY(0);
 			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()+1)));
 		}
-		if(currentPlayer.getCurrentViewAbsX()==-40) {
+		if(currentPlayer.getCurrentViewAbsX()<=-40) {
 			currentPlayer.setCurrentViewAbsX(0);
 			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()-1), currentPlayer.getCurrentView().getY()));
 		}		
-		if(currentPlayer.getCurrentViewAbsY()==-40) {
+		if(currentPlayer.getCurrentViewAbsY()<=-40) {
 			currentPlayer.setCurrentViewAbsY(0);
 			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()-1)));
 		}

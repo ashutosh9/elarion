@@ -10,7 +10,7 @@ public class KeyMap {
 		
 		int keyCode = e.getKeyCode();
 		
-		int speed = 5;
+		int speed = 4;
 		
 		if(i==1){//pressed
 			
