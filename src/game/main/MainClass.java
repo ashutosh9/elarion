@@ -134,26 +134,16 @@ public class MainClass implements KeyListener,MouseInputListener {
 	}
 
 	public void draw(Graphics g){
+		
+		//different views : world view/city view/combat view
+		//currently there is just 1 setup view - world view
+		
 		//draw buildings (maybe state 1 ,2 ,3 etc for animating)
-		//checks the direction the hero is moving and then draws the hero Image in dependency of the direction and on different part of the current 
-		//square, after stopped moving - set the hero location to the next square , activate animation for standing ( if any ) and 
-		//set previous square hero to null and sprite for movement to null, the hero animation is drawn depending on his heading
 		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
 		//the moving sprite image location will equal the square location + some pixels for the movement itself
 		//the movement orientation will depend on the heading
 		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
-		//start moving method :
-		//-ismoving = true
-		//-setheading 
-		//-start the sprite for that heading
-		//-set currentmovingsprite to that sprite
-		//-location of the sprite = location of square
-		//-when sprite = moved all way long = > sprite = 0 ; 
-		//-currentmovingsprite = null
-		//-hero location = next square
-		//-ismoving = false
-		//-hero animation for still
 		for(int x=-2;x<33;x++){
 			for(int y=-2;y<22;y++){
 				
@@ -217,8 +207,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 		}
 		//g.drawImage(a.getImage(), 0, 0, null);
 		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
-		g.drawImage(face1,1060,30,null);
-		g.drawImage(bg, 0, 0, null);
+		//g.drawImage(face1,1060,30,null);
+		//g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
 		///
 	}
