@@ -126,6 +126,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 		if(h.getCurrentSprite() != null) {
 			h.getCurrentSprite().update(timePassed);
 		}
+		
+		//combatView.update(timePassed);
+		
 		//gets all animations from the animations arrayList and updates them
 		//gets all sprites from the sprites arrayList and updates them
 		//a.update(timePassed);
@@ -144,6 +147,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 		//the movement orientation will depend on the heading
 		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
+		
+		//combatView.draw(g);
+		
 		for(int x=-2;x<33;x++){
 			for(int y=-2;y<22;y++){
 				
@@ -205,6 +211,11 @@ public class MainClass implements KeyListener,MouseInputListener {
 			currentPlayer.setCurrentViewAbsY(0);
 			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()-1)));
 		}
+		
+		
+		
+		
+		
 		//g.drawImage(a.getImage(), 0, 0, null);
 		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
 		//g.drawImage(face1,1060,30,null);
