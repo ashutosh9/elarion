@@ -13,6 +13,7 @@ import game.unit.Hero;
 
 public class Player {
 	
+	private String name;
 	private Hero mainHero;
 	private Hero selectedHero;
 	private ArrayList<Hero> heroes = new ArrayList<Hero>(20);
@@ -153,6 +154,14 @@ public class Player {
 
 	public Hero getSelectedHero() {
 		return selectedHero;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

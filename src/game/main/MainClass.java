@@ -28,7 +28,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 	private static MainClass mc;
 	private boolean running;
 	private boolean exited;
-	//private Sprite heroSprite;
+	private Hero movingHero = new Hero();
+	private int screenWidth;
+	private int screenHeight;
 	
 	
 	//for testing
@@ -41,14 +43,14 @@ public class MainClass implements KeyListener,MouseInputListener {
 		Player playerRed = new Player();
 		currentPlayer = playerRed;
 		h = new Hero();
-		currentPlayer.newHero(h,5, 5, field);
+		currentPlayer.newHero(h,480, 480, field);
 		currentPlayer.selectHero(h);
 		Building building = new Building();
 		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
 		field.getSquare(6, 6).setBuilding(building);
 		field.getSquare(6, 6).setPassable(false);
-		field.getSquare(5, 5).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(1, 1));
+		//field.getSquare(498, 498).setHero(h);
+		currentPlayer.setCurrentView(field.getSquare(5, 5));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		
@@ -83,6 +85,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 			loaded = false;
 			running = true;
 			loadimages();
+			screenWidth = 33;
+			screenHeight = 22;
 			if(loaded){
 				while(!exited){
 					movieLoop();
@@ -150,8 +154,32 @@ public class MainClass implements KeyListener,MouseInputListener {
 		
 		//combatView.draw(g);
 		
-		for(int x=-2;x<33;x++){
-			for(int y=-2;y<22;y++){
+		if(movingHero.isMoving()){
+			
+			if((movingHero.getCurrentSquare().getX() < 11) && (movingHero.getCurrentSquare().getY() < 11)){
+				currentPlayer.setCurrentView(field.getSquare(0, 0));
+			} else if((movingHero.getCurrentSquare().getX() < 11)) {
+				currentPlayer.setCurrentView(field.getSquare(0, movingHero.getCurrentSquare().getY() - 10));
+			} else if((movingHero.getCurrentSquare().getY() < 11)) {
+				currentPlayer.setCurrentView(field.getSquare((movingHero.getCurrentSquare().getX() - 10), 0));
+			} else if ((movingHero.getCurrentSquare().getX() < (field.getWidth() - 34)) && (movingHero.getCurrentSquare().getY() < (field.getHeight() - 34))){
+				currentPlayer.setCurrentView(field.getSquare(movingHero.getCurrentSquare().getX() - 10, movingHero.getCurrentSquare().getY() - 10));
+			} else 
+				
+			if((movingHero.getCurrentSquare().getX() > (field.getWidth() - 34)) && (movingHero.getCurrentSquare().getY() > (field.getHeight() - 34))){
+				currentPlayer.setCurrentView(field.getSquare(465, 465));
+			} else if((movingHero.getCurrentSquare().getX() > (field.getWidth() - 34))) {
+				currentPlayer.setCurrentView(field.getSquare(465, movingHero.getCurrentSquare().getY() - 10));
+			} else if((movingHero.getCurrentSquare().getY() > (field.getHeight() - 34))) {
+				currentPlayer.setCurrentView(field.getSquare((movingHero.getCurrentSquare().getX() - 10), 465));
+			} else {
+				currentPlayer.setCurrentView(field.getSquare(movingHero.getCurrentSquare().getX() - 10, movingHero.getCurrentSquare().getY() - 10));
+			}
+			
+		}
+		
+		for(int x=-2;x<screenWidth;x++){
+			for(int y=-2;y<screenHeight;y++){
 				
 				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
 				
@@ -170,24 +198,27 @@ public class MainClass implements KeyListener,MouseInputListener {
 			}
 		}		
 		
-		for(int x=-2;x<33;x++){
-			for(int y=-2;y<22;y++){
+		for(int x=-2;x<screenWidth;x++){
+			for(int y=-2;y<screenHeight;y++){
 				
 				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
 				
 				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
 					
-					Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
-
-					if(hero.isMoving()){
-						g.drawImage(hero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+hero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
-							currentPlayer.getCurrentViewAbsY()-10+hero.getCurrentSprite().getY()), null);
-						if(Math.abs(hero.getCurrentSprite().getX())>=40 || Math.abs(hero.getCurrentSprite().getY())>=40) {
-							hero.movedOneSquare(field);
+					movingHero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
+					
+					if(movingHero.isMoving()){
+						
+						g.drawImage(movingHero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+movingHero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()-10+movingHero.getCurrentSprite().getY()), null);
+						
+						if(Math.abs(movingHero.getCurrentSprite().getX())>=40 || Math.abs(movingHero.getCurrentSprite().getY())>=40) {
+							movingHero.movedOneSquare(field);
 						}
+						
 					} else {
-						//hero.setHeading(23);
-						g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+						
+						g.drawImage(movingHero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
 								currentPlayer.getCurrentViewAbsY()-10), null);
 					}
 					
@@ -195,33 +226,21 @@ public class MainClass implements KeyListener,MouseInputListener {
 				
 			}
 		}
-		if(currentPlayer.getCurrentViewAbsX()>=40) {
-			currentPlayer.setCurrentViewAbsX(0);
-			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()+1), currentPlayer.getCurrentView().getY()));
-		}		
-		if(currentPlayer.getCurrentViewAbsY()>=40) {
-			currentPlayer.setCurrentViewAbsY(0);
-			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()+1)));
-		}
-		if(currentPlayer.getCurrentViewAbsX()<=-40) {
-			currentPlayer.setCurrentViewAbsX(0);
-			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()-1), currentPlayer.getCurrentView().getY()));
-		}		
-		if(currentPlayer.getCurrentViewAbsY()<=-40) {
-			currentPlayer.setCurrentViewAbsY(0);
-			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()-1)));
-		}
+		
+
 		
 		
 		
 		
-		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,20,null);
 		//g.drawImage(a.getImage(), 0, 0, null);
 		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
 		//g.drawImage(face1,1060,30,null);
 		//g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
 		///
+		
+		currentViewChecker();
 	}
 
 	public void loadimages() {
@@ -268,12 +287,47 @@ public class MainClass implements KeyListener,MouseInputListener {
 		exited = true;
 	}	
 	
+	public void currentViewChecker(){
+		if(currentPlayer.getCurrentViewAbsX()>=40) {
+			currentPlayer.setCurrentViewAbsX(0);
+			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()+1), currentPlayer.getCurrentView().getY()));
+		}		
+		if(currentPlayer.getCurrentViewAbsY()>=40) {
+			currentPlayer.setCurrentViewAbsY(0);
+			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()+1)));
+		}
+		if(currentPlayer.getCurrentViewAbsX()<=-40) {
+			currentPlayer.setCurrentViewAbsX(0);
+			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()-1), currentPlayer.getCurrentView().getY()));
+		}		
+		if(currentPlayer.getCurrentViewAbsY()<=-40) {
+			currentPlayer.setCurrentViewAbsY(0);
+			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()-1)));
+		}
+	}
+	
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
 
 	public static void setCurrentPlayer(Player currentPlayer) {
 		MainClass.currentPlayer = currentPlayer;
+	}
+
+	public void setScreenWidth(int screenWidth) {
+		this.screenWidth = screenWidth;
+	}
+
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	public void setScreenHeight(int screenHeight) {
+		this.screenHeight = screenHeight;
+	}
+
+	public int getScreenHeight() {
+		return screenHeight;
 	}
 
 	@Override
@@ -283,14 +337,16 @@ public class MainClass implements KeyListener,MouseInputListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent e) {
+		@SuppressWarnings("unused")
+		KeyMap km = new KeyMap(e,mc,2,field);
 		
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// key tapped
+	public void keyTyped(KeyEvent e) {
+		@SuppressWarnings("unused")
+		KeyMap km = new KeyMap(e,mc,3,field);
 		
 	}
 
@@ -346,4 +402,13 @@ public class MainClass implements KeyListener,MouseInputListener {
 					RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
 			g.setRenderingHints(rh);	
+			
+			String string = " asd " + currentPlayer.getName() + " asd ";
+			
+			g.setColor(w.getBackground());
+			g.fillRect(0,0,s.getWidth(),s.getHeight());
+			g.setColoer(w.getForeground());
+			g.drawString(string,x,y); // draws background && string
+			
+			
  */
