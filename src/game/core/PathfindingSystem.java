@@ -8,7 +8,7 @@ public class PathfindingSystem {
 	
 	private int maxSearchDistance = 200;
 	
-	public Path findPath(Field field, Square startSquare, Square destinationSquare, Object maxDepth){
+	public Path findPath(Field field, Square startSquare, Square destinationSquare){
 		
 		ArrayList<PathNode> openList = new ArrayList<PathNode>(200);
 		ArrayList<PathNode> closedList = new ArrayList<PathNode>(200);
@@ -20,7 +20,7 @@ public class PathfindingSystem {
 		openList.add(startNode);
 		
 		while(!openList.isEmpty()){
-			currentNode = openList.get(1);
+			currentNode = openList.get(0);
 			if(currentNode == destinationNode){
 				break;
 			}

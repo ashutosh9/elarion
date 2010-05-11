@@ -26,9 +26,11 @@ public class KeyMap {
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
 				y+=mc.getScreenHeight()+2;
-				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
-					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
-					mc.getCurrentPlayer().setCurrentViewAbsY(temp+speed);
+				if(y<f.getHeight()){
+					if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
+						int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
+						mc.getCurrentPlayer().setCurrentViewAbsY(temp+speed);
+					}
 				}
 			}
 			
@@ -60,9 +62,11 @@ public class KeyMap {
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
 				x+=mc.getScreenWidth()+2;
-				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
-					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
-					mc.getCurrentPlayer().setCurrentViewAbsX(temp+speed);
+				if(x<f.getWidth()){
+					if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
+						int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
+						mc.getCurrentPlayer().setCurrentViewAbsX(temp+speed);
+					}
 				}
 			}
 			
