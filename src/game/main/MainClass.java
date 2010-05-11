@@ -2,6 +2,8 @@ package game.main;
 
 import game.Interface.Screen;
 import game.building.Building;
+import game.core.Path;
+import game.core.PathfindingSystem;
 import game.field.Field;
 import game.player.Player;
 import game.unit.Hero;
@@ -50,7 +52,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 		field.getSquare(6, 6).setBuilding(building);
 		field.getSquare(6, 6).setPassable(false);
 		//field.getSquare(498, 498).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(5, 5));
+		currentPlayer.setCurrentView(field.getSquare(465, 465));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		
@@ -166,12 +168,12 @@ public class MainClass implements KeyListener,MouseInputListener {
 				currentPlayer.setCurrentView(field.getSquare(movingHero.getCurrentSquare().getX() - 10, movingHero.getCurrentSquare().getY() - 10));
 			} else 
 				
-			if((movingHero.getCurrentSquare().getX() > (field.getWidth() - 34)) && (movingHero.getCurrentSquare().getY() > (field.getHeight() - 34))){
-				currentPlayer.setCurrentView(field.getSquare(465, 465));
-			} else if((movingHero.getCurrentSquare().getX() > (field.getWidth() - 34))) {
-				currentPlayer.setCurrentView(field.getSquare(465, movingHero.getCurrentSquare().getY() - 10));
-			} else if((movingHero.getCurrentSquare().getY() > (field.getHeight() - 34))) {
-				currentPlayer.setCurrentView(field.getSquare((movingHero.getCurrentSquare().getX() - 10), 465));
+			if((movingHero.getCurrentSquare().getX() > (field.getWidth() - screenWidth)) && (movingHero.getCurrentSquare().getY() > (field.getHeight() - screenHeight))){
+				currentPlayer.setCurrentView(field.getSquare((field.getWidth() - screenWidth), (field.getHeight() - screenHeight)));
+			} else if((movingHero.getCurrentSquare().getX() > (field.getWidth() - screenWidth))) {
+				currentPlayer.setCurrentView(field.getSquare((field.getWidth() - screenWidth), movingHero.getCurrentSquare().getY() - 10));
+			} else if((movingHero.getCurrentSquare().getY() > (field.getHeight() - screenHeight))) {
+				currentPlayer.setCurrentView(field.getSquare((movingHero.getCurrentSquare().getX() - 10), (field.getHeight() - screenHeight)));
 			} else {
 				currentPlayer.setCurrentView(field.getSquare(movingHero.getCurrentSquare().getX() - 10, movingHero.getCurrentSquare().getY() - 10));
 			}
@@ -239,6 +241,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 		//g.drawImage(bg, 0, 0, null);
 		// array list for sprite && animations - returns every animation and every sprite
 		///
+		String string = " X: " + currentPlayer.getCurrentView().getX() + " Y: " + currentPlayer.getCurrentView().getY();
+		g.drawString(string,20,20);
 		
 		currentViewChecker();
 	}
