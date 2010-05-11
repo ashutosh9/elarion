@@ -49,6 +49,7 @@ public class Hero extends Unit {
 		y = 1;
 		heading = 1;
 		graphicalData = new GraphicalData();
+		moving = false;
 	}
 	
 	public int getHeroX(){
@@ -230,16 +231,16 @@ public class Hero extends Unit {
 			
 			currentSprite = new Sprite(currentAnimation);
 			if(toMoveX < 0){
-				currentSprite.setVelocityOfX(-0.3f);
+				currentSprite.setVelocityOfX(-0.2f);
 				toMoveX = Math.abs(toMoveX);
 			} else {
-			currentSprite.setVelocityOfX(0.3f);
+				currentSprite.setVelocityOfX(0.2f);
 			}
 			if(toMoveY < 0){
-				currentSprite.setVelocityOfY(-0.3f);
+				currentSprite.setVelocityOfY(-0.2f);
 				toMoveY = Math.abs(toMoveY);
 			} else {
-			currentSprite.setVelocityOfY(0.3f);
+				currentSprite.setVelocityOfY(0.2f);
 			}
 			currentSprite.setToMoveX(toMoveX);
 			currentSprite.setToMoveY(toMoveY);

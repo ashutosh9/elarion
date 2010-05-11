@@ -25,7 +25,7 @@ public class KeyMap {
 			if(keyCode == KeyEvent.VK_DOWN){
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
-				y++;
+				y+=mc.getScreenHeight()+2;
 				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
 					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
 					mc.getCurrentPlayer().setCurrentViewAbsY(temp+speed);
@@ -36,9 +36,11 @@ public class KeyMap {
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
 				y--;
-				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
-					int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
-					mc.getCurrentPlayer().setCurrentViewAbsY(temp-speed);
+				if(y>=0){
+					if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsY() != 0){
+						int temp = mc.getCurrentPlayer().getCurrentViewAbsY();
+						mc.getCurrentPlayer().setCurrentViewAbsY(temp-speed);
+					}
 				}
 			}
 			
@@ -46,16 +48,18 @@ public class KeyMap {
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
 				x--;
-				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
-					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
-					mc.getCurrentPlayer().setCurrentViewAbsX(temp-speed);
+				if(x>=0){
+					if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
+						int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
+						mc.getCurrentPlayer().setCurrentViewAbsX(temp-speed);
+					}
 				}
 			}
 			
 			if(keyCode == KeyEvent.VK_RIGHT){
 				int x = mc.getCurrentPlayer().getCurrentView().getX();
 				int y = mc.getCurrentPlayer().getCurrentView().getY();
-				x++;
+				x+=mc.getScreenWidth()+2;
 				if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
 					int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
 					mc.getCurrentPlayer().setCurrentViewAbsX(temp+speed);
@@ -94,12 +98,16 @@ public class KeyMap {
 				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(24, f);
 			}
 			
+			else {
+				e.consume();
+			}
+			
 		}
 		if(i==2) { //released
 		}
 		
 		if(i==3) { //typed
-			
+			e.consume();
 		}
 	}
 

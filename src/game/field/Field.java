@@ -21,12 +21,36 @@ public class Field {
 		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass2.png");
 		grass = new Terrain(grassImg);
 		s = new Square[width][height];
-		for(int x=1; x<width; x++) {
-			for(int y=1; y<height; y++) {
+		for(int x=0; x<width; x++) {
+			for(int y=0; y<height; y++) {
 				s[x][y] = new Square(x,y); // if square == water - add new animation to animations array list
 				s[x][y].setTerrain(grass);
 				s[x][y].setTooltip("Grass");
 				s[x][y].setPassable(true);
+			}
+		}
+		
+		for(int x=0; x<width; x++){
+			for(int y=0; y<4; y++){
+				s[x][y].setPassable(false);
+			}
+		}
+		
+		for(int x=0; x<width; x++){
+			for(int y=(height-4); y<height; y++){
+				s[x][y].setPassable(false);
+			}
+		}
+		
+		for(int x=0; x<4; x++){
+			for(int y=0; y<height; y++){
+				s[x][y].setPassable(false);
+			}
+		}
+		
+		for(int x=(width-4); x<width; x++){
+			for(int y=0; y<height; y++){
+				s[x][y].setPassable(false);
 			}
 		}
 		
