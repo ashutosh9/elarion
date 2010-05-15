@@ -3,7 +3,9 @@ package game.main;
 import game.Interface.Screen;
 import game.building.Building;
 import game.core.Path;
+import game.core.PathNode;
 import game.field.Field;
+import game.item.Item;
 import game.player.Player;
 import game.resource.Resource;
 import game.unit.Hero;
@@ -39,6 +41,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 	private Image face1;
 	private Animation a;
 	private Sprite sprite;
+	private static Path path;
+	private static Item pathNode;
 	
 	public static void main(String args[]){
 		field = new Field(500,500);
@@ -47,20 +51,23 @@ public class MainClass implements KeyListener,MouseInputListener {
 		currentPlayer = new Player();
 		h = new Hero();
 		currentPlayer.setCurrentPlayer(true);
-		Path path = new Path();
-		path.findPath(field, field.getSquare(10, 10), field.getSquare(14, 15));
 		
 		currentPlayer.getGold().setAmount(1000);
 		currentPlayer.newHero(h,480, 480, field);
 		currentPlayer.selectHero(h);
 		Building building = new Building();
 		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-		field.getSquare(6, 6).setBuilding(building);
-		field.getSquare(6, 6).setPassable(false);
+		field.getSquare(5, 5).setBuilding(building);
+		field.getSquare(5, 5).setPassable(false);
 		//field.getSquare(498, 498).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(465, 465));
+		currentPlayer.setCurrentView(field.getSquare(1, 1));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
+		
+		path = new Path();
+		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 5));
+		pathNode = new Item();
+		pathNode.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/pathSquare.png"));
 		
 /*		playerRed.Activate();
 		if(playerRed.isActive()){
@@ -172,6 +179,14 @@ public class MainClass implements KeyListener,MouseInputListener {
 						, Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
 									currentPlayer.getCurrentViewAbsY()), null);
 				
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource() != null){
+					
+					Resource r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource();
+					g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()), null);
+					
+				}
+				
 				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding() != null){
 					
 					Building building = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding();
@@ -180,9 +195,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 					
 				}
 				
-				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource() != null){
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem() != null){
 					
-					Resource r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource();
+					Item r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem();
 					g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
 							currentPlayer.getCurrentViewAbsY()), null);
 					
@@ -218,6 +233,10 @@ public class MainClass implements KeyListener,MouseInputListener {
 				}
 				
 			}
+		}
+		
+		for(PathNode pn : path.getSquares()){
+			field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
 		}
 		
 		//g.drawImage(a.getImage(), 0, 0, null);
