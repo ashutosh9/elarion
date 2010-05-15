@@ -13,18 +13,12 @@ import game.spells.Talent;
 
 public class Hero extends Unit {
 
-	//combat - left/right move,stand,attack,cast,die
-	/*	private Sprite leftHeadingSprite;
-	private Animation leftHeadingAnimation;
-	private Sprite rightHeadingSprite;
-	private Animation rightHeadingAnimation;*/
 	@SuppressWarnings("unused")
 	private ArrayList<Talent> taletTree = new ArrayList<Talent>(100);
-	@SuppressWarnings("unused")
 	private ArrayList<Item> inventory = new ArrayList<Item>(100);
 	private ArrayList<Unit> units = new ArrayList<Unit>(8);
-	private int x; //upper left coordinate ON SCREEN
-	private int y; //upper left coordinate ON SCREEN
+	private int x; 
+	private int y; 
 	private Player owner;
 	private Square currentSquare;
 	private Race race;
@@ -172,7 +166,9 @@ public class Hero extends Unit {
 	}
 	
 	public void moveOneSquare(int heading, Field f) {
+		
 		//check if movement points are enough for moving 
+		
 		if(moving==false && checkIfPassable(heading,f)==true){
 			
 			
@@ -186,47 +182,39 @@ public class Hero extends Unit {
 			if(heading==1){
 				setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
 				toMoveY=-40;
-				//this.setHeroLocation((currentSquare.getX()), (currentSquare.getY()-1), f);
 			}
 			if(heading==2){
 				setCurrentAnimation(graphicalData.getWorldMapMovementDown());
 				toMoveY=40;
-				//this.setHeroLocation((currentSquare.getX()), (currentSquare.getY()+1), f);
 			}
 			if(heading==3){
 				setCurrentAnimation(graphicalData.getWorldMapMovementRight());
 				toMoveX=-40;
-				//this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()), f);
 			}
 			if(heading==4){
 				setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
 				toMoveX=40;
-				//this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()), f);
 			}
 			if(heading==13){
 				setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
 				toMoveY=-40;
 				toMoveX=-40;
-				//this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()-1), f);
 				
 			}
 			if(heading==14){
 				setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
 				toMoveY=-40;
 				toMoveX=40;
-				//this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()-1), f);
 			}
 			if(heading==23){
 				setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
 				toMoveY=40;
 				toMoveX=-40;
-				//this.setHeroLocation((currentSquare.getX()-1), (currentSquare.getY()+1), f);
 			}
 			if(heading==24){
 				setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
 				toMoveY=40;
 				toMoveX=40;
-				//this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()+1), f);
 			}
 			
 			currentSprite = new Sprite(currentAnimation);
@@ -315,10 +303,23 @@ public class Hero extends Unit {
 			this.setHeroLocation((currentSquare.getX()+1), (currentSquare.getY()+1), f);
 		}
 		
+		//execution of events that are on the new hero location
+		f.getEvents().pickUp(getCurrentSquare(), this);
+		f.getEvents().pickUpResource(getCurrentSquare(), getOwner());
 		//remove movement points
 		
-		//execution of events that are on the new hero location
+
 		
+	}
+	
+	public void addItem(Item i){
+		inventory.add(i);
+	}
+	
+	public void removeItem(Item i){
+		if (inventory.contains(i)) {
+			inventory.remove(i);
+		}
 	}
 	
 	

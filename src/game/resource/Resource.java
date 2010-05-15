@@ -8,10 +8,10 @@ public class Resource {
 	private long amount;
 	private int income;
 	
-	public Resource(String s, int i, long l, Image img){
+	public Resource(String s, int i, long a, Image img){
 		setName(s);
 		setIncome(i);
-		setAmount(l);
+		setAmount(a);
 		setImage(img);
 	}
 	
