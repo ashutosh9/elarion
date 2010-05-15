@@ -1,17 +1,24 @@
 package game.core;
 
+
+
+// TO BE DELETED
+
+
+
+/*
 import game.field.Field;
 import game.field.Square;
 import java.util.ArrayList;
 
 public class PathfindingSystem {
 	
-	private int maxSearchDistance = 200;
+	private int maxSearchDistance = 30;
 	
 	public Path findPath(Field field, Square startSquare, Square destinationSquare){
 		
-		ArrayList<PathNode> openList = new ArrayList<PathNode>(200);
-		ArrayList<PathNode> closedList = new ArrayList<PathNode>(200);
+		ArrayList<PathNode> openList = new ArrayList<PathNode>();
+		ArrayList<PathNode> closedList = new ArrayList<PathNode>();
 		PathNode currentNode = new PathNode(startSquare);
 		PathNode destinationNode = new PathNode(destinationSquare);
 		PathNode startNode = new PathNode(startSquare);
@@ -39,7 +46,7 @@ public class PathfindingSystem {
 					Square neighbourSquare = field.getSquare(xp, xy);
 					PathNode neighbourNode = new PathNode(neighbourSquare);
 					
-					if((!neighbourSquare.getTerrain().isWater()) && (neighbourSquare.isPassable())) {
+					if(neighbourSquare.isPassable()) {
 						int nextStepCost = currentNode.getGoCost() + getMovementCost();
 						neighbourNode.setVisited(true);
 						if (nextStepCost < neighbourNode.getGoCost()) {
@@ -98,7 +105,7 @@ public class PathfindingSystem {
 		return maxSearchDistance;
 	}
 
-}
+} */
 	/*
 	 //H = Math.sqrt(Math.pow((currentSquare.getX() - destinationSquare.getX()), 2) 
 	//	+ Math.pow((currentSquare.getY() - destinationSquare.getY()), 2))

@@ -3,7 +3,6 @@ package game.main;
 import game.Interface.Screen;
 import game.building.Building;
 import game.core.Path;
-import game.core.PathfindingSystem;
 import game.field.Field;
 import game.player.Player;
 import game.resource.Resource;
@@ -48,6 +47,9 @@ public class MainClass implements KeyListener,MouseInputListener {
 		currentPlayer = new Player();
 		h = new Hero();
 		currentPlayer.setCurrentPlayer(true);
+		Path path = new Path();
+		path.findPath(field, field.getSquare(10, 10), field.getSquare(14, 15));
+		
 		currentPlayer.getGold().setAmount(1000);
 		currentPlayer.newHero(h,480, 480, field);
 		currentPlayer.selectHero(h);
@@ -106,7 +108,6 @@ public class MainClass implements KeyListener,MouseInputListener {
 	public void movieLoop() {
 		long startingTime = System.currentTimeMillis();
 		long cumTime = startingTime;
-		//while(!running) - draw menu 
 		while(running && !exited){
 			long timePassed = System.currentTimeMillis() - cumTime;
 			cumTime += timePassed;
@@ -153,8 +154,6 @@ public class MainClass implements KeyListener,MouseInputListener {
 		
 		//draw buildings (maybe state 1 ,2 ,3 etc for animating)
 		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
-		//the moving sprite image location will equal the square location + some pixels for the movement itself
-		//the movement orientation will depend on the heading
 		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
 		
