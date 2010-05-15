@@ -22,18 +22,27 @@ public class Player {
 	private Castle mainCastle; // castle functions identical to the hero ones
 	@SuppressWarnings("unused")
 	private ArrayList<Castle> castles = new ArrayList<Castle>(20);
-	private Resource gems = new Resource("gems",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg")); 
-	private Resource crystal = new Resource("crystal",0,0,Toolkit.getDefaultToolkit().getImage("game\\resource\\images\\Crystal1.jpg"));
-	private Resource gold = new Resource("gold",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg"));
-	private Resource mercury = new Resource("mercury",0,0,Toolkit.getDefaultToolkit().getImage("game\\resource\\images\\Mercury.jpg"));
-	private Resource stone = new Resource("stone",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg"));
-	private Resource sulfur = new Resource("sulfur",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg"));
-	private Resource wood = new Resource("wood",0,0,Toolkit.getDefaultToolkit().getImage("game\\terrain\\Grass1.jpg"));
+	private Resource gold = new Resource("gold",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\gold.png"));
+	private Resource stone = new Resource("stone",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\stone.png"));
+	private Resource wood = new Resource("wood",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\wood.png"));
 	private Square currentView;
-	private int currentViewAbsX; //absolute 
+	private int currentViewAbsX; 
 	private int currentViewAbsY;
 	private boolean humanPlayer;
 	private Race race;
+	private boolean currentPlayer;
+	
+	public Player(String s, Race race){
+		name = s;
+		this.race = race;
+		gold.setAmount(0);
+		stone.setAmount(0);
+		wood.setAmount(0);
+	}
+	
+	public Player(){
+		
+	}
 	
 	public void newHero(Hero h,int x,int y,Field field) {
 		heroes.add(h);
@@ -86,17 +95,6 @@ public class Player {
 	
 	public ArrayList<Hero> getHeroes(){
 		return heroes;
-	}
-	
-	public Resource getResource(String s){
-		if (s=="stone") return stone;
-		if (s=="gold") return gold;
-		if (s=="wood") return wood;
-		if (s=="gems") return gems;
-		if (s=="crystal") return crystal;
-		if (s=="sulfur") return sulfur;
-		if (s=="mercury") return mercury;
-		return null;
 	}
 	
 	public boolean isAI(){
@@ -162,6 +160,26 @@ public class Player {
 
 	public String getName() {
 		return name;
+	}
+
+	public Resource getGold() {
+		return gold;
+	}
+
+	public Resource getStone() {
+		return stone;
+	}
+
+	public Resource getWood() {
+		return wood;
+	}
+
+	public void setCurrentPlayer(boolean currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
+
+	public boolean isCurrentPlayer() {
+		return currentPlayer;
 	}
 
 }

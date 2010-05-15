@@ -3,6 +3,7 @@ package game.field;
 import game.Interface.Tooltip;
 import game.building.Building;
 import game.item.Item;
+import game.resource.Resource;
 import game.unit.Hero;
 
 import java.awt.Image;
@@ -15,14 +16,17 @@ public class Square {
 	private Hero hero;
 	private Terrain terrain;
 	private Tooltip tooltip;
-	private Item collectibleItem;
+	private Item item;
+	private Resource resource;
 	
 	
 	public Square(int x, int y){
 		//set tooltip to terrain tooltip
 		this.x = x;
 		this.y = y;
+		setResource(null);
 		setHero(null);
+		setItem(null);
 		tooltip = new Tooltip("");
 	}
 	
@@ -91,13 +95,21 @@ public class Square {
 		return building.getImage();
 	}
 
-	public void setCollectibleItem(Item collectibleItem) {
+	public void setItem(Item collectibleItem) {
 		//set tooltip to collectible tooltip 
-		this.collectibleItem = collectibleItem;
+		this.item = collectibleItem;
 	}
 
-	public Item getCollectibleItem() {
-		return collectibleItem;
+	public Item getItem() {
+		return item;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+
+	public Resource getResource() {
+		return resource;
 	}
 
 }
