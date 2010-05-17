@@ -15,11 +15,13 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.event.MouseInputListener;
 
-public class MainClass implements KeyListener,MouseInputListener {
+public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
 	
 
 
@@ -97,6 +99,8 @@ public class MainClass implements KeyListener,MouseInputListener {
 			Window w = s.getFullScreenWindow();
 			w.setFocusTraversalKeysEnabled(false);
 			w.addKeyListener(this);
+			w.addMouseListener(this);
+			w.addMouseMotionListener(this);
 			loaded = false;
 			running = true;
 			loadimages();
@@ -423,38 +427,27 @@ public class MainClass implements KeyListener,MouseInputListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -463,6 +456,7 @@ public class MainClass implements KeyListener,MouseInputListener {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }
 
