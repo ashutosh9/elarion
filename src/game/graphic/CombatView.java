@@ -11,6 +11,8 @@ public class CombatView {
 	
 	public Player playerInControl;
 	
+	public CombatView(){}
+	
 	public CombatView(Hero attacker, Hero defender,Square s) {
 		
 	}
