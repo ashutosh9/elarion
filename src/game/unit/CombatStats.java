@@ -54,6 +54,14 @@ public class CombatStats {
 		return defense;
 	}
 
+	public void setMovementpoints(double movementpoints) {
+		this.movementpoints = movementpoints;
+	}
+
+	public double getMovementpoints() {
+		return movementpoints;
+	}
+
 	public void setInitiative(double initiative) {
 		this.initiative = initiative;
 	}

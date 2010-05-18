@@ -62,7 +62,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		field.getSquare(5, 5).setBuilding(building);
 		field.getSquare(5, 5).setPassable(false);
 		//field.getSquare(498, 498).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(1, 1));
+		currentPlayer.setCurrentView(field.getSquare(460, 460));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		
