@@ -6,6 +6,7 @@ public class Unit {
 	private String type;
 	private double level;
 	private double experiance;
+	private CombatStats combatStats;
 	
 	// stats stuff effects spells level xp ranks hp mp skills etc
 	// stand animation images for heading left
@@ -13,7 +14,10 @@ public class Unit {
 
 
 	public Unit(){
-		
+		combatStats = new CombatStats();
+		setExperiance(0);
+		setLevel(1);
+		setType("");
 	}
 
 	public void setType(String type) {
@@ -38,6 +42,14 @@ public class Unit {
 
 	public double getExperiance() {
 		return experiance;
+	}
+
+	public void setCombatStats(CombatStats combatStats) {
+		this.combatStats = combatStats;
+	}
+
+	public CombatStats getCombatStats() {
+		return combatStats;
 	}
 	
 }
