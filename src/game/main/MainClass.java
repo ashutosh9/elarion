@@ -173,11 +173,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		// else draw a single image
 		
 		combatView.draw(g);
-		combatView.setCombat(false);
-		
+		//combatView.setCombat(false);
 		
 		if(!combatView.isCombat()) {
-			
+		
 			if(movingHero.isMoving()){
 				movingHeroChecker();
 			}
@@ -271,12 +270,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			string = "Stone: " + currentPlayer.getStone().getAmount();
 			g.drawString(string,30,77);
 			
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),38,98,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg"),40,100,null);
-			
 			currentViewChecker();
 		}
-	
 	}
 
 	public void loadimages() {
@@ -440,33 +435,34 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent arg0) {
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent arg0) {
 		
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent arg0) {}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent arg0) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent arg0) {}
 
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
+	public void mouseDragged(MouseEvent arg0) {
 		
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-				
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
