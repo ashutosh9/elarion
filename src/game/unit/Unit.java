@@ -7,6 +7,10 @@ public class Unit {
 	private double level;
 	private double experiance;
 	private CombatStats combatStats;
+	private GraphicalData graphicalData;
+	private int combatHeading;
+	//1 == right
+	//2 == left
 	
 	// stats stuff effects spells level xp ranks hp mp skills etc
 	// stand animation images for heading left
@@ -50,6 +54,22 @@ public class Unit {
 
 	public CombatStats getCombatStats() {
 		return combatStats;
+	}
+
+	public void setGraphicalData(GraphicalData graphicalData) {
+		this.graphicalData = graphicalData;
+	}
+
+	public GraphicalData getGraphicalData() {
+		return graphicalData;
+	}
+
+	public void setCombatHeading(int combatHeading) {
+		this.combatHeading = combatHeading;
+	}
+
+	public int getCombatHeading() {
+		return combatHeading;
 	}
 	
 }
