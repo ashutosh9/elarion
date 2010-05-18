@@ -322,6 +322,30 @@ public class Hero extends Unit {
 		}
 	}
 	
+	public Item getItem(Item i){
+		if (inventory.contains(i)) {
+			return inventory.get(inventory.indexOf(i));
+		} 
+		return null;
+	}
+	
+	public void addUnit(Unit u){
+		units.add(u);
+	}
+
+	public void removeUnit(Unit u){
+		if (units.contains(u)) {
+			units.remove(u);
+		}
+	}	
+	
+	public Unit getUnit(Unit u){
+		if (units.contains(u)) {
+			return units.get(units.indexOf(u));
+			}
+		return null;
+	}
+	
 	
 //	public getAnimations(){
 //		return race.getHeroAnimations;
