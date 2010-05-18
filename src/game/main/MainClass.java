@@ -173,6 +173,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		// else draw a single image
 		
 		combatView.draw(g);
+		combatView.setCombat(false);
 		
 		
 		if(!combatView.isCombat()) {

@@ -21,6 +21,16 @@ public class TestUnits {
 		mage.setType("Mage");
 	}
 	
+	public Unit getWarrior(){
+		return warrior;
+	}
+	public Unit getArcher(){
+		return archer;
+	}
+	public Unit getMage(){
+		return mage;
+	}
+	
 }
 
 
