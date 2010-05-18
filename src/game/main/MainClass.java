@@ -10,6 +10,7 @@ import game.item.Item;
 import game.player.Player;
 import game.resource.Resource;
 import game.unit.Hero;
+import game.unit.TestUnits;
 import game.unit.Unit;
 //import javax.swing.*;
 import java.awt.*;
@@ -69,6 +70,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		currentPlayer.setCurrentView(field.getSquare(460, 460));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
+		TestUnits testUnits = new TestUnits();
+		h.addUnit(testUnits.getArcher());
+		h.addUnit(testUnits.getMage());
+		h.addUnit(testUnits.getWarrior());
+		
 		
 		path = new Path();
 		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 5));
