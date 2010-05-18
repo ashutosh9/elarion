@@ -52,8 +52,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		currentPlayer = new Player();
 		h = new Hero();
-		currentPlayer.setCurrentPlayer(true);
-		
+		currentPlayer.setCurrentPlayer(true); 
 		currentPlayer.getGold().setAmount(1000);
 		currentPlayer.newHero(h,480, 480, field);
 		currentPlayer.selectHero(h);
@@ -62,7 +61,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		field.getSquare(5, 5).setBuilding(building);
 		field.getSquare(5, 5).setPassable(false);
 		//field.getSquare(498, 498).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(1, 1));
+		currentPlayer.setCurrentView(field.getSquare(460, 460));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		
@@ -170,6 +169,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 		//combatView.draw(g);
 		
+		
+		
 		if(movingHero.isMoving()){
 			movingHeroChecker();
 		}
@@ -262,6 +263,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,65,null);
 		string = "Stone: " + currentPlayer.getStone().getAmount();
 		g.drawString(string,30,77);
+		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),38,98,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg"),40,100,null);
 		
 		currentViewChecker();
 	}
@@ -427,34 +431,33 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 		
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent e) {}
 
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseMoved(MouseEvent e) {
+				
 	}
 
 	
