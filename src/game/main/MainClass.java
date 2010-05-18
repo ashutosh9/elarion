@@ -176,101 +176,105 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 		if(!combatView.isCombat()) {
 		
-			if(movingHero.isMoving()){
-				movingHeroChecker();
-			}
-			
-			for(int x=-2;x<screenWidth;x++){
-				for(int y=-2;y<screenHeight;y++){
+		if(movingHero.isMoving()){
+			movingHeroChecker();
+		}
+		if(!combatView.isCombat()) {
+		
+		for(int x=-2;x<screenWidth;x++){
+			for(int y=-2;y<screenHeight;y++){
+				
+				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+				
+				g.drawImage(img
+						, Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+									currentPlayer.getCurrentViewAbsY()), null);
+				
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource() != null){
 					
-					Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+					Resource r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource();
+					g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()), null);
 					
-					g.drawImage(img
-							, Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-										currentPlayer.getCurrentViewAbsY()), null);
-					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource() != null){
-						
-						Resource r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource();
-						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()), null);
-						
-					}
-					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding() != null){
-						
-						Building building = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding();
-						g.drawImage(building.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()), null);
-						
-					}
-					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem() != null){
-						
-						Item r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem();
-						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()), null);
-						
-					}
-			
 				}
-			}		
-			
-			for(int x=-2;x<screenWidth;x++){
-				for(int y=-2;y<screenHeight;y++){
+				
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding() != null){
 					
-					Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+					Building building = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding();
+					g.drawImage(building.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()), null);
 					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
+				}
+				
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem() != null){
+					
+					Item r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem();
+					g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()), null);
+					
+				}
+		
+			}
+		}		
+		
+		for(int x=-2;x<screenWidth;x++){
+			for(int y=-2;y<screenHeight;y++){
+				
+				Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+				
+				if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
+					
+					movingHero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
+					
+					if(movingHero.isMoving()){
 						
-						movingHero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
+						g.drawImage(movingHero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+movingHero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
+							currentPlayer.getCurrentViewAbsY()-10+movingHero.getCurrentSprite().getY()), null);
 						
-						if(movingHero.isMoving()){
-							
-							g.drawImage(movingHero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+movingHero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()-10+movingHero.getCurrentSprite().getY()), null);
-							
-							if(Math.abs(movingHero.getCurrentSprite().getX())>=40 || Math.abs(movingHero.getCurrentSprite().getY())>=40) {
-								movingHero.movedOneSquare(field);
-							}
-							
-						} else {
-							
-							g.drawImage(movingHero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
-									currentPlayer.getCurrentViewAbsY()-10), null);
+						if(Math.abs(movingHero.getCurrentSprite().getX())>=40 || Math.abs(movingHero.getCurrentSprite().getY())>=40) {
+							movingHero.movedOneSquare(field);
 						}
 						
+					} else {
+						
+						g.drawImage(movingHero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+								currentPlayer.getCurrentViewAbsY()-10), null);
 					}
 					
 				}
+				
 			}
-			
-			for(PathNode pn : path.getSquares()){
-				field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
-			}
-			
-			//g.drawImage(a.getImage(), 0, 0, null);
-			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
-			//g.drawImage(face1,1060,30,null);
-			//g.drawImage(bg, 0, 0, null);
-			// array list for sprite && animations - returns every animation and every sprite
-	
-			
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,20,null);
-			String string = "X: " + currentPlayer.getCurrentView().getX() + " Y: " + currentPlayer.getCurrentView().getY();
-			g.drawString(string,30,32);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,35,null);
-			string = "Gold: " + currentPlayer.getGold().getAmount();
-			g.drawString(string,30,47);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,50,null);
-			string = "Wood: " + currentPlayer.getWood().getAmount();
-			g.drawString(string,30,62);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,65,null);
-			string = "Stone: " + currentPlayer.getStone().getAmount();
-			g.drawString(string,30,77);
-			
-			currentViewChecker();
 		}
+		
+		for(PathNode pn : path.getSquares()){
+			field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
+		}
+		
+		//g.drawImage(a.getImage(), 0, 0, null);
+		//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
+		//g.drawImage(face1,1060,30,null);
+		//g.drawImage(bg, 0, 0, null);
+		// array list for sprite && animations - returns every animation and every sprite
+
+		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,20,null);
+		String string = "X: " + currentPlayer.getCurrentView().getX() + " Y: " + currentPlayer.getCurrentView().getY();
+		g.drawString(string,30,32);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,35,null);
+		string = "Gold: " + currentPlayer.getGold().getAmount();
+		g.drawString(string,30,47);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,50,null);
+		string = "Wood: " + currentPlayer.getWood().getAmount();
+		g.drawString(string,30,62);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,65,null);
+		string = "Stone: " + currentPlayer.getStone().getAmount();
+		g.drawString(string,30,77);
+		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),38,98,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg"),40,100,null);
+		
+		currentViewChecker();
+	}
 	}
 
 	public void loadimages() {
@@ -434,34 +438,33 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 		
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent e) {}
 
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseMoved(MouseEvent e) {
+				
 	}
 
 	
