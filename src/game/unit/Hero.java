@@ -346,6 +346,10 @@ public class Hero extends Unit {
 		return null;
 	}
 	
+	public ArrayList<Unit> getUnits(){
+		return units;
+	}
+	
 	
 //	public getAnimations(){
 //		return race.getHeroAnimations;

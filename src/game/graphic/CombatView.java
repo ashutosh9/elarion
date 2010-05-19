@@ -4,6 +4,7 @@ import game.battle.BattleField;
 import game.field.Square;
 import game.player.Player;
 import game.unit.Hero;
+import game.unit.Unit;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,7 +17,7 @@ public class CombatView {
 	public boolean combat;
 	public Hero attacker;
 	public Hero defender;
-	public Square square;
+//	public Square square;
 	public BattleField bf;
 
 	public CombatView(){
@@ -24,12 +25,43 @@ public class CombatView {
 		bf = new BattleField();
 	}
 	
-	public CombatView(Hero attacker, Hero defender,Square s) {
+	public CombatView(Hero attacker, Hero defender) {
 		this.attacker = attacker;
 		this.defender = defender;
-		square = s;
 		combat = true;
 		bf = new BattleField();
+		
+		for(Unit u : attacker.getUnits()){
+			long x = Math.round(u.getCombatStats().getCombatPos().getX());
+			//int y = (int) Math.round(u.getCombatStats().getCombatPos().getY());
+			
+			for(int i=0;i<2;i++){
+				for(int j=0;j<9;j++){
+					if(u.getCombatStats().getCombatPos().getX() == i && u.getCombatStats().getCombatPos().getY() == j){
+						bf.getTile(i, j).setUnit(u);
+						bf.getTile(i, j).setPassable(false);
+					}
+				}
+			}
+			
+			if(x == 15) {
+				for(int i=0;i<2;i++){
+					boolean set=false;
+					for(int j=0;j<9;j++){
+						if(bf.getTile(i, j).isPassable()){
+							bf.getTile(i, j).setUnit(u);
+							bf.getTile(i, j).setPassable(false);
+							set = true;
+							break;
+						}
+					}
+					if(set){
+						break;
+					}
+				}
+			}
+			
+		}
 	}
 	
 	

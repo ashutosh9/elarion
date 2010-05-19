@@ -58,7 +58,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h = new Hero();
 		currentPlayer.setCurrentPlayer(true);
 		
-		combatView = new CombatView();
 		currentPlayer.getGold().setAmount(1000);
 		currentPlayer.newHero(h,480, 480, field);
 		currentPlayer.selectHero(h);
@@ -74,6 +73,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h.addUnit(testUnits.getArcher());
 		h.addUnit(testUnits.getMage());
 		h.addUnit(testUnits.getWarrior());
+		combatView = new CombatView(h,h);
 		
 		
 		path = new Path();
