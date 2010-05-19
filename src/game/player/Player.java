@@ -13,27 +13,23 @@ import game.unit.Hero;
 public class Player {
 	
 	private String name;
-	private Hero mainHero;
-	private Hero selectedHero;
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private ArrayList<Hero> deadHeroes = new ArrayList<Hero>();
-	private Color color;
-	private Castle mainCastle; 
 	@SuppressWarnings("unused")
-	private ArrayList<Castle> castles = new ArrayList<Castle>(20);
+	private ArrayList<Castle> castles = new ArrayList<Castle>();
 	private Resource gold = new Resource("gold",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\gold.png"));
 	private Resource stone = new Resource("stone",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\stone.png"));
 	private Resource wood = new Resource("wood",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\wood.png"));
 	private Square currentView;
 	private int currentViewAbsX; 
 	private int currentViewAbsY;
-	private boolean humanPlayer;
 	private boolean currentPlayer;
 	
 	public Player(){
 		gold.setAmount(0);
 		stone.setAmount(0);
 		wood.setAmount(0);
+		currentPlayer = false;
 	}
 	
 	public Player(String s){
@@ -41,6 +37,7 @@ public class Player {
 		gold.setAmount(0);
 		stone.setAmount(0);
 		wood.setAmount(0);
+		currentPlayer = false;
 	}
 	
 	public void newHero(Hero h,int x,int y,Field field) {
@@ -57,13 +54,6 @@ public class Player {
 		return null;
 	}
 	
-	public void setMainHero(Hero h){
-		mainHero = h;
-		if(!heroes.contains(h)) {
-			heroes.add(h);
-		}
-	}
-	
 	public void removeHero(Hero h){
 		if(heroes.contains(h)){
 			heroes.remove(h);
@@ -78,32 +68,9 @@ public class Player {
 		}
 	}
 	
-	public void setColor(Color c){
-		this.color = c;
-	}
-	
-	
-	
-	public Color getColor(){
-		return color;
-	}
-	
-	public Hero getMainHero(){
-		return mainHero;
-	}
-	
 	public ArrayList<Hero> getHeroes(){
 		return heroes;
 	}
-	
-	public boolean isAI(){
-		return !humanPlayer;
-	}
-	
-	public void setHuman(boolean b){
-		humanPlayer = b;
-	}
-
 
 	public void setCurrentView(Square s) {
 		currentView = s;
@@ -111,14 +78,6 @@ public class Player {
 
 	public Square getCurrentView() {
 		return currentView;
-	}
-
-	public void setMainCastle(Castle mainCastle) {
-		this.mainCastle = mainCastle;
-	}
-
-	public Castle getMainCastle() {
-		return mainCastle;
 	}
 
 	public void setCurrentViewAbsX(int currentViewAbsX) {
@@ -135,14 +94,6 @@ public class Player {
 
 	public int getCurrentViewAbsY() {
 		return currentViewAbsY;
-	}
-
-	public void selectHero(Hero selectedHero) {
-		this.selectedHero = selectedHero;
-	}
-
-	public Hero getSelectedHero() {
-		return selectedHero;
 	}
 
 	public void setName(String name) {
@@ -171,6 +122,25 @@ public class Player {
 
 	public boolean isCurrentPlayer() {
 		return currentPlayer;
+	}
+	
+	public Hero getSelectedHero(){
+		int i = 0;
+		for(Hero h : heroes){
+			if(h.isSelected()){
+				i = heroes.indexOf(h);
+			}
+		}
+		return heroes.get(i);
+	}
+	
+	public void selectHero(Hero h){
+		for(Hero hero : heroes){
+			hero.setSelected(false);
+			if((hero.getHeroX() == h.getHeroX()) && (hero.getHeroY() == h.getHeroY())){
+				hero.setSelected(true);
+			}
+		}
 	}
 
 }
