@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import game.castle.Castle;
 import game.field.Field;
 import game.field.Square;
-import game.race.Race;
 import game.resource.Resource;
 import game.unit.Hero;
 
@@ -16,10 +15,10 @@ public class Player {
 	private String name;
 	private Hero mainHero;
 	private Hero selectedHero;
-	private ArrayList<Hero> heroes = new ArrayList<Hero>(20);
-	private ArrayList<Hero> deadHeroes = new ArrayList<Hero>(30);
+	private ArrayList<Hero> heroes = new ArrayList<Hero>();
+	private ArrayList<Hero> deadHeroes = new ArrayList<Hero>();
 	private Color color;
-	private Castle mainCastle; // castle functions identical to the hero ones
+	private Castle mainCastle; 
 	@SuppressWarnings("unused")
 	private ArrayList<Castle> castles = new ArrayList<Castle>(20);
 	private Resource gold = new Resource("gold",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\gold.png"));
@@ -29,19 +28,19 @@ public class Player {
 	private int currentViewAbsX; 
 	private int currentViewAbsY;
 	private boolean humanPlayer;
-	private Race race;
 	private boolean currentPlayer;
 	
-	public Player(String s, Race race){
-		name = s;
-		this.race = race;
+	public Player(){
 		gold.setAmount(0);
 		stone.setAmount(0);
 		wood.setAmount(0);
 	}
 	
-	public Player(){
-		
+	public Player(String s){
+		name = s;
+		gold.setAmount(0);
+		stone.setAmount(0);
+		wood.setAmount(0);
 	}
 	
 	public void newHero(Hero h,int x,int y,Field field) {
@@ -120,14 +119,6 @@ public class Player {
 
 	public Castle getMainCastle() {
 		return mainCastle;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
-	}
-
-	public Race getRace() {
-		return race;
 	}
 
 	public void setCurrentViewAbsX(int currentViewAbsX) {
