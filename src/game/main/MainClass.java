@@ -11,7 +11,7 @@ import game.player.Player;
 import game.resource.Resource;
 import game.unit.Hero;
 import game.unit.TestUnits;
-import game.unit.Unit;
+//import game.unit.Unit;
 //import javax.swing.*;
 import java.awt.*;
 //import java.util.ArrayList;
@@ -22,8 +22,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-import javax.swing.event.MouseInputListener;
+//import javax.swing.event.MouseInputListener;
 
+@SuppressWarnings("unused")
 public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
 	
 
@@ -38,14 +39,18 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private Hero movingHero = new Hero();
 	private int screenWidth;
 	private int screenHeight;
+	@SuppressWarnings("unused")
+	private Hero selectedHero;
+	private boolean turnEnded = false;
+	private Robot robot;
 	
 	
 	//for testing
 	private static Hero h;
-	private Image bg;
-	private Image face1;
-	private Animation a;
-	private Sprite sprite;
+//	private Image bg;
+//	private Image face1;
+//	private Animation a;
+//	private Sprite sprite;
 	private static Path path;
 	private static Item pathNode;
 	private static CombatView combatView;
@@ -118,6 +123,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			screenHeight = 22;
 			if(loaded){
 				while(!exited){
+					if(turnEnded){
+						endedTurn();
+					}
 					movieLoop();
 				}
 			}
@@ -151,10 +159,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 	
 	private void update(long timePassed) {
-		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
-		for(Animation anim : a) {
-			anim.update(timePassed);
-		}
+//		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
+//		for(Animation anim : a) {
+//				anim.update(timePassed);
+//		}
 		if(h.getCurrentSprite() != null) {
 			h.getCurrentSprite().update(timePassed);
 		}
@@ -179,7 +187,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		// else draw a single image
 		
 		combatView.draw(g);
-		//combatView.setCombat(false);
+		combatView.setCombat(false);
 		
 		if(!combatView.isCombat()) {
 		
@@ -223,7 +231,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}		
 			
-			for(int x=-2;x<screenWidth;x++){
+			for(int x=2;x<screenWidth;x++){
 				for(int y=-2;y<screenHeight;y++){
 					
 					Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
@@ -256,6 +264,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
 			}
 			
+			
 			//g.drawImage(a.getImage(), 0, 0, null);
 			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
 			//g.drawImage(face1,1060,30,null);
@@ -284,9 +293,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//load every image
 		field.initImages();
 		//Image img1 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg"); //field.initImages();
-		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
-		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
-		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
+//		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
+//		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
+//		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
 //		Image face2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 2.png");
 //		Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
 //		Image a2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/2.png");
@@ -396,6 +405,16 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	}
 	
+	public void endedTurn(){
+//		for(each player){
+//			if(he is the current player){
+//				this player = current player( to save all data );
+//				current player = next player;
+//			}
+//		}
+		turnEnded = false;
+	}
+	
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
@@ -441,34 +460,72 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 		
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent e) {}
 
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		
+	public void mouseDragged(MouseEvent e) {
+		mouseMoved(e);
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseMoved(MouseEvent e) {
+		if(e.getLocationOnScreen().getX()<10){
+			
+			try {
+				robot = new Robot();
+				robot.keyPress(KeyEvent.VK_LEFT);
+			} catch (AWTException e1) {
+				System.out.print("robot fail");
+			}
+
+		}
+		if(e.getLocationOnScreen().getX()>(s.getScreenWidth()-10)){
+			
+			try {
+				robot = new Robot();
+				robot.keyPress(KeyEvent.VK_RIGHT);
+			} catch (AWTException e1) {
+				System.out.print("robot fail");
+			}
+
+		}
+		if(e.getLocationOnScreen().getY()<10){
+			
+			try {
+				robot = new Robot();
+				robot.keyPress(KeyEvent.VK_UP);
+			} catch (AWTException e1) {
+				System.out.print("robot fail");
+			}
+
+		}
+		if(e.getLocationOnScreen().getY()>(s.getScreenHeight()-10)){
+			
+			try {
+				robot = new Robot();
+				robot.keyPress(KeyEvent.VK_DOWN);
+			} catch (AWTException e1) {
+				System.out.print("robot fail");
+			}
+
+		}
 	}
 
 	
