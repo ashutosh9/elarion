@@ -292,13 +292,23 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			g.drawString(string,30,115);
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg"),210,20,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),248,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),288,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),328,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),368,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),408,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),448,18,null);
+			
+			{
+				int h = 210;
+				for(Hero hero : currentPlayer.getHeroes()){
+					if(hero.isSelected()){
+						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
+					}
+					g.drawImage(hero.getIcon(),h,20,null);
+					h += 40;
+				}
+			}
 			
 			currentViewChecker();
 		}
