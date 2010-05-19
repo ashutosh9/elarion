@@ -177,8 +177,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
 		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
-		
-		combatView.draw(g);
+		if(combatView.isCombat()){
+			combatView.draw(g);
+		}
 		//combatView.setCombat(false);
 		
 		if(!combatView.isCombat()) {
@@ -418,6 +419,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	public int getScreenHeight() {
 		return screenHeight;
+	}
+	
+	public CombatView getCombatView() {
+		return combatView;
 	}
 
 	@Override

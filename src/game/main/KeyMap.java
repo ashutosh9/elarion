@@ -10,6 +10,12 @@ public class KeyMap {
 		
 		int keyCode = e.getKeyCode();
 		
+		if(mc.getCombatView().isCombat()){
+			if(keyCode!= KeyEvent.VK_B){
+				keyCode = -1;
+			}
+		}
+		
 		int speed = 4;
 		
 		if(i==1){//pressed
@@ -100,6 +106,11 @@ public class KeyMap {
 			
 			if(keyCode == KeyEvent.VK_C){
 				mc.getCurrentPlayer().getSelectedHero().moveOneSquare(24, f);
+			}
+			
+			if(keyCode == KeyEvent.VK_B){
+				boolean b = mc.getCombatView().isCombat();
+				mc.getCombatView().setCombat(!b);
 			}
 			
 			else {
