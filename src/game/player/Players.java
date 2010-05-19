@@ -28,5 +28,21 @@ public class Players {
 		return null;
 	}
 	
+	public void nextPlayer(){
+		for(Player p : players){
+			if(p.isCurrentPlayer()){
+				p = currentPlayer;
+				p.setCurrentPlayer(false);
+				int i = players.indexOf(p);
+				i++;
+				if(i==players.size()){
+					i=0;
+				}
+				currentPlayer = players.get(i);
+				players.get(i).setCurrentPlayer(true);
+			}
+		}
+	}
+	
 
 }
