@@ -1,0 +1,65 @@
+package game.unit;
+
+import java.awt.Toolkit;
+
+import game.main.Animation;
+import game.unit.Hero;
+import game.unit.Unit;
+
+public class TestUnits {
+	
+	Unit warrior = new Unit();
+	Unit archer = new Unit();
+	Unit mage = new Unit();
+	
+	public TestUnits(){
+		GraphicalData graphicalData = new GraphicalData();
+		warrior.getCombatStats().setHealth(100);
+		warrior.getCombatStats().setStrenght(10);
+		warrior.setType("Warrior");
+		Animation a = new Animation();
+		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battle/warrior3.png"), 250);
+		warrior.setGraphicalData(graphicalData);
+		warrior.getGraphicalData().setBattleFieldStandLeft(a);
+		a = new Animation();
+		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battle/warrior2.png"), 250);
+		warrior.getGraphicalData().setBattleFieldStandRight(a);
+		archer.getCombatStats().setHealth(50);
+		archer.getCombatStats().setStrenght(2);
+		archer.setType("Archer");
+		a = new Animation();
+		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battle/archer3.png"), 250);
+		archer.setGraphicalData(graphicalData);
+		archer.getGraphicalData().setBattleFieldStandLeft(a);
+		a = new Animation();
+		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battle/archer2.png"), 250);
+		archer.getGraphicalData().setBattleFieldStandRight(a);
+		mage.getCombatStats().setHealth(40);
+		mage.getCombatStats().setStrenght(1);
+		mage.setType("Mage");
+		a = new Animation();
+		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battle/mage3.png"), 250);
+		mage.setGraphicalData(graphicalData);
+		mage.getGraphicalData().setBattleFieldStandLeft(a);
+		a = new Animation();
+		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battle/mage2.png"), 250);
+		mage.getGraphicalData().setBattleFieldStandRight(a);
+	}
+	
+	public Unit getWarrior(){
+		return warrior;
+	}
+	public Unit getArcher(){
+		return archer;
+	}
+	public Unit getMage(){
+		return mage;
+	}
+	
+}
+
+
+
+
+	//Unit testUnit = new Unit();
+	//testUnit.getCombatStats().setHealth(40);
