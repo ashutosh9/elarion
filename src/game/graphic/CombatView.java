@@ -44,7 +44,7 @@ public class CombatView {
 				}
 			}
 			
-			if(x == 15) {
+			if(x == 8) {
 				for(int i=0;i<2;i++){
 					boolean set=false;
 					for(int j=0;j<9;j++){
@@ -60,6 +60,10 @@ public class CombatView {
 					}
 				}
 			}
+			
+		}
+		
+		for(Unit u : defender.getUnits()){
 			
 		}
 	}
