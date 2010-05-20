@@ -26,8 +26,8 @@ public class BattleField {
 				b[x][y].setPassable(true);
 			}
 		}
-		
 	}
+	
 	
 	public BattleTile getTile(int x, int y){
 		return b[x][y];
