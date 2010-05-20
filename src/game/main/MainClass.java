@@ -469,118 +469,17 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return combatView;
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		@SuppressWarnings("unused")
-		KeyMap km = new KeyMap(e,mc,1,field);
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		@SuppressWarnings("unused")
-		KeyMap km = new KeyMap(e,mc,2,field);
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		@SuppressWarnings("unused")
-		KeyMap km = new KeyMap(e,mc,3,field);
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		boolean clicked = false;
-		
-		for(int i = 0; i < 280; i += 40) {
-			long x = mousePos.x;
-			long y = mousePos.y;
-			int xi = 210 + i;
-			int ximax = 210 + i + 39;
-			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
-				ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
-				
-				if(players.getCurrentPlayer().getSelectedHero() != null){
-					if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
-						for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
-							if(field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).isPath()){
-								field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(false);
-							}
-						}
+	public void clearPath(){
+		if(players.getCurrentPlayer().getSelectedHero() != null){
+			if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+				for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
+					if(field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).isPath()){
+						field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(false);
 					}
 				}
-				
-				players.getCurrentPlayer().selectHero(heroes.get(i/40));
-				movingHeroChecker();
-				clicked = true;
+				players.getCurrentPlayer().getSelectedHero().setPath(null);
 			}
 		}
-		
-		if(!clicked && players.getCurrentPlayer().getSelectedHero() != null ){
-			for(int x = 0; x < (screenWidth + 1);x++){
-				for(int y = 0; y < (screenHeight + 1);y++){				
-					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX() - 1)) 
-							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY() - 1))){
-						if(e.getButton() == MouseEvent.BUTTON1){
-//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()))
-//							players.getCurrentPlayer().getSelectedHero().getPath().getDestinationSquare();
-						
-								
-							if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
-								for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
-									if(field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).isPath()){
-										field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(false);
-									}
-								}
-							}
-							players.getCurrentPlayer().getSelectedHero().setPath(null);
-							Path path = new Path();
-							path = path.findPath(field, players.getCurrentPlayer().getSelectedHero().getCurrentSquare(), field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
-							
-							players.getCurrentPlayer().getSelectedHero().setPath(path);
-								
-							
-						}
-						
-						if(e.getButton() == MouseEvent.BUTTON3){
-							Building building = new Building();
-							building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-							field.getSquare(5, 5).setBuilding(building);
-							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
-							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
-						}
-					}
-					
-				}
-			}
-		}
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {}
-
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		mouseMoved(e);
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		mousePos.x = (int) Math.round(e.getLocationOnScreen().getX());
-		mousePos.y = (int) Math.round(e.getLocationOnScreen().getY());
 	}
 	
 	public void mouseChecker(){
@@ -624,6 +523,102 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 
 		}
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		@SuppressWarnings("unused")
+		KeyMap km = new KeyMap(e,mc,1,field);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		@SuppressWarnings("unused")
+		KeyMap km = new KeyMap(e,mc,2,field);
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		@SuppressWarnings("unused")
+		KeyMap km = new KeyMap(e,mc,3,field);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		boolean clicked = false;
+		
+		for(int i = 0; i < 280; i += 40) {
+			long x = mousePos.x;
+			long y = mousePos.y;
+			int xi = 210 + i;
+			int ximax = 210 + i + 39;
+			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
+				ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
+				clearPath();
+				players.getCurrentPlayer().selectHero(heroes.get(i/40));
+				movingHeroChecker();
+				clicked = true;
+			}
+		}
+		
+		if(!clicked && players.getCurrentPlayer().getSelectedHero() != null ){
+			for(int x = 0; x < (screenWidth + 1);x++){
+				for(int y = 0; y < (screenHeight + 1);y++){				
+					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
+							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
+						if(e.getButton() == MouseEvent.BUTTON1){
+//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()))
+//							players.getCurrentPlayer().getSelectedHero().getPath().getDestinationSquare();
+						
+							clearPath();
+							Path path = new Path();
+							path = path.findPath(field, players.getCurrentPlayer().getSelectedHero().getCurrentSquare(), field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
+							
+							players.getCurrentPlayer().getSelectedHero().setPath(path);
+								
+							
+						}
+						
+						if(e.getButton() == MouseEvent.BUTTON3){
+							Building building = new Building();
+							building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
+							field.getSquare(5, 5).setBuilding(building);
+							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
+							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
+						}
+					}
+					
+				}
+			}
+		}
+		
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
+
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		mouseMoved(e);
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		mousePos.x = (int) Math.round(e.getLocationOnScreen().getX());
+		mousePos.y = (int) Math.round(e.getLocationOnScreen().getY());
 	}
 
 	

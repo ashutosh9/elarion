@@ -73,48 +73,56 @@ public class KeyMap {
 				
 				if(keyCode == KeyEvent.VK_S){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(2, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_W){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();						
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(1, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_A){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(3, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_D){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(4, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_Q){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(13, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_E){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(14, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_Z){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(23, f);
 					}
 				}
 				
 				if(keyCode == KeyEvent.VK_C){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
+						mc.clearPath();
 						mc.getCurrentPlayer().getSelectedHero().moveOneSquare(24, f);
 					}
 				}
