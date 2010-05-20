@@ -1,5 +1,7 @@
 package game.unit;
 
+import java.awt.Point;
+
 public class CombatStats {
 
 	private double strenght; //defines damage and 0.5x defense
@@ -13,6 +15,7 @@ public class CombatStats {
 	private double luck;  // from items , buildings , spells
 	private double health;
 	private double mana;
+	private Point combatPos = new Point();
 	
 	public void setStrenght(double strenght) {
 		this.strenght = strenght;
@@ -100,6 +103,14 @@ public class CombatStats {
 	
 	public double getMana() {
 		return mana;
+	}
+
+	public void setCombatPos(Point combatPos) {
+		this.combatPos = combatPos;
+	}
+
+	public Point getCombatPos() {
+		return combatPos;
 	}
 	
 }
