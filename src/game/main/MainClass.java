@@ -36,7 +36,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private int screenHeight;
 	private Robot robot;
 	private static Players players;
-	private Point mousePos = new Point(0,0);
+	private Point mousePos = new Point(30,30);
 	
 	
 	//for testing
@@ -477,6 +477,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		boolean clicked = false;
 		
 		for(int i = 0; i < 280; i += 40) {
 			long x = mousePos.x;
@@ -487,6 +488,22 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
 				players.getCurrentPlayer().selectHero(heroes.get(i/40));
 				movingHeroChecker();
+				clicked = true;
+			}
+		}
+		
+		if(!clicked){
+			for(int x = 0; x < (screenWidth + 1);x++){
+				for(int y = 0; y < (screenHeight + 1);y++){				
+					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX() - 1)) 
+							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY() - 1))){
+						Building building = new Building();
+						building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
+						field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
+						field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
+					}
+					
+				}
 			}
 		}
 		
