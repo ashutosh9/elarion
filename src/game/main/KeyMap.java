@@ -123,6 +123,10 @@ public class KeyMap {
 					boolean b = mc.getCombatView().isCombat();
 					mc.getCombatView().setCombat(!b);
 				}
+				
+				if(keyCode == KeyEvent.VK_0){
+					mc.endedTurn();
+				}
 			
 			else {
 				e.consume();

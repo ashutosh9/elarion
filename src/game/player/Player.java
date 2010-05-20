@@ -1,9 +1,7 @@
 package game.player;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-
 import game.castle.Castle;
 import game.field.Field;
 import game.field.Square;

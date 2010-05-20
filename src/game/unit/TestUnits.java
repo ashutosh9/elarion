@@ -3,7 +3,6 @@ package game.unit;
 import java.awt.Toolkit;
 
 import game.main.Animation;
-import game.unit.Hero;
 import game.unit.Unit;
 
 public class TestUnits {
