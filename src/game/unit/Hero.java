@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import game.core.Path;
 import game.field.Field;
 import game.field.Square;
 import game.item.Item;
@@ -38,6 +39,7 @@ public class Hero extends Unit {
 	private Animation currentAnimation;
 	private Image icon;
 	private boolean selected;
+	private Path path;
 	// to include combat stats and graphical data as different classes
 	
 	public Hero(){
@@ -49,6 +51,7 @@ public class Hero extends Unit {
 		icon = Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg");
 		selected = false;
 		moving = false;
+		path = null;
 	}
 	
 	public int getHeroX(){
@@ -361,6 +364,14 @@ public class Hero extends Unit {
 	
 	public ArrayList<Unit> getUnits(){
 		return units;
+	}
+	
+	public void setPath(Path path) {
+		this.path = path;
+	}
+	
+	public Path getPath() {
+		return path;
 	}
 	
 	

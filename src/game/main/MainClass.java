@@ -78,8 +78,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 //		path = new Path();
 //		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 6));
-		pathNode = new Item();
-		pathNode.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/pathSquare.png"));
+
 		
 /*		playerRed.Activate();
 		if(playerRed.isActive()){
@@ -210,6 +209,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						
 					}
 					
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).isPath()){
+						
+						g.drawImage(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getPathNode().getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
+						
+					}
+					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
 						
 						Building building = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding();
@@ -262,9 +268,16 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
-//			for(PathNode pn : path.getSquares()){
-//				field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
-//			}
+			if(players.getCurrentPlayer().getSelectedHero() != null){
+				if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+					for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
+						field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(true);
+					}
+				}
+			}
+
+
+
 			
 			//g.drawImage(a.getImage(), 0, 0, null);
 			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
@@ -486,21 +499,56 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			int ximax = 210 + i + 39;
 			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
 				ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
+				
+				if(players.getCurrentPlayer().getSelectedHero() != null){
+					if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+						for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
+							if(field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).isPath()){
+								field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(false);
+							}
+						}
+					}
+				}
+				
 				players.getCurrentPlayer().selectHero(heroes.get(i/40));
 				movingHeroChecker();
 				clicked = true;
 			}
 		}
 		
-		if(!clicked){
+		if(!clicked && players.getCurrentPlayer().getSelectedHero() != null ){
 			for(int x = 0; x < (screenWidth + 1);x++){
 				for(int y = 0; y < (screenHeight + 1);y++){				
 					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX() - 1)) 
 							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY() - 1))){
-						Building building = new Building();
-						building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-						field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
-						field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
+						if(e.getButton() == MouseEvent.BUTTON1){
+//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()))
+//							players.getCurrentPlayer().getSelectedHero().getPath().getDestinationSquare();
+						
+								
+							if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+								for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
+									if(field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).isPath()){
+										field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(false);
+									}
+								}
+							}
+							players.getCurrentPlayer().getSelectedHero().setPath(null);
+							Path path = new Path();
+							path = path.findPath(field, players.getCurrentPlayer().getSelectedHero().getCurrentSquare(), field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
+							
+							players.getCurrentPlayer().getSelectedHero().setPath(path);
+								
+							
+						}
+						
+						if(e.getButton() == MouseEvent.BUTTON3){
+							Building building = new Building();
+							building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
+							field.getSquare(5, 5).setBuilding(building);
+							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
+							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
+						}
 					}
 					
 				}
