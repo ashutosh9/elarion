@@ -1,5 +1,7 @@
 package game.unit;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import game.field.Field;
@@ -34,6 +36,8 @@ public class Hero extends Unit {
 	private Sprite currentSprite;
 	private GraphicalData graphicalData;
 	private Animation currentAnimation;
+	private Image icon;
+	private boolean selected;
 	// to include combat stats and graphical data as different classes
 	
 	public Hero(){
@@ -42,6 +46,8 @@ public class Hero extends Unit {
 		heading = 1;
 		graphicalData = new GraphicalData();
 		moving = false;
+		icon = Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg");
+		selected = false;
 	}
 	
 	public int getHeroX(){
@@ -334,6 +340,22 @@ public class Hero extends Unit {
 			return units.get(units.indexOf(u));
 			}
 		return null;
+	}
+
+	public void setIcon(Image icon) {
+		this.icon = icon;
+	}
+
+	public Image getIcon() {
+		return icon;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public boolean isSelected() {
+		return selected;
 	}
 	
 	public ArrayList<Unit> getUnits(){
