@@ -22,7 +22,7 @@ public class Unit {
 		setExperiance(0);
 		setLevel(1);
 		setType("");
-		combatStats.getCombatPos().setLocation(15, 8);
+		combatStats.getCombatPos().setLocation(8, 8);
 	}
 
 	public void setType(String type) {

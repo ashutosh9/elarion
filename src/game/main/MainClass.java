@@ -8,6 +8,7 @@ import game.field.Field;
 import game.graphic.CombatView;
 import game.item.Item;
 import game.player.Player;
+import game.player.Players;
 import game.resource.Resource;
 import game.unit.Hero;
 import game.unit.TestUnits;
@@ -38,6 +39,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private Hero movingHero = new Hero();
 	private int screenWidth;
 	private int screenHeight;
+
+	private Hero selectedHero;
+	private boolean turnEnded = false;
+	private Robot robot;
+	private static Players players;
 	
 	
 	//for testing
@@ -54,6 +60,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
+		players = new Players(2);
 		currentPlayer = new Player();
 		h = new Hero();
 		currentPlayer.setCurrentPlayer(true);
@@ -66,13 +73,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		field.getSquare(5, 5).setBuilding(building);
 		field.getSquare(5, 5).setPassable(false);
 		//field.getSquare(498, 498).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(460, 460));
+		currentPlayer.setCurrentView(field.getSquare(2, 2));
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		TestUnits testUnits = new TestUnits();
-		h.addUnit(testUnits.getArcher());
-		//h.addUnit(testUnits.getMage());
 		h.addUnit(testUnits.getWarrior());
+		h.addUnit(testUnits.getArcher());
+		h.addUnit(testUnits.getMage());
 		combatView = new CombatView(h,h);
 		
 		
@@ -263,19 +270,42 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			//g.drawImage(bg, 0, 0, null);
 			// array list for sprite && animations - returns every animation and every sprite
 	
+			Color color = new Color(255, 255, 255);
+			g.setColor(color);
+			Font font = new Font(Font.SERIF, Font.BOLD, 20);
+			g.setFont(font);
 			
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,20,null);
-			String string = "X: " + currentPlayer.getCurrentView().getX() + " Y: " + currentPlayer.getCurrentView().getY();
-			g.drawString(string,30,32);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,35,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
+			String string = "X: " + currentPlayer.getCurrentView().getX() + "   Y: " + currentPlayer.getCurrentView().getY();
+			g.drawString(string,30,40);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
 			string = "Gold: " + currentPlayer.getGold().getAmount();
-			g.drawString(string,30,47);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,50,null);
+			g.drawString(string,30,65);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
 			string = "Wood: " + currentPlayer.getWood().getAmount();
-			g.drawString(string,30,62);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/testMenu.png"),20,65,null);
+			g.drawString(string,30,90);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
 			string = "Stone: " + currentPlayer.getStone().getAmount();
-			g.drawString(string,30,77);
+			g.drawString(string,30,115);
+			
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),248,18,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),288,18,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),328,18,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),368,18,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),408,18,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),448,18,null);
+			
+			{
+				int h = 210;
+				for(Hero hero : currentPlayer.getHeroes()){
+					if(hero.isSelected()){
+						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
+					}
+					g.drawImage(hero.getIcon(),h,20,null);
+					h += 40;
+				}
+			}
 			
 			currentViewChecker();
 		}
@@ -397,6 +427,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	}
 	
+
+	public void endedTurn(){
+		players.nextPlayer();
+		turnEnded = false;
+	}
+	
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
@@ -427,22 +463,18 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,1,field);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,2,field);
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,3,field);
-		
 	}
 
 	@Override
