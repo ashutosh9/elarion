@@ -55,7 +55,7 @@ public class Path {
 		
 		openList.add(start);
 		
-		while(!foundPath && openList.size() > 0) {
+		while(!foundPath && openList.size() > 0 && openList.size() < 1000) {
 			
 			System.out.print("  openList size : " + openList.size());
 			

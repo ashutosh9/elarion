@@ -12,7 +12,6 @@ import game.player.Players;
 import game.resource.Resource;
 import game.unit.Hero;
 import game.unit.TestUnits;
-import game.unit.Unit;
 //import javax.swing.*;
 import java.awt.*;
 //import java.util.ArrayList;
@@ -23,9 +22,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-import javax.swing.event.MouseInputListener;
-
-@SuppressWarnings("unused")
 public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
 	
 
@@ -33,15 +29,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private Screen s;
 	private boolean loaded;
 	private static Field field;
-	private static Player currentPlayer;
 	private static MainClass mc;
 	private boolean running;
 	private boolean exited;
 	private int screenWidth;
 	private int screenHeight;
-	private boolean turnEnded = false;
 	private Robot robot;
 	private static Players players;
+	private Point mousePos = new Point(0,0);
 	
 	
 	//for testing
@@ -50,7 +45,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 //	private Image face1;
 //	private Animation a;
 //	private Sprite sprite;
-	private static Path path;
 	private static Item pathNode;
 	private static CombatView combatView;
 	
@@ -58,32 +52,32 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
-		players = new Players(2);
-		currentPlayer = new Player();
+		players = new Players(2,field);
 		h = new Hero();
 		Hero h2 = new Hero();
-		currentPlayer.setCurrentPlayer(true);
+		players.getCurrentPlayer().setCurrentPlayer(true);
 		
-		currentPlayer.getGold().setAmount(1000);
-		currentPlayer.newHero(h,480, 480, field);
-		currentPlayer.newHero(h2,481, 480, field);
+		players.getCurrentPlayer().getGold().setAmount(1000);
+		players.getCurrentPlayer().newHero(h,480, 480, field);
+		players.getCurrentPlayer().newHero(h2,481, 480, field);
 		Building building = new Building();
 		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
 		field.getSquare(5, 5).setBuilding(building);
 		field.getSquare(5, 5).setPassable(false);
 		//field.getSquare(498, 498).setHero(h);
-		currentPlayer.setCurrentView(field.getSquare(2, 2));
-		currentPlayer.setCurrentViewAbsX(0);
-		currentPlayer.setCurrentViewAbsY(0);
+		players.getCurrentPlayer().setCurrentView(field.getSquare(2, 2));
+		players.getCurrentPlayer().setCurrentViewAbsX(0);
+		players.getCurrentPlayer().setCurrentViewAbsY(0);
 		TestUnits testUnits = new TestUnits();
 		h.addUnit(testUnits.getWarrior());
 		h.addUnit(testUnits.getArcher());
 		h.addUnit(testUnits.getMage());
 		combatView = new CombatView(h,h);
+		combatView.setCombat(false);
 		
 		
-		path = new Path();
-		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 5));
+//		path = new Path();
+//		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 6));
 		pathNode = new Item();
 		pathNode.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/pathSquare.png"));
 		
@@ -124,9 +118,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			screenHeight = 22;
 			if(loaded){
 				while(!exited){
-					if(turnEnded){
-						endedTurn();
-					}
 					movieLoop();
 				}
 			}
@@ -164,13 +155,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 //		for(Animation anim : a) {
 //				anim.update(timePassed);
 //		}
-		if(currentPlayer.getSelectedHero() != null){
-			if(currentPlayer.getSelectedHero().getCurrentSprite() != null) {
-				currentPlayer.getSelectedHero().getCurrentSprite().update(timePassed);
+		if(players.getCurrentPlayer().getSelectedHero() != null){
+			if(players.getCurrentPlayer().getSelectedHero().getCurrentSprite() != null) {
+				players.getCurrentPlayer().getSelectedHero().getCurrentSprite().update(timePassed);
 			}
 			
-			if(currentPlayer.getSelectedHero().getCurrentAnimation() != null) {
-				currentPlayer.getSelectedHero().getCurrentAnimation().update(timePassed);
+			if(players.getCurrentPlayer().getSelectedHero().getCurrentAnimation() != null) {
+				players.getCurrentPlayer().getSelectedHero().getCurrentAnimation().update(timePassed);
 			}
 		}
 		
@@ -196,8 +187,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//combatView.setCombat(false);
 		
 		if(!combatView.isCombat()) {
-			if(currentPlayer.getSelectedHero() != null){
-				if(currentPlayer.getSelectedHero().isMoving()){
+			if(players.getCurrentPlayer().getSelectedHero() != null){
+				if(players.getCurrentPlayer().getSelectedHero().isMoving()){
 					movingHeroChecker();
 				}
 			}
@@ -205,33 +196,33 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			for(int x=-2;x<screenWidth;x++){
 				for(int y=-2;y<screenHeight;y++){
 					
-					Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+					Image img = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getImage();
 					
 					g.drawImage(img
-							, Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-										currentPlayer.getCurrentViewAbsY()), null);
+							, Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+										players.getCurrentPlayer().getCurrentViewAbsY()), null);
 					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource() != null){
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getResource() != null){
 						
-						Resource r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getResource();
-						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()), null);
+						Resource r = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getResource();
+						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
 					}
 					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding() != null){
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
 						
-						Building building = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getBuilding();
-						g.drawImage(building.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()), null);
+						Building building = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding();
+						g.drawImage(building.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
 					}
 					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem() != null){
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getItem() != null){
 						
-						Item r = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getItem();
-						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()), null);
+						Item r = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getItem();
+						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
 					}
 			
@@ -241,29 +232,29 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			for(int x=-2;x<screenWidth;x++){
 				for(int y=-2;y<screenHeight;y++){
 					
-					Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
+					Image img = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getImage();
 					
-					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
 						
-						Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
-						if(hero == currentPlayer.getSelectedHero()){
-							if(currentPlayer.getSelectedHero().isMoving()){
+						Hero hero = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero();
+						if(hero == players.getCurrentPlayer().getSelectedHero()){
+							if(players.getCurrentPlayer().getSelectedHero().isMoving()){
 								
-								g.drawImage(currentPlayer.getSelectedHero().getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+currentPlayer.getSelectedHero().getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
-									currentPlayer.getCurrentViewAbsY()-10+currentPlayer.getSelectedHero().getCurrentSprite().getY()), null);
+								g.drawImage(players.getCurrentPlayer().getSelectedHero().getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()-10+players.getCurrentPlayer().getSelectedHero().getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
+									players.getCurrentPlayer().getCurrentViewAbsY()-10+players.getCurrentPlayer().getSelectedHero().getCurrentSprite().getY()), null);
 								
-								if(Math.abs(currentPlayer.getSelectedHero().getCurrentSprite().getX())>=40 || Math.abs(currentPlayer.getSelectedHero().getCurrentSprite().getY())>=40) {
-									currentPlayer.getSelectedHero().movedOneSquare(field);
+								if(Math.abs(players.getCurrentPlayer().getSelectedHero().getCurrentSprite().getX())>=40 || Math.abs(players.getCurrentPlayer().getSelectedHero().getCurrentSprite().getY())>=40) {
+									players.getCurrentPlayer().getSelectedHero().movedOneSquare(field);
 								}
 								
 							} else {
 								
-								g.drawImage(currentPlayer.getSelectedHero().getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
-										currentPlayer.getCurrentViewAbsY()-10), null);
+								g.drawImage(players.getCurrentPlayer().getSelectedHero().getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+										players.getCurrentPlayer().getCurrentViewAbsY()-10), null);
 							}
 						} else {
-							g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
-									currentPlayer.getCurrentViewAbsY()-10), null);
+							g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+									players.getCurrentPlayer().getCurrentViewAbsY()-10), null);
 						}
 						
 					}
@@ -271,9 +262,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
-			for(PathNode pn : path.getSquares()){
-				field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
-			}
+//			for(PathNode pn : path.getSquares()){
+//				field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
+//			}
 			
 			//g.drawImage(a.getImage(), 0, 0, null);
 			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
@@ -283,20 +274,20 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 			Color color = new Color(255, 255, 255);
 			g.setColor(color);
-			Font font = new Font(Font.SERIF, Font.BOLD, 18);
+			Font font = new Font(Font.SERIF, Font.BOLD, 17);
 			g.setFont(font);
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
-			String string = "X: " + currentPlayer.getCurrentView().getX() + "   Y: " + currentPlayer.getCurrentView().getY();
+			String string = "X: " + players.getCurrentPlayer().getCurrentView().getX() + "   Y: " + players.getCurrentPlayer().getCurrentView().getY();
 			g.drawString(string,30,40);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
-			string = "Gold: " + currentPlayer.getGold().getAmount();
+			string = "Gold: " + players.getCurrentPlayer().getGold().getAmount();
 			g.drawString(string,30,65);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
-			string = "Wood: " + currentPlayer.getWood().getAmount();
+			string = "Wood: " + players.getCurrentPlayer().getWood().getAmount();
 			g.drawString(string,30,90);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
-			string = "Stone: " + currentPlayer.getStone().getAmount();
+			string = "Stone: " + players.getCurrentPlayer().getStone().getAmount();
 			g.drawString(string,30,115);
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
@@ -309,7 +300,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			
 			{
 				int h = 210;
-				for(Hero hero : currentPlayer.getHeroes()){
+				for(Hero hero : players.getCurrentPlayer().getHeroes()){
 					if(hero.isSelected()){
 						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
 					}
@@ -318,7 +309,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
-			
+			mouseChecker();
 			currentViewChecker();
 		}
 	}
@@ -366,27 +357,27 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}	
 	
 	public void currentViewChecker(){
-		if(currentPlayer.getCurrentViewAbsX()>=40) {
-			currentPlayer.setCurrentViewAbsX(0);
-			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()+1), currentPlayer.getCurrentView().getY()));
+		if(players.getCurrentPlayer().getCurrentViewAbsX()>=40) {
+			players.getCurrentPlayer().setCurrentViewAbsX(0);
+			players.getCurrentPlayer().setCurrentView(field.getSquare((players.getCurrentPlayer().getCurrentView().getX()+1), players.getCurrentPlayer().getCurrentView().getY()));
 		}		
-		if(currentPlayer.getCurrentViewAbsY()>=40) {
-			currentPlayer.setCurrentViewAbsY(0);
-			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()+1)));
+		if(players.getCurrentPlayer().getCurrentViewAbsY()>=40) {
+			players.getCurrentPlayer().setCurrentViewAbsY(0);
+			players.getCurrentPlayer().setCurrentView(field.getSquare(players.getCurrentPlayer().getCurrentView().getX(), (players.getCurrentPlayer().getCurrentView().getY()+1)));
 		}
-		if(currentPlayer.getCurrentViewAbsX()<=-40) {
-			currentPlayer.setCurrentViewAbsX(0);
-			currentPlayer.setCurrentView(field.getSquare((currentPlayer.getCurrentView().getX()-1), currentPlayer.getCurrentView().getY()));
+		if(players.getCurrentPlayer().getCurrentViewAbsX()<=-40) {
+			players.getCurrentPlayer().setCurrentViewAbsX(0);
+			players.getCurrentPlayer().setCurrentView(field.getSquare((players.getCurrentPlayer().getCurrentView().getX()-1), players.getCurrentPlayer().getCurrentView().getY()));
 		}		
-		if(currentPlayer.getCurrentViewAbsY()<=-40) {
-			currentPlayer.setCurrentViewAbsY(0);
-			currentPlayer.setCurrentView(field.getSquare(currentPlayer.getCurrentView().getX(), (currentPlayer.getCurrentView().getY()-1)));
+		if(players.getCurrentPlayer().getCurrentViewAbsY()<=-40) {
+			players.getCurrentPlayer().setCurrentViewAbsY(0);
+			players.getCurrentPlayer().setCurrentView(field.getSquare(players.getCurrentPlayer().getCurrentView().getX(), (players.getCurrentPlayer().getCurrentView().getY()-1)));
 		}
 	}
 	
 	public void movingHeroChecker(){
-		int x = currentPlayer.getSelectedHero().getCurrentSquare().getX() - Math.round(screenWidth / 2) - 1;
-		int y = currentPlayer.getSelectedHero().getCurrentSquare().getY() - Math.round(screenHeight / 2) - 1;
+		int x = players.getCurrentPlayer().getSelectedHero().getCurrentSquare().getX() - Math.round(screenWidth / 2) - 1;
+		int y = players.getCurrentPlayer().getSelectedHero().getCurrentSquare().getY() - Math.round(screenHeight / 2) - 1;
 		
 		if(x < 0) {
 			x = 0;
@@ -399,51 +390,50 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			y = field.getHeight() - screenHeight - 2;
 		}
 		
-		if(currentPlayer.getCurrentView().getX() > (x + 2)) {
-			int tempY = currentPlayer.getCurrentView().getY();
-			currentPlayer.setCurrentView(field.getSquare(x,tempY));
+		if(players.getCurrentPlayer().getCurrentView().getX() > (x + 2)) {
+			int tempY = players.getCurrentPlayer().getCurrentView().getY();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(x,tempY));
 		}
-		if(currentPlayer.getCurrentView().getX() < (x - 2)) {
-			int tempY = currentPlayer.getCurrentView().getY();
-			currentPlayer.setCurrentView(field.getSquare(x,tempY));
+		if(players.getCurrentPlayer().getCurrentView().getX() < (x - 2)) {
+			int tempY = players.getCurrentPlayer().getCurrentView().getY();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(x,tempY));
 		}
-		if(currentPlayer.getCurrentView().getY() > (y + 2)) {
-			int tempX = currentPlayer.getCurrentView().getX();
-			currentPlayer.setCurrentView(field.getSquare(tempX,y));
+		if(players.getCurrentPlayer().getCurrentView().getY() > (y + 2)) {
+			int tempX = players.getCurrentPlayer().getCurrentView().getX();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(tempX,y));
 		}
-		if(currentPlayer.getCurrentView().getY() < (y - 2)) {
-			int tempX = currentPlayer.getCurrentView().getX();
-			currentPlayer.setCurrentView(field.getSquare(tempX,y));
+		if(players.getCurrentPlayer().getCurrentView().getY() < (y - 2)) {
+			int tempX = players.getCurrentPlayer().getCurrentView().getX();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(tempX,y));
 		}
 		
-		if(currentPlayer.getCurrentView().getX() < field.getSquare(x, y).getX()) {
-			int i = currentPlayer.getCurrentViewAbsX();
-			currentPlayer.setCurrentViewAbsX(i + 5);
-		} else if(currentPlayer.getCurrentView().getX() > field.getSquare(x, y).getX()) {
-			int i = currentPlayer.getCurrentViewAbsX();
-			currentPlayer.setCurrentViewAbsX(i - 5);
+		if(players.getCurrentPlayer().getCurrentView().getX() < field.getSquare(x, y).getX()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsX();
+			players.getCurrentPlayer().setCurrentViewAbsX(i + 5);
+		} else if(players.getCurrentPlayer().getCurrentView().getX() > field.getSquare(x, y).getX()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsX();
+			players.getCurrentPlayer().setCurrentViewAbsX(i - 5);
 		} else {}
-		if(currentPlayer.getCurrentView().getY() < field.getSquare(x, y).getY()) {
-			int i = currentPlayer.getCurrentViewAbsY();
-			currentPlayer.setCurrentViewAbsY(i + 5);
-		} else if(currentPlayer.getCurrentView().getY() > field.getSquare(x, y).getY()) {
-			int i = currentPlayer.getCurrentViewAbsY();
-			currentPlayer.setCurrentViewAbsY(i - 5);
+		if(players.getCurrentPlayer().getCurrentView().getY() < field.getSquare(x, y).getY()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsY();
+			players.getCurrentPlayer().setCurrentViewAbsY(i + 5);
+		} else if(players.getCurrentPlayer().getCurrentView().getY() > field.getSquare(x, y).getY()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsY();
+			players.getCurrentPlayer().setCurrentViewAbsY(i - 5);
 		} else {}
 		
-		if(currentPlayer.getCurrentView() == field.getSquare(x,y)){
-			currentPlayer.setCurrentView(field.getSquare(x,y));
+		if(players.getCurrentPlayer().getCurrentView() == field.getSquare(x,y)){
+			players.getCurrentPlayer().setCurrentView(field.getSquare(x,y));
 		}
 
 	}
 	
 	public void endedTurn(){
 		players.nextPlayer();
-		turnEnded = false;
 	}
 	
 	public Player getCurrentPlayer() {
-		return currentPlayer;
+		return players.getCurrentPlayer();
 	}
 
 	public void setScreenWidth(int screenWidth) {
@@ -468,17 +458,20 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,1,field);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,2,field);
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		@SuppressWarnings("unused")
 		KeyMap km = new KeyMap(e,mc,3,field);
 	}
 
@@ -486,14 +479,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public void mousePressed(MouseEvent e) {
 		
 		for(int i = 0; i < 280; i += 40) {
-			long x = Math.round(e.getLocationOnScreen().getX());
-			long y = Math.round(e.getLocationOnScreen().getY());
+			long x = mousePos.x;
+			long y = mousePos.y;
 			int xi = 210 + i;
 			int ximax = 210 + i + 39;
-			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < currentPlayer.getHeroes().size())){
-				ArrayList<Hero> heroes = currentPlayer.getHeroes();
-				currentPlayer.selectHero(heroes.get(i/40));
-				System.out.print("Selected hero" + i/40);
+			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
+				ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
+				players.getCurrentPlayer().selectHero(heroes.get(i/40));
 				movingHeroChecker();
 			}
 		}
@@ -522,7 +514,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(e.getLocationOnScreen().getX()<10){
+		mousePos.x = (int) Math.round(e.getLocationOnScreen().getX());
+		mousePos.y = (int) Math.round(e.getLocationOnScreen().getY());
+	}
+	
+	public void mouseChecker(){
+		if(mousePos.getX()<10){
 			
 			try {
 				robot = new Robot();
@@ -532,7 +529,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 
 		}
-		if(e.getLocationOnScreen().getX()>(s.getScreenWidth()-10)){
+		if(mousePos.getX()>(s.getScreenWidth()-10)){
 			
 			try {
 				robot = new Robot();
@@ -542,7 +539,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 
 		}
-		if(e.getLocationOnScreen().getY()<10){
+		if(mousePos.getY()<10){
 			
 			try {
 				robot = new Robot();
@@ -552,7 +549,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 
 		}
-		if(e.getLocationOnScreen().getY()>(s.getScreenHeight()-10)){
+		if(mousePos.getY()>(s.getScreenHeight()-10)){
 			
 			try {
 				robot = new Robot();

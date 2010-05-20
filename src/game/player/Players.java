@@ -1,15 +1,23 @@
 package game.player;
 
+import game.field.Field;
+
 import java.util.ArrayList;
 
 public class Players {
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
-	public Players(int i){
+	public Players(int i,Field field){
 		for(int j = 0; j < i; j++){
+
 			String name = "Player " + (j+1);
-			players.add(new Player(name));
+			Player p = new Player(name);
+			p.setCurrentView(field.getSquare(2, 2));
+			p.setCurrentViewAbsX(0);
+			p.setCurrentViewAbsY(0);
+			players.add(p);
+
 		}
 		players.get(0).setCurrentPlayer(true);
 	}
@@ -28,17 +36,19 @@ public class Players {
 	}
 	
 	public void nextPlayer(){
+		int i = 0;
 		for(Player p : players){
 			if(p.isCurrentPlayer()){
 				p.setCurrentPlayer(false);
-				int i = players.indexOf(p);
+				i = players.indexOf(p);
 				i++;
 				if(i==players.size()){
 					i=0;
 				}
-				players.get(i).setCurrentPlayer(true);
+				break;
 			}
 		}
+		players.get(i).setCurrentPlayer(true);
 	}
 	
 	public Player getCurrentPlayer(){
