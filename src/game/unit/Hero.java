@@ -8,7 +8,6 @@ import game.item.Item;
 import game.main.Animation;
 import game.main.Sprite;
 import game.player.Player;
-import game.race.Race;
 import game.spells.Talent;
 
 public class Hero extends Unit {
@@ -21,7 +20,6 @@ public class Hero extends Unit {
 	private int y; 
 	private Player owner;
 	private Square currentSquare;
-	private Race race;
 	private int heading;
 	// for heading 
 	// 1 = up
@@ -86,14 +84,6 @@ public class Hero extends Unit {
 
 	public Square getCurrentSquare() {
 		return currentSquare;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
-	}
-
-	public Race getRace() {
-		return race;
 	}
 
 	public void setHeading(int heading) {
