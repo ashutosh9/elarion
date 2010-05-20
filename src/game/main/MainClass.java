@@ -12,7 +12,7 @@ import game.player.Players;
 import game.resource.Resource;
 import game.unit.Hero;
 import game.unit.TestUnits;
-//import game.unit.Unit;
+import game.unit.Unit;
 //import javax.swing.*;
 import java.awt.*;
 //import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-//import javax.swing.event.MouseInputListener;
+import javax.swing.event.MouseInputListener;
 
 @SuppressWarnings("unused")
 public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
@@ -64,7 +64,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		Hero h2 = new Hero();
 		currentPlayer.setCurrentPlayer(true);
 		
-		combatView = new CombatView();
 		currentPlayer.getGold().setAmount(1000);
 		currentPlayer.newHero(h,480, 480, field);
 		currentPlayer.newHero(h2,481, 480, field);
@@ -77,9 +76,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		currentPlayer.setCurrentViewAbsX(0);
 		currentPlayer.setCurrentViewAbsY(0);
 		TestUnits testUnits = new TestUnits();
+		h.addUnit(testUnits.getWarrior());
 		h.addUnit(testUnits.getArcher());
 		h.addUnit(testUnits.getMage());
-		h.addUnit(testUnits.getWarrior());
+		combatView = new CombatView(h,h);
 		
 		
 		path = new Path();
@@ -190,9 +190,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
 		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
-		
-		combatView.draw(g);
-		combatView.setCombat(false);
+		if(combatView.isCombat()){
+			combatView.draw(g);
+		}
+		//combatView.setCombat(false);
 		
 		if(!combatView.isCombat()) {
 			if(currentPlayer.getSelectedHero() != null){
@@ -273,7 +274,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			for(PathNode pn : path.getSquares()){
 				field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setItem(pathNode);
 			}
-			
 			
 			//g.drawImage(a.getImage(), 0, 0, null);
 			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
@@ -460,6 +460,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	public int getScreenHeight() {
 		return screenHeight;
+	}
+	
+	public CombatView getCombatView() {
+		return combatView;
 	}
 
 	@Override
