@@ -237,7 +237,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}		
 			
-			for(int x=2;x<screenWidth;x++){
+			for(int x=-2;x<screenWidth;x++){
 				for(int y=-2;y<screenHeight;y++){
 					
 					Image img = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getImage();
