@@ -7,6 +7,7 @@ import game.resource.Resource;
 import game.unit.Hero;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Square {
 	private int x;
@@ -18,6 +19,8 @@ public class Square {
 	private Tooltip tooltip;
 	private Item item;
 	private Resource resource;
+	private Item pathNode;
+	private boolean path;
 	
 	
 	public Square(int x, int y){
@@ -28,6 +31,9 @@ public class Square {
 		setHero(null);
 		setItem(null);
 		tooltip = new Tooltip("");
+		pathNode = new Item();
+		pathNode.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/pathSquare.png"));
+		path = false;
 	}
 	
 	public int getX(){
@@ -111,5 +117,18 @@ public class Square {
 	public Resource getResource() {
 		return resource;
 	}
+	
+	public Item getPathNode(){
+		return pathNode;
+	}
+
+	public void setPath(boolean path) {
+		this.path = path;
+	}
+
+	public boolean isPath() {
+		return path;
+	}
+
 
 }

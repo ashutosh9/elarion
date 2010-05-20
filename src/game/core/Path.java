@@ -57,23 +57,17 @@ public class Path {
 		
 		while(!foundPath && openList.size() > 0 && openList.size() < 1000) {
 			
-			System.out.print("  openList size : " + openList.size());
-			
 			for(PathNode node : openList){
 				if(node.getFullCost() < current.getFullCost()){
 					current = node;
 				}
 			}
 			
-			System.out.print("  Current full cost : " + current.getFullCost());
-			
 			if((current.getSquare().getX() == destination.getSquare().getX()) && (current.getSquare().getY() == destination.getSquare().getY())) {
 				foundPath = true;
 				destination = current;
 			}
 			else {
-				
-				System.out.print("  current X : " + current.getSquare().getX() + "  current Y : " + current.getSquare().getY());
 				
 				int i = 32000;
 				
@@ -84,13 +78,9 @@ public class Path {
 					}
 				}
 				
-				System.out.print("  i : " + i);
-				
 				if(i!=32000){
 					openList.remove(i);
 				}
-				
-				System.out.print("  openList size : " + openList.size() + "\n");
 				
 				for(int x = -1; x <2 ; x++){
 					for(int y = -1; y < 2; y++){
@@ -156,19 +146,13 @@ public class Path {
 		
 		ArrayList<PathNode> path = new ArrayList<PathNode>();
 		
-		System.out.print("done");
 		
 		PathNode target = destination;
-		System.out.print("\n target get square x " + target.getSquare().getX());
-		System.out.print("\n start get square x " + startSquare.getX());
 		while((target.getSquare().getX() != startSquare.getX()) || (target.getSquare().getY() != startSquare.getY())) {
 			Square s = new Square(target.getSquare().getX(), target.getSquare().getY());
 			path.add(0,new PathNode(s));
 			target = target.getParentNode();
-			System.out.print("Added Square with X : " + target.getSquare().getX() + " and Y : " + target.getSquare().getY() + "\n");
 		}
-		Square s = new Square(startSquare.getX(), startSquare.getY());
-		path.add(0,new PathNode(s));
 		//PathNode[] pathA = (PathNode[]) path.toArray();
 		
 		Path finalPath = new Path(path,startSquare,destinationSquare);

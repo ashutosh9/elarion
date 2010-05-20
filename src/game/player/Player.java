@@ -139,9 +139,11 @@ public class Player {
 	
 	public void selectHero(Hero h){
 		for(Hero hero : heroes){
-			hero.setSelected(false);
 			if((hero.getHeroX() == h.getHeroX()) && (hero.getHeroY() == h.getHeroY())){
 				hero.setSelected(true);
+			} else {
+				hero.setSelected(false);
+				hero.setPath(null);
 			}
 		}
 	}
