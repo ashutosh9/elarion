@@ -85,14 +85,6 @@ public class Field {
 		return width;
 	}
 	
-	public void initImages(){
-		@SuppressWarnings("unused")
-		Image i = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg");
-		//Image img2 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Water1.jpg");
-		//etc
-		//list and get all types of terrain images because that method is slooow
-	}
-	
 	public Square getSquare(int x, int y) {
 		return s[x][y];
 	}

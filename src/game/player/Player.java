@@ -126,12 +126,17 @@ public class Player {
 	
 	public Hero getSelectedHero(){
 		int i = 0;
+		boolean selected = false;
 		for(Hero h : heroes){
 			if(h.isSelected()){
 				i = heroes.indexOf(h);
+				selected = true;
 			}
 		}
-		return heroes.get(i);
+		if(selected){
+			return heroes.get(i);
+		} 
+		return null;
 	}
 	
 	public void selectHero(Hero h){

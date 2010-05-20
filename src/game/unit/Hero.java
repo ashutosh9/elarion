@@ -48,6 +48,7 @@ public class Hero extends Unit {
 		moving = false;
 		icon = Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg");
 		selected = false;
+		moving = false;
 	}
 	
 	public int getHeroX(){

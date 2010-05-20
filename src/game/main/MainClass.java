@@ -37,10 +37,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static MainClass mc;
 	private boolean running;
 	private boolean exited;
-	private Hero movingHero = new Hero();
 	private int screenWidth;
 	private int screenHeight;
-	private Hero selectedHero;
 	private boolean turnEnded = false;
 	private Robot robot;
 	private static Players players;
@@ -63,12 +61,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		players = new Players(2);
 		currentPlayer = new Player();
 		h = new Hero();
+		Hero h2 = new Hero();
 		currentPlayer.setCurrentPlayer(true);
 		
 		combatView = new CombatView();
 		currentPlayer.getGold().setAmount(1000);
 		currentPlayer.newHero(h,480, 480, field);
-		currentPlayer.selectHero(h);
+		currentPlayer.newHero(h2,481, 480, field);
 		Building building = new Building();
 		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
 		field.getSquare(5, 5).setBuilding(building);
@@ -165,14 +164,18 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 //		for(Animation anim : a) {
 //				anim.update(timePassed);
 //		}
-		if(h.getCurrentSprite() != null) {
-			h.getCurrentSprite().update(timePassed);
+		if(currentPlayer.getSelectedHero() != null){
+			if(currentPlayer.getSelectedHero().getCurrentSprite() != null) {
+				currentPlayer.getSelectedHero().getCurrentSprite().update(timePassed);
+			}
+			
+			if(currentPlayer.getSelectedHero().getCurrentAnimation() != null) {
+				currentPlayer.getSelectedHero().getCurrentAnimation().update(timePassed);
+			}
 		}
 		
 		combatView.update(timePassed);
 		
-		//gets all animations from the animations arrayList and updates them
-		//gets all sprites from the sprites arrayList and updates them
 		//a.update(timePassed);
 		//sprite.update(timePassed);
 		
@@ -192,9 +195,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		combatView.setCombat(false);
 		
 		if(!combatView.isCombat()) {
-		
-			if(movingHero.isMoving()){
-				movingHeroChecker();
+			if(currentPlayer.getSelectedHero() != null){
+				if(currentPlayer.getSelectedHero().isMoving()){
+					movingHeroChecker();
+				}
 			}
 			
 			for(int x=-2;x<screenWidth;x++){
@@ -240,20 +244,24 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					
 					if(field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero() != null){
 						
-						movingHero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
-						
-						if(movingHero.isMoving()){
-							
-							g.drawImage(movingHero.getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+movingHero.getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
-								currentPlayer.getCurrentViewAbsY()-10+movingHero.getCurrentSprite().getY()), null);
-							
-							if(Math.abs(movingHero.getCurrentSprite().getX())>=40 || Math.abs(movingHero.getCurrentSprite().getY())>=40) {
-								movingHero.movedOneSquare(field);
+						Hero hero = field.getSquare((x+2+currentPlayer.getCurrentView().getX()),(y+2+currentPlayer.getCurrentView().getY())).getHero();
+						if(hero == currentPlayer.getSelectedHero()){
+							if(currentPlayer.getSelectedHero().isMoving()){
+								
+								g.drawImage(currentPlayer.getSelectedHero().getCurrentSprite().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10+currentPlayer.getSelectedHero().getCurrentSprite().getX()), Math.round((y)*img.getHeight(null) -
+									currentPlayer.getCurrentViewAbsY()-10+currentPlayer.getSelectedHero().getCurrentSprite().getY()), null);
+								
+								if(Math.abs(currentPlayer.getSelectedHero().getCurrentSprite().getX())>=40 || Math.abs(currentPlayer.getSelectedHero().getCurrentSprite().getY())>=40) {
+									currentPlayer.getSelectedHero().movedOneSquare(field);
+								}
+								
+							} else {
+								
+								g.drawImage(currentPlayer.getSelectedHero().getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+										currentPlayer.getCurrentViewAbsY()-10), null);
 							}
-							
 						} else {
-							
-							g.drawImage(movingHero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
+							g.drawImage(hero.getStandAnimation().getImage() , Math.round((x)*img.getWidth(null) - currentPlayer.getCurrentViewAbsX()-10), Math.round((y)*img.getHeight(null) -
 									currentPlayer.getCurrentViewAbsY()-10), null);
 						}
 						
@@ -275,7 +283,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 			Color color = new Color(255, 255, 255);
 			g.setColor(color);
-			Font font = new Font(Font.SERIF, Font.BOLD, 20);
+			Font font = new Font(Font.SERIF, Font.BOLD, 18);
 			g.setFont(font);
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
@@ -310,14 +318,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
+			
 			currentViewChecker();
 		}
 	}
 
 	public void loadimages() {
-		//load every image
-		field.initImages();
-		//Image img1 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg"); //field.initImages();
+		//Image img1 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg"); /
 //		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
 //		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
 //		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
@@ -378,8 +385,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 	
 	public void movingHeroChecker(){
-		int x = movingHero.getCurrentSquare().getX() - Math.round(screenWidth / 2) - 1;
-		int y = movingHero.getCurrentSquare().getY() - Math.round(screenHeight / 2) - 1;
+		int x = currentPlayer.getSelectedHero().getCurrentSquare().getX() - Math.round(screenWidth / 2) - 1;
+		int y = currentPlayer.getSelectedHero().getCurrentSquare().getY() - Math.round(screenHeight / 2) - 1;
 		
 		if(x < 0) {
 			x = 0;
@@ -439,10 +446,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return currentPlayer;
 	}
 
-	public static void setCurrentPlayer(Player currentPlayer) {
-		MainClass.currentPlayer = currentPlayer;
-	}
-
 	public void setScreenWidth(int screenWidth) {
 		this.screenWidth = screenWidth;
 	}
@@ -477,6 +480,19 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
+		for(int i = 0; i < 280; i += 40) {
+			long x = Math.round(e.getLocationOnScreen().getX());
+			long y = Math.round(e.getLocationOnScreen().getY());
+			int xi = 210 + i;
+			int ximax = 210 + i + 39;
+			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < currentPlayer.getHeroes().size())){
+				ArrayList<Hero> heroes = currentPlayer.getHeroes();
+				currentPlayer.selectHero(heroes.get(i/40));
+				System.out.print("Selected hero" + i/40);
+				movingHeroChecker();
+			}
+		}
 		
 	}
 
