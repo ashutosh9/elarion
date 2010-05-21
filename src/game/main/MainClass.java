@@ -139,7 +139,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			
 			Graphics2D g = s.getGraphics();
 
-			draw(g);
+			try {
+				draw(g);
+			} catch (AWTException e) {
+				System.out.print("draw error");
+			}
 			g.dispose();
 			s.update();
 			
@@ -171,7 +175,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 	}
 
-	public void draw(Graphics g){
+	public void draw(Graphics g) throws AWTException{
 		
 		//different views : world view/city view/combat view
 		//currently there is just 1 setup view - world view
