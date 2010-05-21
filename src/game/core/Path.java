@@ -69,17 +69,12 @@ public class Path {
 			}
 			else {
 				
-				int i = 32000;
-				
 				for(PathNode node : openList){
 					if(node == current){
 						closedList.add(node);
-						i = openList.indexOf(node);
+						openList.remove(node);
+						break;
 					}
-				}
-				
-				if(i!=32000){
-					openList.remove(i);
 				}
 				
 				for(int x = -1; x <2 ; x++){

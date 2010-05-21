@@ -38,6 +38,36 @@ public class CombatView {
 			for(int i=0;i<2;i++){
 				for(int j=0;j<9;j++){
 					if(u.getCombatStats().getCombatPos().getX() == i && u.getCombatStats().getCombatPos().getY() == j){
+						u.setCombatHeading(1);
+						bf.getTile(i, j).setUnit(u);
+						bf.getTile(i, j).setPassable(false);
+					}
+				}
+			}
+			if(x == 8) {
+				boolean set=false;
+				for(int i=0;i<2;i++){
+					for(int j=0;j<9;j++){
+						if(bf.getTile(i, j).isPassable() && !set){
+							u.setCombatHeading(1);
+							bf.getTile(i, j).setUnit(u);
+							bf.getTile(i, j).setPassable(false);
+							set = true;
+						}
+					}
+				}
+			}
+			
+		}
+		
+		for(Unit u : defender.getUnits()){
+			long x = Math.round(u.getCombatStats().getCombatPos().getX());
+			//int y = (int) Math.round(u.getCombatStats().getCombatPos().getY());
+			
+			for(int i=15;i>13;i--){
+				for(int j=0;j<9;j++){
+					if(u.getCombatStats().getCombatPos().getX() == i && u.getCombatStats().getCombatPos().getY() == j){
+						u.setCombatHeading(2);
 						bf.getTile(i, j).setUnit(u);
 						bf.getTile(i, j).setPassable(false);
 					}
@@ -45,10 +75,11 @@ public class CombatView {
 			}
 			
 			if(x == 8) {
-				for(int i=0;i<2;i++){
+				for(int i=15;i>13;i--){
 					boolean set=false;
 					for(int j=0;j<9;j++){
 						if(bf.getTile(i, j).isPassable()){
+							u.setCombatHeading(2);
 							bf.getTile(i, j).setUnit(u);
 							bf.getTile(i, j).setPassable(false);
 							set = true;
@@ -60,11 +91,6 @@ public class CombatView {
 					}
 				}
 			}
-			
-		}
-		
-		for(Unit u : defender.getUnits()){
-			
 		}
 	}
 	
@@ -90,7 +116,7 @@ public class CombatView {
 						i = bf.getTile(x, y).getUnit().getGraphicalData().getBattleFieldStandRight().getImage();
 					} else {
 						i = bf.getTile(x, y).getUnit().getGraphicalData().getBattleFieldStandLeft().getImage();
-					} 
+					}
 					g.drawImage(i,x*80,y*80,null);
 				}
 			}

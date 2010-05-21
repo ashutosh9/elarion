@@ -69,10 +69,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		players.getCurrentPlayer().setCurrentViewAbsX(0);
 		players.getCurrentPlayer().setCurrentViewAbsY(0);
 		TestUnits testUnits = new TestUnits();
+		TestUnits testUnits2 = new TestUnits();
 		h.addUnit(testUnits.getWarrior());
 		h.addUnit(testUnits.getArcher());
 		h.addUnit(testUnits.getMage());
-		combatView = new CombatView(h,h);
+		h2.addUnit(testUnits2.getMage());
+		h2.addUnit(testUnits2.getWarrior());
+		h2.addUnit(testUnits2.getArcher());
+		combatView = new CombatView(h2,h);
 		combatView.setCombat(false);
 		
 		
