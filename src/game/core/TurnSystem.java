@@ -1,61 +1,31 @@
 package game.core;
 
-import java.util.ArrayList;
-import java.util.EventListener;
-
 import game.player.Player;
+import game.player.Players;
 
-public class TurnSystem extends Thread implements EventListener{
+public class TurnSystem{
 	
-	private Player currentPlayer;
 	private int currentTurn;
-	@SuppressWarnings("unused")
-	private ArrayList<Player> playerList = new ArrayList<Player>();
-	private int i = 1;
-	private boolean turnInProgress;
-	private boolean gameInProgress;
-	//add players to collection
 	
 	
 	
-	public TurnSystem(ArrayList<Player> playerList){
-		this.playerList = playerList;
-		turnInProgress = true;
-		gameInProgress = true;
+	public TurnSystem(){
 		
-		this.start();
-		while(gameInProgress){
-			setCurrentPlayer(playerList.get(i));
-			if(i<playerList.size()) {
-				i++;
-			} else {
-				i = 0;
-			}
-			//changePlayer();
-			//loadData();
+	}
+	
+	public void nextTurn(Players players){	
+		if(players.getCurrentPlayer() == players.getPlayer(0)){
 			currentTurn++;
-			turnInProgress = true;
 		}
-		//end game events;
-	}
-
-	public void setCurrentPlayer(Player currentPlayer){
-		this.currentPlayer = currentPlayer;
-	}
-
-	public Player getCurrentPlayer(){
-		return currentPlayer;
+		//set all hero movement points to maximum
+		//set current view
+		players.getCurrentPlayer().getGold().addAmount(players.getCurrentPlayer().getGold().getIncome());
+		players.getCurrentPlayer().getStone().addAmount(players.getCurrentPlayer().getGold().getIncome());
+		players.getCurrentPlayer().getWood().addAmount(players.getCurrentPlayer().getGold().getIncome());
 	}
 	
-	public void endTurn(){
-		turnInProgress = false;
+	public int getCurrentTurn(){
+		return currentTurn;
 	}
-	
-	public void endGame(){
-		gameInProgress = false;
-	}
-	
-	
-	
 
 }

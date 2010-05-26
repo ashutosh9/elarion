@@ -4,6 +4,7 @@ import game.Interface.Screen;
 import game.building.Building;
 import game.core.Path;
 import game.core.PathNode;
+import game.core.TurnSystem;
 import game.field.Field;
 import game.graphic.CombatView;
 import game.item.Item;
@@ -37,6 +38,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private Robot robot;
 	private static Players players;
 	private Point mousePos = new Point(30,30);
+	private static TurnSystem turnSystem;
 	
 	
 	//for testing
@@ -45,7 +47,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 //	private Image face1;
 //	private Animation a;
 //	private Sprite sprite;
-	private static Item pathNode;
+//	private static Item pathNode;
 	private static CombatView combatView;
 	
 	public static void main(String args[]){
@@ -53,6 +55,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		players = new Players(2,field);
+		turnSystem = new TurnSystem();
 		h = new Hero();
 		Hero h2 = new Hero();
 		players.getCurrentPlayer().setCurrentPlayer(true);
@@ -218,10 +221,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					}
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).isPath()){
-						
 						g.drawImage(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getPathNode().getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
 								players.getCurrentPlayer().getCurrentViewAbsY()), null);
-						
 					}
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
@@ -276,17 +277,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
-			if(players.getCurrentPlayer().getSelectedHero() != null){
-				if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
-					for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
-						field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(true);
-					}
-				}
-			}
-
-
-
-			
 			//g.drawImage(a.getImage(), 0, 0, null);
 			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
 			//g.drawImage(face1,1060,30,null);
@@ -310,6 +300,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
 			string = "Stone: " + players.getCurrentPlayer().getStone().getAmount();
 			g.drawString(string,30,115);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,120,null);
+			string = "Turn: " + turnSystem.getCurrentTurn();
+			g.drawString(string,30,140);
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),248,18,null);
@@ -451,6 +444,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public void endedTurn(){
 		players.nextPlayer();
+		turnSystem.nextTurn(players);
 	}
 	
 	public Player getCurrentPlayer() {
@@ -570,6 +564,24 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 		}
 		
+		if(!clicked){
+			for(int x = 0; x < (screenWidth + 1);x++){
+				for(int y = 0; y < (screenHeight + 1);y++){		
+					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
+							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
+						if(field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
+							Hero hero = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero();
+							if(players.getCurrentPlayer().getHeroes().contains(hero)){
+								clearPath();
+								players.getCurrentPlayer().selectHero(players.getCurrentPlayer().getHero(hero));
+								clicked = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		
 		if(!clicked && players.getCurrentPlayer().getSelectedHero() != null ){
 			for(int x = 0; x < (screenWidth + 1);x++){
 				for(int y = 0; y < (screenHeight + 1);y++){				
@@ -584,6 +596,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 							path = path.findPath(field, players.getCurrentPlayer().getSelectedHero().getCurrentSquare(), field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
 							
 							players.getCurrentPlayer().getSelectedHero().setPath(path);
+							
+							if(players.getCurrentPlayer().getSelectedHero() != null){
+								if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+									for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
+										field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(true);
+									}
+								}
+							}
 								
 							
 						}

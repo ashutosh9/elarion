@@ -55,24 +55,51 @@ public class Path {
 		
 		openList.add(start);
 		
-		while(!foundPath && openList.size() > 0 && openList.size() < 1000) {
-			
+		while(!foundPath && openList.size() > 0 && openList.size() < 2000) {
+//			System.out.print("SIZE   :   " + openList.size() + "\n");
+			double lowestCost = openList.get(0).getFullCost();
+			int index = 0;
+//			for(PathNode node : openList){
+//				if(node.equals(current)){
+//					node = current;
+//					break;
+//				}
+//			}
 			for(PathNode node : openList){
-				if(node.getFullCost() < current.getFullCost()){
-					current = node;
+
+				//System.out.print("GO COST : " + node.getGoCost() + "\n");
+				if(node.getFullCost() < lowestCost){
+					lowestCost = node.getFullCost();
+					index = openList.indexOf(node);
+//					current = new PathNode(node.getSquare());
+//					//System.out.print("NODE GO cost : " + node.getGoCost() + "  ");
+//					current.setGoCost(node.getGoCost());
+//					//System.out.print("Current GO cost : " + current.getGoCost() + "  ");
+//					current.setHeuristic(node.getHeuristicCost());
+//					current.setParentNode(node.getParentNode());
+					//current = node;
 				}
 			}
+			current = openList.get(index);
+			
+//			current = new PathNode(openList.get(0).getSquare());
+//			current.setGoCost(openList.get(0).getGoCost());
+//			current.setHeuristic(openList.get(0).getHeuristicCost());
+//			current.setParentNode(openList.get(0).getParentNode());
 			
 			if((current.getSquare().getX() == destination.getSquare().getX()) && (current.getSquare().getY() == destination.getSquare().getY())) {
 				foundPath = true;
 				destination = current;
+				break;
 			}
 			else {
 				
 				for(PathNode node : openList){
-					if(node == current){
+					if((node.getSquare().getX() == current.getSquare().getX()) && (node.getSquare().getY() == current.getSquare().getY())){
+//						System.out.print("Removed node");
 						closedList.add(node);
 						openList.remove(node);
+//						System.out.print("SIZE   :   " + openList.size() +"and working with : " + current.getFullCost() +  "\n");
 						break;
 					}
 				}
@@ -81,6 +108,7 @@ public class Path {
 					for(int y = -1; y < 2; y++){
 						
 						boolean done = false;
+						boolean done2 = false;
 						
 						if((x == 0) && (y == 0)) {
 							continue;
@@ -93,35 +121,71 @@ public class Path {
 						PathNode neighbourNode = new PathNode(neighbourSquare);
 						if(neighbourNode.getSquare().isPassable()){
 							
-							for(PathNode node : closedList){
-								if((node.getSquare().getX() == neighbourNode.getSquare().getX()) && (node.getSquare().getY() == neighbourNode.getSquare().getY())){
-									if(neighbourNode.getGoCost() < node.getGoCost()){
-										node.setGoCost(neighbourNode.getGoCost());
-										node.setParentNode(current);
-										done = true;
-									}
+							int indexOfNode = 1;
+							int indexOfNode2 = 1;
+							
+							int goCost = 0;
+							if(Math.abs(x)==Math.abs(y)){
+								goCost = current.getGoCost();
+								goCost += 20;
+							} else {
+								goCost = current.getGoCost();
+								goCost += 15;
+							}
+							double nextStepCost = goCost + current.getHeuristicCost();
+//							neighbourNode.setGoCost(goCost);
+//							neighbourNode.setHeuristic(Math.sqrt(Math.pow((neighbourNode.getSquare().getX() - destination.getSquare().getX()), 2) + Math.pow((neighbourNode.getSquare().getY() - destination.getSquare().getY()), 2)));
+							if(nextStepCost < neighbourNode.getFullCost()){
+								if(openList.contains(neighbourNode)){
+									openList.remove(neighbourNode);
+								}
+								
+								if(closedList.contains(neighbourNode)){
+									closedList.remove(neighbourNode);
 								}
 							}
 							
-							for(PathNode node : openList){
-								if((node.getSquare().getX() == neighbourNode.getSquare().getX()) && (node.getSquare().getY() == neighbourNode.getSquare().getY())){
-									if(neighbourNode.getGoCost() < node.getGoCost()){
-										node.setGoCost(neighbourNode.getGoCost());
-										node.setParentNode(current);
-										done = true;
-									}
-								}
-							}
+//							for(PathNode node : closedList){
+//								if((node.getSquare().getX() == neighbourNode.getSquare().getX()) && (node.getSquare().getY() == neighbourNode.getSquare().getY())){
+//									if(neighbourNode.getFullCost() < node.getFullCost()){
+////										node.setGoCost(neighbourNode.getGoCost());
+////										node.setParentNode(current);
+//										indexOfNode = closedList.indexOf(node);
+//										done = true;
+//									}
+//								}
+//							}
+//
+//							if(done) {
+//								closedList.remove(indexOfNode);
+//							}
+//							
+//							for(PathNode node : openList){
+//								if((node.getSquare().getX() == neighbourNode.getSquare().getX()) && (node.getSquare().getY() == neighbourNode.getSquare().getY())){
+//									if(neighbourNode.getFullCost() < node.getFullCost()){
+////										node.setGoCost(neighbourNode.getGoCost());
+////										node.setParentNode(current);
+//										indexOfNode2 = openList.indexOf(node);
+//										done2 = true;
+//									}
+//								}
+//							}
+//							if(done2){
+//								openList.remove(indexOfNode2);
+//							}
 							
-							if(!done){
-								if(x==y){
-									neighbourNode.setGoCost(current.getGoCost() + 150);
-								} else {
-									neighbourNode.setGoCost(current.getGoCost() + 100);
-								}
-								neighbourNode.setParentNode(current);
-								neighbourNode.setHeuristic(Math.sqrt(Math.pow((neighbourNode.getSquare().getX() - destination.getSquare().getX()), 2) + Math.pow((neighbourNode.getSquare().getY() - destination.getSquare().getY()), 2)));
+							if(!(openList.contains(neighbourNode)) && !(closedList.contains(neighbourNode))){
+							
+						//	if(((!done) && (!done2))){
+								//neighbourNode.setHeuristic(Math.sqrt(Math.pow((neighbourNode.getSquare().getX() - destination.getSquare().getX()), 2) + Math.pow((neighbourNode.getSquare().getY() - destination.getSquare().getY()), 2)));
+							//	System.out.print("added node with GO cost : " + neighbourNode.getGoCost() + "   " + "\n");
 								openList.add(neighbourNode);
+								openList.contains(neighbourNode);
+								int i = openList.indexOf(neighbourNode);
+								openList.get(i).setParentNode(current);
+								openList.get(i).setHeuristic(15*(Math.sqrt(Math.pow((neighbourNode.getSquare().getX() - destination.getSquare().getX()), 2) + Math.pow((neighbourNode.getSquare().getY() - destination.getSquare().getY()), 2))));
+								openList.get(i).setGoCost(goCost);
+//								System.out.print("\n  added with GO cost : "+ openList.get(i).getGoCost() + " and current FULL cost : " + openList.get(i).getFullCost() + "\n");
 							}
 						
 						}

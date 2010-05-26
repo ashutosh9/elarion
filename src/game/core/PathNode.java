@@ -54,4 +54,14 @@ public class PathNode {
 		return (heuristicCost + goCost);
 	}
 	
+	public boolean equals(PathNode other){
+		if(this.getSquare().getX() != other.getSquare().getX()){
+			return false;
+		}
+		if(this.getSquare().getY() != other.getSquare().getY()){
+			return false;
+		}
+		return true;
+	}
+	
 }
