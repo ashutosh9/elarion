@@ -135,6 +135,94 @@ public class KeyMap {
 				if(keyCode == KeyEvent.VK_0){
 					mc.endedTurn();
 				}
+				
+				if(keyCode == KeyEvent.VK_SPACE){
+					if(mc.getCurrentPlayer().getSelectedHero() != null){
+						if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
+							
+							for(int x=-1;x<2;x++){
+								for(int y=-1;y<2;y++){
+									
+									int sqX = mc.getCurrentPlayer().getSelectedHero().getHeroX() + x;
+									int sqY = mc.getCurrentPlayer().getSelectedHero().getHeroY() + y;
+									int heading = 0;
+									
+									if(f.getSquare(sqX, sqY).isPath()){
+										
+										if((x==-1) && (y==-1)){
+											heading = 13;
+										}
+										if((x==1) && (y==1)){
+											heading = 24;
+										}
+										if((x==1) && (y==-1)){
+											heading = 14;
+										}
+										if((x==-1) && (y==1)){
+											heading = 23;
+										}
+										
+										if((x==-1) && (y==0)){
+											heading = 3;
+										}
+										if((x==1) && (y==0)){
+											heading = 4;
+										}
+										if((x==0) && (y==-1)){
+											heading = 1;
+										}
+										if((x==0) && (y==1)){
+											heading = 2;
+										}
+										
+										mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().remove(0);
+										f.getSquare(sqX, sqY).setPath(false);
+										mc.getCurrentPlayer().getSelectedHero().moveOneSquare(heading, f);
+//										if(heading==1){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
+//											toMoveY=-40;
+//										}
+//										if(heading==2){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementDown());
+//											toMoveY=40;
+//										}
+//										if(heading==3){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementRight());
+//											toMoveX=-40;
+//										}
+//										if(heading==4){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
+//											toMoveX=40;
+//										}
+//										if(heading==13){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
+//											toMoveY=-40;
+//											toMoveX=-40;
+//											
+//										}
+//										if(heading==14){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
+//											toMoveY=-40;
+//											toMoveX=40;
+//										}
+//										if(heading==23){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
+//											toMoveY=40;
+//											toMoveX=-40;
+//										}
+//										if(heading==24){
+//											setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
+//											toMoveY=40;
+//											toMoveX=40;
+//										}
+										
+									}
+									
+								}
+							}
+						}
+					}
+				}
 			
 			else {
 				e.consume();

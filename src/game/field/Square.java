@@ -121,6 +121,10 @@ public class Square {
 	public Item getPathNode(){
 		return pathNode;
 	}
+	
+	public void setPathNode(Item pathNode){
+		this.pathNode = pathNode;
+	}
 
 	public void setPath(boolean path) {
 		this.path = path;

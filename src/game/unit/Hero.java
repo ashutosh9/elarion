@@ -46,6 +46,8 @@ public class Hero extends Unit {
 		x = 1;
 		y = 1;
 		heading = 1;
+		currentAnimation = new Animation();
+		currentSprite = new Sprite(currentAnimation);
 		graphicalData = new GraphicalData();
 		moving = false;
 		icon = Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero.jpg");
@@ -73,9 +75,11 @@ public class Hero extends Unit {
 	public void setHeroLocation(int x, int y,Field f){
 		if(this==f.getSquare(this.x, this.y).getHero()){
 			f.getSquare(this.x, this.y).setHero(null); //Occupied(false);
+			f.getSquare(this.x, this.y).setPassable(true);
 		}
 		setCurrentSquare(f.getSquare(x, y));
 		f.getSquare(x, y).setHero(this); //Occupied(true);
+		f.getSquare(x, y).setPassable(false);
 	}
 
 	public void setOwner(Player owner) {
@@ -218,6 +222,7 @@ public class Hero extends Unit {
 			}
 			
 			currentSprite = new Sprite(currentAnimation);
+			
 			if(toMoveX < 0){
 				currentSprite.setVelocityOfX(-0.2f);
 				toMoveX = Math.abs(toMoveX);
@@ -304,6 +309,7 @@ public class Hero extends Unit {
 		}
 		
 		//execution of events that are on the new hero location
+		getCurrentSquare().setPath(false);
 		f.getEvents().pickUp(getCurrentSquare(), this);
 		f.getEvents().pickUpResource(getCurrentSquare(), getOwner());
 		//remove movement points
