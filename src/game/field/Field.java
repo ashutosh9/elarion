@@ -30,7 +30,7 @@ public class Field {
 			for(int y=0; y<height; y++) {
 				int i = generator.nextInt(10);
 				int a = generator.nextInt(20);
-				int ga = generator.nextInt(5000);
+				int ga = generator.nextInt(1000);
 
 				s[x][y] = new Square(x,y); // if square == water - add new animation to animations array list
 				s[x][y].setTerrain(grass);

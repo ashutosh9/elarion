@@ -10,6 +10,7 @@ public class Path {
 	private Square startSquare;
 	private Square destinationSquare;
 	private ArrayList<PathNode> path;
+	private boolean autoMoving;
 	
 	public Path(){
 	}
@@ -18,6 +19,7 @@ public class Path {
 		this.path = path2;
 		this.destinationSquare = destinationSquare;
 		this.startSquare = startSquare;
+		autoMoving = false;
 	}
 	
 	public PathNode getNode(int x) {
@@ -218,6 +220,14 @@ public class Path {
 
 		return finalPath;
 		
+	}
+
+	public void setAutoMoving(boolean autoMoving) {
+		this.autoMoving = autoMoving;
+	}
+
+	public boolean isAutoMoving() {
+		return autoMoving;
 	}
 	
 }
