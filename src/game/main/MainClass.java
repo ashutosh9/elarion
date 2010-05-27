@@ -325,6 +325,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			
 			mouseChecker();
 			currentViewChecker();
+			autoMovementChecker();
 		}
 	}
 
@@ -389,7 +390,28 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 	}
 	
+	public void autoMovementChecker(){
+		
+		if(players.getCurrentPlayer().getSelectedHero() != null){
+			if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+				if(!players.getCurrentPlayer().getSelectedHero().isMoving()) {
+					if (players.getCurrentPlayer().getSelectedHero().getPath().isAutoMoving()) {
+						try {
+							robot = new Robot();
+							robot.keyPress(KeyEvent.VK_SPACE);
+						} catch (AWTException e) {
+							System.out.print("Robot fail");
+						}
+
+					}
+				}
+			}
+		}
+		
+	}
+	
 	public void movingHeroChecker(){
+		
 		int x = players.getCurrentPlayer().getSelectedHero().getCurrentSquare().getX() - Math.round(screenWidth / 2) - 1;
 		int y = players.getCurrentPlayer().getSelectedHero().getCurrentSquare().getY() - Math.round(screenHeight / 2) - 1;
 		
@@ -479,6 +501,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(false);
 					}
 				}
+				players.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
 				players.getCurrentPlayer().getSelectedHero().setPath(null);
 			}
 		}
@@ -550,17 +573,29 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public void mousePressed(MouseEvent e) {
 		boolean clicked = false;
 		
-		for(int i = 0; i < 280; i += 40) {
-			long x = mousePos.x;
-			long y = mousePos.y;
-			int xi = 210 + i;
-			int ximax = 210 + i + 39;
-			if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
-				ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
-				clearPath();
-				players.getCurrentPlayer().selectHero(heroes.get(i/40));
-				movingHeroChecker();
-				clicked = true;
+		
+		if(mc.getCurrentPlayer().getSelectedHero() != null){
+			if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
+				if(mc.getCurrentPlayer().getSelectedHero().getPath().isAutoMoving()){
+					mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
+					clicked = true;
+				}
+			}
+		}
+		
+		if(!clicked){
+			for(int i = 0; i < 280; i += 40) {
+				long x = mousePos.x;
+				long y = mousePos.y;
+				int xi = 210 + i;
+				int ximax = 210 + i + 39;
+				if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
+					ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
+					clearPath();
+					players.getCurrentPlayer().selectHero(heroes.get(i/40));
+					movingHeroChecker();
+					clicked = true;
+				}
 			}
 		}
 		
@@ -609,11 +644,19 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						}
 						
 						if(e.getButton() == MouseEvent.BUTTON3){
-							Building building = new Building();
-							building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-							field.getSquare(5, 5).setBuilding(building);
-							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
-							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
+							try {
+								robot = new Robot();
+								robot.keyPress(KeyEvent.VK_M);
+							} catch (AWTException e1) {
+								System.out.print("robot Fail");
+							}
+
+//							Building building = new Building();
+//							building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
+//							field.getSquare(5, 5).setBuilding(building);
+//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
+//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
+							
 						}
 					}
 					

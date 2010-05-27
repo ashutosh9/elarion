@@ -13,6 +13,9 @@ public class Players {
 
 			String name = "Player " + (j+1);
 			Player p = new Player(name);
+			p.getGold().setAmount(5000);
+			p.getWood().setAmount(50);
+			p.getStone().setAmount(50);
 			p.setCurrentView(field.getSquare(2, 2));
 			p.setCurrentViewAbsX(0);
 			p.setCurrentViewAbsY(0);

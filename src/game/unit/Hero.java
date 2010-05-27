@@ -40,6 +40,7 @@ public class Hero extends Unit {
 	private Image icon;
 	private boolean selected;
 	private Path path;
+	private int movementPoints;
 	// to include combat stats and graphical data as different classes
 	
 	public Hero(){
@@ -54,6 +55,7 @@ public class Hero extends Unit {
 		selected = false;
 		moving = false;
 		path = null;
+		movementPoints = 100;
 	}
 	
 	public int getHeroX(){
@@ -173,72 +175,75 @@ public class Hero extends Unit {
 		
 		//check if movement points are enough for moving 
 		
-		if(moving==false && checkIfPassable(heading,f)==true){
-			
-			
-			moving=true;
-			
-			int toMoveX = 0;
-			int toMoveY = 0;
-			
-			this.heading = heading;
-			
-			if(heading==1){
-				setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
-				toMoveY=-40;
-			}
-			if(heading==2){
-				setCurrentAnimation(graphicalData.getWorldMapMovementDown());
-				toMoveY=40;
-			}
-			if(heading==3){
-				setCurrentAnimation(graphicalData.getWorldMapMovementRight());
-				toMoveX=-40;
-			}
-			if(heading==4){
-				setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
-				toMoveX=40;
-			}
-			if(heading==13){
-				setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
-				toMoveY=-40;
-				toMoveX=-40;
+		if(movementPoints >= 10) {
+	
+			if(moving==false && checkIfPassable(heading,f)==true){
 				
+				
+				moving=true;
+				
+				int toMoveX = 0;
+				int toMoveY = 0;
+				
+				this.heading = heading;
+				
+				if(heading==1){
+					setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
+					toMoveY=-40;
+				}
+				if(heading==2){
+					setCurrentAnimation(graphicalData.getWorldMapMovementDown());
+					toMoveY=40;
+				}
+				if(heading==3){
+					setCurrentAnimation(graphicalData.getWorldMapMovementRight());
+					toMoveX=-40;
+				}
+				if(heading==4){
+					setCurrentAnimation(graphicalData.getWorldMapMovementLeft());
+					toMoveX=40;
+				}
+				if(heading==13){
+					setCurrentAnimation(graphicalData.getWorldMapMovementUpRight());
+					toMoveY=-40;
+					toMoveX=-40;
+					
+				}
+				if(heading==14){
+					setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
+					toMoveY=-40;
+					toMoveX=40;
+				}
+				if(heading==23){
+					setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
+					toMoveY=40;
+					toMoveX=-40;
+				}
+				if(heading==24){
+					setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
+					toMoveY=40;
+					toMoveX=40;
+				}
+				
+				currentSprite = new Sprite(currentAnimation);
+				
+				if(toMoveX < 0){
+					currentSprite.setVelocityOfX(-0.2f);
+					toMoveX = Math.abs(toMoveX);
+				} else {
+					currentSprite.setVelocityOfX(0.2f);
+				}
+				if(toMoveY < 0){
+					currentSprite.setVelocityOfY(-0.2f);
+					toMoveY = Math.abs(toMoveY);
+				} else {
+					currentSprite.setVelocityOfY(0.2f);
+				}
+				currentSprite.setToMoveX(toMoveX);
+				currentSprite.setToMoveY(toMoveY);
+				currentSprite.setX(0);
+				currentSprite.setY(0);
 			}
-			if(heading==14){
-				setCurrentAnimation(graphicalData.getWorldMapMovementUpLeft());
-				toMoveY=-40;
-				toMoveX=40;
-			}
-			if(heading==23){
-				setCurrentAnimation(graphicalData.getWorldMapMovementDownLeft());
-				toMoveY=40;
-				toMoveX=-40;
-			}
-			if(heading==24){
-				setCurrentAnimation(graphicalData.getWorldMapMovementDownRight());
-				toMoveY=40;
-				toMoveX=40;
-			}
-			
-			currentSprite = new Sprite(currentAnimation);
-			
-			if(toMoveX < 0){
-				currentSprite.setVelocityOfX(-0.2f);
-				toMoveX = Math.abs(toMoveX);
-			} else {
-				currentSprite.setVelocityOfX(0.2f);
-			}
-			if(toMoveY < 0){
-				currentSprite.setVelocityOfY(-0.2f);
-				toMoveY = Math.abs(toMoveY);
-			} else {
-				currentSprite.setVelocityOfY(0.2f);
-			}
-			currentSprite.setToMoveX(toMoveX);
-			currentSprite.setToMoveY(toMoveY);
-			currentSprite.setX(0);
-			currentSprite.setY(0);
 		}
 	}
 	
@@ -313,6 +318,7 @@ public class Hero extends Unit {
 		f.getEvents().pickUp(getCurrentSquare(), this);
 		f.getEvents().pickUpResource(getCurrentSquare(), getOwner());
 		//remove movement points
+		movementPoints -= 10;
 		
 
 		
@@ -378,6 +384,14 @@ public class Hero extends Unit {
 	
 	public Path getPath() {
 		return path;
+	}
+
+	public void setMovementPoints(int movementPoints) {
+		this.movementPoints = movementPoints;
+	}
+
+	public int getMovementPoints() {
+		return movementPoints;
 	}
 	
 	

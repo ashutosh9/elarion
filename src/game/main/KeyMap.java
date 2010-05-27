@@ -14,6 +14,14 @@ public class KeyMap {
 		if(!mc.getCombatView().isCombat()){
 			if(i==1){//pressed
 				
+				if(keyCode == KeyEvent.VK_M){
+					if(mc.getCurrentPlayer().getSelectedHero() != null){
+						if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
+							mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(true);
+						}
+					}
+				} 
+				
 				if(keyCode == KeyEvent.VK_ESCAPE){
 					mc.stop();
 				}
@@ -176,8 +184,13 @@ public class KeyMap {
 										}
 										
 										mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().remove(0);
-										f.getSquare(sqX, sqY).setPath(false);
+										//f.getSquare(sqX, sqY).setPath(false);
 										mc.getCurrentPlayer().getSelectedHero().moveOneSquare(heading, f);
+										
+										if(mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().size() == 0){
+											mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
+											mc.clearPath();
+										}
 //										if(heading==1){
 //											setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
 //											toMoveY=-40;
@@ -220,6 +233,14 @@ public class KeyMap {
 									
 								}
 							}
+						}
+					}
+				}
+				
+				if(keyCode == KeyEvent.VK_Z){
+					if(mc.getCurrentPlayer().getSelectedHero() != null){
+						if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
+							mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(true);
 						}
 					}
 				}
