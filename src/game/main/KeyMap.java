@@ -183,13 +183,16 @@ public class KeyMap {
 											heading = 2;
 										}
 										
-										mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().remove(0);
-										//f.getSquare(sqX, sqY).setPath(false);
-										mc.getCurrentPlayer().getSelectedHero().moveOneSquare(heading, f);
-										
-										if(mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().size() == 0){
-											mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
-											mc.clearPath();
+										if(mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().size() > 0 ) {
+											mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().remove(0);
+											//f.getSquare(sqX, sqY).setPath(false);
+											mc.getCurrentPlayer().getSelectedHero().moveOneSquare(heading, f);
+	
+											
+											if(mc.getCurrentPlayer().getSelectedHero().getPath().getSquares().size() == 0){
+												mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
+												mc.clearPath();
+											}
 										}
 //										if(heading==1){
 //											setCurrentAnimation(graphicalData.getWorldMapMovementUp());		
