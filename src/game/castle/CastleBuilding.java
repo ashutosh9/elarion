@@ -4,12 +4,12 @@ import game.main.Sprite;
 
 public class CastleBuilding {
 
-	private boolean built;
-	private int x;
-	private int y;
-	private int w;//width
-	private int h;//height
-	private Sprite currentSprite;
+	protected boolean built;
+	protected int x;
+	protected int y;
+	protected int w;//width
+	protected int h;//height
+	protected Sprite currentSprite;
 	
 	public void build()	{
 		built = true;
