@@ -166,5 +166,9 @@ public class Player {
 			}
 		}
 	}
+	
+	public ArrayList<Castle> getCastles(){
+		return castles;
+	}
 
 }
