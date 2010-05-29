@@ -48,4 +48,7 @@ public class CastleBuilding {
 	public int getH() {
 		return h;
 	}
+	
+	public void Update() {
+	}
 }

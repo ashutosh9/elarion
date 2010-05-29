@@ -17,15 +17,38 @@ public class Castle {
 	private Player owner;
 	private Square currentSquare;
 	private Sprite currentSprite;
+	private Sprite background;
 	private boolean selected;
 	private Image icon;
 	private Field field;
+	private static Keep keep;
+	private static TownHall townhall;
+	private static Barracks barracks;
+	private static Archery archery;
+	private static MageTower magetower;
+	private static Market market;
+	private static Tavern tavern;
 	
 	public Castle () {
 		x = 1;
 		y = 1;
 		selected = false;
-		
+		//Builds the structure objects
+		keep = new Keep();
+		townhall = new TownHall();
+		barracks = new Barracks();
+		archery = new Archery();
+		magetower = new MageTower();
+		market = new Market();
+		tavern = new Tavern();
+		//adds them to the container
+		buildings.add(keep);
+		buildings.add(townhall);
+		buildings.add(barracks);
+		buildings.add(archery);
+		buildings.add(magetower);
+		buildings.add(market);
+		buildings.add(tavern);
 	}
 	
 	public Player getOwner() {
@@ -55,10 +78,11 @@ public class Castle {
 	}
 
 	public void turnUpdate() {
-		
-		//TODO
-		//This method calls the update function on every building object,
-		//in addition to some other things (maybe). Called at the end of
-		//every turn.
+		int i = 0;
+		while (i < buildings.size()) {
+			if (buildings.get(i)!= null) {
+				buildings.get(i).Update();
+			}
+		}
 	}
 }

@@ -189,7 +189,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 		//draw buildings (maybe state 1 ,2 ,3 etc for animating)
 		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
-		//get square get building - if animations[] contains building.getanmation draw(animations.getbuildinganim.getImage()...) 
+		//get square get building - if animations[] contains building.getanimation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
 		if(combatView.isCombat()){
 			combatView.draw(g);
