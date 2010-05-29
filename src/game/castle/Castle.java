@@ -34,13 +34,13 @@ public class Castle {
 		y = 1;
 		selected = false;
 		//Builds the structure objects
-		keep = new Keep();
-		townhall = new TownHall();
-		barracks = new Barracks();
-		archery = new Archery();
-		magetower = new MageTower();
-		market = new Market();
-		tavern = new Tavern();
+		keep = new Keep(this);
+		townhall = new TownHall(this);
+		barracks = new Barracks(this);
+		archery = new Archery(this);
+		magetower = new MageTower(this);
+		market = new Market(this);
+		tavern = new Tavern(this);
 		//adds them to the container
 		buildings.add(keep);
 		buildings.add(townhall);
@@ -81,8 +81,29 @@ public class Castle {
 		int i = 0;
 		while (i < buildings.size()) {
 			if (buildings.get(i)!= null) {
-				buildings.get(i).Update();
+					buildings.get(i).update();
 			}
+		i++;
+		}
+	}
+	
+	public void Build(int i) {
+		if (buildings.get(i) != null
+			&&
+			buildings.get(i).getwood() >= owner.getWood().getAmount()
+			&&
+			buildings.get(i).getstone() >= owner.getStone().getAmount()
+			&&
+			buildings.get(i).getgold() >= owner.getGold().getAmount()
+			&&
+			!buildings.get(i).isBuilt()) {
+			buildings.get(i).modBuilt(true);
+		}
+	}
+	
+	public void Destroy(int i) {
+		if (buildings.get(i) != null && buildings.get(i).isBuilt()) {
+			buildings.get(i).modBuilt(false);
 		}
 	}
 }
