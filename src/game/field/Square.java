@@ -2,6 +2,7 @@ package game.field;
 
 import game.Interface.Tooltip;
 import game.building.Building;
+import game.castle.Castle;
 import game.item.Item;
 import game.resource.Resource;
 import game.unit.Hero;
@@ -21,6 +22,7 @@ public class Square {
 	private Resource resource;
 	private Item pathNode;
 	private boolean path;
+	private Castle castle;
 	
 	
 	public Square(int x, int y){
@@ -82,6 +84,14 @@ public class Square {
 
 	public Hero getHero() {
 		return hero;
+	}
+	
+	public void setCastle(Castle castle) {
+		this.castle = castle;
+	}
+
+	public Castle getCastle() {
+		return castle;
 	}
 
 	public void setBuilding(Building building) {
