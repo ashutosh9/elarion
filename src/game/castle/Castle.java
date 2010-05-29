@@ -54,4 +54,11 @@ public class Castle {
 		f.getSquare(x, y).setPassable(false);
 	}
 
+	public void turnUpdate() {
+		
+		//TODO
+		//This method calls the update function on every building object,
+		//in addition to some other things (maybe). Called at the end of
+		//every turn.
+	}
 }
