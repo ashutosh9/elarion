@@ -11,8 +11,8 @@ public class Market extends CastleBuilding {
 		 * h =
 		 * sprite = 
 		 */
-		goldcost = 1500;
-		woodcost = 10;
-		stonecost = 5;
+		goldcost = 2000;
+		woodcost = 15;
+		stonecost = 0;
 	}
 }

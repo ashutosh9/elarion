@@ -11,8 +11,8 @@ public class Keep extends CastleBuilding {
 		 * h =
 		 * sprite = 
 		 */
-		goldcost = 1500;
-		woodcost = 10;
-		stonecost = 5;
+		goldcost = 7500;
+		woodcost = 20;
+		stonecost = 20;
 	}
 }

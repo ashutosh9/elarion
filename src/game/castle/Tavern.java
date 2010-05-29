@@ -11,8 +11,8 @@ public class Tavern extends CastleBuilding {
 		 * h =
 		 * sprite = 
 		 */
-		goldcost = 1500;
-		woodcost = 10;
+		goldcost = 1000;
+		woodcost = 5;
 		stonecost = 5;
 	}
 }

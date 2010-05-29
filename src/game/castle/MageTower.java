@@ -11,8 +11,8 @@ public class MageTower extends CastleBuilding {
 		 * h =
 		 * sprite = 
 		 */
-		goldcost = 1500;
-		woodcost = 10;
-		stonecost = 5;
+		goldcost = 3000;
+		woodcost = 15;
+		stonecost = 15;
 	}
 }

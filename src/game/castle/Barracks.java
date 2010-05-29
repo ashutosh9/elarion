@@ -11,8 +11,8 @@ public class Barracks extends CastleBuilding {
 		 * h =
 		 * sprite = 
 		 */
-		goldcost = 1500;
-		woodcost = 10;
-		stonecost = 5;
+		goldcost = 2000;
+		woodcost = 5;
+		stonecost = 10;
 	}
 }
