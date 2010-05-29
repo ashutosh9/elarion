@@ -13,7 +13,6 @@ public class Player {
 	private String name;
 	private ArrayList<Hero> heroes = new ArrayList<Hero>();
 	private ArrayList<Hero> deadHeroes = new ArrayList<Hero>();
-	@SuppressWarnings("unused")
 	private ArrayList<Castle> castles = new ArrayList<Castle>();
 	private Resource gold = new Resource("gold",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\gold.png"));
 	private Resource stone = new Resource("stone",0,0,Toolkit.getDefaultToolkit().getImage("game\\images\\resource\\stone.png"));
@@ -45,8 +44,8 @@ public class Player {
 	}
 	
 	public Castle getCastle(Castle c) {
-		if(castles.contains(h)){
-			int i = castles.indexOf(h);
+		if(castles.contains(c)){
+			int i = castles.indexOf(c);
 			return castles.get(i);
 		}
 		return null;
