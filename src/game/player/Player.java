@@ -38,6 +38,26 @@ public class Player {
 		currentPlayer = false;
 	}
 	
+	public void newCastle(Castle c,int x,int y,Field field) {
+		castles.add(c);
+		c.setOwner(this);
+		c.setCastleLocation(x, y, field);
+	}
+	
+	public Castle getCastle(Castle c) {
+		if(castles.contains(h)){
+			int i = castles.indexOf(h);
+			return castles.get(i);
+		}
+		return null;
+	}
+	
+	public void removeCastle(Castle c){
+		if(castles.contains(c)){
+			castles.remove(c);
+		}
+	}
+	
 	public void newHero(Hero h,int x,int y,Field field) {
 		heroes.add(h);
 		h.setOwner(this);
