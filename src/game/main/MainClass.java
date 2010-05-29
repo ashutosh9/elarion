@@ -507,6 +507,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 	}
 	
+	public Point getMouseX(){
+		return mousePos;
+	}
+	
 	public void mouseChecker(){
 		if(mousePos.getX()<10){
 			
