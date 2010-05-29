@@ -358,6 +358,10 @@ public class Hero extends Unit {
 		return null;
 	}
 
+	public int getUnitSize() {
+		return units.size();
+	}
+	
 	public void setIcon(Image icon) {
 		this.icon = icon;
 	}

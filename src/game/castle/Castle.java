@@ -16,6 +16,8 @@ public class Castle {
 	private int y; 
 	private Player owner;
 	private Square currentSquare;
+	private Square garrisonSquare;
+	private Square swapSquare;
 	private Sprite currentSprite;
 	private Sprite background;
 	private boolean selected;
@@ -28,11 +30,14 @@ public class Castle {
 	private static MageTower magetower;
 	private static Market market;
 	private static Tavern tavern;
+	private Garrison garrison;
 	
+
 	public Castle () {
 		x = 1;
 		y = 1;
 		selected = false;
+		garrison = new Garrison(this);
 		//Builds the structure objects
 		keep = new Keep(this);
 		townhall = new TownHall(this);
@@ -65,16 +70,52 @@ public class Castle {
 
 	public void setCurrentSquare(Square s) {
 		currentSquare = s;
+		garrisonSquare.setX(s.getX());
+		garrisonSquare.setY(s.getY()-1);
 	}
 
+	public Square getGarrisonSquare() {
+			return garrisonSquare;
+	}
+	
+	public void setGarrisonSquare(Square s) {
+		garrisonSquare = s;
+	}
+	
+	public Square getSwapSquare() {
+		return swapSquare;
+	}
+
+	public void setSwapSquare(Square s) {
+		swapSquare = s;
+	}
+	
 	public void setCastleLocation(int x, int y,Field f){
 		if(this==f.getSquare(this.x, this.y).getCastle()){
 			f.getSquare(this.x, this.y).setCastle(null);
+			f.getSquare(this.x-1, this.y).setPassable(true);
+			f.getSquare(this.x-1, this.y-1).setPassable(true);
+			f.getSquare(this.x-1, this.y-2).setPassable(true);
 			f.getSquare(this.x, this.y).setPassable(true);
+			f.getSquare(this.x, this.y-1).setPassable(true);
+			f.getSquare(this.x, this.y-2).setPassable(true);
+			f.getSquare(this.x+1, this.y).setPassable(true);
+			f.getSquare(this.x+1, this.y-1).setPassable(true);
+			f.getSquare(this.x+1, this.y-2).setPassable(true);
 		}
 		setCurrentSquare(f.getSquare(x, y));
+		setGarrisonSquare(f.getSquare(x, y-1));
+		setSwapSquare(f.getSquare(x-1,y-1));
 		f.getSquare(x, y).setCastle(this);
-		f.getSquare(x, y).setPassable(false);
+		f.getSquare(this.x-1, this.y).setPassable(false);
+		f.getSquare(this.x-1, this.y-1).setPassable(false);
+		f.getSquare(this.x-1, this.y-2).setPassable(false);
+		f.getSquare(this.x, this.y).setPassable(true);
+		f.getSquare(this.x, this.y-1).setPassable(false);
+		f.getSquare(this.x, this.y-2).setPassable(false);
+		f.getSquare(this.x+1, this.y).setPassable(false);
+		f.getSquare(this.x+1, this.y-1).setPassable(false);
+		f.getSquare(this.x+1, this.y-2).setPassable(false);
 	}
 
 	public void turnUpdate() {
@@ -104,6 +145,25 @@ public class Castle {
 	public void Destroy(int i) {
 		if (buildings.get(i) != null && buildings.get(i).isBuilt()) {
 			buildings.get(i).modBuilt(false);
+		}
+	}
+
+	public void swapGarrison() {
+		if (!((garrisonSquare.getHero() == null) && (currentSquare.getHero() == null))) {
+			if ((garrisonSquare.getHero() == null) && (currentSquare.getHero() != null)) {
+				if(garrison.getSize()<=(8-currentSquare.getHero().getUnitSize())) {
+					for (int i=0;i<8;i++) {
+						if (garrison.getUnit(i) != null) {
+							currentSquare.getHero().addUnit(garrison.getUnit(i));
+						}
+					}
+					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
+				}
+				currentSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), this.field);
+				garrisonSquare.getHero().setHeroLocation(currentSquare.getX(), currentSquare.getY(), this.field);
+				swapSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
+				
+			}
 		}
 	}
 }

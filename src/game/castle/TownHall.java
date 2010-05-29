@@ -11,8 +11,8 @@ public class TownHall extends CastleBuilding {
 		 * h =
 		 * sprite = 
 		 */
-		goldcost = 1500;
-		woodcost = 10;
-		stonecost = 5;
+		goldcost = 0;
+		woodcost = 0;
+		stonecost = 0;
 	}
 }
