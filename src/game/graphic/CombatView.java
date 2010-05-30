@@ -1,6 +1,7 @@
 package game.graphic;
 
 import game.battle.BattleField;
+import game.core.BattleSystem;
 import game.field.Square;
 import game.player.Player;
 import game.unit.Hero;
@@ -10,6 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CombatView {
@@ -20,6 +22,7 @@ public class CombatView {
 	public Hero defender;
 //	public Square square;
 	public BattleField bf;
+	public BattleSystem bs;
 
 	public CombatView(){
 		combat = true;
@@ -140,6 +143,8 @@ public class CombatView {
 	public void setCombat(boolean combat) {
 		this.combat = combat;
 	}
-
 	
+	public void MouseClicked(MouseEvent e){
+		
+	}
 }

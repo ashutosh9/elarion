@@ -11,6 +11,10 @@ public class Unit {
 	private int combatHeading;
 	//1 == right
 	//2 == left
+	private boolean inTurn;
+	private double currIn;
+	private double direction;
+	// 1 = right 2 = left 3 = up 4 = down 5 = right up 6 right down 7 left up 8 left down
 	
 	// stats stuff effects spells level xp ranks hp mp skills etc
 	// stand animation images for heading left
@@ -22,7 +26,10 @@ public class Unit {
 		setExperiance(0);
 		setLevel(1);
 		setType("");
+		setInTurn(false);
 		combatStats.getCombatPos().setLocation(16, 8);
+		
+		
 	}
 
 	public void setType(String type) {
@@ -72,5 +79,34 @@ public class Unit {
 	public int getCombatHeading() {
 		return combatHeading;
 	}
+
+	public void setInTurn(boolean inTurn) {
+		this.inTurn = inTurn;
+	}
+
+	public boolean isInTurn() {
+		return inTurn;
+	}
+
+	public void setCurrIn(double currIn) {
+		this.currIn = currIn;
+	}
+
+	public double getCurrIn() {
+		return currIn;
+	}
+
+	public void setDirection(double direction) {
+		this.direction = direction;
+	}
+
+	public double getDirection() {
+		return direction;
+	}
 	
+	public void moveOneTile(){
+		if(direction == 1){
+			sprite=graphicalData.getbFArcherMoveRight()
+		}
+	}
 }
