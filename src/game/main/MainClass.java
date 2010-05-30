@@ -466,7 +466,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public void endedTurn(){
 		players.nextPlayer();
-		turnSystem.nextTurn(players);
+		turnSystem.nextTurn(players,field);
 	}
 	
 	public Player getCurrentPlayer() {
