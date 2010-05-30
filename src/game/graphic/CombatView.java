@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 public class CombatView {
 	
@@ -34,6 +35,7 @@ public class CombatView {
 		for(Unit u : attacker.getUnits()){
 			long x = Math.round(u.getCombatStats().getCombatPos().getX());
 			long y = Math.round(u.getCombatStats().getCombatPos().getY());
+			//long in = Math.round(u.getCombatStats().getInitiative());
 			
 			for(int i=0;i<2;i++){
 				for(int j=0;j<9;j++){
@@ -58,11 +60,13 @@ public class CombatView {
 				}
 			}
 			
+			
 		}
 		
 		for(Unit u : defender.getUnits()){
 			long x = Math.round(u.getCombatStats().getCombatPos().getX());
 			long y = Math.round(u.getCombatStats().getCombatPos().getY());
+			//long in = Math.round(u.getCombatStats().getInitiative());
 			
 			for(int i=15;i>13;i--){
 				for(int j=0;j<9;j++){
@@ -91,7 +95,11 @@ public class CombatView {
 					}
 				}
 			}
+			
+			
 		}
+		
+		
 	}
 	
 	
