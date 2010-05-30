@@ -28,33 +28,37 @@ public class GraphicalData {
 	private Animation wMMDownLeftStand;
 	
 	// make setter and getter
-	private Animation bFArcherMoveLeft;
-	private Animation bFArcherMoveRight;
-	private Animation bFSwordmanMoveLeft;
-	private Animation bFSwordmanMoveRight;
-	private Animation bFMageMoveLeft;
-	private Animation bFMageMoveRight;
-	private Animation bFArcherStandLeft;
-	private Animation bFArcherStandRight;
-	private Animation bFSwordmanStandLeft;
-	private Animation bFSwordmanStandRight;
-	private Animation bFMageStandLeft;
-	private Animation bFMageStandRight;
-	private Animation bFArcherDieLeft;
-	private Animation bFArcherDieRight;
-	private Animation bFSwordmanDieLeft;
-	private Animation bFSwordmanDieRight;
-	private Animation bFMageDieLeft;
-	private Animation bFMageDieRight;
-	private Animation bFArcherAttackLeft;
-	private Animation bFArcherAttackRight;
-	private Animation bFSwordmanAttackLeft;
-	private Animation bFSwordmanAttackRight;
-	private Animation bFMageAttackLeft;
-	private Animation bFMageAttackRight;
-	private Animation bFMageCastLeft;
-	private Animation bFMAgeCastRight;
-	
+//	private Animation BattleFieldMoveRight;
+//	private Animation BattleFieldMoveLeft;
+	private Animation BattleFieldStandRight;
+	private Animation BattleFieldStandLeft;
+	private Animation BfArcherMoveRight;
+	private Animation BfArcherMoveLeft;
+//	private Animation bFSwordmanMoveLeft;
+//	private Animation bFSwordmanMoveRight;
+//	private Animation bFMageMoveLeft;
+//	private Animation bFMageMoveRight;
+//	private Animation bFArcherStandLeft;
+//	private Animation bFArcherStandRight;
+//	private Animation bFSwordmanStandLeft;
+//	private Animation bFSwordmanStandRight;
+//	private Animation bFMageStandLeft;
+//	private Animation bFMageStandRight;
+//	private Animation bFArcherDieLeft;
+//	private Animation bFArcherDieRight;
+//	private Animation bFSwordmanDieLeft;
+//	private Animation bFSwordmanDieRight;
+//	private Animation bFMageDieLeft;
+//	private Animation bFMageDieRight;
+//	private Animation bFArcherAttackLeft;
+//	private Animation bFArcherAttackRight;
+//	private Animation bFSwordmanAttackLeft;
+//	private Animation bFSwordmanAttackRight;
+//	private Animation bFMageAttackLeft;
+//	private Animation bFMageAttackRight;
+//	private Animation bFMageCastLeft;
+//	private Animation bFMAgeCastRight; 
+//	
 	private ArrayList<Animation> graphicalData = new ArrayList<Animation>();
 	
 	public GraphicalData() {
@@ -446,6 +450,53 @@ public class GraphicalData {
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/units/human/hero/world/southeast/0171.png");
 		wMMDownRightStand.addScene(buffer, timeForScene);
 		
+		
+		BfArcherMoveRight = new Animation();
+		
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0006.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0007.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0008.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0009.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0010.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0011.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0012.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0013.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0014.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0015.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0016.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0017.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0018.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0019.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0020.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0021.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0022.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0023.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0024.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0025.png");
+		BfArcherMoveRight.addScene(buffer, timeForScene);
+		
+		
+		
+		
 		getGraphicalData();
 		
 	}
@@ -607,10 +658,30 @@ public class GraphicalData {
 		if(wMMUpLeft!=null){
 			graphicalData.add(wMMUpLeft);
 		}	
-		
-		
+		if(BfArcherMoveRight!=null){
+			graphicalData.add(BfArcherMoveLeft);
+		}
+		if(BfArcherMoveRight!=null){
+			graphicalData.add(BfArcherMoveRight);
+		}
 			
 		return graphicalData;		
+	}
+
+	public void setBattleFieldStandRight(Animation battleFieldStandRight) {
+		BattleFieldStandRight = battleFieldStandRight;
+	}
+
+	public Animation getBattleFieldStandRight() {
+		return BattleFieldStandRight;
+	}
+
+	public void setBattleFieldStandLeft(Animation battleFieldStandLeft) {
+		BattleFieldStandLeft = battleFieldStandLeft;
+	}
+
+	public Animation getBattleFieldStandLeft() {
+		return BattleFieldStandLeft;
 	}
 	
 }
