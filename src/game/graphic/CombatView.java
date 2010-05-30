@@ -33,7 +33,7 @@ public class CombatView {
 		
 		for(Unit u : attacker.getUnits()){
 			long x = Math.round(u.getCombatStats().getCombatPos().getX());
-			//int y = (int) Math.round(u.getCombatStats().getCombatPos().getY());
+			long y = Math.round(u.getCombatStats().getCombatPos().getY());
 			
 			for(int i=0;i<2;i++){
 				for(int j=0;j<9;j++){
@@ -44,7 +44,7 @@ public class CombatView {
 					}
 				}
 			}
-			if(x == 8) {
+			if(x == 16 && y == 8) {
 				boolean set=false;
 				for(int i=0;i<2;i++){
 					for(int j=0;j<9;j++){
@@ -62,7 +62,7 @@ public class CombatView {
 		
 		for(Unit u : defender.getUnits()){
 			long x = Math.round(u.getCombatStats().getCombatPos().getX());
-			//int y = (int) Math.round(u.getCombatStats().getCombatPos().getY());
+			long y = Math.round(u.getCombatStats().getCombatPos().getY());
 			
 			for(int i=15;i>13;i--){
 				for(int j=0;j<9;j++){
@@ -74,7 +74,7 @@ public class CombatView {
 				}
 			}
 			
-			if(x == 8) {
+			if(x == 16 && y == 8) {
 				for(int i=15;i>13;i--){
 					boolean set=false;
 					for(int j=0;j<9;j++){

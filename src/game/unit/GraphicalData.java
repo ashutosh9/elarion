@@ -27,16 +27,33 @@ public class GraphicalData {
 	private Animation wMMDownRightStand;
 	private Animation wMMDownLeftStand;
 	
-	private Animation bFMovementLeft;
-	private Animation bFMovementRight;
-	private Animation bFStandLeft;
-	private Animation bFStandRight;
-	private Animation bFDieLeft;
-	private Animation bFDieRight;
-	private Animation bFAttackLeft;
-	private Animation bFAttackRight;
-	private Animation bFCastLeft;
-	private Animation bFCastRight;
+	// make setter and getter
+	private Animation bFArcherMoveLeft;
+	private Animation bFArcherMoveRight;
+	private Animation bFSwordmanMoveLeft;
+	private Animation bFSwordmanMoveRight;
+	private Animation bFMageMoveLeft;
+	private Animation bFMageMoveRight;
+	private Animation bFArcherStandLeft;
+	private Animation bFArcherStandRight;
+	private Animation bFSwordmanStandLeft;
+	private Animation bFSwordmanStandRight;
+	private Animation bFMageStandLeft;
+	private Animation bFMageStandRight;
+	private Animation bFArcherDieLeft;
+	private Animation bFArcherDieRight;
+	private Animation bFSwordmanDieLeft;
+	private Animation bFSwordmanDieRight;
+	private Animation bFMageDieLeft;
+	private Animation bFMageDieRight;
+	private Animation bFArcherAttackLeft;
+	private Animation bFArcherAttackRight;
+	private Animation bFSwordmanAttackLeft;
+	private Animation bFSwordmanAttackRight;
+	private Animation bFMageAttackLeft;
+	private Animation bFMageAttackRight;
+	private Animation bFMageCastLeft;
+	private Animation bFMAgeCastRight;
 	
 	private ArrayList<Animation> graphicalData = new ArrayList<Animation>();
 	
@@ -561,85 +578,7 @@ public class GraphicalData {
 		this.wMMDownLeftStand = wMMDownLeftStand;
 	}
 
-	public void setBattleFieldMovementLeft(Animation bFMovementLeft) {
-		this.bFMovementLeft = bFMovementLeft;
-	}
 	
-	public Animation getBattleFieldMovementLeft() {
-		return bFMovementLeft;
-	}
-	
-	public void setBattleFieldMovementRight(Animation bFMovementRight) {
-		this.bFMovementRight = bFMovementRight;
-	}
-	
-	public Animation getBattleFieldMovementRight() {
-		return bFMovementRight;
-	}
-	
-	public void setBattleFieldStandLeft(Animation bFStandLeft) {
-		this.bFStandLeft = bFStandLeft;
-	}
-	
-	public Animation getBattleFieldStandLeft() {
-		return bFStandLeft;
-	}
-	
-	public void setBattleFieldStandRight(Animation bFStandRight) {
-		this.bFStandRight = bFStandRight;
-	}
-	
-	public Animation getBattleFieldStandRight() {
-		return bFStandRight;
-	}
-	
-	public void setBattleFieldDieLeft(Animation bFDieLeft) {
-		this.bFDieLeft = bFDieLeft;
-	}
-	
-	public Animation getBattleFieldDieLeft() {
-		return bFDieLeft;
-	}
-	
-	public void setBattleFieldDieRight(Animation bFDieRight) {
-		this.bFDieRight = bFDieRight;
-	}
-	
-	public Animation getBattleFieldDieRight() {
-		return bFDieRight;
-	}
-	
-	public void setBattleFieldAttackLeft(Animation bFAttackLeft) {
-		this.bFAttackLeft = bFAttackLeft;
-	}
-	
-	public Animation getBattleFieldAttackLeft() {
-		return bFAttackLeft;
-	}
-	
-	public void setBattleFieldAttackRight(Animation bFAttackRight) {
-		this.bFAttackRight = bFAttackRight;
-	}
-	
-	public Animation getBattleFieldAttackRight() {
-		return bFAttackRight;
-	}
-	
-	public void setBattleFieldCastLeft(Animation bFCastLeft) {
-		this.bFCastLeft = bFCastLeft;
-	}
-	
-	public Animation getBattleFieldCastLeft() {
-		return bFCastLeft;
-	}
-	
-	public void setBattleFieldCastRight(Animation bFCastRight) {
-		this.bFCastRight = bFCastRight;
-	}
-	
-	public Animation getBattleFieldCastRight() {
-		return bFCastRight;
-	}
 	
 	public ArrayList<Animation> getGraphicalData(){
 		
@@ -670,37 +609,7 @@ public class GraphicalData {
 		}	
 		
 		
-		if(bFAttackLeft!=null){
-			graphicalData.add(bFAttackLeft);
-		}	
-		if(bFAttackRight!=null){
-			graphicalData.add(bFAttackRight);
-		}
-		if(bFCastLeft!=null){
-			graphicalData.add(bFCastLeft);
-		}
-		if(bFCastRight!=null){
-			graphicalData.add(bFCastRight);
-		}
-		if(bFDieLeft!=null){
-			graphicalData.add(bFDieLeft);
-		}
-		if(bFDieRight!=null){
-			graphicalData.add(bFDieRight);
-		}
-		if(bFMovementLeft!=null){
-			graphicalData.add(bFMovementLeft);
-		}
-		if(bFMovementRight!=null){
-			graphicalData.add(bFMovementRight);
-		}
-		if(bFStandLeft!=null){
-			graphicalData.add(bFStandLeft);
-		}
-		if(bFStandRight!=null){
-			graphicalData.add(bFStandRight);
-		}
-		
+			
 		return graphicalData;		
 	}
 	
