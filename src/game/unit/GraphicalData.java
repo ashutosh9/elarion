@@ -32,8 +32,8 @@ public class GraphicalData {
 //	private Animation BattleFieldMoveLeft;
 	private Animation BattleFieldStandRight;
 	private Animation BattleFieldStandLeft;
-	private Animation BfArcherMoveRight;
-	private Animation BfArcherMoveLeft;
+	private Animation bFArcherMoveRight;
+	private Animation bFArcherMoveLeft;
 //	private Animation bFSwordmanMoveLeft;
 //	private Animation bFSwordmanMoveRight;
 //	private Animation bFMageMoveLeft;
@@ -451,48 +451,49 @@ public class GraphicalData {
 		wMMDownRightStand.addScene(buffer, timeForScene);
 		
 		
-		BfArcherMoveRight = new Animation();
+		bFArcherMoveRight = new Animation();
 		
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0006.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0007.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0008.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0009.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0010.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0011.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0012.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0013.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0014.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0015.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0016.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0017.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0018.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0019.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0020.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0021.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0022.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0023.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0024.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
 		buffer = Toolkit.getDefaultToolkit().getImage("Images/bf/archer/move/right/0025.png");
-		BfArcherMoveRight.addScene(buffer, timeForScene);
+		bFArcherMoveRight.addScene(buffer, timeForScene);
+		
 		
 		
 		
@@ -658,11 +659,11 @@ public class GraphicalData {
 		if(wMMUpLeft!=null){
 			graphicalData.add(wMMUpLeft);
 		}	
-		if(BfArcherMoveRight!=null){
-			graphicalData.add(BfArcherMoveLeft);
+		if(bFArcherMoveRight!=null){
+			graphicalData.add(bFArcherMoveLeft);
 		}
-		if(BfArcherMoveRight!=null){
-			graphicalData.add(BfArcherMoveRight);
+		if(bFArcherMoveRight!=null){
+			graphicalData.add(bFArcherMoveRight);
 		}
 			
 		return graphicalData;		
