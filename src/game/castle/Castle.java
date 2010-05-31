@@ -2,10 +2,12 @@ package game.castle;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import game.field.Field;
 import game.field.Square;
+import game.graphic.CastleView;
 import game.main.Sprite;
 import game.player.Player;
 import game.unit.Hero;
@@ -196,5 +198,9 @@ public class Castle {
 				
 			}
 		}
+	}
+	
+	public void handleInput (MouseEvent mouseInput, CastleView castleView) {
+		
 	}
 }
