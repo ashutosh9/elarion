@@ -14,7 +14,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class CombatView {
+public class CombatView {		//unfinished
 	
 	public Player playerInControl;
 	public boolean combat;
@@ -34,6 +34,7 @@ public class CombatView {
 		this.defender = defender;
 		combat = true;
 		bf = new BattleField();
+		
 		
 //		for(Unit u : attacker.getUnits()){
 //			long x = Math.round(u.getCombatStats().getCombatPos().getX());

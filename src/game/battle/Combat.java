@@ -12,7 +12,10 @@ public class Combat {
 		
 		for(Unit u : attacker.getUnits()){
 		
-	}
+		}
+		for(Unit u : defender.getUnits()){
+			
+		}
 	
 	}
 }
