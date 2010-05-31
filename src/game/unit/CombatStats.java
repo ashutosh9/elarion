@@ -6,7 +6,7 @@ public class CombatStats {
 
 	private double strenght; //defines damage and 0.5x defense
 	private double agility;  // defines ranged damage
-	private double stamina;  // defines health and 0.5x defense
+	//private double stamina;  // defines health and 0.5x defense
 	private double intelligence; // defines mana and spell damage 
 	private double defense;
 	private double movementpoints;	// how many titles can the unit walk
@@ -16,6 +16,7 @@ public class CombatStats {
 	private double health;
 	private double mana;
 	private Point combatPos = new Point();
+	private double cP;
 	
 	public void setStrenght(double strenght) {
 		this.strenght = strenght;
@@ -33,13 +34,13 @@ public class CombatStats {
 		return agility;
 	}
 	
-	public void setStamina(double stamina) {
-		this.stamina = stamina;
-	}
-	
-	public double getStamina() {
-		return stamina;
-	}
+//	public void setStamina(double stamina) {
+//		this.stamina = stamina;
+//	}
+//	
+//	public double getStamina() {
+//		return stamina;
+//	}
 	
 	public void setIntelligence(double intelligence) {
 		this.intelligence = intelligence;
@@ -111,6 +112,14 @@ public class CombatStats {
 
 	public Point getCombatPos() {
 		return combatPos;
+	}
+
+	public void setcP(double cP) {
+		this.cP = cP;
+	}
+
+	public double getcP() {
+		return cP;
 	}
 	
 }

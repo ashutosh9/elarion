@@ -42,6 +42,7 @@ public class Hero extends Unit {
 	private Path path;
 	private int movementPoints;
 	// to include combat stats and graphical data as different classes
+	private double hPower;
 	
 	public Hero(){
 		x = 1;
@@ -396,6 +397,14 @@ public class Hero extends Unit {
 
 	public int getMovementPoints() {
 		return movementPoints;
+	}
+
+	public void sethPower(double hPower) {
+		this.hPower = hPower;
+	}
+
+	public double gethPower() {
+		return hPower;
 	}
 	
 	
