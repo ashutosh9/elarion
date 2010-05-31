@@ -15,6 +15,7 @@ public class Unit {
 	private double currIn;
 	private double direction;
 	// 1 = right 2 = left 3 = up 4 = down 5 = right up 6 right down 7 left up 8 left down
+	private double currHp;
 	
 	// stats stuff effects spells level xp ranks hp mp skills etc
 	// stand animation images for heading left
@@ -106,7 +107,15 @@ public class Unit {
 	
 	public void moveOneTile(){
 		if(direction == 1){
-			sprite=graphicalData.getbFArcherMoveRight()
+			
 		}
+	}
+
+	public void setCurrHp(double currHp) {
+		this.currHp = currHp;
+	}
+
+	public double getCurrHp() {
+		return currHp;
 	}
 }
