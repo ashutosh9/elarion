@@ -1,8 +1,11 @@
 package game.unit;
 
+import java.awt.Image;
+
 
 public class Unit {
 	
+	protected Image icon;
 	private String type;
 	private double level;
 	private double experiance;
@@ -118,4 +121,13 @@ public class Unit {
 	public double getCurrHp() {
 		return currHp;
 	}
+
+	public void setIcon(Image icon) {
+		this.icon = icon;
+	}
+
+	public Image getIcon() {
+		return icon;
+	}
+
 }

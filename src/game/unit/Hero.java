@@ -37,7 +37,6 @@ public class Hero extends Unit {
 	private Sprite currentSprite;
 	private GraphicalData graphicalData;
 	private Animation currentAnimation;
-	private Image icon;
 	private boolean selected;
 	private Path path;
 	private int movementPoints;
@@ -363,14 +362,6 @@ public class Hero extends Unit {
 		return units.size();
 	}
 	
-	public void setIcon(Image icon) {
-		this.icon = icon;
-	}
-
-	public Image getIcon() {
-		return icon;
-	}
-
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
