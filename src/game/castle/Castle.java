@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import game.field.Field;
 import game.field.Square;
 import game.graphic.CastleView;
-import game.main.Sprite;
 import game.player.Player;
 import game.unit.Hero;
 
@@ -149,6 +148,14 @@ public class Castle {
 		f.getSquare(this.x+1, this.y).setPassable(false);
 		f.getSquare(this.x+1, this.y-1).setPassable(false);
 		f.getSquare(this.x+1, this.y-2).setPassable(false);
+	}
+
+	public boolean getSelected() {
+		return selected;
+	}
+	
+	public void setSelected (boolean selected) {
+		this.selected = selected;
 	}
 
 	public void turnUpdate() {
