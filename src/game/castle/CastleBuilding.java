@@ -1,18 +1,26 @@
 package game.castle;
 
-import game.main.Sprite;
+import java.awt.Image;
 
 public class CastleBuilding {
-	protected Castle owner;
-	protected boolean built;
+	protected Image image;
 	protected int x;
 	protected int y;
 	protected int w;//width
 	protected int h;//height
+	protected Castle owner;
+	protected boolean built;
 	protected int goldcost;
 	protected int woodcost;
 	protected int stonecost;
-	protected Sprite currentSprite;
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 	
 	public CastleBuilding (Castle owner) {
 		built = false;

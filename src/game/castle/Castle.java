@@ -18,8 +18,8 @@ public class Castle {
 	private Square currentSquare;
 	private Square garrisonSquare;
 	private Square swapSquare;
-	private Sprite currentSprite;
-	private Sprite background;
+	private Image currentSprite;
+	private Image background;
 	private boolean selected;
 	private Image icon;
 	private Field field;
@@ -31,7 +31,6 @@ public class Castle {
 	private static Market market;
 	private static Tavern tavern;
 	private Garrison garrison;
-	
 
 	public Castle () {
 		x = 1;
@@ -54,6 +53,38 @@ public class Castle {
 		buildings.add(magetower);
 		buildings.add(market);
 		buildings.add(tavern);
+	}
+
+	public ArrayList<CastleBuilding> getBuildings() {
+		return buildings;
+	}
+	
+	public CastleBuilding getBuilding(int i) {
+		return buildings.get(i);
+	}
+	
+	public Image getIcon() {
+		return icon;
+	}
+	
+	public void setIcon(Image icon) {
+		this.icon = icon;
+	}
+	
+	public Image getImage() {
+		return currentSprite;
+	}
+	
+	public void setImage(Image image) {
+		this.currentSprite = image;
+	}
+	
+	public Image getBackground() {
+			return background;
+	}
+	
+	public void setBackground(Image background) {
+		this.background = background;
 	}
 	
 	public Player getOwner() {
