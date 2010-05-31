@@ -11,6 +11,7 @@ package game.graphic;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import game.castle.Castle;
@@ -21,16 +22,19 @@ import game.player.Players;
 import game.unit.Hero;
 
 public class CastleView {
-
+	
 	private Castle castle; // index of castle in ArrayList<Castle> in player class
 	private boolean inCastle; // ako e true - se risuva CastleView ako ne e true ne se risuva
 	private MainClass mc;
 	private int menuBuilding;
+	private Image menuFrame;
 	
 	public CastleView (int castle, MainClass mc) {
 		setInCastle(true);
 		this.castle = mc.getCurrentPlayer().getCastles().get(castle);
 		menuBuilding = 0;
+		menuFrame = Toolkit.getDefaultToolkit().getImage("Images/Castle/Frame.png");
+	
 	}
 	
 	public void update(long timePassed){
@@ -52,7 +56,11 @@ public class CastleView {
 		 * Hero/unit icons - 36x36px with 40x40px borders
 		 */
 		// Draw menu
+		g.drawImage(menuFrame,1,1,null);
+		g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),901,11,null);
+		g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
 		
+		/*
 		/*
 		//for( Building b : castle.getbuildings
 		g.setColor(new Color(244));
