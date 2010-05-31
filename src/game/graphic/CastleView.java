@@ -28,19 +28,17 @@ public class CastleView {
 	private MainClass mc;
 	private int menuBuilding;
 	private Image menuFrame;
+	private MouseEvent mouseInput;
 	
 	public CastleView (int castle, MainClass mc) {
 		setInCastle(true);
 		this.castle = mc.getCurrentPlayer().getCastles().get(castle);
-		menuBuilding = 0;
+		menuBuilding = -1;
 		menuFrame = Toolkit.getDefaultToolkit().getImage("Images/Castle/Frame.png");
 	
 	}
 	
 	public void update(long timePassed){
-		//ako ima animacii
-		//za vsqka
-		//a.update(timePassed);
 	}
 	
 	public void draw(Graphics g){
@@ -52,23 +50,28 @@ public class CastleView {
 				g.drawImage(current.getImage(),current.getX(),current.getY(),null);
 			}
 		}
-		/* MENU INFO
-		 * Hero/unit icons - 36x36px with 40x40px borders
-		 */
-		// Draw menu
+		// Hero/unit icons - 36x36px with 40x40px borders
 		g.drawImage(menuFrame,1,1,null);
+		//draw resource bars
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
+		g.drawString("Gold: " + castle.getOwner().getGold().getAmount(),30,65);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
+		g.drawString("Wood: " + castle.getOwner().getWood().getAmount(),30,90);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
+		g.drawString("Stone: " + castle.getOwner().getStone().getAmount(),30,115);
+		//draw hero/unit icons
 		g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),901,11,null);
 		g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
-		
-		/*
-		/*
-		//for( Building b : castle.getbuildings
-		g.setColor(new Color(244));
-		g.fillRect(0, 0, 1600, 1000);
-		//vurti6 cikul za vsqka postroika - ako e postroena - q risuva6
-		//g.draw(img, x , y , null)  null e za observeri kvito ne polzvame
-		//otdelno risuva6 i butoni i si4ko
-		*/
+		for (int i=0;i<8;i++) {
+			g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),13+(i*40),null);
+			g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),63+(i*40),null);
+		}
+		//draw sub menus/handle input
+		if (menuBuilding==-1) {
+			castle.getBuilding(menuBuilding).drawMenu(g,mouseInput,this);
+		} else if (mouseInput != null) {
+			castle.handleInput(mouseInput,this);
+		}
 	}
 
 	public void setInCastle(boolean isInCastle) {
@@ -78,10 +81,9 @@ public class CastleView {
 	public boolean isInCastle() {
 		return inCastle;
 	}
-	
+
 	public void mouseClicked(MouseEvent e){
-		//tuka pi6e6 klasut za mi6kata - za da dokopa6 kude to4no e - mc.getMousePos() i ot tam iz4islqva6 dali e vurhu postroika ili vurhu buton 
-		//ako e na takova mqsto pi6e6 kakvo stava ako se klikne
+		mouseInput = e;
 	}
 	
 	

@@ -1,6 +1,10 @@
 package game.castle;
 
+import game.graphic.CastleView;
+
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 
 public class CastleBuilding {
 	protected Image image;
@@ -86,5 +90,7 @@ public class CastleBuilding {
 	
 	public void setstone(int stonecost) {
 		this.stonecost = stonecost;
+	}
+	public void drawMenu(Graphics g, MouseEvent mouseInput, CastleView castleView) {	
 	}
 }
