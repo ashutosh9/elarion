@@ -1,5 +1,6 @@
 package game.battle;
 
+import java.awt.Graphics;
 import java.awt.Toolkit;
 
 import game.unit.Hero;
@@ -75,11 +76,14 @@ public class Combat {
 			defender.sethPower(defender.gethPower()+u.getCombatStats().getcP());
 		}
 		
-//		if(attacker.gethPower() > defender.gethPower()){
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/Combat/AttackerWin.png"),500,300,null);
-//		}else{
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("Image/Combat/DefenderWin.png"),500,300,null);
-//		}
 	
+	}
+	
+	public void draw(Graphics g){
+		if(attacker.gethPower() > defender.gethPower()){
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/Combat/AttackerWin.png"),500,300,null);
+		}else{
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Image/Combat/DefenderWin.png"),500,300,null);
+		}
 	}
 }
