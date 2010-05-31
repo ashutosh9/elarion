@@ -175,7 +175,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 		}
 		
-		combatView.update(timePassed);
+		//combatView.update(timePassed);
 		
 		//a.update(timePassed);
 		//sprite.update(timePassed);
@@ -191,12 +191,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		/* METHOD :: g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null); */
 		//get square get building - if animations[] contains building.getanimation draw(animations.getbuildinganim.getImage()...) 
 		// else draw a single image
-		if(combatView.isCombat()){
-			combatView.draw(g);
-		}
+//		if(combatView.isCombat()){
+//			combatView.draw(g);
+//		}
 		//combatView.setCombat(false);
 		
-		if(!combatView.isCombat()) {
+		//if(!combatView.isCombat()) {
+		if(true){
+		
 			if(players.getCurrentPlayer().getSelectedHero() != null){
 				if(players.getCurrentPlayer().getSelectedHero().isMoving()){
 					movingHeroChecker();
