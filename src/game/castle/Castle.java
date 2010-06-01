@@ -208,6 +208,8 @@ public class Castle {
 	}
 	
 	public void handleInput (MouseEvent mouseInput, CastleView castleView) {
-		
+		for (int i=0;i<8;i++) {
+		if (mouseInput.getPoint().getX() == )
+		}
 	}
 }

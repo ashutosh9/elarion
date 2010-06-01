@@ -11,6 +11,7 @@ package game.graphic;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class CastleView {
 	private int menuBuilding;
 	private Image menuFrame;
 	private MouseEvent mouseInput;
+	private int selectedIndex;
 	
 	public CastleView (int castle, MainClass mc) {
 		setInCastle(true);
@@ -63,8 +65,10 @@ public class CastleView {
 		g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),901,11,null);
 		g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
 		for (int i=0;i<8;i++) {
-			g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),13+(i*40),null);
-			g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),63+(i*40),null);
+			if (castle.getGarrisonSquare().getHero().getUnits().get(i) != null) {
+			g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),13+(i*40),null); }
+			if (castle.getCurrentSquare().getHero().getUnits().get(i) != null) {
+			g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),63+(i*40),null); }
 		}
 		//draw sub menus/handle input
 		if (menuBuilding==-1) {
@@ -86,6 +90,20 @@ public class CastleView {
 		mouseInput = e;
 	}
 	
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+	
+	public void setSelectedIndes(int index) {
+		selectedIndex = index;	
+	}
+	
+	public boolean withinBounds(Point p,int x,int y,int w,int h) {
+		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 }
