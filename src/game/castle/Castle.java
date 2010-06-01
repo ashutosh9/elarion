@@ -10,6 +10,7 @@ import game.field.Square;
 import game.graphic.CastleView;
 import game.player.Player;
 import game.unit.Hero;
+import game.main.MainClass;
 
 public class Castle {
 	private ArrayList<CastleBuilding> buildings = new ArrayList<CastleBuilding>();
@@ -208,8 +209,11 @@ public class Castle {
 	}
 	
 	public void handleInput (MouseEvent mouseInput, CastleView castleView) {
-		for (int i=0;i<8;i++) {
-		if (mouseInput.getPoint().getX() == )
-		}
+		if (mouseInput.getButton() != mouseInput.)
+			for (int i=0;i<8;i++) {
+				if (withinBounds(mouseInput.getLocationOnScreen(),)) {
+			
+				}
+			}
 	}
 }
