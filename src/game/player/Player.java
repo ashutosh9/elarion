@@ -37,10 +37,9 @@ public class Player {
 		currentPlayer = false;
 	}
 	
-	public void newCastle(Castle c,int x,int y,Field field) {
-		castles.add(c);
+	public void newCastle(Castle c) {
 		c.setOwner(this);
-		c.setCastleLocation(x, y, field);
+		castles.add(c);
 	}
 	
 	public Castle getCastle(Castle c) {

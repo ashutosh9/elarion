@@ -6,8 +6,8 @@ public class TownHall extends CastleBuilding {
 
 	public TownHall(Castle owner) {
 		super(owner);
-		x = 504;
-		y = 0;
+		x = 0;
+		y = 504;
 		w = 609;
 		h = 205;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/TownHall.png");

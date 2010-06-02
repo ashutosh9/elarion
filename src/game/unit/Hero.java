@@ -398,6 +398,10 @@ public class Hero extends Unit {
 		return hPower;
 	}
 	
+	public void swapUnit(Hero other,int otherIndex, int thisIndex){
+		
+	}
+	
 	
 //	public getAnimations(){
 //		return race.getHeroAnimations;

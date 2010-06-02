@@ -14,5 +14,6 @@ public class Tavern extends CastleBuilding {
 		goldcost = 1000;
 		woodcost = 5;
 		stonecost = 5;
+		built = true;
 	}
 }

@@ -31,10 +31,13 @@ public class CastleView {
 	private Image menuFrame;
 	private MouseEvent mouseInput;
 	private int selectedIndex;
+	private int index;
 	
-	public CastleView (int castle, MainClass mc) {
+	public CastleView (Castle castle, MainClass mc) {
 		setInCastle(true);
-		this.castle = mc.getCurrentPlayer().getCastles().get(castle);
+		this.castle = castle;
+		//this.castle.setOwner(mc.getCurrentPlayer());
+		//this.castle = mc.getCurrentPlayer().getCastles().get(castle);
 		menuBuilding = -1;
 		menuFrame = Toolkit.getDefaultToolkit().getImage("Images/Castle/Frame.png");
 	
@@ -45,7 +48,8 @@ public class CastleView {
 	
 	public void draw(Graphics g){
 		// Draw background
-		g.drawImage(castle.getBackground(),1,1,null);
+		g.drawImage(castle.getBackground(),0,0,null);
+//		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png"), 0, 0, null);
 		// Draw individual buildings
 		for (CastleBuilding current : castle.getBuildings()) {
 			if (current.isBuilt()) {
@@ -55,30 +59,41 @@ public class CastleView {
 		// Hero/unit icons - 36x36px with 40x40px borders
 		g.drawImage(menuFrame,1,1,null);
 		//draw resource bars
+		//System.out.print(castle.getOwner().getGold().getAmount());
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
 		g.drawString("Gold: " + castle.getOwner().getGold().getAmount(),30,65);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
 		g.drawString("Wood: " + castle.getOwner().getWood().getAmount(),30,90);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
 		g.drawString("Stone: " + castle.getOwner().getStone().getAmount(),30,115);
-		//draw hero/unit icons
-		g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),901,11,null);
-		g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
-		for (int i=0;i<8;i++) {
-			if (castle.getGarrisonSquare().getHero() == null) {
-				if (castle.getGarrison().isEmpty()) {
-			} else if (castle.getGarrisonSquare().getHero().getUnits().get(i) != null) {
-						g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),13+(i*40),null); }
-			if (castle.getCurrentSquare().getHero().getUnits().get(i) != null) {
-				g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),63+(i*40),null); }
+//		//draw hero/unit icons
+		if(castle.getGarrisonSquare().getHero()!=null){
+			g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),901,11,null);
+			for (int i=0;i<8;i++) {
+				if (castle.getGarrisonSquare().getHero().getUnits().get(i) != null)
+					g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943 + (40*i),11,null);
 			}
-			//draw sub menus/handle input
-			if (menuBuilding==-1) {
-				castle.getBuilding(menuBuilding).drawMenu(g,mouseInput,this);
-			} else if (mouseInput != null) {
-				castle.handleInput(mouseInput,this);
+			
+		} else {
+			for (int i=0;i<8;i++) {
+				if (castle.getGarrison().getUnits().get(i) != null) {
+					g.drawImage(castle.getGarrison().getUnits().get(i).getIcon(),943 + (40*i),13,null);
+				}
 			}
 		}
+		if(castle.getCurrentSquare().getHero()!=null){
+			g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
+			for (int i=0;i<8;i++) {
+				if (castle.getCurrentSquare().getHero().getUnits().get(i) != null) {
+					g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943 + (40*i),53,null);
+				}
+			}
+		}
+		//draw sub menus/handle input
+		//if (menuBuilding != -1) {
+		//	castle.getBuilding(menuBuilding).drawMenu(g,this);
+		//} else if (mouseInput != null) {
+		//			castle.handleInput(this,mc);
 	}
 
 	public void setInCastle(boolean isInCastle) {

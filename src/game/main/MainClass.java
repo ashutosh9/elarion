@@ -2,10 +2,12 @@ package game.main;
 
 import game.Interface.Screen;
 import game.building.Building;
+import game.castle.Castle;
 import game.core.Path;
 import game.core.PathNode;
 import game.core.TurnSystem;
 import game.field.Field;
+import game.graphic.CastleView;
 import game.graphic.CombatView;
 import game.item.Item;
 import game.player.Player;
@@ -39,6 +41,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static Players players;
 	private Point mousePos = new Point(30,30);
 	private static TurnSystem turnSystem;
+	private boolean inCastle = false;
+	private CastleView castleView;
 	
 	
 	//for testing
@@ -197,7 +201,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//combatView.setCombat(false);
 		
 		//if(!combatView.isCombat()) {
-		if(true){
+		if(inCastle){
+			castleView.draw(g);
+		} else 
+		if(!inCastle){
 		
 			if(players.getCurrentPlayer().getSelectedHero() != null){
 				if(players.getCurrentPlayer().getSelectedHero().isMoving()){
@@ -509,10 +516,26 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 	}
 	
-	public Point getMouseX(){
+	public void setInCastle(boolean inCastle) {
+		this.inCastle = inCastle;
+	}
+
+	public boolean isInCastle() {
+		return inCastle;
+	}
+
+	public Point getMousePos(){
 		return mousePos;
 	}
 	
+	public void setCastleView(CastleView castleView) {
+		this.castleView = castleView;
+	}
+
+	public CastleView getCastleView() {
+		return castleView;
+	}
+
 	public void mouseChecker(){
 		if(mousePos.getX()<10){
 			
@@ -556,6 +579,23 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 	}
 	
+	public void enterCastle(Castle castle){
+		setCastleView(new CastleView(castle,this));
+		inCastle = true;
+	}
+	
+	public void exitCastle(){
+		setCastleView(null);
+		inCastle = false;
+	}
+	
+	public boolean withinBounds(Point p,int x,int y,int w,int h) {
+		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		@SuppressWarnings("unused")
@@ -579,6 +619,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public void mousePressed(MouseEvent e) {
 		boolean clicked = false;
 		
+		if(inCastle){
+			
+		}
 		
 		if(mc.getCurrentPlayer().getSelectedHero() != null){
 			if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
@@ -698,12 +741,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		mousePos.y = (int) Math.round(e.getLocationOnScreen().getY());
 	}
 
-	static boolean withinBounds(Point p,int x,int y,int w,int h) {
-		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
-			return true;
-		}
-		return false;
-	}
 }
 
 
