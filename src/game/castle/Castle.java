@@ -208,12 +208,38 @@ public class Castle {
 		}
 	}
 	
+	public Garrison getGarrison() {
+			return garrison;
+	}
+	
 	public void handleInput (MouseEvent mouseInput, CastleView castleView) {
-		if (mouseInput.getButton() != mouseInput.)
+		if (mouseInput.getButton() != mouseInput.NOBUTTON)
+			//checks for moving units between the garrison/garrisoned hero and the visiting hero (the current square one).
+			//MESSY code, beware.
 			for (int i=0;i<8;i++) {
-				if (withinBounds(mouseInput.getLocationOnScreen(),)) {
-			
-				}
+				for (int j=1;j<3;j++) {	
+					if (withinBounds(mouseInput.getLocationOnScreen(),)) {
+						switch (castleView.getSelected()) {
+						case 0 : castleView.setSelected((i+1)*j); break;
+						default: if (castleView.getSelected()<8) { 
+									if (currentSquare.getHero() != null) {
+										if (garrisonSquare.getHero() != null) {
+											currentSquare.getHero().getUnits().add(garrisonSquare.getHero().getUnits().get(castleView.getSelected()));
+											garrisonSquare.getHero().getUnits().remove(castleView.getSelected());
+											castleView.setSelected(0);
+										} else {
+											currentSquare.getHero().getUnits().add(garrison.getUnit(i));
+											garrison.removeUnit(i);
+										}
+									}
+								break;
+						}
+						}
+					}
 			}
+		}
+		
+		
+		
 	}
 }

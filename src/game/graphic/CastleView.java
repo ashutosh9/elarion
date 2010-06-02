@@ -66,17 +66,18 @@ public class CastleView {
 		g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
 		for (int i=0;i<8;i++) {
 			if (castle.getGarrisonSquare().getHero() == null) {
-				if (castle.getGarrison()) {
+				if (castle.getGarrison().isEmpty()) {
 			} else if (castle.getGarrisonSquare().getHero().getUnits().get(i) != null) {
 						g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),13+(i*40),null); }
 			if (castle.getCurrentSquare().getHero().getUnits().get(i) != null) {
 				g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943+(i*40),63+(i*40),null); }
-		}
-		//draw sub menus/handle input
-		if (menuBuilding==-1) {
-			castle.getBuilding(menuBuilding).drawMenu(g,mouseInput,this);
-		} else if (mouseInput != null) {
-			castle.handleInput(mouseInput,this);
+			}
+			//draw sub menus/handle input
+			if (menuBuilding==-1) {
+				castle.getBuilding(menuBuilding).drawMenu(g,mouseInput,this);
+			} else if (mouseInput != null) {
+				castle.handleInput(mouseInput,this);
+			}
 		}
 	}
 
@@ -92,11 +93,11 @@ public class CastleView {
 		mouseInput = e;
 	}
 	
-	public int getSelectedIndex() {
+	public int getSelected() {
 		return selectedIndex;
 	}
 	
-	public void setSelectedIndex(int index) {
+	public void setSelected(int index) {
 		selectedIndex = index;	
 	}
 }

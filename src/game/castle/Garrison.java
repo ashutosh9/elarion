@@ -25,4 +25,8 @@ public class Garrison {
 	public int getSize() {
 		return units.size();
 	}
+	
+	public boolean isEmpty() {
+		return units.isEmpty();
+	}
 }
