@@ -1,5 +1,6 @@
 package game.main;
 
+import game.castle.Castle;
 import game.field.Field;
 
 import java.awt.event.KeyEvent;
@@ -136,8 +137,12 @@ public class KeyMap {
 				}
 				
 				if(keyCode == KeyEvent.VK_B){
-					boolean b = mc.getCombatView().isCombat();
-					mc.getCombatView().setCombat(!b);
+//					boolean b = mc.getCombatView().isCombat();
+//					mc.getCombatView().setCombat(!b);
+					Castle castle = new Castle(465,467,f);
+					//castle.build(3);
+					mc.getCurrentPlayer().newCastle(castle);
+					mc.enterCastle(mc.getCurrentPlayer().getCastle(castle));
 				}
 				
 				if(keyCode == KeyEvent.VK_0){

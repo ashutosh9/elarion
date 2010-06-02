@@ -14,5 +14,6 @@ public class Market extends CastleBuilding {
 		goldcost = 2000;
 		woodcost = 15;
 		stonecost = 0;
+		built = true;
 	}
 }

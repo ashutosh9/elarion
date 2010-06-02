@@ -4,8 +4,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Archery extends CastleBuilding {
-	private Image image;
-	
 	
 	public Archery(Castle owner) {
 		super(owner);
@@ -17,6 +15,7 @@ public class Archery extends CastleBuilding {
 		woodcost = 10;
 		stonecost = 5;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/Archery.png");
+		built = true;
 	}
 	
 	@Override

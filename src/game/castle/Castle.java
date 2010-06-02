@@ -34,12 +34,11 @@ public class Castle {
 	private static Tavern tavern;
 	private Garrison garrison;
 
-	public Castle () {
-		x = 1;
-		y = 1;
+	public Castle (int x, int y,Field f) {
 		selected = false;
 		garrison = new Garrison(this);
 		//Builds the structure objects
+		background = Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png");
 		keep = new Keep(this);
 		townhall = new TownHall(this);
 		barracks = new Barracks(this);
@@ -55,6 +54,21 @@ public class Castle {
 		buildings.add(magetower);
 		buildings.add(market);
 		buildings.add(tavern);
+		setCurrentSquare(f.getSquare(x, y));
+		setGarrisonSquare(f.getSquare(x, y-1));
+		setSwapSquare(f.getSquare(x-1,y-1));
+		f.getSquare(x, y).setCastle(this);
+		f.getSquare(x-1, y).setPassable(false);
+		f.getSquare( x-1,  y-1).setPassable(false);
+		f.getSquare( x-1,  y-2).setPassable(false);
+		f.getSquare( x,  y).setPassable(true);
+		f.getSquare( x,  y-1).setPassable(false);
+		f.getSquare( x,  y-2).setPassable(false);
+		f.getSquare( x+1,  y).setPassable(false);
+		f.getSquare( x+1,  y-1).setPassable(false);
+		f.getSquare( x+1,  y-2).setPassable(false);
+		this.x = x;
+		this.y = y;
 	}
 
 	public ArrayList<CastleBuilding> getBuildings() {
@@ -82,7 +96,7 @@ public class Castle {
 	}
 	
 	public Image getBackground() {
-			return background;
+		return background;
 	}
 	
 	public void setBackground(Image background) {
@@ -103,8 +117,6 @@ public class Castle {
 
 	public void setCurrentSquare(Square s) {
 		currentSquare = s;
-		garrisonSquare.setX(s.getX());
-		garrisonSquare.setY(s.getY()-1);
 	}
 
 	public Square getGarrisonSquare() {
@@ -122,36 +134,8 @@ public class Castle {
 	public void setSwapSquare(Square s) {
 		swapSquare = s;
 	}
-	
-	public void setCastleLocation(int x, int y,Field f){
-		if(this==f.getSquare(this.x, this.y).getCastle()){
-			f.getSquare(this.x, this.y).setCastle(null);
-			f.getSquare(this.x-1, this.y).setPassable(true);
-			f.getSquare(this.x-1, this.y-1).setPassable(true);
-			f.getSquare(this.x-1, this.y-2).setPassable(true);
-			f.getSquare(this.x, this.y).setPassable(true);
-			f.getSquare(this.x, this.y-1).setPassable(true);
-			f.getSquare(this.x, this.y-2).setPassable(true);
-			f.getSquare(this.x+1, this.y).setPassable(true);
-			f.getSquare(this.x+1, this.y-1).setPassable(true);
-			f.getSquare(this.x+1, this.y-2).setPassable(true);
-		}
-		setCurrentSquare(f.getSquare(x, y));
-		setGarrisonSquare(f.getSquare(x, y-1));
-		setSwapSquare(f.getSquare(x-1,y-1));
-		f.getSquare(x, y).setCastle(this);
-		f.getSquare(this.x-1, this.y).setPassable(false);
-		f.getSquare(this.x-1, this.y-1).setPassable(false);
-		f.getSquare(this.x-1, this.y-2).setPassable(false);
-		f.getSquare(this.x, this.y).setPassable(true);
-		f.getSquare(this.x, this.y-1).setPassable(false);
-		f.getSquare(this.x, this.y-2).setPassable(false);
-		f.getSquare(this.x+1, this.y).setPassable(false);
-		f.getSquare(this.x+1, this.y-1).setPassable(false);
-		f.getSquare(this.x+1, this.y-2).setPassable(false);
-	}
 
-	public boolean getSelected() {
+	public boolean isSelected() {
 		return selected;
 	}
 	
@@ -169,7 +153,7 @@ public class Castle {
 		}
 	}
 	
-	public void Build(int i) {
+	public void build(int i) {
 		if (buildings.get(i) != null
 			&&
 			buildings.get(i).getwood() >= owner.getWood().getAmount()
@@ -183,7 +167,7 @@ public class Castle {
 		}
 	}
 	
-	public void Destroy(int i) {
+	public void destroy(int i) {
 		if (buildings.get(i) != null && buildings.get(i).isBuilt()) {
 			buildings.get(i).modBuilt(false);
 		}
@@ -212,13 +196,15 @@ public class Castle {
 			return garrison;
 	}
 	
-	public void handleInput (MouseEvent mouseInput, CastleView castleView) {
+	//public void swapUnits(int , int garrison)
+	
+	public void handleInput (MouseEvent mouseInput, CastleView castleView, MainClass mc) {
 		if (mouseInput.getButton() != mouseInput.NOBUTTON)
 			//checks for moving units between the garrison/garrisoned hero and the visiting hero (the current square one).
 			//MESSY code, beware.
 			for (int i=0;i<8;i++) {
 				for (int j=1;j<3;j++) {	
-					if (withinBounds(mouseInput.getLocationOnScreen(),)) {
+					if (mc.withinBounds(mouseInput.getLocationOnScreen(),1,1,1,1)) {
 						switch (castleView.getSelected()) {
 						case 0 : castleView.setSelected((i+1)*j); break;
 						default: if (castleView.getSelected()<8) { 
@@ -233,7 +219,7 @@ public class Castle {
 										}
 									}
 								break;
-						}
+							}
 						}
 					}
 			}
