@@ -698,7 +698,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		mousePos.y = (int) Math.round(e.getLocationOnScreen().getY());
 	}
 
-	public boolean withinBounds(Point p,int x,int y,int w,int h) {
+	static boolean withinBounds(Point p,int x,int y,int w,int h) {
 		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
 			return true;
 		}
