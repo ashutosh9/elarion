@@ -152,7 +152,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 			try {
 				draw(g);
-			} catch (AWTException e) {
+			} catch (NullPointerException e) {
 				System.out.print("draw error");
 			}
 			g.dispose();
@@ -186,7 +186,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 	}
 
-	public void draw(Graphics g) throws AWTException{
+	public void draw(Graphics g) throws NullPointerException{
 		
 		//different views : world view/city view/combat view
 		//currently there is just 1 setup view - world view
