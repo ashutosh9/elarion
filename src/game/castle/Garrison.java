@@ -10,6 +10,9 @@ public class Garrison {
 	
 	public Garrison(Castle owner) {
 		units = new ArrayList<Unit>(8);
+		for (int i=0;i<8;i++) {
+			units.add(i,null);
+		}
 		this.owner = owner;
 	}
 	

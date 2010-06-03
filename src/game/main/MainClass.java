@@ -45,6 +45,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static TurnSystem turnSystem;
 	private boolean inCastle = false;
 	private CastleView castleView;
+
 	private static ResourceBar resourceBar;
 	private PopupWindow popupWindow = null;
 	
@@ -303,28 +304,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			//g.drawImage(bg, 0, 0, null);
 			// array list for sprite && animations - returns every animation and every sprite
 	
-			resourceBar.draw(g, mc);
-			
-//			Color color = new Color(255, 255, 255);
-//			g.setColor(color);
-//			Font font = new Font(Font.SERIF, Font.BOLD, 17);
-//			g.setFont(font);
-//			
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
-//			String string = "X: " + players.getCurrentPlayer().getCurrentView().getX() + "   Y: " + players.getCurrentPlayer().getCurrentView().getY();
-//			g.drawString(string,30,40);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
-//			string = "Gold: " + players.getCurrentPlayer().getGold().getAmount();
-//			g.drawString(string,30,65);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
-//			string = "Wood: " + players.getCurrentPlayer().getWood().getAmount();
-//			g.drawString(string,30,90);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
-//			string = "Stone: " + players.getCurrentPlayer().getStone().getAmount();
-//			g.drawString(string,30,115);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,120,null);
-//			string = "Turn: " + turnSystem.getCurrentTurn();
-//			g.drawString(string,30,140);
+			resourceBar.draw(g, mc);			
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),248,18,null);
@@ -502,7 +482,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public TurnSystem getTurnSystem() {
 		return turnSystem;
 	}
-
+	
 	public void setScreenWidth(int screenWidth) {
 		this.screenWidth = screenWidth;
 	}
@@ -613,13 +593,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		inCastle = false;
 	}
 	
-	public boolean withinBounds(Point p,int x,int y,int w,int h) {
+	public boolean isWithinBounds(Point p,int x,int y,int w,int h) {
 		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
 			return true;
 		}
 		return false;
 	}
 	
+
 	public boolean withinBounds(Point currentPoint, Point startPoint,Point endPoint){
 		if((currentPoint.getX() >= startPoint.getX()) && (currentPoint.getX() <= endPoint.getX()) 
 				&& (currentPoint.getY() >= startPoint.getY()) && (currentPoint.getY() <= endPoint.getY())){
@@ -652,7 +633,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			@SuppressWarnings("unused")
 			KeyMap km = new KeyMap(e,mc,2,field);
 		}
-		
 	}
 
 	@Override

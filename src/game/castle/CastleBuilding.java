@@ -91,6 +91,6 @@ public class CastleBuilding {
 	public void setstone(int stonecost) {
 		this.stonecost = stonecost;
 	}
-	public void drawMenu(Graphics g, MouseEvent mouseInput, CastleView castleView) {	
+	public void drawMenu(Graphics g, CastleView castleView) {	
 	}
 }

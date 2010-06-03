@@ -108,7 +108,7 @@ public class Castle {
 	}
 	
 	public void setOwner(Player p) {
-		owner = p;
+		this.owner = p;
 	}
 	
 	public Square getCurrentSquare() {
@@ -204,7 +204,7 @@ public class Castle {
 			//MESSY code, beware.
 			for (int i=0;i<8;i++) {
 				for (int j=1;j<3;j++) {	
-					if (mc.withinBounds(mouseInput.getLocationOnScreen(),1,1,1,1)) {
+					if (mc.isWithinBounds(mouseInput.getLocationOnScreen(),1,1,1,1)) {
 						switch (castleView.getSelected()) {
 						case 0 : castleView.setSelected((i+1)*j); break;
 						default: if (castleView.getSelected()<8) { 
