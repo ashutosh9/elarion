@@ -88,7 +88,6 @@ public class PopupMenu {
 			if((mc.withinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
 				@SuppressWarnings("unused")
 				MenuEventMap event = new MenuEventMap(c.getEvent(),mc,this);
-				//execute event
 			}
 			c.setPressed(false);
 		}
