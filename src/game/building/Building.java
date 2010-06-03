@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import game.field.Square;
 
+@SuppressWarnings("unused")
 public class Building {
 
 	Image img;
