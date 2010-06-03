@@ -1,8 +1,10 @@
 package game.main;
 
+import game.Interface.PopupWindow;
 import game.castle.Castle;
 import game.field.Field;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 public class KeyMap {
@@ -218,6 +220,12 @@ public class KeyMap {
 							mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(true);
 						}
 					}
+				}
+				
+				if(keyCode == KeyEvent.VK_P){
+					PopupWindow popupWindow = new PopupWindow(mc);
+					popupWindow.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
+					mc.setPopupWindow(popupWindow);
 				}
 			
 			else {

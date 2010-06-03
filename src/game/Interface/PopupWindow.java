@@ -2,24 +2,38 @@ package game.Interface;
 
 import game.main.MainClass;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class PopupMenu {
+public class PopupWindow {
 	
 	private boolean opened;
 	private Image background;
 	private ArrayList<Choice> choices;
 	private ArrayList<Img> images;
 	private ArrayList<Text> texts;
-	private static final int constX = 500;
-	private static final int constY = 400;
+	private static int X;
+	private static int Y;
 	
-	public PopupMenu(MainClass mc){
+	public PopupWindow(MainClass mc){
+		choices = new ArrayList<Choice>();
+		images = new ArrayList<Img>();
+		texts = new ArrayList<Text>();
+		boolean loaded = false;
+		while(!loaded){
+			background = Toolkit.getDefaultToolkit().getImage("Images/popup/popupBackground.jpg");
+			loaded = true;
+		}
 		opened = true;
+		X = Math.round(((1280 - 800) / 2));
+		Y = Math.round(((800 - 600) / 2));
 	}
 	
 	public void update(int timePassed){
@@ -28,26 +42,30 @@ public class PopupMenu {
 	
 	public void draw(Graphics g){
 		
-		g.drawImage(background, constX, constY, null);
+		g.drawImage(background, X, Y, null);
 		
 		for(Choice c : choices){
 			String s = c.getText();
-			g.drawString(s,c.getX() + constX,c.getY() + constY);
+			Color color = new Color(255, 255, 255);
+			g.setColor(color);
+			Font font = new Font(Font.SERIF, Font.BOLD, 17);
+			g.setFont(font);
+			g.drawString(s,c.getX() + X,c.getY() + Y);
 			if(c.isPressed()){
-				g.drawImage(c.getButtonPressed(),c.getX() + constX,c.getY() + constY,null);
+				g.drawImage(c.getButtonPressed(),c.getX() + X,c.getY() + Y,null);
 			} else if(c.isHovered()) {
-				g.drawImage(c.getButtonHovered(),c.getX() + constX,c.getY() + constY,null);
+				g.drawImage(c.getButtonHovered(),c.getX() + X,c.getY() + Y,null);
 			} else {
-				g.drawImage(c.getButton(),c.getX() + constX,c.getY() + constY,null);
+				g.drawImage(c.getButton(),c.getX() + X,c.getY() + Y,null);
 			}
 		}
 		
 		for(Img i : images){
-			g.drawImage(i.getImg(),i.getX() + constX,i.getY() + constY,null);
+			g.drawImage(i.getImg(),i.getX() + X,i.getY() + Y,null);
 		}
 		
 		for(Text t : texts){
-			g.drawString(t.getString(), t.getX() + constX, t.getY() + constY);
+			g.drawString(t.getString(), t.getX() + X, t.getY() + Y);
 		}
 	}
 	
@@ -59,13 +77,17 @@ public class PopupMenu {
 		return opened;
 	}
 
-	public void mouseMoved(MouseEvent e,MainClass mc){
+	public void mouseChecker(MainClass mc){
 		for(Choice c : choices){
-			c.setHovered(false);
-			Point start = new Point(c.getX(),c.getY());
-			Point end = new Point((c.getX() + c.getButton().getWidth(null)),(c.getY() + c.getButton().getHeight(null)));
+
+			Point start = new Point(c.getX() + X,c.getY() + Y);
+			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
+//			System.out.print(" start X : " + start.x + " start Y " + start.y);
+//			System.out.print(" end X : " + end.x + " end Y " + end.y);
 			if(mc.withinBounds(mc.getMousePos(), start, end)){
 				c.setHovered(true);
+			} else {
+				c.setHovered(false);
 			}
 		}
 	}
@@ -73,8 +95,8 @@ public class PopupMenu {
 	public void mousePressed(MouseEvent e, MainClass mc){
 		for(Choice c : choices){
 			c.setPressed(false);
-			Point start = new Point(c.getX(),c.getY());
-			Point end = new Point((c.getX() + c.getButton().getWidth(null)),(c.getY() + c.getButton().getHeight(null)));
+			Point start = new Point(c.getX() + X,c.getY() + Y);
+			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
 			if(mc.withinBounds(mc.getMousePos(), start, end)){
 				c.setPressed(true);
 			}
@@ -83,13 +105,26 @@ public class PopupMenu {
 	
 	public void mouseReleased(MouseEvent e, MainClass mc){
 		for(Choice c : choices){
-			Point start = new Point(c.getX(),c.getY());
-			Point end = new Point((c.getX() + c.getButton().getWidth(null)),(c.getY() + c.getButton().getHeight(null)));
+			Point start = new Point(c.getX() + X,c.getY() + Y);
+			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
 			if((mc.withinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
 				@SuppressWarnings("unused")
 				MenuEventMap event = new MenuEventMap(c.getEvent(),mc,this);
 			}
 			c.setPressed(false);
+		}
+	}
+	
+	public void keyPressed(KeyEvent e){
+		int keyCode = e.getKeyCode();
+		if(keyCode == KeyEvent.VK_ENTER){
+			if(choices.size() > 0){
+				for(Choice c : choices){
+					if(c.getEvent() == "close"){
+						this.closePopup();
+					}
+				}
+			}
 		}
 	}
 	

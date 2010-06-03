@@ -1,5 +1,6 @@
 package game.main;
 
+import game.Interface.PopupWindow;
 import game.Interface.ResourceBar;
 import game.Interface.Screen;
 import game.building.Building;
@@ -45,6 +46,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private boolean inCastle = false;
 	private CastleView castleView;
 	private static ResourceBar resourceBar;
+	private static PopupWindow popupWindow = null;
 	
 	
 	//for testing
@@ -88,7 +90,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		combatView = new CombatView(h2,h);
 		combatView.setCombat(false);
 		resourceBar = new ResourceBar();
-		
+
 		
 //		path = new Path();
 //		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 6));
@@ -150,14 +152,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			//update sprites and animations
 			update(timePassed);
 			
-			
 			Graphics2D g = s.getGraphics();
-
+			
 			try {
 				draw(g);
 			} catch (NullPointerException e) {
 				System.out.print("draw error");
 			}
+			
 			g.dispose();
 			s.update();
 			
@@ -179,6 +181,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			
 			if(players.getCurrentPlayer().getSelectedHero().getCurrentAnimation() != null) {
 				players.getCurrentPlayer().getSelectedHero().getCurrentAnimation().update(timePassed);
+			}
+		}
+		
+		if(popupWindow != null){
+			if(!popupWindow.isOpened()){
+				popupWindow = null;
 			}
 		}
 		
@@ -335,6 +343,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					g.drawImage(hero.getIcon(),h,20,null);
 					h += 40;
 				}
+			}
+			
+			if(popupWindow != null){
+				popupWindow.draw(g);
 			}
 			
 			mouseChecker();
@@ -586,6 +598,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 
 		}
+		if(popupWindow != null){
+			popupWindow.mouseChecker(this);
+		}
 	}
 	
 	public void enterCastle(Castle castle){
@@ -613,34 +628,57 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return false;
 	}
 	
+	public void setPopupWindow(PopupWindow popupWindow) {
+		this.popupWindow = popupWindow;
+	}
+
+	public PopupWindow getPopupWindow() {
+		return popupWindow;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		@SuppressWarnings("unused")
-		KeyMap km = new KeyMap(e,mc,1,field);
+		if(true){
+		//if(popupWindow == null){
+			@SuppressWarnings("unused")
+			KeyMap km = new KeyMap(e,mc,1,field);
+		} else {
+			popupWindow.keyPressed(e);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		@SuppressWarnings("unused")
-		KeyMap km = new KeyMap(e,mc,2,field);
+		if(popupWindow == null){
+			@SuppressWarnings("unused")
+			KeyMap km = new KeyMap(e,mc,2,field);
+		}
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		@SuppressWarnings("unused")
-		KeyMap km = new KeyMap(e,mc,3,field);
+		if(popupWindow == null){
+			@SuppressWarnings("unused")
+			KeyMap km = new KeyMap(e,mc,3,field);
+		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		boolean clicked = false;
 		
-		if(inCastle){
-			
+		if(popupWindow != null){
+			popupWindow.mousePressed(e, this);
+			clicked = true;
 		}
 		
-		if(mc.getCurrentPlayer().getSelectedHero() != null){
+		if(inCastle){
+			//code here
+			clicked = true;
+		}
+		
+		if((mc.getCurrentPlayer().getSelectedHero() != null) && (!clicked)){
 			if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
 				if(mc.getCurrentPlayer().getSelectedHero().getPath().isAutoMoving()){
 					mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
@@ -734,7 +772,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+		if(popupWindow != null){
+			popupWindow.mouseReleased(e, this);
+		}
 	}
 	
 	@Override
@@ -745,7 +785,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
-
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
