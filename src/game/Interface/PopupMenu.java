@@ -1,4 +1,6 @@
-package game.main;
+package game.Interface;
+
+import game.main.MainClass;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 
 public class PopupMenu {
 	
+	private boolean opened;
 	private Image background;
 	private ArrayList<Choice> choices;
 	private ArrayList<Img> images;
@@ -16,6 +19,7 @@ public class PopupMenu {
 	private static final int constY = 400;
 	
 	public PopupMenu(MainClass mc){
+		opened = true;
 	}
 	
 	public void update(int timePassed){
@@ -47,6 +51,14 @@ public class PopupMenu {
 		}
 	}
 	
+	public void closePopup(){
+		opened = false;
+	}
+
+	public boolean isOpened() {
+		return opened;
+	}
+
 	public void mouseMoved(MouseEvent e,MainClass mc){
 		for(Choice c : choices){
 			c.setHovered(false);
@@ -74,6 +86,8 @@ public class PopupMenu {
 			Point start = new Point(c.getX(),c.getY());
 			Point end = new Point((c.getX() + c.getButton().getWidth(null)),(c.getY() + c.getButton().getHeight(null)));
 			if((mc.withinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
+				@SuppressWarnings("unused")
+				MenuEventMap event = new MenuEventMap(c.getEvent(),mc,this);
 				//execute event
 			}
 			c.setPressed(false);
@@ -90,9 +104,11 @@ public class PopupMenu {
 		private boolean hovered;
 		private int x;
 		private int y;
+		private String event;
 		
-		public Choice(String s, Image button, Image buttonPressed, Image buttonHovered){
-			text = s;
+		public Choice(String text,String event, Image button, Image buttonPressed, Image buttonHovered){
+			this.text = text;
+			setEvent(event);
 			this.button = button;
 			this.buttonPressed = buttonPressed;
 			this.buttonHovered = buttonHovered;
@@ -147,12 +163,20 @@ public class PopupMenu {
 		public int getY() {
 			return y;
 		}
+
+		public void setEvent(String event) {
+			this.event = event;
+		}
+
+		public String getEvent() {
+			return event;
+		}
 		
 		
 	}
 	
-	public void newChoice(String s,int x,int y, Image button, Image buttonPressed, Image buttonHovered){
-		Choice choice = new Choice(s,button,buttonPressed,buttonHovered);
+	public void newChoice(String text,String event, int x,int y, Image button, Image buttonPressed, Image buttonHovered){
+		Choice choice = new Choice(text,event,button,buttonPressed,buttonHovered);
 		choice.setX(x);
 		choice.setY(y);
 		choices.add(choice);
