@@ -9,6 +9,8 @@ package game.graphic;
  * Tavern - coordinates 865x508
  * Keep - coordinates 855x208*/
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -32,6 +34,9 @@ public class CastleView {
 	private MouseEvent mouseInput;
 	private int selectedIndex;
 	private int index;
+	private String string;
+	Color color = new Color(255, 255, 255);
+	Font font = new Font(Font.SERIF, Font.BOLD, 17);
 	
 	public CastleView (Castle castle, MainClass mc) {
 		setInCastle(true);
@@ -47,6 +52,9 @@ public class CastleView {
 	}
 	
 	public void draw(Graphics g){
+		//set font
+		g.setColor(color);
+		g.setFont(font);
 		// Draw background
 		g.drawImage(castle.getBackground(),0,0,null);
 //		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png"), 0, 0, null);
@@ -90,10 +98,12 @@ public class CastleView {
 			}
 		}
 		//draw sub menus/handle input
-		//if (menuBuilding != -1) {
-		//	castle.getBuilding(menuBuilding).drawMenu(g,this);
-		//} else if (mouseInput != null) {
-		//			castle.handleInput(this,mc);
+		if (menuBuilding != -1) {
+			castle.getBuilding(menuBuilding).drawMenu(g,this);
+		}
+	}
+	
+	public void mousePressed (MouseEvent mouseEvent) {
 	}
 
 	public void setInCastle(boolean isInCastle) {
