@@ -1,6 +1,5 @@
 package game.main;
 
-import game.Interface.ResourceBar;
 import game.Interface.Screen;
 import game.building.Building;
 import game.castle.Castle;
@@ -44,7 +43,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static TurnSystem turnSystem;
 	private boolean inCastle = false;
 	private CastleView castleView;
-	private static ResourceBar resourceBar;
 	
 	
 	//for testing
@@ -87,7 +85,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h2.addUnit(testUnits2.getArcher());
 		combatView = new CombatView(h2,h);
 		combatView.setCombat(false);
-		resourceBar = new ResourceBar();
 		
 		
 //		path = new Path();
@@ -155,7 +152,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 			try {
 				draw(g);
-			} catch (NullPointerException e) {
+			} catch (AWTException e) {
 				System.out.print("draw error");
 			}
 			g.dispose();
@@ -189,7 +186,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 	}
 
-	public void draw(Graphics g) throws NullPointerException{
+	public void draw(Graphics g) throws AWTException{
 		
 		//different views : world view/city view/combat view
 		//currently there is just 1 setup view - world view
@@ -295,28 +292,26 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			//g.drawImage(bg, 0, 0, null);
 			// array list for sprite && animations - returns every animation and every sprite
 	
-			resourceBar.draw(g, mc);
+			Color color = new Color(255, 255, 255);
+			g.setColor(color);
+			Font font = new Font(Font.SERIF, Font.BOLD, 17);
+			g.setFont(font);
 			
-//			Color color = new Color(255, 255, 255);
-//			g.setColor(color);
-//			Font font = new Font(Font.SERIF, Font.BOLD, 17);
-//			g.setFont(font);
-//			
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
-//			String string = "X: " + players.getCurrentPlayer().getCurrentView().getX() + "   Y: " + players.getCurrentPlayer().getCurrentView().getY();
-//			g.drawString(string,30,40);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
-//			string = "Gold: " + players.getCurrentPlayer().getGold().getAmount();
-//			g.drawString(string,30,65);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
-//			string = "Wood: " + players.getCurrentPlayer().getWood().getAmount();
-//			g.drawString(string,30,90);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
-//			string = "Stone: " + players.getCurrentPlayer().getStone().getAmount();
-//			g.drawString(string,30,115);
-//			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,120,null);
-//			string = "Turn: " + turnSystem.getCurrentTurn();
-//			g.drawString(string,30,140);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
+			String string = "X: " + players.getCurrentPlayer().getCurrentView().getX() + "   Y: " + players.getCurrentPlayer().getCurrentView().getY();
+			g.drawString(string,30,40);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
+			string = "Gold: " + players.getCurrentPlayer().getGold().getAmount();
+			g.drawString(string,30,65);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,70,null);
+			string = "Wood: " + players.getCurrentPlayer().getWood().getAmount();
+			g.drawString(string,30,90);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,95,null);
+			string = "Stone: " + players.getCurrentPlayer().getStone().getAmount();
+			g.drawString(string,30,115);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,120,null);
+			string = "Turn: " + turnSystem.getCurrentTurn();
+			g.drawString(string,30,140);
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),248,18,null);
@@ -486,10 +481,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public Player getCurrentPlayer() {
 		return players.getCurrentPlayer();
 	}
-	
-	public TurnSystem getTurnSystem() {
-		return turnSystem;
-	}
 
 	public void setScreenWidth(int screenWidth) {
 		this.screenWidth = screenWidth;
@@ -600,14 +591,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public boolean withinBounds(Point p,int x,int y,int w,int h) {
 		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean withinBounds(Point currentPoint, Point startPoint,Point endPoint){
-		if((currentPoint.getX() >= startPoint.getX()) && (currentPoint.getX() <= endPoint.getX()) 
-				&& (currentPoint.getY() >= startPoint.getY()) && (currentPoint.getY() <= endPoint.getY())){
 			return true;
 		}
 		return false;

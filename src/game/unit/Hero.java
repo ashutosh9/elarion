@@ -55,6 +55,9 @@ public class Hero extends Unit {
 		moving = false;
 		path = null;
 		movementPoints = 100;
+		for (int i=0;i<8;i++) {
+			units.add(i,null);
+		}
 	}
 	
 	public int getHeroX(){
