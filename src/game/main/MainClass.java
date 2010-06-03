@@ -596,6 +596,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return false;
 	}
 	
+	public boolean withinBounds(Point currentPoint, Point startPoint,Point endPoint){
+		if((currentPoint.getX() >= startPoint.getX()) && (currentPoint.getX() <= endPoint.getX()) 
+				&& (currentPoint.getY() >= startPoint.getY()) && (currentPoint.getY() <= endPoint.getY())){
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		@SuppressWarnings("unused")
