@@ -589,7 +589,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		inCastle = false;
 	}
 	
-	public boolean withinBounds(Point p,int x,int y,int w,int h) {
+	public boolean isWithinBounds(Point p,int x,int y,int w,int h) {
 		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
 			return true;
 		}

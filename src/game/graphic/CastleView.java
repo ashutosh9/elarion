@@ -98,10 +98,12 @@ public class CastleView {
 			}
 		}
 		//draw sub menus/handle input
-		//if (menuBuilding != -1) {
-		//	castle.getBuilding(menuBuilding).drawMenu(g,this);
-		//} else if (mouseInput != null) {
-		//			castle.handleInput(this,mc);
+		if (menuBuilding != -1) {
+			castle.getBuilding(menuBuilding).drawMenu(g,this);
+		}
+	}
+	
+	public void mousePressed (MouseEvent mouseEvent) {
 	}
 
 	public void setInCastle(boolean isInCastle) {
