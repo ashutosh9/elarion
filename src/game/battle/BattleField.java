@@ -1,6 +1,5 @@
 package game.battle;
 
-import game.field.Square;
 import game.field.Terrain;
 
 import java.awt.Image;

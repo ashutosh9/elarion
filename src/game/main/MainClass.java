@@ -46,7 +46,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private boolean inCastle = false;
 	private CastleView castleView;
 	private static ResourceBar resourceBar;
-	private static PopupWindow popupWindow = null;
+	private PopupWindow popupWindow = null;
 	
 	
 	//for testing
@@ -638,8 +638,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(true){
-		//if(popupWindow == null){
+		if(popupWindow == null){
 			@SuppressWarnings("unused")
 			KeyMap km = new KeyMap(e,mc,1,field);
 		} else {

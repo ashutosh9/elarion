@@ -3,6 +3,7 @@ package game.castle;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+@SuppressWarnings("unused")
 public class Barracks extends CastleBuilding {
 	
 	public Barracks(Castle owner) {

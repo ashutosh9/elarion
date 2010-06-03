@@ -2,17 +2,10 @@ package game.graphic;
 
 import game.battle.BattleField;
 import game.core.BattleSystem;
-import game.field.Square;
 import game.player.Player;
 import game.unit.Hero;
-import game.unit.Unit;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class CombatView {		//unfinished
 	

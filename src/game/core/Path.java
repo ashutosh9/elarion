@@ -109,9 +109,6 @@ public class Path {
 				for(int x = -1; x <2 ; x++){
 					for(int y = -1; y < 2; y++){
 						
-						boolean done = false;
-						boolean done2 = false;
-						
 						if((x == 0) && (y == 0)) {
 							continue;
 						}
@@ -122,9 +119,6 @@ public class Path {
 						Square neighbourSquare = field.getSquare(xp, xy);
 						PathNode neighbourNode = new PathNode(neighbourSquare);
 						if(neighbourNode.getSquare().isPassable()){
-							
-							int indexOfNode = 1;
-							int indexOfNode2 = 1;
 							
 							int goCost = 0;
 							if(Math.abs(x)==Math.abs(y)){
