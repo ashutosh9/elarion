@@ -108,7 +108,7 @@ public class Castle {
 	}
 	
 	public void setOwner(Player p) {
-		owner = p;
+		this.owner = p;
 	}
 	
 	public Square getCurrentSquare() {
