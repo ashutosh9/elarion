@@ -1,6 +1,5 @@
 package game.unit;
 
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
