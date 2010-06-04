@@ -15,5 +15,6 @@ public class Keep extends CastleBuilding {
 		stonecost = 20;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/Keep.png");
 		built = true;
+		index = 0;
 	}
 }

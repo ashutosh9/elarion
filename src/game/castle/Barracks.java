@@ -17,5 +17,6 @@ public class Barracks extends CastleBuilding {
 		stonecost = 10;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/Barracks.png");
 		built = true;
+		index = 2;
 	}
 }

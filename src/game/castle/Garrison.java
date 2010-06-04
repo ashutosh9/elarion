@@ -9,13 +9,13 @@ public class Garrison {
 	private Castle owner;
 	
 	public Garrison(Castle owner) {
-<<<<<<< local
-		units = new ArrayList<Unit>();
-		for(int i=0;i<8;i++){
-=======
+//<<<<<<< local
+//		units = new ArrayList<Unit>();
+//		for(int i=0;i<8;i++){
+//=======
 		units = new ArrayList<Unit>(8);
 		for (int i=0;i<8;i++) {
->>>>>>> other
+//>>>>>>> other
 			units.add(i,null);
 		}
 		this.owner = owner;

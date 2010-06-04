@@ -15,5 +15,6 @@ public class Tavern extends CastleBuilding {
 		woodcost = 5;
 		stonecost = 5;
 		built = true;
+		index = 5;
 	}
 }
