@@ -44,7 +44,7 @@ public class CastleView {
 		//this.castle.setOwner(mc.getCurrentPlayer());
 		//this.castle = mc.getCurrentPlayer().getCastles().get(castle);
 		menuBuilding = -1;
-		menuFrame = Toolkit.getDefaultToolkit().getImage("Images/Castle/Frame.png");
+		menuFrame = Toolkit.getDefaultToolkit().getImage("Images/castle/MenuFrame.png");
 	
 	}
 	
@@ -57,7 +57,7 @@ public class CastleView {
 		g.setFont(font);
 		// Draw background
 		g.drawImage(castle.getBackground(),0,0,null);
-//		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png"), 0, 0, null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/MenuFrame.png"), 0, 0, null);
 		// Draw individual buildings
 		for (CastleBuilding current : castle.getBuildings()) {
 			if (current.isBuilt()) {
@@ -115,6 +115,7 @@ public class CastleView {
 
 	public void mousePressed(MouseEvent e, MainClass mc){
 		mouseInput = e;
+		castle.mousePressed(e, this, mc);
 	}
 	
 	public int getSelected() {
@@ -123,5 +124,13 @@ public class CastleView {
 	
 	public void setSelected(int index) {
 		selectedIndex = index;	
+	}
+	
+	public int getMenuBuilding() {
+		return menuBuilding;
+	}
+	
+	public void setMenuBuilding(int i) {
+		menuBuilding = i;
 	}
 }

@@ -17,6 +17,7 @@ public class CastleBuilding {
 	protected int goldcost;
 	protected int woodcost;
 	protected int stonecost;
+	protected int index;
 	
 	public Image getImage() {
 		return image;
@@ -91,6 +92,15 @@ public class CastleBuilding {
 	public void setstone(int stonecost) {
 		this.stonecost = stonecost;
 	}
+	
+	public int getIndex() {
+		return index;
+	}
+	
+	public void setIndex(int i) {
+		index = i;
+	}
+	
 	public void drawMenu(Graphics g, CastleView castleView) {	
 	}
 }

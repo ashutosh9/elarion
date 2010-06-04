@@ -17,6 +17,7 @@ public class Archery extends CastleBuilding {
 		stonecost = 5;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/Archery.png");
 		built = true;
+		index = 3;
 	}
 	
 	@Override

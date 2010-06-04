@@ -15,5 +15,6 @@ public class TownHall extends CastleBuilding {
 		woodcost = 0;
 		stonecost = 0;
 		built = true;
+		index = 1;
 	}
 }

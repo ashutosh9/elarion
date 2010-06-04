@@ -15,6 +15,7 @@ public class MageTower extends CastleBuilding {
 		woodcost = 15;
 		stonecost = 15;
 		built = true;
+		index = 4;
 	}
 	
 	
