@@ -46,9 +46,9 @@ public class PopupWindow {
 		
 		for(Choice c : choices){
 			String s = c.getText();
-			Color color = new Color(255, 255, 255);
+			Color color = new Color(0, 0, 0);
 			g.setColor(color);
-			Font font = new Font(Font.SERIF, Font.BOLD, 17);
+			Font font = new Font(Font.SERIF, Font.BOLD, 18);
 			g.setFont(font);
 			g.drawString(s,c.getX() + X,c.getY() + Y);
 			if(c.isPressed()){

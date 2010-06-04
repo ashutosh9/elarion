@@ -3,6 +3,7 @@ package game.main;
 import game.Interface.PopupWindow;
 import game.castle.Castle;
 import game.field.Field;
+import game.unit.HeroPopupWindow;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -223,8 +224,9 @@ public class KeyMap {
 				}
 				
 				if(keyCode == KeyEvent.VK_P){
-					PopupWindow popupWindow = new PopupWindow(mc);
-					popupWindow.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
+//					PopupWindow popupWindow = new PopupWindow(mc);
+//					popupWindow.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
+					HeroPopupWindow popupWindow = new HeroPopupWindow(mc,mc.getCurrentPlayer().getSelectedHero());
 					mc.setPopupWindow(popupWindow);
 				}
 			

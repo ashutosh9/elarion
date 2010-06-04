@@ -16,6 +16,7 @@ import game.player.Player;
 import game.player.Players;
 import game.resource.Resource;
 import game.unit.Hero;
+import game.unit.HeroPopupWindow;
 import game.unit.TestUnits;
 //import javax.swing.*;
 import java.awt.*;
@@ -67,6 +68,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		turnSystem = new TurnSystem();
 		h = new Hero();
 		Hero h2 = new Hero();
+		h.setName("Erag Tone");
+		h2.setName("Bryan Treehunter");
 		players.getCurrentPlayer().setCurrentPlayer(true);
 		
 		players.getCurrentPlayer().getGold().setAmount(1000);
@@ -667,8 +670,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
 					ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
 					clearPath();
-					players.getCurrentPlayer().selectHero(heroes.get(i/40));
-					movingHeroChecker();
+					if(players.getCurrentPlayer().getSelectedHero() == players.getCurrentPlayer().getHeroes().get(i/40)){
+						popupWindow = new HeroPopupWindow(this,players.getCurrentPlayer().getHeroes().get(i/40));
+					} else {
+						players.getCurrentPlayer().selectHero(heroes.get(i/40));
+						movingHeroChecker();
+					}
 					clicked = true;
 				}
 			}

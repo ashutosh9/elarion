@@ -1,5 +1,6 @@
 package game.unit;
 
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class Hero extends Unit {
 	private ArrayList<Talent> taletTree = new ArrayList<Talent>(100);
 	private ArrayList<Item> inventory = new ArrayList<Item>(100);
 	private ArrayList<Unit> units = new ArrayList<Unit>(8);
+	private String name;
+	private Point experience;
 	private int x; 
 	private int y; 
 	private Player owner;
@@ -55,6 +58,9 @@ public class Hero extends Unit {
 		moving = false;
 		path = null;
 		movementPoints = 100;
+		experience = new Point();
+		experience.x = 0;
+		experience.y = 1000;
 		for (int i=0;i<8;i++) {
 			units.add(i,null);
 		}
@@ -405,6 +411,22 @@ public class Hero extends Unit {
 		temp = this.getUnits().get(thisIndex);
 		this.getUnits().set(thisIndex, other.getUnits().get(otherIndex));
 		other.getUnits().set(otherIndex,temp);
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setExperience(Point experience) {
+		this.experience = experience;
+	}
+
+	public Point getExperience() {
+		return experience;
 	}
 	
 //	public getAnimations(){
