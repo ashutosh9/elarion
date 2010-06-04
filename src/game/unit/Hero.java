@@ -401,9 +401,11 @@ public class Hero extends Unit {
 	}
 	
 	public void swapUnit(Hero other,int otherIndex, int thisIndex){
-		
+		Unit temp;
+		temp = this.getUnits().get(thisIndex);
+		this.getUnits().set(thisIndex, other.getUnits().get(otherIndex));
+		other.getUnits().set(otherIndex,temp);
 	}
-	
 	
 //	public getAnimations(){
 //		return race.getHeroAnimations;
