@@ -262,6 +262,7 @@ public class Castle {
 			bottomRight.setLocation(1275, 110);
 			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				swapGarrison();
+				clicked = true;
 			}
 		}
 		if (!clicked) {
@@ -269,6 +270,7 @@ public class Castle {
 			bottomRight.setLocation(760, 100);
 			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				castleView.setInCastle(false);
+				clicked = true;
 			}
 		}
 
