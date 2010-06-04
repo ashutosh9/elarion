@@ -10,6 +10,7 @@ import game.field.Square;
 import game.graphic.CastleView;
 import game.player.Player;
 import game.unit.Hero;
+import game.unit.Unit;
 import game.main.MainClass;
 
 public class Castle {
@@ -196,7 +197,12 @@ public class Castle {
 			return garrison;
 	}
 	
-	//public void swapUnits(int , int garrison)
+	public void swapUnitWithGarrison(int heroUnit, int garrisonUnit, Garrison garrison) {
+		Unit temp;
+		temp = garrison.getUnit(garrisonUnit);
+		garrison.getUnits().set(garrisonUnit,currentSquare.getHero().getUnits().get(heroUnit));
+		currentSquare.getHero().getUnits().set(heroUnit, temp);
+	}
 	
 	public void handleInput (MouseEvent mouseInput, CastleView castleView, MainClass mc) {
 		if (mouseInput.getButton() != mouseInput.NOBUTTON)

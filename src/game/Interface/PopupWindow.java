@@ -84,7 +84,7 @@ public class PopupWindow {
 			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
 //			System.out.print(" start X : " + start.x + " start Y " + start.y);
 //			System.out.print(" end X : " + end.x + " end Y " + end.y);
-			if(mc.withinBounds(mc.getMousePos(), start, end)){
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
 				c.setHovered(true);
 			} else {
 				c.setHovered(false);
@@ -97,7 +97,7 @@ public class PopupWindow {
 			c.setPressed(false);
 			Point start = new Point(c.getX() + X,c.getY() + Y);
 			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
-			if(mc.withinBounds(mc.getMousePos(), start, end)){
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
 				c.setPressed(true);
 			}
 		}
@@ -107,7 +107,7 @@ public class PopupWindow {
 		for(Choice c : choices){
 			Point start = new Point(c.getX() + X,c.getY() + Y);
 			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
-			if((mc.withinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
+			if((mc.isWithinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
 				@SuppressWarnings("unused")
 				MenuEventMap event = new MenuEventMap(c.getEvent(),mc,this);
 			}

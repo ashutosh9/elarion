@@ -104,9 +104,6 @@ public class CastleView {
 			castle.getBuilding(menuBuilding).drawMenu(g,this);
 		}
 	}
-	
-	public void mousePressed (MouseEvent mouseEvent) {
-	}
 
 	public void setInCastle(boolean isInCastle) {
 		this.inCastle = isInCastle;
@@ -116,7 +113,7 @@ public class CastleView {
 		return inCastle;
 	}
 
-	public void mouseClicked(MouseEvent e){
+	public void mousePressed(MouseEvent e, MainClass mc){
 		mouseInput = e;
 	}
 	

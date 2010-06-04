@@ -592,16 +592,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		setCastleView(null);
 		inCastle = false;
 	}
-	
-	public boolean isWithinBounds(Point p,int x,int y,int w,int h) {
-		if ((p.getX() >= x) && (p.getX() <= x+w) && (p.getY() >=y) && (p.getY()<=y+h)) {
-			return true;
-		}
-		return false;
-	}
-	
 
-	public boolean withinBounds(Point currentPoint, Point startPoint,Point endPoint){
+	public boolean isWithinBounds(Point currentPoint, Point startPoint,Point endPoint){
 		if((currentPoint.getX() >= startPoint.getX()) && (currentPoint.getX() <= endPoint.getX()) 
 				&& (currentPoint.getY() >= startPoint.getY()) && (currentPoint.getY() <= endPoint.getY())){
 			return true;
@@ -653,7 +645,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 		
 		if(inCastle){
-			//code here
+			castleView.mousePressed(e,this);
 			clicked = true;
 		}
 		
