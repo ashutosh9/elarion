@@ -83,9 +83,11 @@ public class CastleView {
 			}
 			
 		} else {
-			for (int i=0;i<8;i++) {
-				if (castle.getGarrison().getUnits().get(i) != null) {
-					g.drawImage(castle.getGarrison().getUnits().get(i).getIcon(),943 + (40*i),13,null);
+			if (castle.getGarrison() != null) {
+				for (int i=0;i<8;i++) {
+					if (castle.getGarrison().getUnits().get(i) != null) {
+						g.drawImage(castle.getGarrison().getUnits().get(i).getIcon(),943 + (40*i),13,null);
+					}
 				}
 			}
 		}
