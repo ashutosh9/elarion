@@ -33,7 +33,7 @@ public class Square {
 		setHero(null);
 		setItem(null);
 		tooltip = new Tooltip("");
-		pathNode = new Item();
+		pathNode = new Item(null, null);
 		pathNode.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/pathSquare.png"));
 		path = false;
 	}

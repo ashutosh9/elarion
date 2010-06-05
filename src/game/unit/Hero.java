@@ -19,6 +19,7 @@ public class Hero extends Unit {
 	private ArrayList<Talent> taletTree = new ArrayList<Talent>(100);
 	private ArrayList<Item> inventory = new ArrayList<Item>(100);
 	private ArrayList<Unit> units = new ArrayList<Unit>(8);
+	private Equipment equipment;
 	private String name;
 	private Point experience;
 	private int x; 
@@ -61,6 +62,7 @@ public class Hero extends Unit {
 		experience = new Point();
 		experience.x = 0;
 		experience.y = 1000;
+		setEquipment(new Equipment());
 		for (int i=0;i<8;i++) {
 			units.add(i,null);
 		}
@@ -427,6 +429,14 @@ public class Hero extends Unit {
 
 	public Point getExperience() {
 		return experience;
+	}
+
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
+	}
+
+	public Equipment getEquipment() {
+		return equipment;
 	}
 	
 //	public getAnimations(){
