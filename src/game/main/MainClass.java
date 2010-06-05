@@ -217,7 +217,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 		//if(!combatView.isCombat()) {
 		if(inCastle){
-			if (castleView != null) { System.out.print("castleView not null"); } else { System.out.print("castleView null"); }
 			castleView.draw(g);
 		} else 
 		if(!inCastle){
