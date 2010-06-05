@@ -260,7 +260,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
 					}
-			
+					
 				}
 			}		
 			
@@ -268,6 +268,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				for(int y=-2;y<screenHeight;y++){
 					
 					Image img = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getImage();
+					
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getCastle() != null){
+						Castle c = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getCastle();
+						g.drawImage(c.getImage(), Math.round((x-1)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-2)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
+						
+					}
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
 						
@@ -293,6 +300,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						}
 						
 					}
+					
 					
 				}
 			}
