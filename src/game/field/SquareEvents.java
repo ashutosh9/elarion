@@ -31,7 +31,6 @@ public class SquareEvents {
 			if (s.getCastle().getOwner() == p) {
 				mc.clearPath();
 				mc.enterCastle(s.getCastle());
-				System.out.print("going in");
 			}
 		}
 	}

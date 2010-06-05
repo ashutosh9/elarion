@@ -223,7 +223,6 @@ public class Castle {
 //	}
 	
 	public void mousePressed (MouseEvent mouseInput, CastleView castleView) {
-		System.out.print("clicked \n");
 		boolean clicked = false;
 		Point topLeft = new Point(0,0);
 		Point bottomRight = new Point(0,0);
@@ -232,13 +231,8 @@ public class Castle {
 			for (int j=0;j<2;j++) {
 				topLeft.setLocation(943 + (40*i),13+(40*j));
 				bottomRight.setLocation(978 + (40*i),48+(40*j));
-				System.out.print(topLeft.getX() + " ");
-				System.out.print(topLeft.getY() + " ");
-				System.out.print(bottomRight.getX() + " ");
-				System.out.print(bottomRight.getY() + " \n");
 				if (mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
 					if (castleView.getSelected() != 0) { //in this case we swap units around
-						System.out.print("Swapping \n");
 						Hero clickedUnitHero = null;
 						if (j == 0) {
 							if (garrisonSquare.getHero() != null) {
@@ -264,7 +258,7 @@ public class Castle {
 						} else {
 							selectedUnitHero.swapUnit(clickedUnitHero, i, castleView.getSelected()-9);
 						}
-						System.out.print("Swapping done \n");
+
 						castleView.setSelected(0);
 					} else { //in this case we mark a new selected unit
 						switch (j) {
@@ -275,8 +269,6 @@ public class Castle {
 									castleView.setSelected((1+i)+8); break;
 								}
 						}
-				
-						System.out.print("Selected " + castleView.getSelected() + "\n");
 					}
 					clicked = true;
 				}
