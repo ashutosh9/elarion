@@ -62,12 +62,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static CombatView combatView;
 	
 	public static void main(String args[]){
+		mc = new MainClass();
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		players = new Players(2,field);
 		turnSystem = new TurnSystem();
-		Castle c = new Castle(479,478,field,mc);
+		Castle c = new Castle(479,479,field,mc);
 		Castle c2 = new Castle (5,5,field,mc);
 		h = new Hero(mc);
 		Hero h2 = new Hero(mc);
@@ -105,7 +106,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			playerList.add(playerRed);
 		}
 		TurnSystem turnSystem = new TurnSystem(playerList);*/
-		mc = new MainClass();
 		// this will be the main graphics class
 		// it will get the current player from the turn system
 		mc.run();
@@ -217,6 +217,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 		//if(!combatView.isCombat()) {
 		if(inCastle){
+			if (castleView != null) { System.out.print("castleView not null"); } else { System.out.print("castleView null"); }
 			castleView.draw(g);
 		} else 
 		if(!inCastle){
