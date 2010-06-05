@@ -68,7 +68,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		players = new Players(2,field);
 		turnSystem = new TurnSystem();
-		Castle c = new Castle(479,479,field,mc);
+		Castle c = new Castle(479,478,field,mc);
 		Castle c2 = new Castle (5,5,field,mc);
 		h = new Hero(mc);
 		Hero h2 = new Hero(mc);
