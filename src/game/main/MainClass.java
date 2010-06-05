@@ -67,6 +67,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		players = new Players(2,field);
 		turnSystem = new TurnSystem();
+		
 		h = new Hero(mc);
 		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
