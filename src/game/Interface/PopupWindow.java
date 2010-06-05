@@ -36,7 +36,7 @@ public class PopupWindow {
 		Y = Math.round(((800 - 600) / 2));
 	}
 	
-	public void update(int timePassed){
+	public void update(long timePassed){
 		
 	}
 	
@@ -300,6 +300,14 @@ public class PopupWindow {
 	public void newText(String s, int x,int y){
 		Text text = new Text(s,x,y);
 		texts.add(text);
+	}
+	
+	public int getX(){
+		return X;
+	}
+	
+	public int getY(){
+		return Y;
 	}
 	
 

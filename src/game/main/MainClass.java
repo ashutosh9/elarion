@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
 	
@@ -326,7 +327,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			if(popupWindow != null){
 				popupWindow.draw(g);
 			}
-			
+	
 			mouseChecker();
 			currentViewChecker();
 			autoMovementChecker();

@@ -19,7 +19,17 @@ public class Equipment {
 	private Item bracers;
 	
 	public Equipment(){
-		
+		head = null;
+		legs = null;
+		armor = null;
+		feet = null;
+		leftHand = null;
+		rightHand = null;
+		ring1 = null;
+		ring2 = null;
+		amulet = null;
+		gloves = null;
+		bracers = null;
 	}
 	
 	public void equip(Item i, ArrayList<Item> inventory){
