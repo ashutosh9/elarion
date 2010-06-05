@@ -40,6 +40,7 @@ public class Castle {
 		garrison = new Garrison(this);
 		//Builds the structure objects
 		background = Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png");
+		currentSprite = Toolkit.getDefaultToolkit().getImage("Images/castle/castle.png");
 		keep = new Keep(this);
 		townhall = new TownHall(this);
 		barracks = new Barracks(this);
@@ -55,19 +56,19 @@ public class Castle {
 		buildings.add(magetower);
 		buildings.add(market);
 		buildings.add(tavern);
-		setCurrentSquare(f.getSquare(x, y));
-		setGarrisonSquare(f.getSquare(x, y-1));
-		setSwapSquare(f.getSquare(x-1,y-1));
-		f.getSquare(x, y).setCastle(this);
-		f.getSquare(x-1, y).setPassable(false);
+		setCurrentSquare(f.getSquare(x, y+1));
+		setGarrisonSquare(f.getSquare(x, y));
+		setSwapSquare(f.getSquare(x-1,y));
+		f.getSquare(x, y+1).setCastle(this);
+		f.getSquare(x-1, y+1).setPassable(false);
+		f.getSquare( x-1,  y).setPassable(false);
 		f.getSquare( x-1,  y-1).setPassable(false);
-		f.getSquare( x-1,  y-2).setPassable(false);
-		f.getSquare( x,  y).setPassable(true);
+		f.getSquare( x,  y+1).setPassable(true);
+		f.getSquare( x,  y).setPassable(false);
 		f.getSquare( x,  y-1).setPassable(false);
-		f.getSquare( x,  y-2).setPassable(false);
+		f.getSquare( x+1,  y+1).setPassable(false);
 		f.getSquare( x+1,  y).setPassable(false);
 		f.getSquare( x+1,  y-1).setPassable(false);
-		f.getSquare( x+1,  y-2).setPassable(false);
 		this.x = x;
 		this.y = y;
 	}
@@ -175,20 +176,38 @@ public class Castle {
 	}
 
 	public void swapGarrison() {
-		if (!((garrisonSquare.getHero() == null) && (currentSquare.getHero() == null))) {
-			if ((garrisonSquare.getHero() == null) && (currentSquare.getHero() != null)) {
-				if(garrison.getSize()<=(8-currentSquare.getHero().getUnitSize())) {
+//		if (!((garrisonSquare.getHero() == null) || (currentSquare.getHero() == null))) {
+//			if ((garrisonSquare.getHero() == null) && (currentSquare.getHero() != null)) {
+//				if(garrison.getSize()<=(8-currentSquare.getHero().getUnitSize())) {
+//					for (int i=0;i<8;i++) {
+//						if (garrison.getUnit(i) != null) {
+//							currentSquare.getHero().addUnit(garrison.getUnit(i));
+//						}
+//					}
+//					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
+//				}
+//				currentSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), this.field);
+//				garrisonSquare.getHero().setHeroLocation(currentSquare.getX(), currentSquare.getY(), this.field);
+//				swapSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
+//				
+//			}
+//		}
+//	}
+		if ((currentSquare.getHero() != null) || garrisonSquare.getHero() != null) {
+			if (garrisonSquare.getHero() == null) {
+				if(8 - currentSquare.getHero().getUnits().size() > garrison.getUnits().size()) {
 					for (int i=0;i<8;i++) {
 						if (garrison.getUnit(i) != null) {
-							currentSquare.getHero().addUnit(garrison.getUnit(i));
+							currentSquare.getHero().getUnits().add(garrison.getUnit(i));
 						}
 					}
 					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
+					garrison.getUnits().clear();
 				}
-				currentSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), this.field);
-				garrisonSquare.getHero().setHeroLocation(currentSquare.getX(), currentSquare.getY(), this.field);
-				swapSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
-				
+			} else {
+				garrisonSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), this.field);
+				currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
+				swapSquare.getHero().setHeroLocation(currentSquare.getX(),currentSquare.getY(),this.field);
 			}
 		}
 	}
@@ -269,7 +288,7 @@ public class Castle {
 			topLeft.setLocation(660, 20);
 			bottomRight.setLocation(760, 100);
 			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
-				castleView.setInCastle(false);
+				mc.setInCastle(false);
 				clicked = true;
 			}
 		}
