@@ -69,20 +69,15 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h = new Hero();
 		Hero h2 = new Hero();
 		h.setName("Erag Tone");
-		h2.setName("Bryan Treehunter");
-		players.getCurrentPlayer().setCurrentPlayer(true);
+		h2.setName("Kirie");
+		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
 		
 		players.getCurrentPlayer().getGold().setAmount(1000);
 		players.getCurrentPlayer().newHero(h,480, 480, field);
-		players.getCurrentPlayer().newHero(h2,481, 480, field);
-		Building building = new Building();
-		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-		field.getSquare(5, 5).setBuilding(building);
-		field.getSquare(5, 5).setPassable(false);
-		//field.getSquare(498, 498).setHero(h);
+		//players.getCurrentPlayer().newHero(h2,481, 480, field);
+		players.getPlayer(1).newHero(h2, 30, 40, field);
+		
 		players.getCurrentPlayer().setCurrentView(field.getSquare(2, 2));
-		players.getCurrentPlayer().setCurrentViewAbsX(0);
-		players.getCurrentPlayer().setCurrentViewAbsY(0);
 		TestUnits testUnits = new TestUnits();
 		TestUnits testUnits2 = new TestUnits();
 		h.addUnit(testUnits.getWarrior());

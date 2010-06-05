@@ -27,6 +27,8 @@ public class Player {
 		stone.setAmount(0);
 		wood.setAmount(0);
 		currentPlayer = false;
+		currentViewAbsX = 0;
+		currentViewAbsY = 0;
 	}
 	
 	public Player(String s){
