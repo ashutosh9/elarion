@@ -67,6 +67,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		players = new Players(2,field);
 		turnSystem = new TurnSystem();
+		Castle c = new Castle(479,478,field,mc);
+		Castle c2 = new Castle (5,5,field,mc);
 		h = new Hero(mc);
 		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
@@ -77,6 +79,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		players.getCurrentPlayer().newHero(h,480, 480, field);
 		//players.getCurrentPlayer().newHero(h2,481, 480, field);
 		players.getPlayer(1).newHero(h2, 30, 40, field);
+		players.getCurrentPlayer().newCastle(c);
+		players.getPlayer(1).newCastle(c2);
 		
 		players.getCurrentPlayer().setCurrentView(field.getSquare(2, 2));
 		TestUnits testUnits = new TestUnits();
