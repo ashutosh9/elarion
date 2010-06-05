@@ -16,8 +16,8 @@ import game.spells.Talent;
 public class Hero extends Unit {
 
 	@SuppressWarnings("unused")
-	private ArrayList<Talent> taletTree = new ArrayList<Talent>(100);
-	private ArrayList<Item> inventory = new ArrayList<Item>(100);
+	private ArrayList<Talent> taletTree = new ArrayList<Talent>();
+	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private ArrayList<Unit> units = new ArrayList<Unit>(8);
 	private Equipment equipment;
 	private String name;
@@ -65,6 +65,9 @@ public class Hero extends Unit {
 		setEquipment(new Equipment());
 		for (int i=0;i<8;i++) {
 			units.add(i,null);
+		}
+		for(int i=0;i<40;i++){
+			inventory.add(null);
 		}
 	}
 	
@@ -349,6 +352,10 @@ public class Hero extends Unit {
 			return inventory.get(inventory.indexOf(i));
 		} 
 		return null;
+	}
+	
+	public ArrayList<Item> getInventory(){
+		return inventory;
 	}
 	
 	public void addUnit(Unit u){
