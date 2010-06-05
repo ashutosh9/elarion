@@ -41,6 +41,7 @@ public class Castle {
 		field = f;
 		selected = false;
 		garrisonHero = new Hero(mc);
+		garrisonHero.clearUnits();
 		//Builds the structure objects
 		background = Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png");
 		currentSprite = Toolkit.getDefaultToolkit().getImage("Images/castle/castle.png");
@@ -262,9 +263,12 @@ public class Castle {
 						castleView.setSelected(0);
 					} else { //in this case we mark a new selected unit
 						switch (j) {
-						case 0: if ((garrisonSquare.getHero().getUnits().get(i) != null) || (garrisonHero.getUnits().get(i) != null)) {
+						case 0: if (garrisonSquare.getHero().getUnits().get(i) != null) {
 									castleView.setSelected((1+i));
-								} break;
+								}
+								if (garrisonHero.getUnits().get(i) != null) {
+									castleView.setSelected((1+i));
+								}
 						case 1: if (currentSquare.getHero().getUnits().get(i) != null) {
 									castleView.setSelected((1+i)+8); break;
 								}
