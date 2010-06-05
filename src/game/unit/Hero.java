@@ -9,6 +9,7 @@ import game.field.Field;
 import game.field.Square;
 import game.item.Item;
 import game.main.Animation;
+import game.main.MainClass;
 import game.main.Sprite;
 import game.player.Player;
 import game.spells.Talent;
@@ -45,8 +46,10 @@ public class Hero extends Unit {
 	private int movementPoints;
 	// to include combat stats and graphical data as different classes
 	private double hPower;
+	private MainClass mc;
 	
-	public Hero(){
+	public Hero(MainClass mc){
+		this.mc = mc;
 		x = 1;
 		y = 1;
 		heading = 1;
@@ -330,6 +333,7 @@ public class Hero extends Unit {
 		getCurrentSquare().setPath(false);
 		f.getEvents().pickUp(getCurrentSquare(), this);
 		f.getEvents().pickUpResource(getCurrentSquare(), getOwner());
+		f.getEvents().enterCastle(getCurrentSquare(), getOwner(), mc);
 		//remove movement points
 		movementPoints -= 10;
 		
@@ -359,7 +363,12 @@ public class Hero extends Unit {
 	}
 	
 	public void addUnit(Unit u){
-		units.add(u);
+		for (int i=0;i<8;i++) {
+			if (units.get(i) == null) {
+				units.set(i,u);
+				break;
+			}
+		}
 	}
 
 	public void removeUnit(Unit u){
@@ -455,7 +464,12 @@ public class Hero extends Unit {
 	public Equipment getEquipment() {
 		return equipment;
 	}
-	
+
+	public void clearUnits() {
+		for (int i=0;i<8;i++) {
+			units.set(i,null);
+		}
+	}
 //	public getAnimations(){
 //		return race.getHeroAnimations;
 //	}
