@@ -22,7 +22,7 @@ public class Field {
 		//grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg");
 		//water.setImg(waterImg);
 		Random generator = new Random(100);
-		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass2.png");
+		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass2.jpg");
 		grass = new Terrain(grassImg);
 		setEvents(new SquareEvents());
 		s = new Square[width][height];

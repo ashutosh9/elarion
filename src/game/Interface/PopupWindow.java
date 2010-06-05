@@ -36,7 +36,7 @@ public class PopupWindow {
 		Y = Math.round(((800 - 600) / 2));
 	}
 	
-	public void update(int timePassed){
+	public void update(long timePassed){
 		
 	}
 	
@@ -46,9 +46,9 @@ public class PopupWindow {
 		
 		for(Choice c : choices){
 			String s = c.getText();
-			Color color = new Color(255, 255, 255);
+			Color color = new Color(0, 0, 0);
 			g.setColor(color);
-			Font font = new Font(Font.SERIF, Font.BOLD, 17);
+			Font font = new Font(Font.SERIF, Font.BOLD, 18);
 			g.setFont(font);
 			g.drawString(s,c.getX() + X,c.getY() + Y);
 			if(c.isPressed()){
@@ -300,6 +300,14 @@ public class PopupWindow {
 	public void newText(String s, int x,int y){
 		Text text = new Text(s,x,y);
 		texts.add(text);
+	}
+	
+	public int getX(){
+		return X;
+	}
+	
+	public int getY(){
+		return Y;
 	}
 	
 

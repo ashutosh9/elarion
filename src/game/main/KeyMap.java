@@ -3,6 +3,7 @@ package game.main;
 import game.Interface.PopupWindow;
 import game.castle.Castle;
 import game.field.Field;
+import game.unit.HeroPopupWindow;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
