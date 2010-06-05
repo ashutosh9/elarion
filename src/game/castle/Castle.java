@@ -263,14 +263,33 @@ public class Castle {
 						castleView.setSelected(0);
 					} else { //in this case we mark a new selected unit
 						switch (j) {
-						case 0: if (garrisonSquare.getHero().getUnits().get(i) != null) {
-									castleView.setSelected((1+i));
+						case 0: if (garrisonSquare.getHero() != null) {
+									if (garrisonSquare.getHero().getUnits().get(i) != null) {
+										castleView.setSelected((1+i));
+									}
+								}
+								if (garrisonHero != null) {
+									System.out.print("GarrisonHero exists\n");
+									if (garrisonHero.getUnits() != null) {
+										System.out.print("Units array exists\n");
+										for (int l=0;l<8;l++) {
+											System.out.print("Slot" + l);
+											if (garrisonHero.getUnits().get(l) != null) {
+												System.out.print("full\n");
+											} else {System.out.print("empty\n"); }
+										}
+									}
 								}
 								if (garrisonHero.getUnits().get(i) != null) {
+									System.out.print("Check Succeeded\n");
 									castleView.setSelected((1+i));
-								}
-						case 1: if (currentSquare.getHero().getUnits().get(i) != null) {
-									castleView.setSelected((1+i)+8); break;
+									System.out.print("Unit set\n");
+									}
+						case 1: 
+								if (currentSquare.getHero() != null) {
+									if (currentSquare.getHero().getUnits().get(i) != null) {
+										castleView.setSelected((1+i)+8); break;
+									}
 								}
 						}
 					}
