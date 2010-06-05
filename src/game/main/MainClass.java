@@ -16,6 +16,7 @@ import game.player.Player;
 import game.player.Players;
 import game.resource.Resource;
 import game.unit.Hero;
+import game.unit.HeroPopupWindow;
 import game.unit.TestUnits;
 //import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
 	
@@ -67,19 +69,16 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		turnSystem = new TurnSystem();
 		h = new Hero();
 		Hero h2 = new Hero();
-		players.getCurrentPlayer().setCurrentPlayer(true);
+		h.setName("Erag Tone");
+		h2.setName("Kirie");
+		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
 		
 		players.getCurrentPlayer().getGold().setAmount(1000);
 		players.getCurrentPlayer().newHero(h,480, 480, field);
-		players.getCurrentPlayer().newHero(h2,481, 480, field);
-		Building building = new Building();
-		building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-		field.getSquare(5, 5).setBuilding(building);
-		field.getSquare(5, 5).setPassable(false);
-		//field.getSquare(498, 498).setHero(h);
+		//players.getCurrentPlayer().newHero(h2,481, 480, field);
+		players.getPlayer(1).newHero(h2, 30, 40, field);
+		
 		players.getCurrentPlayer().setCurrentView(field.getSquare(2, 2));
-		players.getCurrentPlayer().setCurrentViewAbsX(0);
-		players.getCurrentPlayer().setCurrentViewAbsY(0);
 		TestUnits testUnits = new TestUnits();
 		TestUnits testUnits2 = new TestUnits();
 		h.addUnit(testUnits.getWarrior());
@@ -328,7 +327,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			if(popupWindow != null){
 				popupWindow.draw(g);
 			}
-			
+	
 			mouseChecker();
 			currentViewChecker();
 			autoMovementChecker();
@@ -667,8 +666,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
 					ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
 					clearPath();
-					players.getCurrentPlayer().selectHero(heroes.get(i/40));
-					movingHeroChecker();
+					if(players.getCurrentPlayer().getSelectedHero() == players.getCurrentPlayer().getHeroes().get(i/40)){
+						popupWindow = new HeroPopupWindow(this,players.getCurrentPlayer().getHeroes().get(i/40));
+						movingHeroChecker();
+					} else {
+						players.getCurrentPlayer().selectHero(heroes.get(i/40));
+						movingHeroChecker();
+					}
 					clicked = true;
 				}
 			}
@@ -698,8 +702,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
 							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
 						if(e.getButton() == MouseEvent.BUTTON1){
-//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()))
-//							players.getCurrentPlayer().getSelectedHero().getPath().getDestinationSquare();
 						
 							clearPath();
 							Path path = new Path();
