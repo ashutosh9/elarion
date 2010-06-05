@@ -28,13 +28,9 @@ public class CastleView {
 	
 	private Castle castle; // index of castle in ArrayList<Castle> in player class
 	private boolean inCastle; // ako e true - se risuva CastleView ako ne e true ne se risuva
-	private MainClass mc;
 	private int menuBuilding;
 	private Image menuFrame;
-	private MouseEvent mouseInput;
 	private int selectedIndex;
-	private int index;
-	private String string;
 	Color color = new Color(255, 255, 255);
 	Font font = new Font(Font.SERIF, Font.BOLD, 17);
 	
@@ -45,6 +41,7 @@ public class CastleView {
 		//this.castle = mc.getCurrentPlayer().getCastles().get(castle);
 		menuBuilding = -1;
 		menuFrame = Toolkit.getDefaultToolkit().getImage("Images/castle/MenuFrame.png");
+		selectedIndex = 0;
 	
 	}
 	
@@ -99,6 +96,17 @@ public class CastleView {
 				}
 			}
 		}
+		//if a unit is selected - highlight it
+		if(selectedIndex != 0) {
+			Color c = new Color(255,206,0);
+			g.setColor(c);
+			if (selectedIndex < 9) {
+				g.drawRect(943+(40*(selectedIndex-1)), 13, 36, 36);
+			}else{
+				g.drawRect(943+(40*(selectedIndex-9)), 53, 36, 36);
+			}
+		}
+		//if the mouse is floating over a building - highlight it
 		//draw sub menus/handle input
 		if (menuBuilding != -1) {
 			castle.getBuilding(menuBuilding).drawMenu(g,this);
@@ -113,9 +121,8 @@ public class CastleView {
 		return inCastle;
 	}
 
-	public void mousePressed(MouseEvent e, MainClass mc){
-		mouseInput = e;
-		castle.mousePressed(e, this, mc);
+	public void mousePressed(MouseEvent e){
+		castle.mousePressed(e, this);
 	}
 	
 	public int getSelected() {

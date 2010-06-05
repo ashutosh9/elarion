@@ -142,7 +142,7 @@ public class KeyMap {
 				if(keyCode == KeyEvent.VK_B){
 //					boolean b = mc.getCombatView().isCombat();
 //					mc.getCombatView().setCombat(!b);
-					Castle castle = new Castle(479,479,f);
+					Castle castle = new Castle(479,479,f,mc);
 					//castle.build(3);
 					mc.getCurrentPlayer().newCastle(castle);
 					mc.enterCastle(mc.getCurrentPlayer().getCastle(castle));

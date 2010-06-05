@@ -1,5 +1,6 @@
 package game.field;
 
+import game.main.MainClass;
 import game.player.Player;
 import game.unit.Hero;
 
@@ -25,10 +26,12 @@ public class SquareEvents {
 		}
 	}
 	
-	public void enterCastle(Square s, Player p){
+	public void enterCastle(Square s, Player p, MainClass mc){
 		if(s.getCastle()!=null) {
 			if (s.getCastle().getOwner() == p) {
-				
+				mc.clearPath();
+				mc.enterCastle(s.getCastle());
+				System.out.print("going in");
 			}
 		}
 	}

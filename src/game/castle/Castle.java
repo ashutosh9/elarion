@@ -33,12 +33,14 @@ public class Castle {
 	private static MageTower magetower;
 	private static Market market;
 	private static Tavern tavern;
-	private Garrison garrison;
-
-	public Castle (int x, int y,Field f) {
+	private Hero garrisonHero;
+	private MainClass mc;
+	
+	public Castle (int x, int y,Field f, MainClass mc) {
+		this.mc = mc;
 		field = f;
 		selected = false;
-		garrison = new Garrison(this);
+		garrisonHero = new Hero(mc);
 		//Builds the structure objects
 		background = Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png");
 		currentSprite = Toolkit.getDefaultToolkit().getImage("Images/castle/castle.png");
@@ -177,29 +179,24 @@ public class Castle {
 	}
 
 	public void swapGarrison() {
-		if ((currentSquare.getHero() != null) || garrisonSquare.getHero() != null) {
-			System.out.print("fail1");
-			if (garrisonSquare.getHero() == null) {
-				System.out.print("fail2");
-				if((8 - currentSquare.getHero().getUnitsAmmount()) > garrison.getAmount()) {
-					System.out.print("fail3");
+		if (currentSquare.getHero() == null) {
+			if (garrisonSquare.getHero() != null) {
+				garrisonSquare.getHero().setHeroLocation(currentSquare.getX(), currentSquare.getY(), field);
+			}
+		} else if ((currentSquare.getHero() != null)) {
+			if (garrisonSquare.getHero() != null) {
+				garrisonSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), field);
+				currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), field);
+				swapSquare.getHero().setHeroLocation(currentSquare.getX(),currentSquare.getY(),field);
+			} else {
+				if (8-currentSquare.getHero().getUnitsAmmount() > garrisonHero.getUnitsAmmount()) {
 					for (int i=0;i<8;i++) {
-						if (garrison.getUnit(i) != null) {
-							currentSquare.getHero().getUnits().add(garrison.getUnit(i));
+						if (garrisonHero.getUnits().get(i) != null) {
+							currentSquare.getHero().addUnit(garrisonHero.getUnits().get(i));
 						}
 					}
+					garrisonHero.clearUnits();
 					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), field);
-					garrison.clear();
-				}
-			} else {
-				if (garrisonSquare.getHero() != null) {
-					garrisonSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), field);
-				}
-				if (currentSquare.getHero() != null) {
-					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), field);
-				}
-				if (swapSquare.getHero() != null) {
-					swapSquare.getHero().setHeroLocation(currentSquare.getX(),currentSquare.getY(),field);
 				}
 			}
 		}
@@ -207,60 +204,85 @@ public class Castle {
 		garrisonSquare.setPassable(false);
 	}
 	
-	public Garrison getGarrison() {
-			return garrison;
+	public Hero getGarrison() {
+			return garrisonHero;
 	}
+
+//	public void swapUnitGarrisonToHero(int heroUnit, int garrisonUnit, Garrison garrison) {
+//		Unit temp;
+//		temp = garrison.getUnit(garrisonUnit);
+//		garrison.getUnits().set(garrisonUnit,currentSquare.getHero().getUnits().get(heroUnit));
+//		currentSquare.getHero().getUnits().set(heroUnit, temp);
+//	}
+//	
+//	public void swapUnitGarrisonToSelf(int Unit1, int Unit2, Garrison garrison) {
+//		Unit temp;
+//		temp = garrison.getUnit(Unit1);
+//		garrison.getUnits().set(Unit1,currentSquare.getHero().getUnits().get(Unit2));
+//		currentSquare.getHero().getUnits().set(Unit2, temp);
+//	}
 	
-	public void swapUnitGarrisonToHero(int heroUnit, int garrisonUnit, Garrison garrison) {
-		Unit temp;
-		temp = garrison.getUnit(garrisonUnit);
-		garrison.getUnits().set(garrisonUnit,currentSquare.getHero().getUnits().get(heroUnit));
-		currentSquare.getHero().getUnits().set(heroUnit, temp);
-	}
-	
-	public void swapUnitGarrisonToSelf(int Unit1, int Unit2, Garrison garrison) {
-		Unit temp;
-		temp = garrison.getUnit(Unit1);
-		garrison.getUnits().set(Unit1,currentSquare.getHero().getUnits().get(Unit2));
-		currentSquare.getHero().getUnits().set(Unit2, temp);
-	}
-	
-	public void mousePressed (MouseEvent mouseInput, CastleView castleView, MainClass mc) {
+	public void mousePressed (MouseEvent mouseInput, CastleView castleView) {
+		System.out.print("clicked \n");
 		boolean clicked = false;
 		Point topLeft = new Point(0,0);
 		Point bottomRight = new Point(0,0);
 		//checks whether to move units between the garrison/garrisoned hero and the visiting hero.
-		Hero clickedUnitHero = null;
 		for (int i=0;i<8;i++) {
-			for (int j=0;j<2;j++) {	
+			for (int j=0;j<2;j++) {
 				topLeft.setLocation(943 + (40*i),13+(40*j));
-				bottomRight.setLocation(958 + (40*i),48+(40*j));
+				bottomRight.setLocation(978 + (40*i),48+(40*j));
+				System.out.print(topLeft.getX() + " ");
+				System.out.print(topLeft.getY() + " ");
+				System.out.print(bottomRight.getX() + " ");
+				System.out.print(bottomRight.getY() + " \n");
 				if (mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
 					if (castleView.getSelected() != 0) { //in this case we swap units around
-						if (garrisonSquare.getHero() != null) {
-							switch (j) {
-								case 0: clickedUnitHero = garrisonSquare.getHero(); break;
-								case 1: clickedUnitHero = currentSquare.getHero(); break;
-							}
-							if (castleView.getSelected() < 9) {
-								swapUnitGarrisonToSelf(castleView.getSelected(), i, garrison);
+						System.out.print("Swapping \n");
+						Hero clickedUnitHero = null;
+						if (j == 0) {
+							if (garrisonSquare.getHero() != null) {
+								clickedUnitHero = garrisonSquare.getHero();
 							} else {
-								swapUnitGarrisonToHero(i, (castleView.getSelected()-8), garrison);
+								clickedUnitHero = garrisonHero;
 							}
 						} else {
-							if (castleView.getSelected() < 9) {
-								garrisonSquare.getHero().swapUnit(clickedUnitHero, castleView.getSelected(), i);
-							} else {
-								currentSquare.getHero().swapUnit(clickedUnitHero, castleView.getSelected(), i);
-							}
+							clickedUnitHero = currentSquare.getHero();
 						}
+						Hero selectedUnitHero = null;
+						if (castleView.getSelected() < 9) {
+							if (garrisonSquare.getHero() != null) {
+								selectedUnitHero = garrisonSquare.getHero();
+							} else {
+								selectedUnitHero = garrisonHero;
+							}	
+						} else {
+							selectedUnitHero = currentSquare.getHero();
+						}
+						if (castleView.getSelected() < 9) {
+							selectedUnitHero.swapUnit(clickedUnitHero, i, castleView.getSelected()-1);
+						} else {
+							selectedUnitHero.swapUnit(clickedUnitHero, i, castleView.getSelected()-9);
+						}
+						System.out.print("Swapping done \n");
+						castleView.setSelected(0);
 					} else { //in this case we mark a new selected unit
-						castleView.setSelected((1+i)*(j+1));
+						switch (j) {
+						case 0: if ((garrisonSquare.getHero().getUnits().get(i) != null) || (garrisonHero.getUnits().get(i) != null)) {
+									castleView.setSelected((1+i));
+								} break;
+						case 1: if (currentSquare.getHero().getUnits().get(i) != null) {
+									castleView.setSelected((1+i)+8); break;
+								}
+						}
+				
+						System.out.print("Selected " + castleView.getSelected() + "\n");
 					}
 					clicked = true;
 				}
 			}	
 		}
+		//checks for buildings clicked
 		if (!clicked) {
 			for (CastleBuilding current : buildings) {
 				topLeft.setLocation(current.getX(),current.getY());
@@ -271,6 +293,7 @@ public class Castle {
 				}
 			}
 		}
+		//checks for swap button clicked
 		if (!clicked) {
 			topLeft.setLocation(1241, 14);
 			bottomRight.setLocation(1275, 110);
@@ -279,6 +302,7 @@ public class Castle {
 				clicked = true;
 			}
 		}
+		//checks for exit button clicked
 		if (!clicked) {
 			topLeft.setLocation(660, 20);
 			bottomRight.setLocation(760, 100);
@@ -286,6 +310,10 @@ public class Castle {
 				mc.setInCastle(false);
 				clicked = true;
 			}
+		}
+		//de-selects if clicked on nothing
+		if (!clicked) {
+			castleView.setSelected(0);
 		}
 
 	}

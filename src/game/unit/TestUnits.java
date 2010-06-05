@@ -12,6 +12,7 @@ public class TestUnits {
 	Unit mage = new Unit();
 	
 	public TestUnits(){
+		//Warrior Setup
 		GraphicalData graphicalData = new GraphicalData();
 		warrior.getCombatStats().setHealth(100);
 		warrior.getCombatStats().setMana(0);
@@ -29,6 +30,8 @@ public class TestUnits {
 		a = new Animation();
 		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battlefield/warrior2.png"), 250);
 		warrior.getGraphicalData().setBattleFieldStandRight(a);
+		warrior.setIcon(Toolkit.getDefaultToolkit().getImage("Images/units/human/swordsman/swordsman_icon.jpg"));
+		//Archer Setup
 		graphicalData = new GraphicalData();
 		archer.getCombatStats().setHealth(50);
 		archer.getCombatStats().setMana(0);
@@ -46,6 +49,8 @@ public class TestUnits {
 		a = new Animation();
 		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battlefield/archer2.png"), 250);
 		archer.getGraphicalData().setBattleFieldStandRight(a);
+		archer.setIcon(Toolkit.getDefaultToolkit().getImage("Images/units/human/archer/archer_icon.jpg"));
+		//Mage Setup
 		graphicalData = new GraphicalData();
 		mage.getCombatStats().setHealth(40);
 		mage.getCombatStats().setMana(20);
@@ -63,6 +68,7 @@ public class TestUnits {
 		a = new Animation();
 		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battlefield/mage2.png"), 250);
 		mage.getGraphicalData().setBattleFieldStandRight(a);
+		mage.setIcon(Toolkit.getDefaultToolkit().getImage("Images/units/human/mage/mage_icon.jpg"));
 	}
 	
 	public Unit getWarrior(){

@@ -67,8 +67,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
 		players = new Players(2,field);
 		turnSystem = new TurnSystem();
-		h = new Hero();
-		Hero h2 = new Hero();
+		h = new Hero(mc);
+		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
@@ -642,12 +642,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			popupWindow.mousePressed(e, this);
 			clicked = true;
 		}
-		
-		if(inCastle){
-			castleView.mousePressed(e,this);
-			clicked = true;
+		if (!clicked) {
+			if(inCastle){
+				castleView.mousePressed(e);
+				clicked = true;
+			}
 		}
-		
 		if((mc.getCurrentPlayer().getSelectedHero() != null) && (!clicked)){
 			if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
 				if(mc.getCurrentPlayer().getSelectedHero().getPath().isAutoMoving()){
