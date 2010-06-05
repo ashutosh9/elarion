@@ -149,7 +149,9 @@ public class KeyMap {
 				}
 				
 				if(keyCode == KeyEvent.VK_0){
-					mc.endedTurn();
+					if (!mc.isInCastle()) {
+						mc.endedTurn();	
+					}
 				}
 				
 				if(keyCode == KeyEvent.VK_SPACE){

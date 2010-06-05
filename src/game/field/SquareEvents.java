@@ -25,4 +25,12 @@ public class SquareEvents {
 		}
 	}
 	
+	public void enterCastle(Square s, Player p){
+		if(s.getCastle()!=null) {
+			if (s.getCastle().getOwner() == p) {
+				
+			}
+		}
+	}
+	
 }
