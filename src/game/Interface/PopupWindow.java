@@ -28,7 +28,7 @@ public class PopupWindow {
 		texts = new ArrayList<Text>();
 		boolean loaded = false;
 		while(!loaded){
-			background = Toolkit.getDefaultToolkit().getImage("Images/popup/popupBackground.jpg");
+			background = Toolkit.getDefaultToolkit().getImage("Images/popup/popupBack.png");
 			loaded = true;
 		}
 		opened = true;

@@ -326,6 +326,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				for(Hero hero : players.getCurrentPlayer().getHeroes()){
 					if(hero.isSelected()){
 						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
+					} else {
+						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(h-2),18,null);
 					}
 					g.drawImage(hero.getIcon(),h,20,null);
 					h += 40;
