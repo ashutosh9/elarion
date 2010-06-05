@@ -668,6 +668,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					clearPath();
 					if(players.getCurrentPlayer().getSelectedHero() == players.getCurrentPlayer().getHeroes().get(i/40)){
 						popupWindow = new HeroPopupWindow(this,players.getCurrentPlayer().getHeroes().get(i/40));
+						movingHeroChecker();
 					} else {
 						players.getCurrentPlayer().selectHero(heroes.get(i/40));
 						movingHeroChecker();
@@ -701,8 +702,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
 							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
 						if(e.getButton() == MouseEvent.BUTTON1){
-//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()))
-//							players.getCurrentPlayer().getSelectedHero().getPath().getDestinationSquare();
 						
 							clearPath();
 							Path path = new Path();

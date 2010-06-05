@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
+
 import game.Interface.PopupWindow;
 import game.main.MainClass;
 
@@ -35,12 +37,15 @@ public class HeroPopupWindow extends PopupWindow {
 	public void drawInventory(Graphics g){
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"), 1, 1, null);
 		for(int i = invIndex; i < (invIndex + 8);i++){
+			Image img = null;
 			if(hero.getInventory().get(i) != null){
-				g.drawImage(hero.getInventory().get(i).getImage(),40 + i*40, 400, null);
+				img = hero.getInventory().get(i).getImage().getScaledInstance(40, 40, 1);
 			} else {
-				g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg"),40 + i*40, 400, null);
+				img = Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg");
 			}
+			g.drawImage(img,40 + i*64 + super.getX(), 400 + super.getY(), null);
 		}
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"), 100, 100, null);
 	}
 	
 }
