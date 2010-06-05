@@ -30,12 +30,24 @@ public class Garrison {
 	public Unit getUnit(int i) {
 		return units.get(i);
 	}
-	public int getSize() {
-		return units.size();
+	public int getAmount() {
+		int amount = 0;
+		for (int i=0; i<8; i++) {
+			if (units.get(i) != null) {
+				amount++;
+			}
+		}
+		return amount;
 	}
 	
 	public ArrayList<Unit> getUnits(){
 		return units;
+	}
+	
+	public void clear() {
+		for (int i=0;i<8;i++) {
+			units.set(i,null);
+		}
 	}
 	
 	public boolean isEmpty() {

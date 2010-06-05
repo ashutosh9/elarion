@@ -36,6 +36,7 @@ public class Castle {
 	private Garrison garrison;
 
 	public Castle (int x, int y,Field f) {
+		field = f;
 		selected = false;
 		garrison = new Garrison(this);
 		//Builds the structure objects
@@ -176,40 +177,34 @@ public class Castle {
 	}
 
 	public void swapGarrison() {
-//		if (!((garrisonSquare.getHero() == null) || (currentSquare.getHero() == null))) {
-//			if ((garrisonSquare.getHero() == null) && (currentSquare.getHero() != null)) {
-//				if(garrison.getSize()<=(8-currentSquare.getHero().getUnitSize())) {
-//					for (int i=0;i<8;i++) {
-//						if (garrison.getUnit(i) != null) {
-//							currentSquare.getHero().addUnit(garrison.getUnit(i));
-//						}
-//					}
-//					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
-//				}
-//				currentSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), this.field);
-//				garrisonSquare.getHero().setHeroLocation(currentSquare.getX(), currentSquare.getY(), this.field);
-//				swapSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
-//				
-//			}
-//		}
-//	}
 		if ((currentSquare.getHero() != null) || garrisonSquare.getHero() != null) {
+			System.out.print("fail1");
 			if (garrisonSquare.getHero() == null) {
-				if(8 - currentSquare.getHero().getUnits().size() > garrison.getUnits().size()) {
+				System.out.print("fail2");
+				if((8 - currentSquare.getHero().getUnitsAmmount()) > garrison.getAmount()) {
+					System.out.print("fail3");
 					for (int i=0;i<8;i++) {
 						if (garrison.getUnit(i) != null) {
 							currentSquare.getHero().getUnits().add(garrison.getUnit(i));
 						}
 					}
-					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
-					garrison.getUnits().clear();
+					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), field);
+					garrison.clear();
 				}
 			} else {
-				garrisonSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), this.field);
-				currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), this.field);
-				swapSquare.getHero().setHeroLocation(currentSquare.getX(),currentSquare.getY(),this.field);
+				if (garrisonSquare.getHero() != null) {
+					garrisonSquare.getHero().setHeroLocation(swapSquare.getX(), swapSquare.getY(), field);
+				}
+				if (currentSquare.getHero() != null) {
+					currentSquare.getHero().setHeroLocation(garrisonSquare.getX(), garrisonSquare.getY(), field);
+				}
+				if (swapSquare.getHero() != null) {
+					swapSquare.getHero().setHeroLocation(currentSquare.getX(),currentSquare.getY(),field);
+				}
 			}
 		}
+		swapSquare.setPassable(false);
+		garrisonSquare.setPassable(false);
 	}
 	
 	public Garrison getGarrison() {

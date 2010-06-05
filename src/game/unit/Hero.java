@@ -400,6 +400,16 @@ public class Hero extends Unit {
 		return hPower;
 	}
 	
+	public int getUnitsAmmount() {
+		int amount = 0;
+		for (int i=0;i<8;i++) {
+			if (units.get(i) != null) {
+				amount++;
+			}
+		}
+		return amount;
+	}
+	
 	public void swapUnit(Hero other,int otherIndex, int thisIndex){
 		Unit temp;
 		temp = this.getUnits().get(thisIndex);
