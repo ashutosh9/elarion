@@ -1,14 +1,20 @@
 package game.castle;
 
 import game.graphic.CastleView;
+import game.item.Item;
 import game.main.MainClass;
 
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class Market extends CastleBuilding {
+	private ArrayList<Item> items = new ArrayList<Item>(8);
+	private int selection;
+	private int j;
+	private int invOffset;
 
 	public Market(Castle owner, MainClass mc) {
 		super(owner,mc);
@@ -29,34 +35,62 @@ public class Market extends CastleBuilding {
 		this.mc = mc;
 		name = "Market";
 		description = "nodescript";
+		selection = -1;
+		invOffset = 0;
+		items.clear();
+		update();
 	}
 	
-
+	@Override
+	public void update() {
+		items.clear();
+		for (int i=0;i<8;i++) {
+			items.add(mc.getItemGen().getRandomItem());
+		}
+	}
 
 	@Override
 	public void drawMenu(Graphics g, CastleView castleView) {
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground.png"),101,101,null);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"),701,501,null);
 		g.setColor(black);
-		g.fillRect(351, 201, 600, 200);
+		g.fillRect(151, 151, 600, 400);
 		g.setColor(white);
-		g.drawRect(351, 201, 600, 200);
-		g.drawString("Wood",355,205);
-		g.drawString("Buy 5 for 500", 355, 230);
-		g.drawString("Sell 5 for 100",355,255);
-		g.drawString("Buy",355,270);
-		g.drawString("Sell",421,270);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),356,295,null);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),421,295,null);
-		g.drawString("Stone",500,205);
-		g.drawString("Buy 5 for 500", 500, 230);
-		g.drawString("Sell 5 for 100",500,255);
-		g.drawString("Buy",500,270);
-		g.drawString("Sell",566,270);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),501,295,null);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),566,295,null);
+		g.drawRect(151, 151, 600, 400);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"),701,501,null);
+		g.drawString("Wood",155,165);
+		g.drawString("Buy 5 for 500", 155,190);
+		g.drawString("Sell 5 for 100",155,215);
+		g.drawString("Buy",155,230);
+		g.drawString("Sell",221,230);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),156,255,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),221,255,null);
+		g.drawString("Stone",300,165);
+		g.drawString("Buy 5 for 500", 300, 190);
+		g.drawString("Sell 5 for 100",300, 215);
+		g.drawString("Buy",300,230);
+		g.drawString("Sell",366,230);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),301,255,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),366,255,null);
 		if (upgraded) {
-			
+			for (int i=0; i<8; i++) {
+				if(items.get(i) != null) {
+					g.drawImage(items.get(i).getImage(),157+(40*i),403,null);
+					if(selection == i) {
+						g.setColor(gold);
+						g.drawRect(157+(40*i), 403, 36, 36);
+					}
+				}
+			}
+			if (owner.getCurrentSquare().getHero() != null) {
+				if ((invOffset != 0) && (owner.getCurrentSquare().getHero().getInventory().size() > 8)) {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),155,461,null);
+				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),155,461,null); }
+				for (int i=0; i<8; i++) {
+				}
+				if (invOffset < (owner.getCurrentSquare().getHero().getInventory().size() - 8)) {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),155,731,null);
+				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),155,731,null); }
+			}
 		}
 	}
 	@Override
@@ -64,8 +98,8 @@ public class Market extends CastleBuilding {
 		Point topLeft = new Point(0,0);
 		Point bottomRight = new Point(0,0);
 		boolean clicked = false;
-		topLeft.setLocation(356,295);
-		bottomRight.setLocation(415,354);
+		topLeft.setLocation(156,255);
+		bottomRight.setLocation(215,314);
 		if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 			clicked = true;
 			if (mc.getCurrentPlayer().getGold().getAmount() >= 500) {
@@ -74,8 +108,8 @@ public class Market extends CastleBuilding {
 			}
 		}
 		if (!clicked) {
-			topLeft.setLocation(421,295);
-			bottomRight.setLocation(460,354);
+			topLeft.setLocation(221,255);
+			bottomRight.setLocation(260,314);
 			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				clicked = true;
 				if (mc.getCurrentPlayer().getWood().getAmount() >= 5) {
@@ -85,8 +119,8 @@ public class Market extends CastleBuilding {
 			}
 		}
 		if (!clicked) {
-			topLeft.setLocation(501,295);
-			bottomRight.setLocation(560,354);
+			topLeft.setLocation(301,255);
+			bottomRight.setLocation(360,314);
 			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				clicked = true;
 				if (mc.getCurrentPlayer().getGold().getAmount() >= 500) {
@@ -96,8 +130,8 @@ public class Market extends CastleBuilding {
 			}
 		}
 		if (!clicked) {
-			topLeft.setLocation(566,295);
-			bottomRight.setLocation(625,354);
+			topLeft.setLocation(366,255);
+			bottomRight.setLocation(425,314);
 			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				clicked = true;
 				if (mc.getCurrentPlayer().getStone().getAmount() >= 5) {
@@ -108,7 +142,7 @@ public class Market extends CastleBuilding {
 		}
 		
 		if (!clicked) {
-			topLeft.setLocation(701,501);
+			topLeft.setLocation(501,501);
 			bottomRight.setLocation(760,560);
 			if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				castleView.setMenuBuilding(-1);
