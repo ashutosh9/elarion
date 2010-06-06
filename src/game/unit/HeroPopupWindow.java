@@ -18,6 +18,7 @@ public class HeroPopupWindow extends PopupWindow {
 	private int selectedUnit;
 
 	public HeroPopupWindow(MainClass mc, Hero hero) {
+		
 		super(mc);
 		invIndex = 0;
 		selectedItem = -1;
@@ -32,14 +33,6 @@ public class HeroPopupWindow extends PopupWindow {
 		this.newText(s, 100, 50);
 		s = new String("XP : " + hero.getExperience().x + " / " + hero.getExperience().y);
 		this.newText(s, 100, 80);
-//		for(int i = 0;i<1;i++){
-//			hero.getInventory().add(0, new Item("armor",null));
-//		}
-//		
-//		Item i = new Item("neck",Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"));
-//		Item e = new Item("rightHand",Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
-//		hero.getInventory().add(0,e);
-//		hero.getEquipment().equip(i, hero.getInventory());
 		
 	}
 	
@@ -89,6 +82,8 @@ public class HeroPopupWindow extends PopupWindow {
 			}
 			g.drawImage(img,40 + (i-invIndex)*40 + super.getX() - minX, 400 + super.getY() + plusY,36,36, null);
 		}	
+		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg") ,(7)*40 + super.getX() - 2 - 25, 360 + super.getY() - 2 + 15,25,25,null);
 		
 	}
 	
@@ -187,6 +182,7 @@ public class HeroPopupWindow extends PopupWindow {
 				g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/units/default.jpg") ,i * 50 +365 + super.getX() + 2, 400 + super.getY() + 2,42,42,null);
 			}
 		}
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg") ,7 * 50 +385 + super.getX() + 2, 370 + super.getY() + 2,25,25,null);
 		
 	}
 	
@@ -232,6 +228,16 @@ public class HeroPopupWindow extends PopupWindow {
 				if(invIndex < 0 ) invIndex = 0;
 			}
 		} 
+		
+		if(mc.isWithinBounds(mc.getMousePos(), new Point((7)*40 + super.getX() - 2 - 25, 360 + super.getY() - 2 + 15), new Point((7)*40 + super.getX() - 2 , 360 + super.getY() - 2 + 40))){
+			if(selectedItem != -1){
+				if(hero.getInventory().get(selectedItem) != null){
+					hero.getInventory().remove(selectedItem);
+					hero.getInventory().add(selectedItem,null);
+					selectedItem = -1;
+				}
+			}
+		}
 		
 		Point start;
 		Point end;
@@ -331,6 +337,16 @@ public class HeroPopupWindow extends PopupWindow {
 					}
 				}
 				break;
+			}
+		}
+
+		if(mc.isWithinBounds(mc.getMousePos(), new Point(7 * 50 +385 + super.getX() + 2, 370 + super.getY() + 2), new Point(7 * 50 +410 + super.getX() + 2, 395 + super.getY() + 2))){
+			if(selectedUnit != -1){
+				if(hero.getUnits().get(selectedUnit) != null){
+					hero.getUnits().remove(selectedUnit);
+					hero.getUnits().add(selectedUnit,null);
+					selectedUnit = -1;
+				}
 			}
 		}
 		
