@@ -127,6 +127,14 @@ public class Castle {
 		this.owner = p;
 	}
 	
+	public Field getField() {
+		return field;
+	}
+	
+	public void setField(Field f) {
+		field = f;
+	}
+	
 	public Square getCurrentSquare() {
 		return currentSquare;
 	}
@@ -255,22 +263,21 @@ public class Castle {
 						}
 
 						castleView.setSelected(0);
-					} else { //in this case we mark a new selected unit
+					} else { //in this case we mark a new selected unit. Forgetting breaks is fun ^_^
 						switch (j) {
 						case 0: if (garrisonSquare.getHero() != null) {
 									if (garrisonSquare.getHero().getUnits().get(i) != null) {
 										castleView.setSelected((1+i));
 									}
-								}
-								if (garrisonHero.getUnits().get(i) != null) {
+								} else if (garrisonHero.getUnits().get(i) != null) {
 									castleView.setSelected((1+i));
-									}
+								}; break;
 						case 1: 
 								if (currentSquare.getHero() != null) {
 									if (currentSquare.getHero().getUnits().get(i) != null) {
 										castleView.setSelected((1+i)+8); break;
 									}
-								}
+								} break;
 						}
 					}
 					clicked = true;

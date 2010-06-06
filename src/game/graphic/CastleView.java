@@ -1,6 +1,6 @@
 package game.graphic;
 /* IMAGES POSITIONING INFO
- * Background - 1280x800, coordinates 0x0
+ * Background - 1280x800, coordinates 1x1
  * Town Hall - coordinates 504x0
  * Barracks - coordinates 206x417
  * Archery - coordinates 66x413
@@ -53,8 +53,8 @@ public class CastleView {
 		g.setColor(color);
 		g.setFont(font);
 		// Draw background
-		g.drawImage(castle.getBackground(),0,0,null);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/MenuFrame.png"), 0, 0, null);
+		g.drawImage(castle.getBackground(),1,1,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/MenuFrame.png"), 1, 1, null);
 		// Draw individual buildings
 		for (CastleBuilding current : castle.getBuildings()) {
 			if (current.isBuilt()) {
