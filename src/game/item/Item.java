@@ -7,8 +7,10 @@ public class Item {
 
 	private Image image;
 	private String type;
+	private String name;
 	
 	public Item(String type, Image img){
+		name = new String("?");
 		this.type = type;
 		this.image = img;
 		if(type == null){
@@ -33,6 +35,14 @@ public class Item {
 
 	public String getType() {
 		return type;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
