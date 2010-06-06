@@ -64,6 +64,9 @@ public class Players {
 		return players.get(i);
 	}
 	
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
 	
 
 }

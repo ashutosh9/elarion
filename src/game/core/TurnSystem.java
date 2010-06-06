@@ -1,5 +1,6 @@
 package game.core;
 
+import game.castle.Castle;
 import game.field.Field;
 import game.player.Player;
 import game.player.Players;
@@ -18,6 +19,11 @@ public class TurnSystem{
 	public void nextTurn(Players players,Field f){	
 		if(players.getCurrentPlayer() == players.getPlayer(0)){
 			currentTurn++;
+			for(Player p :players.getPlayers()) {
+				for (Castle c : p.getCastles()) {
+					c.turnUpdate();
+				}
+			}
 		}
 		//set all hero movement points to maximum
 		//set current view
