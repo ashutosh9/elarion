@@ -1,5 +1,7 @@
 package game.core;
 
+import java.util.Random;
+
 import game.castle.Castle;
 import game.field.Field;
 import game.player.Player;
