@@ -144,12 +144,14 @@ public class Tavern extends CastleBuilding {
 						}
 					} else {
 						if (upgraded) {
-							if (mc.getCurrentPlayer().getGold().getAmount() >= 5000) {
-								mc.getCurrentPlayer().getDeadHeroes().get(selection-2).setHeroLocation(owner.getCurrentSquare().getX(), owner.getCurrentSquare().getY(), owner.getField());
-								mc.getCurrentPlayer().getGold().removeAmount(5000);
-								mc.getCurrentPlayer().newHero(mc.getCurrentPlayer().getDeadHeroes().get(selection-2),owner.getCurrentSquare().getX(),owner.getCurrentSquare().getY(),owner.getField());
-								mc.getCurrentPlayer().getDeadHeroes().remove(selection-2);
-								selection = -1;
+							if (owner.getCurrentSquare().getHero() == null) {
+								if (mc.getCurrentPlayer().getGold().getAmount() >= 5000) {
+									mc.getCurrentPlayer().getDeadHeroes().get(selection-2).setHeroLocation(owner.getCurrentSquare().getX(), owner.getCurrentSquare().getY(), owner.getField());
+									mc.getCurrentPlayer().getGold().removeAmount(5000);
+									mc.getCurrentPlayer().newHero(mc.getCurrentPlayer().getDeadHeroes().get(selection-2),owner.getCurrentSquare().getX(),owner.getCurrentSquare().getY(),owner.getField());
+									mc.getCurrentPlayer().getDeadHeroes().remove(selection-2);
+									selection = -1;
+								}
 							}
 						}
 					}
