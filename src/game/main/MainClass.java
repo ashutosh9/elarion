@@ -157,7 +157,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			update(timePassed);
 			
 			Graphics2D g = s.getGraphics();
-			
+
 			try {
 				draw(g);
 			} catch (NullPointerException e) {
