@@ -46,7 +46,7 @@ public class PopupWindow {
 		
 		for(Choice c : choices){
 			String s = c.getText();
-			Color color = new Color(0, 0, 0);
+			Color color = new Color(220, 220, 220);
 			g.setColor(color);
 			Font font = new Font(Font.SERIF, Font.BOLD, 18);
 			g.setFont(font);
@@ -82,8 +82,6 @@ public class PopupWindow {
 
 			Point start = new Point(c.getX() + X,c.getY() + Y);
 			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
-//			System.out.print(" start X : " + start.x + " start Y " + start.y);
-//			System.out.print(" end X : " + end.x + " end Y " + end.y);
 			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
 				c.setHovered(true);
 			} else {
