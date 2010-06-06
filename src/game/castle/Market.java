@@ -86,10 +86,21 @@ public class Market extends CastleBuilding {
 					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),155,461,null);
 				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),155,461,null); }
 				for (int i=0; i<8; i++) {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg"),155,461,null);
 				}
 				if (invOffset < (owner.getCurrentSquare().getHero().getInventory().size() - 8)) {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),155,731,null);
-				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),155,731,null); }
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),731,461,null);
+				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),731,461,null); }
+				j = 0;
+				for (Item item : owner.getCurrentSquare().getHero().getInventory()) {
+					if (((j - invOffset) > -1)&&((j - invOffset) < 8)) {
+						g.drawImage(item.getImage(),219 + (64*j),461,null);
+						if ((selection - 8) == j) {
+							g.setColor(gold);
+							g.drawRect(219+(64*j),461,64,64);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -151,7 +162,36 @@ public class Market extends CastleBuilding {
 			
 		}
 		if(upgraded) {
-			
+			if (!clicked) {
+				for (int i=0; i<8; i++) {
+					topLeft.setLocation(157+(40*i),403);
+					bottomRight.setLocation(220+(40*i),467);
+					if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
+						clicked = true;
+						if (items.get(i) != null) {
+							selection = i;
+						}	
+					}
+				}
+			}
+			if (!clicked) {
+				j = 0;
+				if(owner.getGarrisonSquare().getHero() != null) {
+					if (owner.getGarrisonSquare().getHero().getInventory() != null) {
+							for (Item item : owner.getGarrisonSquare().getHero().getInventory()) {
+							if (((j - invOffset) > -1) && ((j - invOffset) < 8)) {
+								topLeft.setLocation(219 + (64*(j - invOffset)),524);
+								bottomRight.setLocation(282 + (64*(j - invOffset)),524);
+								if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
+									clicked = true;
+									selection = (j-invOffset);
+								}
+							}
+							j++;
+						}
+					}
+				}
+			}
 		}
 	}
 }
