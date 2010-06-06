@@ -325,18 +325,22 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),408,18,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),448,18,null);
 			
-			{
-				int h = 210;
-				for(Hero hero : players.getCurrentPlayer().getHeroes()){
-					if(hero.isSelected()){
-						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
-					} else {
-						g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(h-2),18,null);
-					}
-					g.drawImage(hero.getIcon(),h,20,null);
-					h += 40;
+			
+			int h = 210;
+			for(Hero hero : players.getCurrentPlayer().getHeroes()){
+				if(hero.isSelected()){
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
+				} else {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(h-2),18,null);
 				}
+				g.drawImage(hero.getIcon(),h,20,null);
+				h += 40;
 			}
+			
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),38,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg"),(156),38,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),78,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),78,null);
 			
 			if(popupWindow != null){
 				popupWindow.draw(g);
