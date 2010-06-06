@@ -90,6 +90,10 @@ public class Player {
 		return heroes;
 	}
 
+	public ArrayList<Hero> getDeadHeroes() {
+		return deadHeroes;
+	}
+	
 	public void setCurrentView(Square s) {
 		currentView = s;
 	}
