@@ -81,6 +81,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h.setName("Erag Tone");
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
+		players.getCurrentPlayer().getDeadHeroes().add(heroGen.getRandomHero());
 		
 		players.getCurrentPlayer().getGold().setAmount(100000);
 		players.getCurrentPlayer().getWood().setAmount(1000);
