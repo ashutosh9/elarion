@@ -122,7 +122,11 @@ public class CastleView {
 	}
 
 	public void mousePressed(MouseEvent e){
+	if (menuBuilding != -1) {
+		castle.getBuilding(menuBuilding).mousePressed(e, this);
+	} else {
 		castle.mousePressed(e, this);
+	}
 	}
 	
 	public int getSelected() {

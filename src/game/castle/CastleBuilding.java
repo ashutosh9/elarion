@@ -1,7 +1,10 @@
 package game.castle;
 
 import game.graphic.CastleView;
+import game.main.MainClass;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -17,7 +20,15 @@ public class CastleBuilding {
 	protected int goldcost;
 	protected int woodcost;
 	protected int stonecost;
+	protected int upgradegoldcost;
+	protected int upgradestonecost;
+	protected int upgradewoodcost;
 	protected int index;
+	protected boolean upgraded;
+	Color white = new Color(255, 255, 255);
+	Color black = new Color(0,0,0);
+	Font font = new Font(Font.SERIF, Font.BOLD, 17);
+	protected MainClass mc;
 	
 	public Image getImage() {
 		return image;
@@ -101,6 +112,12 @@ public class CastleBuilding {
 		index = i;
 	}
 	
+	public void upgrade() {
+	}
+	
 	public void drawMenu(Graphics g, CastleView castleView) {	
+	}
+	
+	public void mousePressed(MouseEvent e, CastleView castleView) {
 	}
 }
