@@ -1,6 +1,9 @@
 package game.castle;
 
 import game.graphic.CastleView;
+import game.main.MainClass;
+import game.unit.TestUnits;
+import game.unit.Unit;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,8 +14,8 @@ import java.awt.event.MouseEvent;
 @SuppressWarnings("unused")
 public class Archery extends CastleBuilding {
 	
-	public Archery(Castle owner) {
-		super(owner);
+	public Archery(Castle owner, MainClass mc) {
+		super(owner, mc);
 		x = 66;
 		y = 413;
 		w = 140;
@@ -56,5 +59,45 @@ public class Archery extends CastleBuilding {
 		Point topLeft = new Point(0,0);
 		Point bottomRight = new Point(0,0);
 		boolean clicked = false;
+		topLeft.setLocation(481,431);
+		bottomRight.setLocation(540,490);
+		if(mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
+			clicked = true;
+			if(mc.getCurrentPlayer().getGold().getAmount() >= 1000) {
+				if (owner.getGarrisonSquare().getHero() != null) {
+					if (owner.getGarrisonSquare().getHero().getUnitsAmmount() < 8) {
+						TestUnits testUnits = new TestUnits();
+						Unit u = new Unit();
+						u = testUnits.getArcher();
+						if (upgraded) {
+							u.setExperiance(1000);
+						}
+						owner.getGarrisonSquare().getHero().addUnit(u);
+						mc.getCurrentPlayer().getGold().removeAmount(1000);
+					}
+				} else if (owner.getGarrison().getUnitsAmmount() < 8) {
+					if (owner.getGarrison().getUnitsAmmount() < 8) {
+						TestUnits testUnits = new TestUnits();
+						Unit u = new Unit();
+						u = testUnits.getArcher();
+						if (upgraded) {
+							u.setExperiance(1000);
+						}
+						owner.getGarrison().addUnit(u);
+						mc.getCurrentPlayer().getGold().removeAmount(1000);
+					}
+				}
+					
+			}
+		}
+		if (!clicked) {
+			topLeft.setLocation(701,501);
+			bottomRight.setLocation(760,560);
+			if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
+				castleView.setMenuBuilding(-1);
+				clicked = true;
+			}
+			
+		}
 	}
 }

@@ -45,13 +45,13 @@ public class Castle {
 		//Builds the structure objects
 		background = Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png");
 		currentSprite = Toolkit.getDefaultToolkit().getImage("Images/castle/castle.png");
-		keep = new Keep(this);
-		townhall = new TownHall(this);
-		barracks = new Barracks(this);
-		archery = new Archery(this);
-		magetower = new MageTower(this);
-		market = new Market(this);
-		tavern = new Tavern(this);
+		keep = new Keep(this,mc);
+		townhall = new TownHall(this,mc);
+		barracks = new Barracks(this,mc);
+		archery = new Archery(this,mc);
+		magetower = new MageTower(this,mc);
+		market = new Market(this,mc);
+		tavern = new Tavern(this,mc);
 		//adds them to the container
 		buildings.add(keep);
 		buildings.add(townhall);

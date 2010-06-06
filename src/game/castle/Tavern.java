@@ -1,11 +1,13 @@
 package game.castle;
 
+import game.main.MainClass;
+
 import java.awt.Toolkit;
 
 public class Tavern extends CastleBuilding {
 
-	public Tavern(Castle owner) {
-		super(owner);
+	public Tavern(Castle owner, MainClass mc) {
+		super(owner,mc);
 		x = 865;
 		y = 508;
 		w = 320;
