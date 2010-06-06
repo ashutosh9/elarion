@@ -22,6 +22,7 @@ public class Hero extends Unit {
 	private ArrayList<Unit> units = new ArrayList<Unit>(8);
 	private Equipment equipment;
 	private String name;
+	private String description;
 	private Point experience;
 	private int x; 
 	private int y; 
@@ -50,6 +51,8 @@ public class Hero extends Unit {
 	
 	public Hero(MainClass mc){
 		this.mc = mc;
+		name = "noname";
+		description = "nondescript";
 		x = 1;
 		y = 1;
 		heading = 1;
@@ -449,6 +452,14 @@ public class Hero extends Unit {
 		return name;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
 	public void setExperience(Point experience) {
 		this.experience = experience;
 	}
