@@ -3,59 +3,68 @@ package game.unit;
 import java.awt.Point;
 
 public class CombatStats {
-
-	private double strenght; //defines damage and 0.5x defense
-	private double agility;  // defines ranged damage
-	//private double stamina;  // defines health and 0.5x defense
-	private double intelligence; // defines mana and spell damage 
-	private double defense;
-	private double movementpoints;	// how many titles can the unit walk
-	private double initiative;
-	private double morale; // from items , building , spells
-	private double luck;  // from items , buildings , spells
-	private double health;
-	private double mana;
+	
+	
 	private Point combatPos = new Point();
 	private double cP;
-	
-	public void setStrenght(double strenght) {
-		this.strenght = strenght;
-	}
-	
-	public double getStrenght() {
-		return strenght;
-	}
-	
-	public void setAgility(double agility) {
-		this.agility = agility;
-	}
-	
-	public double getAgility() {
-		return agility;
-	}
-	
-//	public void setStamina(double stamina) {
-//		this.stamina = stamina;
-//	}
-//	
-//	public double getStamina() {
-//		return stamina;
-//	}
-	
-	public void setIntelligence(double intelligence) {
-		this.intelligence = intelligence;
-	}
-	
-	public double getIntelligence() {
-		return intelligence;
-	}
-	
-	public void setDefense(double defense) {
-		this.defense = defense;
-	}
 
-	public double getDefense() {
-		return defense;
+	private double movementpoints;	
+	private int initiative;
+	
+	private Point health;
+	private Point mana;
+	
+	private int strenght;
+	private int constitution;
+	
+	private int dexterity;
+	private int intelligence;
+	
+	private int wisdom;
+	private int charisma;
+
+	public CombatStats(){
+		health = new Point(100,100);
+		mana = new Point(100,100);
+		
+		strenght = 10;
+		constitution = 10;
+		dexterity = 10;
+		intelligence = 10;
+		wisdom = 10;
+		charisma = 10;
+	}
+	
+	public void setCurrentHealth(int i){
+		health.x = i;
+	}
+	
+	public void setMaximumHealth(int i){
+		health.y = i;
+	}
+	
+	public int getMaximumHealth(){
+		return health.y;
+	}
+	
+	public int getCurrentHealth(){
+		return health.x;
+	}
+	
+	public void setCurrentMana(int i){
+		mana.x = i;
+	}
+	
+	public void setMaximumMana(int i){
+		mana.y = i;
+	}
+	
+	public int getCurrentMana(){
+		return mana.x;
+	}
+	
+	public int getMaximumMana(){
+		return mana.y;
 	}
 
 	public void setMovementpoints(double movementpoints) {
@@ -64,46 +73,6 @@ public class CombatStats {
 
 	public double getMovementpoints() {
 		return movementpoints;
-	}
-
-	public void setInitiative(double initiative) {
-		this.initiative = initiative;
-	}
-
-	public double getInitiative() {
-		return initiative;
-	}
-
-	public void setMorale(double morale) {
-		this.morale = morale;
-	}
-
-	public double getMorale() {
-		return morale;
-	}
-
-	public void setLuck(double luck) {
-		this.luck = luck;
-	}
-
-	public double getLuck() {
-		return luck;
-	}
-
-	public void setHealth(double health) {
-		this.health = health;
-	}
-	
-	public double getHealth() {
-		return health;
-	}
-	
-	public void setMana(double mana) {
-		this.mana = mana;
-	}
-	
-	public double getMana() {
-		return mana;
 	}
 
 	public void setCombatPos(Point combatPos) {
@@ -120,6 +89,78 @@ public class CombatStats {
 
 	public double getcP() {
 		return cP;
+	}
+
+	public int getInitiative() {
+		return initiative;
+	}
+
+	public void setInitiative(int initiative) {
+		this.initiative = initiative;
+	}
+
+	public Point getHealth() {
+		return health;
+	}
+
+	public void setHealth(Point health) {
+		this.health = health;
+	}
+
+	public Point getMana() {
+		return mana;
+	}
+
+	public void setMana(Point mana) {
+		this.mana = mana;
+	}
+
+	public int getStrenght() {
+		return strenght;
+	}
+
+	public void setStrenght(int strenght) {
+		this.strenght = strenght;
+	}
+
+	public int getConstitution() {
+		return constitution;
+	}
+
+	public void setConstitution(int constitution) {
+		this.constitution = constitution;
+	}
+
+	public int getDexterity() {
+		return dexterity;
+	}
+
+	public void setDexterity(int dexterity) {
+		this.dexterity = dexterity;
+	}
+
+	public int getIntelligence() {
+		return intelligence;
+	}
+
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
+	}
+
+	public int getWisdom() {
+		return wisdom;
+	}
+
+	public void setWisdom(int wisdom) {
+		this.wisdom = wisdom;
+	}
+
+	public int getCharisma() {
+		return charisma;
+	}
+
+	public void setCharisma(int charisma) {
+		this.charisma = charisma;
 	}
 	
 }

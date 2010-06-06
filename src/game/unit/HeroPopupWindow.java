@@ -33,6 +33,38 @@ public class HeroPopupWindow extends PopupWindow {
 		this.newText(s, 100, 50);
 		s = new String("XP : " + hero.getExperience().x + " / " + hero.getExperience().y);
 		this.newText(s, 100, 80);
+		img = Toolkit.getDefaultToolkit().getImage("Images/popup/stats2.png").getScaledInstance(300, 370, Image.SCALE_REPLICATE);
+		this.newImg(img, 415, 33);
+		
+		s = new String("Level : " + hero.getLevel());
+		this.newText(s, 455, 80);
+		
+		s = new String("Strenght : " + hero.getCombatStats().getStrenght());
+		this.newText(s, 455, 110);
+		s = new String("Constitution : " + hero.getCombatStats().getConstitution());
+		this.newText(s, 455, 130);
+		
+		s = new String("Dexterity : " + hero.getCombatStats().getDexterity());
+		this.newText(s, 455, 160);
+		s = new String("Intelligence : " + hero.getCombatStats().getIntelligence());
+		this.newText(s, 455, 180);
+
+		s = new String("Wisdom : " + hero.getCombatStats().getWisdom());
+		this.newText(s, 455, 210);
+		s = new String("Charisma : " + hero.getCombatStats().getCharisma());
+		this.newText(s, 455, 230);
+		
+		s = new String("Initiative : " + hero.getCombatStats().getInitiative());
+		this.newText(s, 455, 260);
+		s = new String("Movement Points : " + hero.getMovementPoints() / 10);
+		this.newText(s, 455, 280);
+		
+		s = new String("Health : " + hero.getCombatStats().getHealth().x + "/" + hero.getCombatStats().getHealth().y);
+		this.newText(s, 455, 310);
+		s = new String("Mana : " + hero.getCombatStats().getMana().x + "/" + hero.getCombatStats().getMana().y);
+		this.newText(s, 455, 330);
+		
+		
 		
 	}
 	

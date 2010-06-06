@@ -71,7 +71,7 @@ public class Archery extends CastleBuilding {
 						Unit u = new Unit();
 						u = testUnits.getArcher();
 						if (upgraded) {
-							u.setExperiance(1000);
+							u.addExperience(1000,mc);
 						}
 						owner.getGarrisonSquare().getHero().addUnit(u);
 						mc.getCurrentPlayer().getGold().removeAmount(1000);
@@ -82,7 +82,7 @@ public class Archery extends CastleBuilding {
 						Unit u = new Unit();
 						u = testUnits.getArcher();
 						if (upgraded) {
-							u.setExperiance(1000);
+							u.addExperience(1000,mc);
 						}
 						owner.getGarrison().addUnit(u);
 						mc.getCurrentPlayer().getGold().removeAmount(1000);

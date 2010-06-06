@@ -66,7 +66,7 @@ public class Barracks extends CastleBuilding {
 						Unit u = new Unit();
 						u = testUnits.getWarrior();
 						if (upgraded) {
-							u.setExperiance(1500);
+							u.addExperience(1500,mc);
 						}
 						owner.getGarrisonSquare().getHero().addUnit(u);
 						mc.getCurrentPlayer().getGold().removeAmount(1500);
@@ -77,7 +77,7 @@ public class Barracks extends CastleBuilding {
 						Unit u = new Unit();
 						u = testUnits.getWarrior();
 						if (upgraded) {
-							u.setExperiance(1500);
+							u.addExperience(1500,mc);
 						}
 						owner.getGarrison().addUnit(u);
 						mc.getCurrentPlayer().getGold().removeAmount(1500);

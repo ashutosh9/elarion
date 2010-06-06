@@ -13,68 +13,68 @@ public class Combat {
 
 	public Combat(Hero attacker , Hero defender){
 		
-		for(Unit u : attacker.getUnits()){
-			if(u.getType() == "Warrior"){
-				u.getCombatStats().setcP(u.getCombatStats().getHealth() +    
-										 u.getCombatStats().getMana() + 
-										 u.getCombatStats().getStrenght() +  
-										 u.getCombatStats().getAgility()*1.5 +     
-										 u.getCombatStats().getIntelligence()*2 +
-										 u.getCombatStats().getInitiative()*10 +
-										 u.getCombatStats().getMovementpoints()*3 +
-										 u.getCombatStats().getDefense());
-			}else if(u.getType() == "Archer"){
-				u.getCombatStats().setcP(u.getCombatStats().getHealth() +    
-						 				 u.getCombatStats().getMana() + 
-						 				 u.getCombatStats().getStrenght() +  
-						 				 u.getCombatStats().getAgility()*1.5 +     
-						 				 u.getCombatStats().getIntelligence()*2 +
-						 				 u.getCombatStats().getInitiative()*10 +
-						 				 u.getCombatStats().getMovementpoints()*3 +
-						 				 u.getCombatStats().getDefense() + 50);
-			}else if(u.getType() == "Mage"){
-				u.getCombatStats().setcP(u.getCombatStats().getHealth() +    
-						 				 u.getCombatStats().getMana() + 
-						 				 u.getCombatStats().getStrenght() +  
-						 				 u.getCombatStats().getAgility()*1.5 +     
-						 				 u.getCombatStats().getIntelligence()*2 +
-						 				 u.getCombatStats().getInitiative()*10 +
-						 				 u.getCombatStats().getMovementpoints()*3 +
-						 				 u.getCombatStats().getDefense() + 100);	
-			}
-			attacker.sethPower(attacker.gethPower()+u.getCombatStats().getcP());
-		}
-		for(Unit u : defender.getUnits()){
-			if(u.getType() == "Warrior"){
-				u.getCombatStats().setcP(u.getCombatStats().getHealth() +    
-										 u.getCombatStats().getMana() + 
-										 u.getCombatStats().getStrenght() +  
-										 u.getCombatStats().getAgility()*1.5 +     
-										 u.getCombatStats().getIntelligence()*2 +
-										 u.getCombatStats().getInitiative()*10 +
-										 u.getCombatStats().getMovementpoints()*3 +
-										 u.getCombatStats().getDefense());
-			}else if(u.getType() == "Archer"){
-				u.getCombatStats().setcP(u.getCombatStats().getHealth() +    
-						 				 u.getCombatStats().getMana() + 
-						 				 u.getCombatStats().getStrenght() +  
-						 				 u.getCombatStats().getAgility()*1.5 +     
-						 				 u.getCombatStats().getIntelligence()*2 +
-						 				 u.getCombatStats().getInitiative()*10 +
-						 				 u.getCombatStats().getMovementpoints()*3 +
-						 				 u.getCombatStats().getDefense() + 50);
-			}else if(u.getType() == "Mage"){
-				u.getCombatStats().setcP(u.getCombatStats().getHealth() +    
-						 				 u.getCombatStats().getMana() + 
-						 				 u.getCombatStats().getStrenght() +  
-						 				 u.getCombatStats().getAgility()*1.5 +     
-						 				 u.getCombatStats().getIntelligence()*2 +
-						 				 u.getCombatStats().getInitiative()*10 +
-						 				 u.getCombatStats().getMovementpoints()*3 +
-						 				 u.getCombatStats().getDefense() + 100);
-			}
-			defender.sethPower(defender.gethPower()+u.getCombatStats().getcP());
-		}
+//		for(Unit u : attacker.getUnits()){
+//			if(u.getType() == "Warrior"){
+//				u.getCombatStats().setcP(u.getCombatStats().getMaximumHealth() +    
+//										 u.getCombatStats().getMana() + 
+//										 u.getCombatStats().getStrenght() +  
+//										 u.getCombatStats().getAgility()*1.5 +     
+//										 u.getCombatStats().getIntelligence()*2 +
+//										 u.getCombatStats().getInitiative()*10 +
+//										 u.getCombatStats().getMovementpoints()*3 +
+//										 u.getCombatStats().getDefense());
+//			}else if(u.getType() == "Archer"){
+//				u.getCombatStats().setcP(u.getCombatStats().getMaximumHealth() +    
+//						 				 u.getCombatStats().getMana() + 
+//						 				 u.getCombatStats().getStrenght() +  
+//						 				 u.getCombatStats().getAgility()*1.5 +     
+//						 				 u.getCombatStats().getIntelligence()*2 +
+//						 				 u.getCombatStats().getInitiative()*10 +
+//						 				 u.getCombatStats().getMovementpoints()*3 +
+//						 				 u.getCombatStats().getDefense() + 50);
+//			}else if(u.getType() == "Mage"){
+//				u.getCombatStats().setcP(u.getCombatStats().getMaximumHealth() +    
+//						 				 u.getCombatStats().getMana() + 
+//						 				 u.getCombatStats().getStrenght() +  
+//						 				 u.getCombatStats().getAgility()*1.5 +     
+//						 				 u.getCombatStats().getIntelligence()*2 +
+//						 				 u.getCombatStats().getInitiative()*10 +
+//						 				 u.getCombatStats().getMovementpoints()*3 +
+//						 				 u.getCombatStats().getDefense() + 100);	
+//			}
+//			attacker.sethPower(attacker.gethPower()+u.getCombatStats().getcP());
+//		}
+//		for(Unit u : defender.getUnits()){
+//			if(u.getType() == "Warrior"){
+//				u.getCombatStats().setcP(u.getCombatStats().getMaximumHealth() +    
+//										 u.getCombatStats().getMana() + 
+//										 u.getCombatStats().getStrenght() +  
+//										 u.getCombatStats().getAgility()*1.5 +     
+//										 u.getCombatStats().getIntelligence()*2 +
+//										 u.getCombatStats().getInitiative()*10 +
+//										 u.getCombatStats().getMovementpoints()*3 +
+//										 u.getCombatStats().getDefense());
+//			}else if(u.getType() == "Archer"){
+//				u.getCombatStats().setcP(u.getCombatStats().getMaximumHealth() +    
+//						 				 u.getCombatStats().getMana() + 
+//						 				 u.getCombatStats().getStrenght() +  
+//						 				 u.getCombatStats().getAgility()*1.5 +     
+//						 				 u.getCombatStats().getIntelligence()*2 +
+//						 				 u.getCombatStats().getInitiative()*10 +
+//						 				 u.getCombatStats().getMovementpoints()*3 +
+//						 				 u.getCombatStats().getDefense() + 50);
+//			}else if(u.getType() == "Mage"){
+//				u.getCombatStats().setcP(u.getCombatStats().getMaximumHealth() +    
+//						 				 u.getCombatStats().getMana() + 
+//						 				 u.getCombatStats().getStrenght() +  
+//						 				 u.getCombatStats().getAgility()*1.5 +     
+//						 				 u.getCombatStats().getIntelligence()*2 +
+//						 				 u.getCombatStats().getInitiative()*10 +
+//						 				 u.getCombatStats().getMovementpoints()*3 +
+//						 				 u.getCombatStats().getDefense() + 100);
+//			}
+//			defender.sethPower(defender.gethPower()+u.getCombatStats().getcP());
+//		}
 		
 	
 	}

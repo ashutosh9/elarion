@@ -65,18 +65,18 @@ public class Keep extends CastleBuilding {
 		if (owner.getGarrisonSquare().getHero() != null) {
 			for (int i=0; i<8; i++) {
 				if (owner.getGarrisonSquare().getHero().getUnits().get(i) != null) {
-					owner.getGarrisonSquare().getHero().getUnits().get(i).setCurrHp(owner.getGarrisonSquare().getHero().getUnits().get(i).getCombatStats().getHealth());
+					owner.getGarrisonSquare().getHero().getUnits().get(i).setCurrHp(owner.getGarrisonSquare().getHero().getUnits().get(i).getCombatStats().getMaximumHealth());
 					if (upgraded) {
-						owner.getGarrisonSquare().getHero().getUnits().get(i).setExperiance(owner.getGarrisonSquare().getHero().getUnits().get(i).getExperiance() + 500);
+						owner.getGarrisonSquare().getHero().getUnits().get(i).addExperience(500,mc);
 					}
 				}
 			}
 		} else {
 			for (int i=0; i<8; i++) {
 				if (owner.getGarrison().getUnits().get(i) != null) {
-					owner.getGarrison().getUnits().get(i).setCurrHp(owner.getGarrison().getUnits().get(i).getCombatStats().getHealth());
+					owner.getGarrison().getUnits().get(i).setCurrHp(owner.getGarrison().getUnits().get(i).getCombatStats().getMaximumHealth());
 					if (upgraded) {
-						owner.getGarrison().getUnits().get(i).setExperiance(owner.getGarrison().getUnits().get(i).getExperiance() + 500);
+						owner.getGarrison().getUnits().get(i).addExperience(500,mc);
 					}
 				}
 			}

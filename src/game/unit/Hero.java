@@ -21,9 +21,7 @@ public class Hero extends Unit {
 	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private ArrayList<Unit> units = new ArrayList<Unit>(8);
 	private Equipment equipment;
-	private String name;
 	private String description;
-	private Point experience;
 	private int x; 
 	private int y; 
 	private Player owner;
@@ -51,11 +49,13 @@ public class Hero extends Unit {
 	
 	public Hero(MainClass mc){
 		this.mc = mc;
-		name = "noname";
-		description = "nondescript";
+		setLevel(1);
+		setName("");
+		description = " ";
 		x = 1;
 		y = 1;
 		heading = 1;
+		setCombatStats(new CombatStats());
 		currentAnimation = new Animation();
 		currentSprite = new Sprite(currentAnimation);
 		graphicalData = new GraphicalData();
@@ -65,9 +65,7 @@ public class Hero extends Unit {
 		moving = false;
 		path = null;
 		movementPoints = 100;
-		experience = new Point();
-		experience.x = 0;
-		experience.y = 1000;
+		setExperience(new Point(0,1000));
 		setEquipment(new Equipment());
 		for (int i=0;i<8;i++) {
 			units.add(i,null);
@@ -444,28 +442,12 @@ public class Hero extends Unit {
 		other.getUnits().set(otherIndex,temp);
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
 	public String getDescription() {
 		return description;
-	}
-	
-	public void setExperience(Point experience) {
-		this.experience = experience;
-	}
-
-	public Point getExperience() {
-		return experience;
 	}
 
 	public void setEquipment(Equipment equipment) {

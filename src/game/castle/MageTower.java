@@ -65,7 +65,7 @@ public class MageTower extends CastleBuilding {
 						Unit u = new Unit();
 						u = testUnits.getMage();
 						if (upgraded) {
-							u.setExperiance(1000);
+							u.addExperience(1000,mc);
 						}
 						owner.getGarrisonSquare().getHero().addUnit(u);
 						mc.getCurrentPlayer().getGold().removeAmount(200);
@@ -76,7 +76,7 @@ public class MageTower extends CastleBuilding {
 						Unit u = new Unit();
 						u = testUnits.getMage();
 						if (upgraded) {
-							u.setExperiance(1000);
+							u.addExperience(1000,mc);
 						}
 						owner.getGarrison().addUnit(u);
 						mc.getCurrentPlayer().getGold().removeAmount(200);
