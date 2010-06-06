@@ -148,12 +148,6 @@ public class KeyMap {
 //					mc.enterCastle(mc.getCurrentPlayer().getCastle(castle));
 //				}
 				
-				if(keyCode == KeyEvent.VK_0){
-					if (!mc.isInCastle()) {
-						mc.endedTurn();	
-					}
-				}
-				
 				if(keyCode == KeyEvent.VK_SPACE){
 					if(mc.getCurrentPlayer().getSelectedHero() != null){
 						if(mc.getCurrentPlayer().getSelectedHero().getMovementPoints() > 10){
