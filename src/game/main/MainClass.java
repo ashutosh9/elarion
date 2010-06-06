@@ -338,9 +338,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),38,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg"),(156),38,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg"),(156),40,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),78,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),78,null);
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),80,null);
 			
 			if(popupWindow != null){
 				popupWindow.draw(g);
@@ -676,6 +676,17 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 		
 		if(!clicked){
+			if(isWithinBounds(getMousePos(),new Point((156-2),38),new Point((196-2),78))){
+				endedTurn();
+				clicked = true;
+			}
+			if(isWithinBounds(getMousePos(),new Point((156-2),78),new Point((196-2),118))){
+				PopupWindow popupWindow = new PopupWindow(mc);
+				popupWindow.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
+				popupWindow.newChoice("Exit Game","exit", 370, 70, Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel_hovered.jpg"));
+				mc.setPopupWindow(popupWindow);
+				clicked = true;
+			}
 			for(int i = 0; i < 280; i += 40) {
 				long x = mousePos.x;
 				long y = mousePos.y;
