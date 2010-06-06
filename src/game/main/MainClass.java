@@ -76,7 +76,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
 		
-		players.getCurrentPlayer().getGold().setAmount(1000);
+		players.getCurrentPlayer().getGold().setAmount(100000);
+		players.getCurrentPlayer().getWood().setAmount(1000);
+		players.getCurrentPlayer().getStone().setAmount(1000);
 		players.getCurrentPlayer().newHero(h,480, 480, field);
 		//players.getCurrentPlayer().newHero(h2,481, 480, field);
 		players.getPlayer(1).newHero(h2, 30, 40, field);
