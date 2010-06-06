@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 
 import game.Interface.PopupWindow;
-import game.item.Item;
 import game.main.MainClass;
 
 public class HeroPopupWindow extends PopupWindow {
@@ -358,7 +357,8 @@ public class HeroPopupWindow extends PopupWindow {
 				if(selectedUnit != -1){
 					if(selectedUnit == i){
 						selectedUnit = -1;
-					}
+						break;
+					} 
 					hero.swapUnit(hero, i, selectedUnit);
 					selectedUnit = -1;
 				} else {

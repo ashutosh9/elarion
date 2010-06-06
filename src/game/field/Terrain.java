@@ -6,10 +6,12 @@ public class Terrain {
 
 	private Image image;
 	private boolean water;
+	private String name;
 	
 	public Terrain(Image img){
 		this.image = img;
 		setWater(false);
+		name = "";
 	}
 	
 	public Terrain(Image img, boolean isWater){
@@ -31,6 +33,14 @@ public class Terrain {
 
 	public boolean isWater() {
 		return water;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 }

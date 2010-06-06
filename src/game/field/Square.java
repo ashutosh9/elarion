@@ -17,7 +17,6 @@ public class Square {
 	private Building building;
 	private Hero hero;
 	private Terrain terrain;
-	private Tooltip tooltip;
 	private Item item;
 	private Resource resource;
 	private Item pathNode;
@@ -26,13 +25,11 @@ public class Square {
 	
 	
 	public Square(int x, int y){
-		//set tooltip to terrain tooltip
 		this.x = x;
 		this.y = y;
 		setResource(null);
 		setHero(null);
 		setItem(null);
-		tooltip = new Tooltip("");
 		pathNode = new Item(null, null);
 		pathNode.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/pathSquare.png"));
 		path = false;
@@ -48,14 +45,6 @@ public class Square {
 	
 	public boolean isPassable(){
 		return passable;
-	}
-	
-	public Tooltip getTooltip(){
-		return tooltip;
-	}
-	
-	public void setTooltip(String s){
-		tooltip.setTooltip(s);
 	}
 	
 	public void setX(int x){
