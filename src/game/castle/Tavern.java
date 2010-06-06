@@ -118,6 +118,7 @@ public class Tavern extends CastleBuilding {
 							mc.getCurrentPlayer().getGold().removeAmount(2500);
 							mc.getCurrentPlayer().newHero(owner.getCurrentSquare().getHero(),owner.getCurrentSquare().getX(),owner.getCurrentSquare().getY(),owner.getField());
 							heroes.set(selection,null);
+							selection = -1;
 						}
 					}
 				}
