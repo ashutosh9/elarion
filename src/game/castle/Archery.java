@@ -11,7 +11,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 
-@SuppressWarnings("unused")
 public class Archery extends CastleBuilding {
 	
 	public Archery(Castle owner, MainClass mc) {
@@ -31,6 +30,8 @@ public class Archery extends CastleBuilding {
 		index = 3;
 		upgraded = false;
 		this.mc = mc;
+		name = "Archery";
+		description = "nodescript";
 	}
 	
 	@Override

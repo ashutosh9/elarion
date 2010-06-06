@@ -35,9 +35,11 @@ public class Castle {
 	private static Tavern tavern;
 	private Hero garrisonHero;
 	private MainClass mc;
+	private int buildLimit;
 	
 	public Castle (int x, int y,Field f, MainClass mc) {
 		this.mc = mc;
+		buildLimit = 1;
 		field = f;
 		selected = false;
 		garrisonHero = new Hero(mc);
@@ -83,6 +85,14 @@ public class Castle {
 	
 	public CastleBuilding getBuilding(int i) {
 		return buildings.get(i);
+	}
+	
+	public int getBuildLimit() {
+		return buildLimit;
+	}
+	
+	public void setBuildLimit(int i) {
+		buildLimit = i;
 	}
 	
 	public Image getIcon() {
@@ -150,32 +160,16 @@ public class Castle {
 	}
 
 	public void turnUpdate() {
-		int i = 0;
-		while (i < buildings.size()) {
-			if (buildings.get(i)!= null) {
-					buildings.get(i).update();
-			}
-		i++;
+		for (int i=0;i<7;i++) {
+			buildings.get(i).update();
 		}
+		buildLimit = 1;
 	}
-	
-	public void build(int i) {
-		if (buildings.get(i) != null
-			&&
-			buildings.get(i).getwood() >= owner.getWood().getAmount()
-			&&
-			buildings.get(i).getstone() >= owner.getStone().getAmount()
-			&&
-			buildings.get(i).getgold() >= owner.getGold().getAmount()
-			&&
-			!buildings.get(i).isBuilt()) {
-			buildings.get(i).modBuilt(true);
-		}
-	}
-	
-	public void destroy(int i) {
+
+	public void destroyBuildings(int i) {
 		if (buildings.get(i) != null && buildings.get(i).isBuilt()) {
-			buildings.get(i).modBuilt(false);
+			buildings.get(i).setBuilt(false);
+			buildings.get(i).setUpgraded(false);
 		}
 	}
 

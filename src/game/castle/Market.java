@@ -20,15 +20,21 @@ public class Market extends CastleBuilding {
 		goldcost = 2000;
 		woodcost = 15;
 		stonecost = 0;
-		built = true;
+		upgradegoldcost = 2500;
+		upgradewoodcost = 0;
+		upgradestonecost = 15;
+		built = false;
 		index = 6;
 		upgraded = false;
 		this.mc = mc;
+		name = "Market";
+		description = "nodescript";
 	}
 	
 	@Override
 	public void drawMenu(Graphics g, CastleView castleView) {
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground"),101,101,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"),701,501,null);
 		g.setColor(black);
 		g.fillRect(351, 201, 600, 200);
 		g.setColor(white);
@@ -47,6 +53,9 @@ public class Market extends CastleBuilding {
 		g.drawString("Sell",566,270);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),501,295,null);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),566,295,null);
+		if (upgraded) {
+			
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e, CastleView castleView) {
@@ -74,12 +83,38 @@ public class Market extends CastleBuilding {
 			}
 		}
 		if (!clicked) {
+			topLeft.setLocation(501,295);
+			bottomRight.setLocation(560,354);
+			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
+				clicked = true;
+				if (mc.getCurrentPlayer().getGold().getAmount() >= 500) {
+					mc.getCurrentPlayer().getGold().removeAmount(500);
+					mc.getCurrentPlayer().getStone().addAmount(5);
+				}
+			}
+		}
+		if (!clicked) {
+			topLeft.setLocation(566,295);
+			bottomRight.setLocation(625,354);
+			if (mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
+				clicked = true;
+				if (mc.getCurrentPlayer().getStone().getAmount() >= 5) {
+					mc.getCurrentPlayer().getStone().removeAmount(5);
+					mc.getCurrentPlayer().getGold().addAmount(100);
+				}
+			}
+		}
+		
+		if (!clicked) {
 			topLeft.setLocation(701,501);
 			bottomRight.setLocation(760,560);
 			if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				castleView.setMenuBuilding(-1);
 				clicked = true;
 			}
+			
+		}
+		if(upgraded) {
 			
 		}
 	}

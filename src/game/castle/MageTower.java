@@ -22,8 +22,15 @@ public class MageTower extends CastleBuilding {
 		goldcost = 3000;
 		woodcost = 15;
 		stonecost = 15;
-		built = true;
+		upgradegoldcost = 2000;
+		upgradewoodcost = 10;
+		upgradestonecost = 5;
+		built = false;
+		upgraded = false;
+		this.mc = mc;
 		index = 4;
+		name = "Mage Tower";
+		description = "nodescript";
 	}
 	
 	@Override

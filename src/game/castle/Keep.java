@@ -23,10 +23,12 @@ public class Keep extends CastleBuilding {
 		upgradestonecost = 10;
 		upgradewoodcost = 10;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/Keep.png");
-		built = true;
+		built = false;
 		index = 0;
 		upgraded = false;
 		this.mc = mc;
+		name = "Keep";
+		description = "nodescript";
 	}
 	
 	@Override
@@ -55,6 +57,30 @@ public class Keep extends CastleBuilding {
 				castleView.setMenuBuilding(-1);
 				clicked = true;
 			}		
+		}
+	}
+	
+	@Override
+	public void update() {
+		if (owner.getGarrisonSquare().getHero() != null) {
+			for (int i=0; i<8; i++) {
+				if (owner.getGarrisonSquare().getHero().getUnits().get(i) != null) {
+					owner.getGarrisonSquare().getHero().getUnits().get(i).setCurrHp(owner.getGarrisonSquare().getHero().getUnits().get(i).getCombatStats().getHealth());
+					if (upgraded) {
+						owner.getGarrisonSquare().getHero().getUnits().get(i).setExperiance(owner.getGarrisonSquare().getHero().getUnits().get(i).getExperiance() + 500);
+					}
+				}
+			}
+		} else {
+			for (int i=0; i<8; i++) {
+				if (owner.getGarrison().getUnits().get(i) != null) {
+					owner.getGarrison().getUnits().get(i).setCurrHp(owner.getGarrison().getUnits().get(i).getCombatStats().getHealth());
+					if (upgraded) {
+						owner.getGarrison().getUnits().get(i).setExperiance(owner.getGarrison().getUnits().get(i).getExperiance() + 500);
+					}
+				}
+			}
+
 		}
 	}
 }

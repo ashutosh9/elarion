@@ -27,10 +27,12 @@ public class Barracks extends CastleBuilding {
 		upgradestonecost = 5;
 		upgradewoodcost = 5;
 		image = Toolkit.getDefaultToolkit().getImage("Images/castle/Barracks.png");
-		built = true;
+		built = false;
 		index = 2;
 		upgraded = false;
 		this.mc = mc;
+		name = "Barracks";
+		description = "nodescript";
 	}
 	@Override
 	public void drawMenu(Graphics g, CastleView castleView) {
