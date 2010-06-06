@@ -38,7 +38,7 @@ public class CastleBuilding {
 		this.image = image;
 	}
 	
-	public CastleBuilding (Castle owner) {
+	public CastleBuilding (Castle owner, MainClass mc) {
 		built = false;
 		this.owner = owner;
 	}
