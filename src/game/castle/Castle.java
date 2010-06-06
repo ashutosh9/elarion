@@ -224,8 +224,8 @@ public class Castle {
 		//checks whether to move units between the garrison/garrisoned hero and the visiting hero.
 		for (int i=0;i<8;i++) {
 			for (int j=0;j<2;j++) {
-				topLeft.setLocation(943 + (40*i),13+(40*j));
-				bottomRight.setLocation(978 + (40*i),48+(40*j));
+				topLeft.setLocation(904 + (42*i),14+(60*j));
+				bottomRight.setLocation(939 + (42*i),49+(60*j));
 				if (mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
 					if (castleView.getSelected() != 0) { //in this case we swap units around
 						Hero clickedUnitHero = null;
@@ -262,22 +262,8 @@ public class Castle {
 										castleView.setSelected((1+i));
 									}
 								}
-								if (garrisonHero != null) {
-									System.out.print("GarrisonHero exists\n");
-									if (garrisonHero.getUnits() != null) {
-										System.out.print("Units array exists\n");
-										for (int l=0;l<8;l++) {
-											System.out.print("Slot" + l);
-											if (garrisonHero.getUnits().get(l) != null) {
-												System.out.print("full\n");
-											} else {System.out.print("empty\n"); }
-										}
-									}
-								}
 								if (garrisonHero.getUnits().get(i) != null) {
-									System.out.print("Check Succeeded\n");
 									castleView.setSelected((1+i));
-									System.out.print("Unit set\n");
 									}
 						case 1: 
 								if (currentSquare.getHero() != null) {

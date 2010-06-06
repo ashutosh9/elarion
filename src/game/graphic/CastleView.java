@@ -73,26 +73,26 @@ public class CastleView {
 		g.drawString("Stone: " + castle.getOwner().getStone().getAmount(),30,115);
 //		//draw hero/unit icons
 		if(castle.getGarrisonSquare().getHero()!=null){
-			g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),901,11,null);
+			g.drawImage(castle.getGarrisonSquare().getHero().getIcon(),864,14,null);
 			for (int i=0;i<8;i++) {
 				if (castle.getGarrisonSquare().getHero().getUnits().get(i) != null)
-					g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),943 + (40*i),11,null);
+					g.drawImage(castle.getGarrisonSquare().getHero().getUnits().get(i).getIcon(),904 + (42*i),14,null);
 			}
 			
 		} else {
 			if (castle.getGarrison() != null) {
 				for (int i=0;i<8;i++) {
 					if (castle.getGarrison().getUnits().get(i) != null) {
-						g.drawImage(castle.getGarrison().getUnits().get(i).getIcon(),943 + (40*i),13,null);
+						g.drawImage(castle.getGarrison().getUnits().get(i).getIcon(),904 + (42*i),14,null);
 					}
 				}
 			}
 		}
 		if(castle.getCurrentSquare().getHero()!=null){
-			g.drawImage(castle.getCurrentSquare().getHero().getIcon(),901,61,null);
+			g.drawImage(castle.getCurrentSquare().getHero().getIcon(),864,74,null);
 			for (int i=0;i<8;i++) {
 				if (castle.getCurrentSquare().getHero().getUnits().get(i) != null) {
-					g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),943 + (40*i),53,null);
+					g.drawImage(castle.getCurrentSquare().getHero().getUnits().get(i).getIcon(),904 + (42*i),74,null);
 				}
 			}
 		}
@@ -101,9 +101,9 @@ public class CastleView {
 			Color c = new Color(255,206,0);
 			g.setColor(c);
 			if (selectedIndex < 9) {
-				g.drawRect(943+(40*(selectedIndex-1)), 13, 36, 36);
+				g.drawRect(904+(42*(selectedIndex-1)), 14, 36, 36);
 			}else{
-				g.drawRect(943+(40*(selectedIndex-9)), 53, 36, 36);
+				g.drawRect(904+(42*(selectedIndex-9)), 74, 36, 36);
 			}
 		}
 		//if the mouse is floating over a building - highlight it
