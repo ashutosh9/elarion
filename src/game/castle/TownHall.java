@@ -36,7 +36,7 @@ private int selection;
 	}
 	@Override
 	public void drawMenu(Graphics g, CastleView castleView) {
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground"),101,101,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground.png"),101,101,null);
 		g.setColor(black);
 		g.fillRect(151, 151, 600, 400);
 		g.setColor(white);
@@ -55,7 +55,7 @@ private int selection;
 				g.fillRect(171,171+(30*i),200,25);
 			}
 			g.setColor(white);
-			g.drawString(owner.getBuilding(i).getName(),174,174+(i*30));
+			g.drawString(owner.getBuilding(i).getName(),174,186+(i*30));
 			if (i == selection) {
 				g.setColor(white);
 				g.drawRect(171, 171+(30*i), 200, 25);
@@ -70,21 +70,21 @@ private int selection;
 		if (selection != -1) {
 			if(owner.getBuilding(selection).isBuilt()) {
 				if (owner.getBuilding(selection).isUpgraded()) {
-					g.drawString(owner.getBuilding(selection).getName(),503,173);
-					g.drawString("Upgraded",503,203);
+					g.drawString(owner.getBuilding(selection).getName(),503,186);
+					g.drawString("Upgraded",503,216);
 				} else {
-					g.drawString(owner.getBuilding(selection).getName(), 503, 173);
-					g.drawString("cost:",503,203);
-					g.drawString("Gold: "+owner.getBuilding(selection).getUpGold(),503,233);
-					g.drawString("Wood: "+owner.getBuilding(selection).getUpWood(),503,263);
-					g.drawString("Stone: "+owner.getBuilding(selection).getUpStone(),503,293);
+					g.drawString(owner.getBuilding(selection).getName(), 503, 186);
+					g.drawString("cost:",503,216);
+					g.drawString("Gold: "+owner.getBuilding(selection).getUpGold(),503,246);
+					g.drawString("Wood: "+owner.getBuilding(selection).getUpWood(),503,276);
+					g.drawString("Stone: "+owner.getBuilding(selection).getUpStone(),503,306);
 				}
 			} else {
-				g.drawString(owner.getBuilding(selection).getName(), 503, 173);
-				g.drawString("cost:",503,203);
-				g.drawString("Gold: "+owner.getBuilding(selection).getGold(),503,233);
-				g.drawString("Wood: "+owner.getBuilding(selection).getWood(),503,263);
-				g.drawString("Stone: "+owner.getBuilding(selection).getStone(),503,293);
+				g.drawString(owner.getBuilding(selection).getName(), 503, 186);
+				g.drawString("cost:",503,216);
+				g.drawString("Gold: "+owner.getBuilding(selection).getGold(),503,246);
+				g.drawString("Wood: "+owner.getBuilding(selection).getWood(),503,276);
+				g.drawString("Stone: "+owner.getBuilding(selection).getStone(),503,306);
 			}
 		}
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),621,501,null);

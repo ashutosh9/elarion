@@ -294,11 +294,13 @@ public class Castle {
 		//checks for buildings clicked
 		if (!clicked) {
 			for (CastleBuilding current : buildings) {
-				topLeft.setLocation(current.getX(),current.getY());
-				bottomRight.setLocation(current.getX()+current.getW(),current.getY()+current.getH());
-				if (mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
-					castleView.setMenuBuilding(current.getIndex());
-					clicked = true;
+				if (current.isBuilt()) {
+					topLeft.setLocation(current.getX(),current.getY());
+					bottomRight.setLocation(current.getX()+current.getW(),current.getY()+current.getH());
+					if (mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
+						castleView.setMenuBuilding(current.getIndex());
+						clicked = true;
+					}
 				}
 			}
 		}

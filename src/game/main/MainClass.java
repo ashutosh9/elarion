@@ -12,11 +12,13 @@ import game.field.Field;
 import game.graphic.CastleView;
 import game.graphic.CombatView;
 import game.item.Item;
+import game.item.RandomItemGenerator;
 import game.player.Player;
 import game.player.Players;
 import game.resource.Resource;
 import game.unit.Hero;
 import game.unit.HeroPopupWindow;
+import game.unit.RandomHeroGenerator;
 import game.unit.TestUnits;
 //import javax.swing.*;
 import java.awt.*;
@@ -47,6 +49,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static TurnSystem turnSystem;
 	private boolean inCastle = false;
 	private CastleView castleView;
+	private static RandomItemGenerator itemGen;
+	private static RandomHeroGenerator heroGen;
 
 	private static ResourceBar resourceBar;
 	private PopupWindow popupWindow = null;
@@ -63,6 +67,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public static void main(String args[]){
 		mc = new MainClass();
+		itemGen = new RandomItemGenerator();
+		heroGen = new RandomHeroGenerator(mc);
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
@@ -492,6 +498,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public void endedTurn(){
 		players.nextPlayer();
 		turnSystem.nextTurn(players,field);
+	}
+	
+	public RandomHeroGenerator getHeroGen() {
+		return heroGen;
+	}
+	
+	public RandomItemGenerator getItemGen() {
+		return itemGen;
 	}
 	
 	public Player getCurrentPlayer() {

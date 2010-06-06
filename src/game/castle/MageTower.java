@@ -35,7 +35,7 @@ public class MageTower extends CastleBuilding {
 	
 	@Override
 	public void drawMenu(Graphics g, CastleView castleView) {
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground"),101,101,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground.png"),101,101,null);
 		g.setColor(black);
 		g.fillRect(351, 201, 200, 200);
 		g.setColor(white);
