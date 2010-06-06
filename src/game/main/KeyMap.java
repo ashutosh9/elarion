@@ -1,9 +1,7 @@
 package game.main;
 
 import game.Interface.PopupWindow;
-import game.castle.Castle;
 import game.field.Field;
-import game.unit.HeroPopupWindow;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -15,7 +13,7 @@ public class KeyMap {
 		int keyCode = e.getKeyCode();
 		
 		int speed = 4;
-		if(!mc.getCombatView().isCombat()){
+		if(!mc.isInCastle()){
 			if(i==1){//pressed
 				
 				if(keyCode == KeyEvent.VK_M){
@@ -27,7 +25,7 @@ public class KeyMap {
 				} 
 				
 				if(keyCode == KeyEvent.VK_ESCAPE){
-					mc.stop();
+					mc.exitGamePopup();
 				}
 				
 				if(keyCode == KeyEvent.VK_1){
@@ -150,7 +148,7 @@ public class KeyMap {
 				
 				if(keyCode == KeyEvent.VK_SPACE){
 					if(mc.getCurrentPlayer().getSelectedHero() != null){
-						if(mc.getCurrentPlayer().getSelectedHero().getMovementPoints() > 10){
+						if(mc.getCurrentPlayer().getSelectedHero().getMovementPoints() >= 10){
 							if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
 								
 								for(int x=-1;x<2;x++){

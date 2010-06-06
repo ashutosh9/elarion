@@ -1,12 +1,15 @@
 package game.main;
 
+import game.Interface.PausePopupWindow;
 import game.Interface.PopupWindow;
 import game.Interface.ResourceBar;
 import game.Interface.Screen;
+import game.Interface.Tooltip;
 import game.building.Building;
 import game.castle.Castle;
 import game.core.Path;
 import game.core.PathNode;
+import game.core.TurnPopupWindow;
 import game.core.TurnSystem;
 import game.field.Field;
 import game.graphic.CastleView;
@@ -20,16 +23,13 @@ import game.unit.Hero;
 import game.unit.HeroPopupWindow;
 import game.unit.RandomHeroGenerator;
 import game.unit.TestUnits;
-//import javax.swing.*;
 import java.awt.*;
-//import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainClass implements KeyListener,MouseMotionListener,MouseListener {
 	
@@ -51,6 +51,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private CastleView castleView;
 	private static RandomItemGenerator itemGen;
 	private static RandomHeroGenerator heroGen;
+	private Tooltip tooltip;
 
 	private static ResourceBar resourceBar;
 	private PopupWindow popupWindow = null;
@@ -351,6 +352,13 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),78,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),80,null);
 			
+			
+			if(tooltip != null){
+				tooltip.draw(g);
+			} else {
+				tooltip = new Tooltip(this);
+			}
+			
 			if(popupWindow != null){
 				popupWindow.draw(g);
 			}
@@ -362,36 +370,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 	public void loadimages() {
-		//Image img1 = Toolkit.getDefaultToolkit().getImage("game/terrain/images/Grass1.jpg"); /
-//		bg = Toolkit.getDefaultToolkit().getImage("src/game/images/test/bg.png"); 
-//		face1 = Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 1.png");
-//		ArrayList<Animation> a = h.getGraphicalData().getGraphicalData();
-//		Image face2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/pic 2.png");
-//		Image a1 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/1.png");
-//		Image a2 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/2.png");
-//		Image a3 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/3.png");
-//		Image a4 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/4.png");
-//		Image a5 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/5.png");
-//		Image a6 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/6.png");
-//		Image a7 =  Toolkit.getDefaultToolkit().getImage("src/game/images/test/7.png");
 		
-		//test animation
-//		a = new Animation();
-//		a.addScene(a1,200);
-//		a.addScene(a2,200);
-//		a.addScene(a3,150);
-//		a.addScene(a4,200);
-//		a.addScene(a5,200);
-//		a.addScene(a6,200);
-//		a.addScene(a7,200); 
-//		
-//		sprite = new Sprite(a);
-//		sprite.setVelocityOfX(-0.3f);
-//		sprite.setVelocityOfY(0.3f);
-//		sprite.setX(200);
-//		sprite.setY(200);
-//		sprite.setToMoveX(200f);
-//		sprite.setToMoveY(0f); 
 		loaded = true;
 	}
 
@@ -499,6 +478,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	public void endedTurn(){
 		players.nextPlayer();
 		turnSystem.nextTurn(players,field);
+		setPopupWindow(new TurnPopupWindow(mc,getCurrentPlayer()));
 	}
 	
 	public RandomHeroGenerator getHeroGen() {
@@ -643,6 +623,19 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return popupWindow;
 	}
 
+	public void setTooltip(Tooltip tooltip) {
+		this.tooltip = tooltip;
+	}
+
+	public Tooltip getTooltip() {
+		return tooltip;
+	}
+	
+	public void exitGamePopup(){
+		PausePopupWindow popupWindow = new PausePopupWindow(mc);
+		mc.setPopupWindow(popupWindow);
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(popupWindow == null){
@@ -698,10 +691,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				clicked = true;
 			}
 			if(isWithinBounds(getMousePos(),new Point((156-2),78),new Point((196-2),118))){
-				PopupWindow popupWindow = new PopupWindow(mc);
-				popupWindow.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
-				popupWindow.newChoice("Exit Game","exit", 370, 70, Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel_hovered.jpg"));
-				mc.setPopupWindow(popupWindow);
+				exitGamePopup();
 				clicked = true;
 			}
 			for(int i = 0; i < 280; i += 40) {

@@ -304,9 +304,20 @@ public class PopupWindow {
 		return X;
 	}
 	
+	public void setX(int x){
+		X = x;
+	}
+	
 	public int getY(){
 		return Y;
 	}
 	
+	public void setY(int y){
+		Y = y;
+	}
+	
+	public void setBackground(Image i){
+		background = i;
+	}	
 
 }

@@ -7,8 +7,10 @@ import game.main.MainClass;
 
 public class RandomHeroGenerator {
 	private Hero randomHero;
+	private MainClass mc;
 
 	public RandomHeroGenerator(MainClass mc) {
+		this.mc = mc;
 		randomHero = new Hero(mc);
 		
 		String name;
@@ -175,7 +177,12 @@ public class RandomHeroGenerator {
 		
 	}
 	
-	public Hero getRandomHero() {
+	public Hero getHero(){
 		return randomHero;
+	}
+	
+	public Hero getRandomHero() {
+		Hero h = new RandomHeroGenerator(mc).getHero();
+		return h;
 	}
 }

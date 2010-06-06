@@ -12,5 +12,14 @@ public class MenuEventMap {
 			popupMenu.closePopup();
 		}
 	}
+	
+	public MenuEventMap(String event, MainClass mc, Tooltip tooltip){
+		if(event == "exit"){
+			mc.exit();
+		}
+		if(event == "close"){
+			tooltip.closePopup();
+		}
+	}
 
 }

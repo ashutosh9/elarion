@@ -24,6 +24,7 @@ public class Field {
 		Random generator = new Random(100);
 		Image grassImg = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass2.jpg");
 		grass = new Terrain(grassImg);
+		grass.setName("Grass");
 		setEvents(new SquareEvents());
 		s = new Square[width][height];
 		for(int x=0; x<width; x++) {
@@ -34,7 +35,6 @@ public class Field {
 
 				s[x][y] = new Square(x,y); // if square == water - add new animation to animations array list
 				s[x][y].setTerrain(grass);
-				s[x][y].setTooltip("Grass");
 				s[x][y].setPassable(true);
 				
 				if(i==1){
