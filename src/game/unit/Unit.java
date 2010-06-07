@@ -23,6 +23,7 @@ public class Unit {
 	private Point experience;
 	private int level;
 	private String name;
+	private Point movementPoints;
 	
 	// stats stuff effects spells level xp ranks hp mp skills etc
 	// stand animation images for heading left
@@ -35,6 +36,7 @@ public class Unit {
 		experience = new Point();
 		experience.x = 0;
 		experience.y = 1000;
+		movementPoints = new Point(8,8);
 		setType("");
 		setInTurn(false);
 		combatStats.getCombatPos().setLocation(16, 8);
@@ -166,6 +168,34 @@ public class Unit {
 
 	public String getName() {
 		return name;
+	}
+
+	public void setMovementPoints(int movementPoints) {
+		this.movementPoints.x = movementPoints;
+	}
+
+	public int getMovementPoints() {
+		return movementPoints.x;
+	}
+	
+	public int getMaxMovementPoints(){
+		return movementPoints.y;
+	}
+	
+	public void setMaxMovementPoints(int i){
+		movementPoints.y = i;
+	}
+	
+	public void refillMovementPoints(){
+		movementPoints.x = movementPoints.y;
+	}
+	
+	public Point getMovement(){
+		return movementPoints;
+	}
+	
+	public void setMovement(Point p){
+		movementPoints = p;
 	}
 
 }

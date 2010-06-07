@@ -1,5 +1,6 @@
 package game.unit;
 
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.Random;
 
@@ -172,6 +173,17 @@ public class RandomHeroGenerator {
 		} else {
 			String s = "Images/heroes/human/human_hero_" + i + ".jpg"; 
 			randomHero.setIcon(Toolkit.getDefaultToolkit().getImage(s));
+		}
+		
+		i = random.nextInt(3);
+		if(i==0){
+			randomHero.setMovement(new Point(100,100));
+		}
+		if(i==2){
+			randomHero.setMovement(new Point(110,110));
+		}
+		if(i==1){
+			randomHero.setMovement(new Point(120,120));
 		}
 		
 		randomHero.setType("hero");

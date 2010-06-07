@@ -42,7 +42,6 @@ public class Hero extends Unit {
 	private Animation currentAnimation;
 	private boolean selected;
 	private Path path;
-	private int movementPoints;
 	// to include combat stats and graphical data as different classes
 	private double hPower;
 	private MainClass mc;
@@ -65,7 +64,8 @@ public class Hero extends Unit {
 		selected = false;
 		moving = false;
 		path = null;
-		movementPoints = 100;
+		setMovementPoints(100);
+		setMaxMovementPoints(100);
 		setExperience(new Point(0,1000));
 		setEquipment(new Equipment());
 		for (int i=0;i<8;i++) {
@@ -193,7 +193,7 @@ public class Hero extends Unit {
 		
 		//check if movement points are enough for moving 
 		
-		if(movementPoints >= 10) {
+		if(getMovementPoints() >= 10) {
 	
 			if(moving==false && checkIfPassable(heading,f)==true){
 				
@@ -338,7 +338,7 @@ public class Hero extends Unit {
 		f.getEvents().enterCastle(getCurrentSquare(), owner, mc);
 		
 		//remove movement points
-		movementPoints -= 10;
+		setMovementPoints(getMovementPoints() - 10);
 		
 
 		
@@ -409,14 +409,6 @@ public class Hero extends Unit {
 	
 	public Path getPath() {
 		return path;
-	}
-
-	public void setMovementPoints(int movementPoints) {
-		this.movementPoints = movementPoints;
-	}
-
-	public int getMovementPoints() {
-		return movementPoints;
 	}
 
 	public void sethPower(double hPower) {
