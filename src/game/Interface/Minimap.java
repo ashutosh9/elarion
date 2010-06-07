@@ -104,10 +104,10 @@ public class Minimap extends Tooltip {
 				y=0;
 			}
 			if(Math.round(x)>f.getWidth() - mc.getScreenWidth() + 3){
-				x=f.getWidth() - mc.getScreenWidth() - 1;
+				x=f.getWidth() - mc.getScreenWidth() + 14;
 			}
 			if(Math.round(y)>f.getHeight() - mc.getScreenHeight() + 3){
-				y=f.getHeight() - mc.getScreenHeight() - 1;
+				y=f.getHeight() - mc.getScreenHeight() + 8;
 			}
 
 			mc.getCurrentPlayer().setCurrentView(f.getSquare((int)Math.round(x - mc.getScreenWidth()/2),(int)Math.round(y - mc.getScreenHeight()/2)));
