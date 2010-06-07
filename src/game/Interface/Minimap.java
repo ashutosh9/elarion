@@ -62,8 +62,8 @@ public class Minimap extends Tooltip {
 	
 	public void MousePressed(MouseEvent e,MainClass mc){
 		super.mousePressed(e, mc);
-		if(mc.isWithinBounds(mc.getMousePos(), new Point(40,5), new Point(240,195))){
-			
+		if(mc.isWithinBounds(mc.getMousePos(), new Point(40 + getX(),5 + getY()), new Point(240 + getX(),195 + getY()))){
+			System.out.print("ASd");
 		}
 	}
 	
