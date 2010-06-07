@@ -348,6 +348,16 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				g.drawImage(hero.getIcon(),h,20,null);
 				h += 40;
 			}
+			h = 310;
+			for(Castle castle : players.getCurrentPlayer().getCastles()){
+				if(castle.isSelected()){
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/castle_selected"),(h-2),18,null);
+				} else {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/castle_icon"),(h-2),18,null);
+				}
+				g.drawImage(castle.getIcon(),h,20,null);
+				h += 40;
+			}
 			
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),38,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg"),(156),40,null);
