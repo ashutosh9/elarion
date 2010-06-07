@@ -195,7 +195,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 		}
 		
-		minimap.update(this, field);
+		getMinimap().update(this, field);
 		
 		//combatView.update(timePassed);
 		
@@ -373,8 +373,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 	public void load() {
-		minimap = new Minimap(this,field);
-		setTooltip(minimap);
+		setMinimap(new Minimap(this,field));
+		setTooltip(getMinimap());
 		loaded = true;
 	}
 
@@ -631,6 +631,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return tooltip;
 	}
 	
+	public void setMinimap(Minimap minimap) {
+		this.minimap = minimap;
+	}
+
+	public Minimap getMinimap() {
+		return minimap;
+	}
+
 	public Players getPlayers(){
 		return players;
 	}
@@ -820,7 +828,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON3){
-			tooltip = minimap;
+			tooltip = getMinimap();
 		}
 		if(popupWindow != null){
 			popupWindow.mouseReleased(e, this);

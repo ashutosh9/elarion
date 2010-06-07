@@ -91,25 +91,29 @@ public class PopupWindow {
 	}
 	
 	public void mousePressed(MouseEvent e, MainClass mc){
-		for(Choice c : choices){
-			c.setPressed(false);
-			Point start = new Point(c.getX() + X,c.getY() + Y);
-			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
-			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-				c.setPressed(true);
+		if(e.getButton() == MouseEvent.BUTTON1){
+			for(Choice c : choices){
+				c.setPressed(false);
+				Point start = new Point(c.getX() + X,c.getY() + Y);
+				Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					c.setPressed(true);
+				}
 			}
 		}
 	}
 	
 	public void mouseReleased(MouseEvent e, MainClass mc){
-		for(Choice c : choices){
-			Point start = new Point(c.getX() + X,c.getY() + Y);
-			Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
-			if((mc.isWithinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
-				@SuppressWarnings("unused")
-				MenuEventMap event = new MenuEventMap(c.getEvent(),mc,this);
+		if(e.getButton() == MouseEvent.BUTTON1){
+			for(Choice c : choices){
+				Point start = new Point(c.getX() + X,c.getY() + Y);
+				Point end = new Point((c.getX() + c.getButton().getWidth(null) + X),(c.getY() + c.getButton().getHeight(null) + Y));
+				if((mc.isWithinBounds(mc.getMousePos(), start, end)) && (c.isPressed())){
+					@SuppressWarnings("unused")
+					MenuEventMap event = new MenuEventMap(c.getEvent(),mc,this);
+				}
+				c.setPressed(false);
 			}
-			c.setPressed(false);
 		}
 	}
 	
