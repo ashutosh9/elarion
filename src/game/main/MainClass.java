@@ -53,6 +53,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static RandomItemGenerator itemGen;
 	private static RandomHeroGenerator heroGen;
 	private Tooltip tooltip;
+	private Minimap minimap;
 
 	private static ResourceBar resourceBar;
 	private PopupWindow popupWindow = null;
@@ -133,7 +134,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public void run() {
 		s = new Screen();
-		setTooltip(new Minimap(this,field));
+		
 		try {
 			DisplayMode dm = s.findCompatibleMode(modes);
 			s.setFullScreen(dm);
@@ -148,6 +149,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			screenWidth = 33;
 			screenHeight = 22;
 			if(loaded){
+				
+				minimap = new Minimap(this,field);
+				setTooltip(minimap);
+				
 				while(!exited){
 					drawLoop();
 				}
@@ -205,6 +210,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				popupWindow = null;
 			}
 		}
+		
+		minimap.update(this, field);
 		
 		//combatView.update(timePassed);
 		
@@ -686,6 +693,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			popupWindow.mousePressed(e, this);
 			clicked = true;
 		}
+		
+		if(tooltip != null){
+			tooltip.mousePressed(e, this);
+			//clicked = true;
+		}
+		
 		if (!clicked) {
 			if(inCastle){
 				castleView.mousePressed(e);

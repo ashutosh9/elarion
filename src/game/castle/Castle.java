@@ -36,6 +36,7 @@ public class Castle {
 	private Hero garrisonHero;
 	private MainClass mc;
 	private int buildLimit;
+	private Square rootSquare;
 	
 	public Castle (int x, int y,Field f, MainClass mc) {
 		this.mc = mc;
@@ -69,6 +70,7 @@ public class Castle {
 		f.getSquare(x-1, y+1).setPassable(false);
 		f.getSquare( x-1,  y).setPassable(false);
 		f.getSquare( x-1,  y-1).setPassable(false);
+		setRootSquare(f.getSquare( x-1,  y-1));
 		f.getSquare( x,  y+1).setPassable(true);
 		f.getSquare( x,  y).setPassable(false);
 		f.getSquare( x,  y-1).setPassable(false);
@@ -163,6 +165,14 @@ public class Castle {
 		return selected;
 	}
 	
+	public void setRootSquare(Square rootSquare) {
+		this.rootSquare = rootSquare;
+	}
+
+	public Square getRootSquare() {
+		return rootSquare;
+	}
+
 	public void setSelected (boolean selected) {
 		this.selected = selected;
 	}
