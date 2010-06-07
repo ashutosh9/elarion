@@ -1,5 +1,6 @@
 package game.main;
 
+import game.Interface.Minimap;
 import game.Interface.PopupWindow;
 import game.field.Field;
 import game.item.ChestPopupWindow;

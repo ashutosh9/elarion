@@ -1,5 +1,6 @@
 package game.main;
 
+import game.Interface.Minimap;
 import game.Interface.PausePopupWindow;
 import game.Interface.PopupWindow;
 import game.Interface.ResourceBar;
@@ -132,6 +133,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public void run() {
 		s = new Screen();
+		setTooltip(new Minimap(this,field));
 		try {
 			DisplayMode dm = s.findCompatibleMode(modes);
 			s.setFullScreen(dm);
@@ -629,6 +631,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	public Tooltip getTooltip() {
 		return tooltip;
+	}
+	
+	public Players getPlayers(){
+		return players;
 	}
 	
 	public void exitGamePopup(){

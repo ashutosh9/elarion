@@ -63,6 +63,7 @@ public class Castle {
 		buildings.add(market);
 		buildings.add(tavern);
 		setCurrentSquare(f.getSquare(x, y+1));
+		System.out.print(getCurrentSquare().getX() + "   ");
 		setGarrisonSquare(f.getSquare(x, y));
 		setSwapSquare(f.getSquare(x-1,y));
 		f.getSquare(x, y+1).setCastle(this);
