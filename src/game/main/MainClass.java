@@ -147,7 +147,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			screenHeight = 22;
 			if(loaded){
 				while(!exited){
-					movieLoop();
+					drawLoop();
 				}
 			}
 		} finally {
@@ -155,12 +155,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 	}
 	
-	public void movieLoop() {
+	public void drawLoop() {
 		long startingTime = System.currentTimeMillis();
-		long cumTime = startingTime;
+		long runningTime = startingTime;
 		while(running && !exited){
-			long timePassed = System.currentTimeMillis() - cumTime;
-			cumTime += timePassed;
+			long timePassed = System.currentTimeMillis() - runningTime;
+			runningTime += timePassed;
 			//a.update(timePassed);
 			//sprite.update(timePassed);
 			//update sprites and animations
