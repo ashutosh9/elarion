@@ -24,14 +24,19 @@ public class HeroPopupWindow extends PopupWindow {
 		selectedUnit = -1;
 		this.hero = hero;
 		this.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
+		
 		Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		this.newImg(img, 33, 33);
+		
 		img = hero.getIcon().getScaledInstance(56, 56, 1);
 		this.newImg(img, 35, 35);
+		
 		String s = hero.getName();
 		this.newText(s, 100, 50);
+		
 		s = new String("XP : " + hero.getExperience().x + " / " + hero.getExperience().y);
 		this.newText(s, 100, 80);
+		
 		img = Toolkit.getDefaultToolkit().getImage("Images/popup/stats2.png").getScaledInstance(300, 370, Image.SCALE_REPLICATE);
 		this.newImg(img, 415, 33);
 		
