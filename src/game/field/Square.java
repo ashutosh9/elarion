@@ -1,6 +1,5 @@
 package game.field;
 
-import game.Interface.Tooltip;
 import game.building.Building;
 import game.castle.Castle;
 import game.item.Item;

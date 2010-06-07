@@ -1,15 +1,21 @@
 package game.field;
 
+import game.item.ChestPopupWindow;
 import game.main.MainClass;
 import game.player.Player;
 import game.unit.Hero;
 
 public class SquareEvents {
 	
-	public void pickUp(Square s, Hero h){
+	public void pickUp(Square s, Hero h,MainClass mc){
 		if(s.getItem() != null ) {
-			h.addItem(s.getItem());
-			s.setItem(null);
+			if(s.getItem().getType() == "chest"){
+				mc.setPopupWindow(new ChestPopupWindow(mc,mc.getCurrentPlayer()));
+				s.setItem(null);
+			} else {
+				h.addItem(s.getItem());
+				s.setItem(null);
+			}
 		}
 	}
 	
