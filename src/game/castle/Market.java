@@ -78,46 +78,27 @@ public class Market extends CastleBuilding {
 			for (int i=0; i<8; i++) {
 				if(items.get(i) != null) {
 					g.drawImage(items.get(i).getImage(),157+(40*i),331,null);
-					if(selection == i) {
+					if((selection) == i) {
 						g.setColor(gold);
 						g.drawRect(157+(40*i), 331, 36, 36);
 					}
 				}
 			}
 			if (owner.getCurrentSquare().getHero() != null) {
-//				if ((invOffset != 0) && (owner.getCurrentSquare().getHero().getInventory().size() > 8)) {
-//					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),155,461,null);
-//				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),155,461,null); }
-//				for (int i=0; i<8; i++) {
-//					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg"),155,461,null);
-//				}
-//				if (invOffset < (owner.getCurrentSquare().getHero().getInventory().size() - 8)) {
-//					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),731,461,null);
-//				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),731,461,null); }
-//				j = 0;
-//				for (Item item : owner.getCurrentSquare().getHero().getInventory()) {
-//					if (((j - invOffset) > -1)&&((j - invOffset) < 8)) {
-//						g.drawImage(item.getImage(),219 + (64*j),461,null);
-//						if ((selection - 8) == j) {
-//							g.setColor(gold);
-//							g.drawRect(219+(64*j),461,64,64);
-//						}
-//					}
-//				}
 				if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 2, 360 + yInv - 2 + 0,40,40,null);
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),40 + (7)*40 + xInv, 360 + yInv,36,36,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),40 + (7)*40 + xInv, 410 + yInv,36,36,null);
 				} else {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 2, 360 + yInv - 2 + 0,40,40,null);
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),40 + (7)*40 + xInv, 360 + yInv,36,36,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),40 + (7)*40 + xInv - 220, 410 + yInv,36,36,null);
 				}
 				
 				if(invIndex>0){
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),(7)*40 + xInv - 2, 360 + yInv - 2 + 0,40,40,null);
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),(7)*40 + xInv, 360 + yInv,36,36,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),(7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),(7)*40 + xInv - 220, 410 + yInv,36,36,null);
 				} else {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),(7)*40 + xInv - 2, 360 + yInv - 2 + 0,40,40,null);
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),(7)*40 + xInv, 360 + yInv,36,36,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),(7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),(7)*40 + xInv - 220, 410 + yInv,36,36,null);
 				}
 				
 				int plusY = 0;
@@ -142,7 +123,7 @@ public class Market extends CastleBuilding {
 					g.drawImage(img,40 + (i-invIndex)*40 + xInv - minX, 400 + yInv + plusY,36,36, null);
 				}	
 				
-				g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg") ,(7)*40 + xInv - 2 - 25, 360 + yInv - 2 + 15,25,25,null);
+				g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg") ,(7)*40 + xInv - 257 - 25, 360 + yInv - 2 + 15,25,25,null);
 				
 			}
 		}
