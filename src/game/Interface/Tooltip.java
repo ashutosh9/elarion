@@ -68,6 +68,7 @@ public class Tooltip {
 		for(Text t : texts){
 			g.drawString(t.getString(), t.getX() + X, t.getY() + Y);
 		}
+		
 	}
 	
 	public void closePopup(){

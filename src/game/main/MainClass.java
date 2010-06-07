@@ -97,17 +97,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		resourceBar = new ResourceBar();
 
 		
-//		path = new Path();
-//		path = path.findPath(field, field.getSquare(4, 5), field.getSquare(14, 6));
 
-		
-/*		playerRed.Activate();
-		if(playerRed.isActive()){
-			playerList.add(playerRed);
-		}
-		TurnSystem turnSystem = new TurnSystem(playerList);*/
-		// this will be the main graphics class
-		// it will get the current player from the turn system
 		mc.run();
 	}
 
@@ -158,7 +148,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			update(timePassed);
 			
 			Graphics2D g = s.getGraphics();
-
+			
 			try {
 				draw(g);
 			} catch (NullPointerException e) {
@@ -204,7 +194,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		
 	}
 
-	public void draw(Graphics g) throws NullPointerException{
+	public void draw(Graphics g) throws NullPointerException {
 		
 		//different views : world view/city view/combat view
 		//currently there is just 1 setup view - world view
@@ -355,16 +345,16 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),78,null);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),80,null);
 			
+			if(popupWindow != null){
+				popupWindow.draw(g);
+			}
 			
 			if(tooltip != null){
 				tooltip.draw(g);
 			} else {
-				tooltip = new Tooltip(this);
+				tooltip = new Minimap(this,field);
 			}
-			
-			if(popupWindow != null){
-				popupWindow.draw(g);
-			}
+
 	
 			mouseChecker();
 			currentViewChecker();
