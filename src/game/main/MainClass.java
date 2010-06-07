@@ -254,11 +254,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						
 					}
 					
-					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).isPath()){
-						g.drawImage(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getPathNode().getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
-								players.getCurrentPlayer().getCurrentViewAbsY()), null);
-					}
-					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
 						
 						Building building = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding();
@@ -273,6 +268,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						g.drawImage(r.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
 								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
+					}
+					
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).isPath()){
+						g.drawImage(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getPathNode().getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 					}
 					
 				}

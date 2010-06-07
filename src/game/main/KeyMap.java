@@ -19,7 +19,6 @@ public class KeyMap {
 				
 				if(keyCode == KeyEvent.VK_M){
 					if(mc.getCurrentPlayer().getSelectedHero() != null){
-						mc.setPopupWindow(new ChestPopupWindow(mc,mc.getCurrentPlayer()));
 						if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
 							mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(true);
 						}

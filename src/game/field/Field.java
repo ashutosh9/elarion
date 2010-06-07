@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.util.Random;
 
 import game.field.Square;
+import game.item.Item;
 import game.resource.Resource;
 
 public class Field {
@@ -29,7 +30,7 @@ public class Field {
 		s = new Square[width][height];
 		for(int x=0; x<width; x++) {
 			for(int y=0; y<height; y++) {
-				int i = generator.nextInt(10);
+				int i = generator.nextInt(15);
 				int a = generator.nextInt(20);
 				int ga = generator.nextInt(1000);
 
@@ -45,6 +46,9 @@ public class Field {
 				}
 				if(i==3){
 					s[x][y].setResource(new Resource("wood",0,a,Toolkit.getDefaultToolkit().getImage("src/game/images/resource/wood.png")));
+				}
+				if(i==4){
+					s[x][y].setItem(new Item("chest", Toolkit.getDefaultToolkit().getImage("src/game/images/resource/chest.png")));
 				}
 			}
 		}
