@@ -225,170 +225,191 @@ public class HeroPopupWindow extends PopupWindow {
 	public void mousePressed(MouseEvent e, MainClass mc) {
 		super.mousePressed(e, mc);
 		
-		int plusY = -40;
-		int minX = -320;
+		if(e.getButton() == MouseEvent.BUTTON1){
 		
-		for(int i = invIndex; i < (invIndex + 32);i++){
-			if((i-invIndex)%8 == 0){
-				plusY += 40;
-				minX += 320;
+			int plusY = -40;
+			int minX = -320;
+			
+			for(int i = invIndex; i < (invIndex + 32);i++){
+				if((i-invIndex)%8 == 0){
+					plusY += 40;
+					minX += 320;
+				}
+				Point start = new Point(40 + (i-invIndex)*40 + super.getX() - 2 - minX, 400 + super.getY() - 2 + plusY);
+				Point end = new Point(80 + (i-invIndex)*40 + super.getX() - 2 - minX, 440 + super.getY() - 2 + plusY);
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getInventory().get(i) != null){
+						if(i == selectedItem){
+							hero.getEquipment().equip(hero.getInventory().get(i), hero.getInventory());
+							selectedItem = -1;
+						} else {
+							selectedItem = i;
+						}
+					}
+					break;
+				}
 			}
-			Point start = new Point(40 + (i-invIndex)*40 + super.getX() - 2 - minX, 400 + super.getY() - 2 + plusY);
-			Point end = new Point(80 + (i-invIndex)*40 + super.getX() - 2 - minX, 440 + super.getY() - 2 + plusY);
-			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-				if(hero.getInventory().get(i) != null){
-					if(i == selectedItem){
-						hero.getEquipment().equip(hero.getInventory().get(i), hero.getInventory());
+			
+			if(hero.getInventory().get(invIndex + 32) != null ){
+				Point start = new Point(40 + (7)*40 + super.getX() - 2, 360 + super.getY() - 2);
+				Point end = new Point(80 + (7)*40 + super.getX() - 2, 400 + super.getY() - 2);
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					invIndex += 32;
+				}
+			} 
+			
+			if(invIndex>0){
+				Point start = new Point((7)*40 + super.getX() - 2, 360 + super.getY() - 2);
+				Point end = new Point((8)*40 + super.getX() - 2, 400 + super.getY() - 2);
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					invIndex -=32;
+					if(invIndex < 0 ) invIndex = 0;
+				}
+			} 
+			
+			if(mc.isWithinBounds(mc.getMousePos(), new Point((7)*40 + super.getX() - 2 - 25, 360 + super.getY() - 2 + 15), new Point((7)*40 + super.getX() - 2 , 360 + super.getY() - 2 + 40))){
+				if(selectedItem != -1){
+					if(hero.getInventory().get(selectedItem) != null){
+						hero.getInventory().remove(selectedItem);
+						hero.getInventory().add(selectedItem,null);
 						selectedItem = -1;
-					} else {
-						selectedItem = i;
 					}
 				}
-				break;
 			}
-		}
-		
-		if(hero.getInventory().get(invIndex + 32) != null ){
-			Point start = new Point(40 + (7)*40 + super.getX() - 2, 360 + super.getY() - 2);
-			Point end = new Point(80 + (7)*40 + super.getX() - 2, 400 + super.getY() - 2);
+			
+			Point start;
+			Point end;
+			
+			start = new Point(40 + super.getX(), 280 + super.getY());
+			end = new Point(90 + super.getX(), 330 + super.getY());
+			
 			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-				invIndex += 32;
+				hero.getEquipment().equip(null, hero.getInventory(),"leftHand");
 			}
-		} 
-		
-		if(invIndex>0){
-			Point start = new Point((7)*40 + super.getX() - 2, 360 + super.getY() - 2);
-			Point end = new Point((8)*40 + super.getX() - 2, 400 + super.getY() - 2);
+	
+			start = new Point(135 + super.getX(), 260 + super.getY());
+			end = new Point(185 + super.getX(), 310 + super.getY());
+			
 			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-				invIndex -=32;
-				if(invIndex < 0 ) invIndex = 0;
+				hero.getEquipment().equip(null, hero.getInventory(),"legs");
 			}
-		} 
-		
-		if(mc.isWithinBounds(mc.getMousePos(), new Point((7)*40 + super.getX() - 2 - 25, 360 + super.getY() - 2 + 15), new Point((7)*40 + super.getX() - 2 , 360 + super.getY() - 2 + 40))){
-			if(selectedItem != -1){
-				if(hero.getInventory().get(selectedItem) != null){
-					hero.getInventory().remove(selectedItem);
-					hero.getInventory().add(selectedItem,null);
-					selectedItem = -1;
+	
+			start = new Point(230 + super.getX(), 280 + super.getY());
+			end = new Point(280 + super.getX(), 330 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"rightHand");
+			}
+	
+			start = new Point(40 + super.getX(), 220 + super.getY());
+			end = new Point(90 + super.getX(), 270 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"feet");
+			}
+	
+			start = new Point(135 + super.getX(), 190 + super.getY());
+			end = new Point(185 + super.getX(), 240 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"armor");
+			}
+	
+			start = new Point(230 + super.getX(), 220 + super.getY());
+			end = new Point(280 + super.getX(), 270 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"neck");
+			}
+	
+			start = new Point(40 + super.getX(), 160 + super.getY());
+			end = new Point(90 + super.getX(), 210 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"bracers");
+			}
+			
+			start = new Point(135 + super.getX(), 120 + super.getY());
+			end = new Point(185 + super.getX(), 170 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"head");
+			}
+	
+			start = new Point( 230 + super.getX(), 160 + super.getY());
+			end = new Point( 280 + super.getX(), 210 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"ring1");
+			}
+	
+			start = new Point(40 + super.getX(), 100 + super.getY());
+			end = new Point(90 + super.getX(), 150 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"gloves");
+			}
+	
+			start = new Point( 230 + super.getX(), 100 + super.getY());
+			end = new Point( 280 + super.getX(), 150 + super.getY());
+			
+			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+				hero.getEquipment().equip(null, hero.getInventory(),"ring2");
+			}
+	
+			for(int i = 0;i<8;i++){
+				start = new Point(i * 50 +365 + super.getX() - 2, 400 + super.getY() - 2);
+				end = new Point(i * 50 +415 + super.getX() - 2, 450 + super.getY() - 2);
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(selectedUnit != -1){
+						if(selectedUnit == i){
+							selectedUnit = -1;
+							break;
+						} 
+						hero.swapUnit(hero, i, selectedUnit);
+						selectedUnit = -1;
+					} else {
+						if(hero.getUnits().get(i) != null){
+							selectedUnit = i;
+						} else {
+							selectedUnit = -1;
+						}
+					}
+					break;
 				}
 			}
-		}
-		
-		Point start;
-		Point end;
-		
-		start = new Point(40 + super.getX(), 280 + super.getY());
-		end = new Point(90 + super.getX(), 330 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"leftHand");
-		}
-
-		start = new Point(135 + super.getX(), 260 + super.getY());
-		end = new Point(185 + super.getX(), 310 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"legs");
-		}
-
-		start = new Point(230 + super.getX(), 280 + super.getY());
-		end = new Point(280 + super.getX(), 330 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"rightHand");
-		}
-
-		start = new Point(40 + super.getX(), 220 + super.getY());
-		end = new Point(90 + super.getX(), 270 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"feet");
-		}
-
-		start = new Point(135 + super.getX(), 190 + super.getY());
-		end = new Point(185 + super.getX(), 240 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"armor");
-		}
-
-		start = new Point(230 + super.getX(), 220 + super.getY());
-		end = new Point(280 + super.getX(), 270 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"neck");
-		}
-
-		start = new Point(40 + super.getX(), 160 + super.getY());
-		end = new Point(90 + super.getX(), 210 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"bracers");
-		}
-		
-		start = new Point(135 + super.getX(), 120 + super.getY());
-		end = new Point(185 + super.getX(), 170 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"head");
-		}
-
-		start = new Point( 230 + super.getX(), 160 + super.getY());
-		end = new Point( 280 + super.getX(), 210 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"ring1");
-		}
-
-		start = new Point(40 + super.getX(), 100 + super.getY());
-		end = new Point(90 + super.getX(), 150 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"gloves");
-		}
-
-		start = new Point( 230 + super.getX(), 100 + super.getY());
-		end = new Point( 280 + super.getX(), 150 + super.getY());
-		
-		if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-			hero.getEquipment().equip(null, hero.getInventory(),"ring2");
-		}
-
-		for(int i = 0;i<8;i++){
-			start = new Point(i * 50 +365 + super.getX() - 2, 400 + super.getY() - 2);
-			end = new Point(i * 50 +415 + super.getX() - 2, 450 + super.getY() - 2);
-			if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+	
+			if(mc.isWithinBounds(mc.getMousePos(), new Point(7 * 50 +385 + super.getX() + 2, 370 + super.getY() + 2), new Point(7 * 50 +410 + super.getX() + 2, 395 + super.getY() + 2))){
 				if(selectedUnit != -1){
-					if(selectedUnit == i){
-						selectedUnit = -1;
-						break;
-					} 
-					hero.swapUnit(hero, i, selectedUnit);
-					selectedUnit = -1;
-				} else {
-					if(hero.getUnits().get(i) != null){
-						selectedUnit = i;
-					} else {
+					if(hero.getUnits().get(selectedUnit) != null){
+						hero.getUnits().remove(selectedUnit);
+						hero.getUnits().add(selectedUnit,null);
 						selectedUnit = -1;
 					}
 				}
-				break;
 			}
+		
 		}
-
-		if(mc.isWithinBounds(mc.getMousePos(), new Point(7 * 50 +385 + super.getX() + 2, 370 + super.getY() + 2), new Point(7 * 50 +410 + super.getX() + 2, 395 + super.getY() + 2))){
-			if(selectedUnit != -1){
-				if(hero.getUnits().get(selectedUnit) != null){
-					hero.getUnits().remove(selectedUnit);
-					hero.getUnits().add(selectedUnit,null);
-					selectedUnit = -1;
+		
+		if(e.getButton() == MouseEvent.BUTTON3){
+			for(int i = 0;i<8;i++){
+				Point start = new Point(i * 50 +365 + super.getX() - 2, 400 + super.getY() - 2);
+				Point end = new Point(i * 50 +415 + super.getX() - 2, 450 + super.getY() - 2);
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getUnits().get(i) != null){
+						mc.setTooltip(new UnitTooltip(mc, hero.getUnits().get(i)));
+					}
 				}
 			}
 		}
-		
-		
-		
+	
 	}	
+	
+	public void mouseReleased(MouseEvent e,MainClass mc){
+		super.mouseReleased(e, mc);
+		if(e.getButton() == MouseEvent.BUTTON3){
+			mc.setTooltip(mc.getMinimap());
+		}
+	}
 	
 }
