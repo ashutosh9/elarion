@@ -2,6 +2,7 @@ package game.main;
 
 import game.Interface.PopupWindow;
 import game.field.Field;
+import game.item.ChestPopupWindow;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -18,6 +19,7 @@ public class KeyMap {
 				
 				if(keyCode == KeyEvent.VK_M){
 					if(mc.getCurrentPlayer().getSelectedHero() != null){
+						mc.setPopupWindow(new ChestPopupWindow(mc,mc.getCurrentPlayer()));
 						if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
 							mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(true);
 						}
