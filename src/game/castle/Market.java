@@ -82,25 +82,34 @@ public class Market extends CastleBuilding {
 				}
 			}
 			if (owner.getCurrentSquare().getHero() != null) {
-				if ((invOffset != 0) && (owner.getCurrentSquare().getHero().getInventory().size() > 8)) {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),155,461,null);
-				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),155,461,null); }
-				for (int i=0; i<8; i++) {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg"),155,461,null);
+//				if ((invOffset != 0) && (owner.getCurrentSquare().getHero().getInventory().size() > 8)) {
+//					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),155,461,null);
+//				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),155,461,null); }
+//				for (int i=0; i<8; i++) {
+//					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg"),155,461,null);
+//				}
+//				if (invOffset < (owner.getCurrentSquare().getHero().getInventory().size() - 8)) {
+//					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),731,461,null);
+//				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),731,461,null); }
+//				j = 0;
+//				for (Item item : owner.getCurrentSquare().getHero().getInventory()) {
+//					if (((j - invOffset) > -1)&&((j - invOffset) < 8)) {
+//						g.drawImage(item.getImage(),219 + (64*j),461,null);
+//						if ((selection - 8) == j) {
+//							g.setColor(gold);
+//							g.drawRect(219+(64*j),461,64,64);
+//						}
+//					}
+//				}
+				if(invOffset != 0) {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),501,403,null);
+				} else {g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left.jpg"),501,403,null);
+				if(owner.getCurrentSquare().getHero().getInventory().size() - 8 > invOffset) {
+					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),571,403,null);
+				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),571,403,null); }
+				
 				}
-				if (invOffset < (owner.getCurrentSquare().getHero().getInventory().size() - 8)) {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),731,461,null);
-				} else { g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),731,461,null); }
-				j = 0;
-				for (Item item : owner.getCurrentSquare().getHero().getInventory()) {
-					if (((j - invOffset) > -1)&&((j - invOffset) < 8)) {
-						g.drawImage(item.getImage(),219 + (64*j),461,null);
-						if ((selection - 8) == j) {
-							g.setColor(gold);
-							g.drawRect(219+(64*j),461,64,64);
-						}
-					}
-				}
+				j++;
 			}
 		}
 	}
