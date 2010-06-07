@@ -13,10 +13,12 @@ public class LevelPopupWindow extends PopupWindow{
 	private Unit unit;
 	private String bonus1;
 	private String bonus2;
+	private boolean levelPopupWindow;
 	
 	public LevelPopupWindow(MainClass mc,Unit u) {
 		super(mc);
-		unit = u;
+		setLevelPopupWindow(true);
+		setUnit(u);
 		this.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
 		Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
 		this.newImg(img, 33, 33);
@@ -59,74 +61,90 @@ public class LevelPopupWindow extends PopupWindow{
 		int i = random.nextInt(6);
 		
 		if(i == 0){
-			unit.getCombatStats().setCharisma(unit.getCombatStats().getCharisma() + 1);
+			getUnit().getCombatStats().setCharisma(getUnit().getCombatStats().getCharisma() + 1);
 			bonus1 = "charisma";
 		}
 		if(i == 1){
-			unit.getCombatStats().setStrenght(unit.getCombatStats().getStrenght() + 1);
-			unit.getCombatStats().setMaximumHealth(unit.getCombatStats().getHealth().y + 10);
-			unit.getCombatStats().setCurrentHealth(unit.getCombatStats().getMaximumHealth());
+			getUnit().getCombatStats().setStrenght(getUnit().getCombatStats().getStrenght() + 1);
+			getUnit().getCombatStats().setMaximumHealth(getUnit().getCombatStats().getHealth().y + 10);
+			getUnit().getCombatStats().setCurrentHealth(getUnit().getCombatStats().getMaximumHealth());
 			
 			bonus1 = "strenght";
 		}
 		if(i == 2){
-			unit.getCombatStats().setWisdom(unit.getCombatStats().getWisdom() + 1);
+			getUnit().getCombatStats().setWisdom(getUnit().getCombatStats().getWisdom() + 1);
 			bonus1 = "wisdom";
 		}
 		if(i == 3){
-			unit.getCombatStats().setConstitution(unit.getCombatStats().getConstitution() + 1);
+			getUnit().getCombatStats().setConstitution(getUnit().getCombatStats().getConstitution() + 1);
 			bonus1 = "constitution";
 		}
 		if(i == 4){
-			unit.getCombatStats().setDexterity(unit.getCombatStats().getDexterity() + 1);
-			unit.getCombatStats().setInitiative(unit.getCombatStats().getInitiative() + 1);
+			getUnit().getCombatStats().setDexterity(getUnit().getCombatStats().getDexterity() + 1);
+			getUnit().getCombatStats().setInitiative(getUnit().getCombatStats().getInitiative() + 1);
 			bonus1 = "dexterity";
 		}
 		if(i == 5){
-			unit.getCombatStats().setIntelligence(unit.getCombatStats().getIntelligence() + 1);
-			unit.getCombatStats().setMaximumMana(unit.getCombatStats().getMana().y + 10);
-			unit.getCombatStats().setCurrentMana(unit.getCombatStats().getMaximumMana());
+			getUnit().getCombatStats().setIntelligence(getUnit().getCombatStats().getIntelligence() + 1);
+			getUnit().getCombatStats().setMaximumMana(getUnit().getCombatStats().getMana().y + 10);
+			getUnit().getCombatStats().setCurrentMana(getUnit().getCombatStats().getMaximumMana());
 			bonus1 = "intelligence";
 		}
 		
 		i = random.nextInt(6);
 		
 		if(i == 0){
-			unit.getCombatStats().setCharisma(unit.getCombatStats().getCharisma() + 1);
+			getUnit().getCombatStats().setCharisma(getUnit().getCombatStats().getCharisma() + 1);
 			bonus2 = "charisma";
 		}
 		if(i == 1){
-			unit.getCombatStats().setStrenght(unit.getCombatStats().getStrenght() + 1);
-			unit.getCombatStats().setMaximumHealth(unit.getCombatStats().getHealth().y + 10);
-			unit.getCombatStats().setCurrentHealth(unit.getCombatStats().getMaximumHealth());
+			getUnit().getCombatStats().setStrenght(getUnit().getCombatStats().getStrenght() + 1);
+			getUnit().getCombatStats().setMaximumHealth(getUnit().getCombatStats().getHealth().y + 10);
+			getUnit().getCombatStats().setCurrentHealth(getUnit().getCombatStats().getMaximumHealth());
 			bonus2 = "strenght";
 		}
 		if(i == 2){
-			unit.getCombatStats().setWisdom(unit.getCombatStats().getWisdom() + 1);
+			getUnit().getCombatStats().setWisdom(getUnit().getCombatStats().getWisdom() + 1);
 			bonus2 = "wisdom";
 		}
 		if(i == 3){
-			unit.getCombatStats().setConstitution(unit.getCombatStats().getConstitution() + 1);
+			getUnit().getCombatStats().setConstitution(getUnit().getCombatStats().getConstitution() + 1);
 			bonus2 = "constitution";
 		}
 		if(i == 4){
-			unit.getCombatStats().setDexterity(unit.getCombatStats().getDexterity() + 1);
-			unit.getCombatStats().setInitiative(unit.getCombatStats().getInitiative() + 1);
+			getUnit().getCombatStats().setDexterity(getUnit().getCombatStats().getDexterity() + 1);
+			getUnit().getCombatStats().setInitiative(getUnit().getCombatStats().getInitiative() + 1);
 			bonus2 = "dexterity";
 		}
 		if(i == 5){
-			unit.getCombatStats().setIntelligence(unit.getCombatStats().getIntelligence() + 1);
-			unit.getCombatStats().setMaximumMana(unit.getCombatStats().getMana().y + 10);
-			unit.getCombatStats().setCurrentMana(unit.getCombatStats().getMaximumMana());
+			getUnit().getCombatStats().setIntelligence(getUnit().getCombatStats().getIntelligence() + 1);
+			getUnit().getCombatStats().setMaximumMana(getUnit().getCombatStats().getMana().y + 10);
+			getUnit().getCombatStats().setCurrentMana(getUnit().getCombatStats().getMaximumMana());
 			bonus2 = "intelligence";
 		}
 		
-		unit.getCombatStats().setMaximumMana(unit.getCombatStats().getMana().y + (unit.getLevel()/2)*20);
-		unit.getCombatStats().setCurrentMana(unit.getCombatStats().getMaximumMana());
-		unit.getCombatStats().setMaximumHealth(unit.getCombatStats().getHealth().y + (unit.getLevel()/2)*10);
-		unit.getCombatStats().setCurrentHealth(unit.getCombatStats().getMaximumHealth());
+		getUnit().getCombatStats().setMaximumMana(getUnit().getCombatStats().getMana().y + (getUnit().getLevel()/2)*20);
+		getUnit().getCombatStats().setCurrentMana(getUnit().getCombatStats().getMaximumMana());
+		getUnit().getCombatStats().setMaximumHealth(getUnit().getCombatStats().getHealth().y + (getUnit().getLevel()/2)*10);
+		getUnit().getCombatStats().setCurrentHealth(getUnit().getCombatStats().getMaximumHealth());
 
 		
+	}
+
+	public void setLevelPopupWindow(boolean levelPopupWindow) {
+		this.levelPopupWindow = levelPopupWindow;
+	}
+
+	public boolean isLevelPopupWindow() {
+		return levelPopupWindow;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
+	}
+
+	public Unit getUnit() {
+		return unit;
 	}
 	
 }

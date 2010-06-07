@@ -144,6 +144,10 @@ public class Unit {
 		
 		LevelPopupWindow popup = new LevelPopupWindow(mc, this);
 		
+		if(experience.x > experience.y){
+			levelUp(mc);
+		}
+		
 		mc.setPopupWindow(popup);
 		
 	}
