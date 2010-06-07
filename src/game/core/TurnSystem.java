@@ -42,7 +42,7 @@ public class TurnSystem{
 				h.getPath().setAutoMoving(false);
 				h.setPath(null);
 			}
-			h.setMovementPoints(100);
+			h.refillMovementPoints();
 		}
 		
 	}

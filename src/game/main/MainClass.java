@@ -23,6 +23,8 @@ import game.unit.Hero;
 import game.unit.HeroPopupWindow;
 import game.unit.RandomHeroGenerator;
 import game.unit.TestUnits;
+import game.unit.UnitTooltip;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -793,7 +795,22 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			}
 		} else 	if(e.getButton() == MouseEvent.BUTTON3){
 			
-			tooltip = new Tooltip(this);
+			if(!clicked){
+				for(int i = 0; i < 280; i += 40) {
+					long x = mousePos.x;
+					long y = mousePos.y;
+					int xi = 210 + i;
+					int ximax = 210 + i + 39;
+					if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
+						if(players.getCurrentPlayer().getHeroes().get(i/40) != null){
+							tooltip = new UnitTooltip(this,players.getCurrentPlayer().getHeroes().get(i/40));
+						} 
+						clicked = true;
+					}
+				}
+			}
+			
+
 			
 			
 		}
