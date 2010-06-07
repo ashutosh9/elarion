@@ -98,10 +98,10 @@ public class Minimap extends Tooltip {
 			y = y*f.getHeight();
 			
 			if(Math.round(x - mc.getScreenWidth()/2)<0){
-				x=0;
+				x=Math.round(mc.getScreenWidth()/2) + 1;
 			}
 			if(Math.round(y - mc.getScreenHeight()/2) < 0){
-				y=0;
+				y=Math.round(mc.getScreenHeight()/2) + 1;
 			}
 			if(Math.round(x)>f.getWidth() - mc.getScreenWidth() + 3){
 				x=f.getWidth() - mc.getScreenWidth() + 14;
