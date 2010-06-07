@@ -14,7 +14,7 @@ public class TestUnits {
 	public TestUnits(){
 		//Warrior Setup
 		GraphicalData graphicalData = new GraphicalData();
-//		warrior.getCombatStats().setHealth(100);
+//		warrior.getCombatStats().getHealth(100);
 //		warrior.getCombatStats().setMana(0);
 //		warrior.getCombatStats().setStrenght(30);
 //		warrior.getCombatStats().setAgility(6);
@@ -22,7 +22,7 @@ public class TestUnits {
 //		warrior.getCombatStats().setInitiative(8);
 //		warrior.getCombatStats().setMovementpoints(5);
 //		warrior.getCombatStats().setDefense(50);
-		warrior.setType("Warrior");
+		warrior.setType("warrior");
 		Animation a = new Animation();
 		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battlefield/warrior3.png"), 250);
 		warrior.setGraphicalData(graphicalData);
@@ -41,7 +41,7 @@ public class TestUnits {
 //		archer.getCombatStats().setInitiative(10);
 //		archer.getCombatStats().setMovementpoints(4);
 //		archer.getCombatStats().setDefense(25);
-		archer.setType("Archer");
+		archer.setType("archer");
 		a = new Animation();
 		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battlefield/archer3.png"), 250);
 		archer.setGraphicalData(graphicalData);
@@ -60,7 +60,7 @@ public class TestUnits {
 //		mage.getCombatStats().setInitiative(6);
 //		mage.getCombatStats().setMovementpoints(4);
 //		mage.getCombatStats().setDefense(10);
-		mage.setType("Mage");
+		mage.setType("mage");
 		a = new Animation();
 		a.addScene(Toolkit.getDefaultToolkit().getImage("Images/battlefield/mage3.png"), 250);
 		mage.setGraphicalData(graphicalData);
