@@ -172,6 +172,16 @@ public class Player {
 		}
 	}
 	
+	public void selectCastle(Castle c){
+		for(Castle castle : castles){
+			if((castle.getCurrentSquare().getX() == c.getCurrentSquare().getX()) && (castle.getCurrentSquare().getY() == c.getCurrentSquare().getY())){
+				castle.setSelected(true);
+			} else {
+				castle.setSelected(false);
+			}
+		}
+	}
+	
 	public ArrayList<Castle> getCastles(){
 		return castles;
 	}

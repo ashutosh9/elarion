@@ -39,7 +39,7 @@ public class Castle {
 	
 	public Castle (int x, int y,Field f, MainClass mc) {
 		this.mc = mc;
-		buildLimit = 1;
+		buildLimit = 20;
 		field = f;
 		selected = false;
 		garrisonHero = new Hero(mc);
