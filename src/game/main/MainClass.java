@@ -14,7 +14,6 @@ import game.core.TurnPopupWindow;
 import game.core.TurnSystem;
 import game.field.Field;
 import game.graphic.CastleView;
-import game.graphic.CombatView;
 import game.item.Item;
 import game.item.RandomItemGenerator;
 import game.player.Player;
@@ -54,19 +53,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static RandomHeroGenerator heroGen;
 	private Tooltip tooltip;
 	private Minimap minimap;
-
 	private static ResourceBar resourceBar;
 	private PopupWindow popupWindow = null;
-	
-	
-	//for testing
-	private static Hero h;
-//	private Image bg;
-//	private Image face1;
-//	private Animation a;
-//	private Sprite sprite;
-//	private static Item pathNode;
-	private static CombatView combatView;
 	
 	public static void main(String args[]){
 		mc = new MainClass();
@@ -79,7 +67,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		turnSystem = new TurnSystem();
 		Castle c = new Castle(479,478,field,mc);
 		Castle c2 = new Castle (5,5,field,mc);
-		h = new Hero(mc);
+		Hero h = new Hero(mc);
 		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
 		h2.setName("Kirie");
@@ -104,8 +92,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h2.addUnit(testUnits2.getMage());
 		h2.addUnit(testUnits2.getWarrior());
 		h2.addUnit(testUnits2.getArcher());
-		combatView = new CombatView(h2,h);
-		combatView.setCombat(false);
 		resourceBar = new ResourceBar();
 
 		
@@ -145,14 +131,10 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			w.addMouseMotionListener(this);
 			loaded = false;
 			running = true;
-			loadimages();
 			screenWidth = 33;
 			screenHeight = 22;
+			load();
 			if(loaded){
-				
-				minimap = new Minimap(this,field);
-				setTooltip(minimap);
-				
 				while(!exited){
 					drawLoop();
 				}
@@ -388,8 +370,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		}
 	}
 
-	public void loadimages() {
-		
+	public void load() {
+		minimap = new Minimap(this,field);
+		setTooltip(minimap);
 		loaded = true;
 	}
 
@@ -530,10 +513,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	public int getScreenHeight() {
 		return screenHeight;
-	}
-	
-	public CombatView getCombatView() {
-		return combatView;
 	}
 
 	public void clearPath(){
@@ -705,111 +684,127 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				clicked = true;
 			}
 		}
-		if((mc.getCurrentPlayer().getSelectedHero() != null) && (!clicked)){
-			if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
-				if(mc.getCurrentPlayer().getSelectedHero().getPath().isAutoMoving()){
-					mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
-					clicked = true;
-				}
-			}
-		}
 		
-		if(!clicked){
-			if(isWithinBounds(getMousePos(),new Point((156-2),38),new Point((196-2),78))){
-				endedTurn();
-				clicked = true;
-			}
-			if(isWithinBounds(getMousePos(),new Point((156-2),78),new Point((196-2),118))){
-				exitGamePopup();
-				clicked = true;
-			}
-			for(int i = 0; i < 280; i += 40) {
-				long x = mousePos.x;
-				long y = mousePos.y;
-				int xi = 210 + i;
-				int ximax = 210 + i + 39;
-				if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
-					ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
-					clearPath();
-					if(players.getCurrentPlayer().getSelectedHero() == players.getCurrentPlayer().getHeroes().get(i/40)){
-						popupWindow = new HeroPopupWindow(this,players.getCurrentPlayer().getHeroes().get(i/40));
-						movingHeroChecker();
-					} else {
-						players.getCurrentPlayer().selectHero(heroes.get(i/40));
-						movingHeroChecker();
+		if(e.getButton() == MouseEvent.BUTTON1){
+			if((mc.getCurrentPlayer().getSelectedHero() != null) && (!clicked)){
+				if(mc.getCurrentPlayer().getSelectedHero().getPath() != null){
+					if(mc.getCurrentPlayer().getSelectedHero().getPath().isAutoMoving()){
+						mc.getCurrentPlayer().getSelectedHero().getPath().setAutoMoving(false);
+						clicked = true;
 					}
-					clicked = true;
 				}
 			}
-		}
-		
-		if(!clicked){
-			for(int x = 0; x < (screenWidth + 1);x++){
-				for(int y = 0; y < (screenHeight + 1);y++){		
-					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
-							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
-						if(field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
-							Hero hero = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero();
-							if(players.getCurrentPlayer().getHeroes().contains(hero)){
-								clearPath();
-								players.getCurrentPlayer().selectHero(players.getCurrentPlayer().getHero(hero));
-								clicked = true;
-							}
+			
+			if(!clicked){
+				if(isWithinBounds(getMousePos(),new Point((156-2),38),new Point((196-2),78))){
+					endedTurn();
+					clicked = true;
+				}
+				if(isWithinBounds(getMousePos(),new Point((156-2),78),new Point((196-2),118))){
+					exitGamePopup();
+					clicked = true;
+				}
+				for(int i = 0; i < 280; i += 40) {
+					long x = mousePos.x;
+					long y = mousePos.y;
+					int xi = 210 + i;
+					int ximax = 210 + i + 39;
+					if((x>xi) && (x<ximax) && (y>18) && (y<58) && (i/40 < players.getCurrentPlayer().getHeroes().size())){
+						ArrayList<Hero> heroes = players.getCurrentPlayer().getHeroes();
+						clearPath();
+						if(players.getCurrentPlayer().getSelectedHero() == players.getCurrentPlayer().getHeroes().get(i/40)){
+							popupWindow = new HeroPopupWindow(this,players.getCurrentPlayer().getHeroes().get(i/40));
+							movingHeroChecker();
+						} else {
+							players.getCurrentPlayer().selectHero(heroes.get(i/40));
+							movingHeroChecker();
 						}
+						clicked = true;
 					}
 				}
 			}
-		}
-		
-		if(!clicked && players.getCurrentPlayer().getSelectedHero() != null ){
-			for(int x = 0; x < (screenWidth + 1);x++){
-				for(int y = 0; y < (screenHeight + 1);y++){				
-					if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
-							&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
-						if(e.getButton() == MouseEvent.BUTTON1){
-						
-							clearPath();
-							Path path = new Path();
-							path = path.findPath(field, players.getCurrentPlayer().getSelectedHero().getCurrentSquare(), field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
-							
-							players.getCurrentPlayer().getSelectedHero().setPath(path);
-							
-							if(players.getCurrentPlayer().getSelectedHero() != null){
-								if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
-									for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
-										field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(true);
-									}
+			
+			if(!clicked){
+				for(int x = 0; x < (screenWidth + 1);x++){
+					for(int y = 0; y < (screenHeight + 1);y++){		
+						if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
+								&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
+							if(field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
+								Hero hero = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero();
+								if(players.getCurrentPlayer().getHeroes().contains(hero)){
+									clearPath();
+									players.getCurrentPlayer().selectHero(players.getCurrentPlayer().getHero(hero));
+									clicked = true;
 								}
 							}
-								
-							
-						}
-						
-						if(e.getButton() == MouseEvent.BUTTON3){
-							try {
-								robot = new Robot();
-								robot.keyPress(KeyEvent.VK_M);
-							} catch (AWTException e1) {
-								System.out.print("robot Fail");
-							}
-
-//							Building building = new Building();
-//							building.setImage(Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass1.jpg"));
-//							field.getSquare(5, 5).setBuilding(building);
-//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setBuilding(building);
-//							field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).setPassable(false);
-							
 						}
 					}
-					
 				}
 			}
+			
+			if(!clicked && players.getCurrentPlayer().getSelectedHero() != null ){
+				for(int x = 0; x < (screenWidth + 1);x++){
+					for(int y = 0; y < (screenHeight + 1);y++){				
+						if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
+								&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
+							if(e.getButton() == MouseEvent.BUTTON1){
+							
+								if((players.getCurrentPlayer().getSelectedHero().getDestination() != null) && (players.getCurrentPlayer().getSelectedHero().getDestination().getX() == (x + 2 +players.getCurrentPlayer().getCurrentView().getX())) && 
+										(players.getCurrentPlayer().getSelectedHero().getDestination().getY() == (y+2+players.getCurrentPlayer().getCurrentView().getY()))) {
+									
+									try {
+										robot = new Robot();
+										robot.keyPress(KeyEvent.VK_M);
+									} catch (AWTException e1) {
+										System.out.print("robot Fail");
+									}
+								} else {
+									
+									clearPath();
+									Path path = new Path();
+									path = path.findPath(field, players.getCurrentPlayer().getSelectedHero().getCurrentSquare(), field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
+									
+									players.getCurrentPlayer().getSelectedHero().setDestination(new Point((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())));
+									
+									players.getCurrentPlayer().getSelectedHero().setPath(path);
+									
+									if(path == null){
+										players.getCurrentPlayer().getSelectedHero().setDestination(null);
+									}
+									
+									
+									if(players.getCurrentPlayer().getSelectedHero() != null){
+										if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
+											for(PathNode pn : players.getCurrentPlayer().getSelectedHero().getPath().getSquares()){
+												field.getSquare(pn.getSquare().getX(), pn.getSquare().getY()).setPath(true);
+											}
+										}
+									}
+								}
+									
+								
+							}
+							
+
+						}
+						
+					}
+				}
+			}
+		} else 	if(e.getButton() == MouseEvent.BUTTON3){
+			
+			tooltip = new Tooltip(this);
+			
+			
 		}
 		
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if(e.getButton() == MouseEvent.BUTTON3){
+			tooltip = minimap;
+		}
 		if(popupWindow != null){
 			popupWindow.mouseReleased(e, this);
 		}
@@ -836,22 +831,3 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 
 }
-
-
-
-
-/*	 
-   			RenderingHints rh = new RenderingHints(
-					RenderingHints.KEY_ANTIALIASING,
-					RenderingHints.VALUE_ANTIALIAS_ON);
-			g.setRenderingHints(rh);	
-			
-			String string = " asd " + currentPlayer.getName() + " asd ";
-			
-			g.setColor(w.getBackground());
-			g.fillRect(0,0,s.getWidth(),s.getHeight());
-			g.setColoer(w.getForeground());
-			g.drawString(string,x,y); // draws background && string
-			
-			
- */

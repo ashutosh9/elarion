@@ -46,6 +46,7 @@ public class Hero extends Unit {
 	// to include combat stats and graphical data as different classes
 	private double hPower;
 	private MainClass mc;
+	private Point destination;
 	
 	public Hero(MainClass mc){
 		this.mc = mc;
@@ -464,9 +465,14 @@ public class Hero extends Unit {
 			units.set(i,null);
 		}
 	}
-//	public getAnimations(){
-//		return race.getHeroAnimations;
-//	}
+
+	public void setDestination(Point destination) {
+		this.destination = destination;
+	}
+
+	public Point getDestination() {
+		return destination;
+	}
 
 	
 }

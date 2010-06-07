@@ -68,19 +68,19 @@ public class KeyMap {
 						}
 					}
 				}
-					if(keyCode == KeyEvent.VK_RIGHT){
-						int x = mc.getCurrentPlayer().getCurrentView().getX();
-						int y = mc.getCurrentPlayer().getCurrentView().getY();
-						x+=mc.getScreenWidth()+2;
-						if(x<f.getWidth()){
-							if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
-								int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
-								mc.getCurrentPlayer().setCurrentViewAbsX(temp+speed);
-							}
+				if(keyCode == KeyEvent.VK_RIGHT){
+					int x = mc.getCurrentPlayer().getCurrentView().getX();
+					int y = mc.getCurrentPlayer().getCurrentView().getY();
+					x+=mc.getScreenWidth()+2;
+					if(x<f.getWidth()){
+						if(f.getSquare(x, y)!=null || mc.getCurrentPlayer().getCurrentViewAbsX() != 0){
+							int temp = mc.getCurrentPlayer().getCurrentViewAbsX();
+							mc.getCurrentPlayer().setCurrentViewAbsX(temp+speed);
 						}
 					}
+				}
+		
 			
-				
 				if(keyCode == KeyEvent.VK_S){
 					if(mc.getCurrentPlayer().getSelectedHero() != null) {
 						mc.clearPath();
@@ -221,36 +221,10 @@ public class KeyMap {
 					PopupWindow popupWindow = new PopupWindow(mc);
 					popupWindow.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
 					mc.setPopupWindow(popupWindow);
+				}	else {
+					e.consume();
 				}
 			
-			else {
-				e.consume();
-			}
-			
-		}
-		if(i==2) { //released
-		}
-		
-		if(i==3) { //typed
-			e.consume();
-		}
-	}
-	else if(mc.getCombatView().isCombat()){
-			if(i==1){//pressed
-				
-				if(keyCode == KeyEvent.VK_ESCAPE){
-					mc.stop();
-				}
-				
-				if(keyCode == KeyEvent.VK_1){
-					mc.exit();
-				}
-				
-				if(keyCode == KeyEvent.VK_B){
-					boolean b = mc.getCombatView().isCombat();
-					mc.getCombatView().setCombat(!b);
-				}
-				
 			}
 			if(i==2) { //released
 			}
