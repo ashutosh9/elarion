@@ -174,6 +174,8 @@ public class RandomHeroGenerator {
 			randomHero.setIcon(Toolkit.getDefaultToolkit().getImage(s));
 		}
 		
+		randomHero.setType("hero");
+		
 		
 	}
 	
