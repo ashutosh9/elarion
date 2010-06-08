@@ -20,13 +20,13 @@ public class Archery extends Building{
 	public void draw(Graphics g) {
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground.png"),101,101,null);
 		g.setColor(black);
-		g.fillRect(351, 201, 500, 500);
+		g.fillRect(151, 151, 500, 500);
 		g.setColor(white);
-		g.drawRect(351, 201, 500, 500);
-		g.drawString("Buy Warrior",355,205);
-		g.drawString("Cost:",355,230);
-		g.drawString("Gold: 1725",355,255);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),481,431,null);
+		g.drawRect(151, 151, 500, 500);
+		g.drawString("Buy Archer",155,205);
+		g.drawString("Cost:",155,230);
+		g.drawString("Gold: 1250",155,255);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"),151,431,null);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"),701,501,null);
 	}
 	
@@ -35,8 +35,8 @@ public class Archery extends Building{
 		Point topLeft = new Point(0,0);
 		Point bottomRight = new Point(0,0);
 		boolean clicked = false;
-		topLeft.setLocation(481,431);
-		bottomRight.setLocation(540,490);
+		topLeft.setLocation(151,431);
+		bottomRight.setLocation(210,490);
 		if(mc.isWithinBounds(mc.getMousePos(),topLeft,bottomRight)) {
 			clicked = true;
 			if(mc.getCurrentPlayer().getGold().getAmount() >= 1250) {
