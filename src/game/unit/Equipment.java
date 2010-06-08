@@ -32,17 +32,6 @@ public class Equipment {
 		gloves = null;
 		bracers = null;
 		equipment = new ArrayList<Item>();
-		equipment.add(head);
-		equipment.add(legs);
-		equipment.add(armor);
-		equipment.add(feet);
-		equipment.add(leftHand);
-		equipment.add(rightHand);
-		equipment.add(ring1);
-		equipment.add(ring2);
-		equipment.add(neck);
-		equipment.add(gloves);
-		equipment.add(bracers);
 	}
 	
 	public void equip(Item i, ArrayList<Item> inventory){
@@ -53,9 +42,11 @@ public class Equipment {
 			}
 			if(head != null){
 				inventory.add(0,head);
+				equipment.remove(equipment.indexOf(head));
 				head = null;
 			}
 			head = i;
+			equipment.add(0, head);
 		}
 		
 		if(i.getType() == "legs"){
@@ -64,8 +55,10 @@ public class Equipment {
 			}
 			if(legs != null){
 				inventory.add(0,legs);
+				equipment.remove(equipment.indexOf(legs));
 				legs = null;
 			}
+			equipment.add(0, i);
 			legs = i;
 		}
 		
@@ -75,8 +68,10 @@ public class Equipment {
 			}
 			if(armor != null){
 				inventory.add(0, armor);
+				equipment.remove(equipment.indexOf(armor));
 				armor = null;
 			}
+			equipment.add(0, i);
 			armor = i;
 		}
 		
@@ -86,8 +81,10 @@ public class Equipment {
 			}
 			if(feet != null){
 				inventory.add(0,feet);
+				equipment.remove(equipment.indexOf(feet));
 				feet = null;
 			}
+			equipment.add(0, i);
 			feet = i;
 		}
 		
@@ -97,8 +94,10 @@ public class Equipment {
 			}
 			if(leftHand != null){
 				inventory.add(0,leftHand);
+				equipment.remove(equipment.indexOf(leftHand));
 				leftHand = null;
 			}
+			equipment.add(0, i);
 			leftHand = i;
 		}
 		
@@ -108,8 +107,10 @@ public class Equipment {
 			}
 			if(rightHand != null){
 				inventory.add(0,rightHand);
+				equipment.remove(equipment.indexOf(rightHand));
 				rightHand = null;
 			}
+			equipment.add(0, i);
 			rightHand = i;
 		}
 		
@@ -119,8 +120,10 @@ public class Equipment {
 			}
 			if(neck != null){
 				inventory.add(0,neck);
+				equipment.remove(equipment.indexOf(neck));
 				neck = null;
 			}
+			equipment.add(0, i);
 			neck = i;
 		}
 		
@@ -130,8 +133,10 @@ public class Equipment {
 			}
 			if(gloves != null){
 				inventory.add(0,gloves);
+				equipment.remove(equipment.indexOf(gloves));
 				gloves = null;
 			}
+			equipment.add(0, i);
 			gloves = i;
 		}
 		
@@ -141,8 +146,10 @@ public class Equipment {
 			}
 			if(bracers != null){
 				inventory.add(0,bracers);
+				equipment.remove(equipment.indexOf(bracers));
 				bracers = null;
 			}
+			equipment.add(0, i);
 			bracers = i;
 		}
 		
@@ -151,12 +158,15 @@ public class Equipment {
 				inventory.remove(inventory.indexOf(i));
 			}
 			if(ring1 == null){
+				equipment.add(0, i);
 				ring1 = i;
 			} else {
 				if(ring2 != null){
 					inventory.add(0,ring2);
+					equipment.remove(equipment.indexOf(ring2));
 					ring2 = null;
 				}
+				equipment.add(0, i);
 				ring2 = i;
 			}
 		}
@@ -171,9 +181,11 @@ public class Equipment {
 			}
 			if(head != null){
 				inventory.add(0,head);
+				equipment.remove(equipment.indexOf(head));
 				head = null;
 			}
 			head = i;
+			equipment.add(0, head);
 		}
 		
 		if(type == "legs"){
@@ -182,8 +194,10 @@ public class Equipment {
 			}
 			if(legs != null){
 				inventory.add(0,legs);
+				equipment.remove(equipment.indexOf(legs));
 				legs = null;
 			}
+			equipment.add(0, i);
 			legs = i;
 		}
 		
@@ -193,8 +207,10 @@ public class Equipment {
 			}
 			if(armor != null){
 				inventory.add(0, armor);
+				equipment.remove(equipment.indexOf(armor));
 				armor = null;
 			}
+			equipment.add(0, i);
 			armor = i;
 		}
 		
@@ -204,8 +220,10 @@ public class Equipment {
 			}
 			if(feet != null){
 				inventory.add(0,feet);
+				equipment.remove(equipment.indexOf(feet));
 				feet = null;
 			}
+			equipment.add(0, i);
 			feet = i;
 		}
 		
@@ -215,8 +233,10 @@ public class Equipment {
 			}
 			if(leftHand != null){
 				inventory.add(0,leftHand);
+				equipment.remove(equipment.indexOf(leftHand));
 				leftHand = null;
 			}
+			equipment.add(0, i);
 			leftHand = i;
 		}
 		
@@ -226,8 +246,10 @@ public class Equipment {
 			}
 			if(rightHand != null){
 				inventory.add(0,rightHand);
+				equipment.remove(equipment.indexOf(rightHand));
 				rightHand = null;
 			}
+			equipment.add(0, i);
 			rightHand = i;
 		}
 		
@@ -237,8 +259,10 @@ public class Equipment {
 			}
 			if(neck != null){
 				inventory.add(0,neck);
+				equipment.remove(equipment.indexOf(neck));
 				neck = null;
 			}
+			equipment.add(0, i);
 			neck = i;
 		}
 		
@@ -248,8 +272,10 @@ public class Equipment {
 			}
 			if(gloves != null){
 				inventory.add(0,gloves);
+				equipment.remove(equipment.indexOf(gloves));
 				gloves = null;
 			}
+			equipment.add(0, i);
 			gloves = i;
 		}
 		
@@ -259,31 +285,29 @@ public class Equipment {
 			}
 			if(bracers != null){
 				inventory.add(0,bracers);
+				equipment.remove(equipment.indexOf(bracers));
 				bracers = null;
 			}
+			equipment.add(0, i);
 			bracers = i;
 		}
 		
-		if(type == "ring1"){
+		if(type == "ring"){
 			if(inventory.contains(i)){
 				inventory.remove(inventory.indexOf(i));
 			}
-			if(ring1 != null){
-				inventory.add(0,ring1);
-				ring1 = null;
+			if(ring1 == null){
+				equipment.add(0, i);
+				ring1 = i;
+			} else {
+				if(ring2 != null){
+					inventory.add(0,ring2);
+					equipment.remove(equipment.indexOf(ring2));
+					ring2 = null;
+				}
+				equipment.add(0, i);
+				ring2 = i;
 			}
-			ring1 = i;
-		}
-		
-		if(type == "ring2"){
-			if(inventory.contains(i)){
-				inventory.remove(inventory.indexOf(i));
-			}
-			if(ring2 != null){
-				inventory.add(0,ring2);
-				ring2 = null;
-			}
-			ring2 = i;
 		}
 		
 	}

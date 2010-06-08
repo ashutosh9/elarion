@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 
 import game.Interface.PopupWindow;
+import game.Interface.Tooltip;
+import game.item.Item;
 import game.main.MainClass;
 
 public class HeroPopupWindow extends PopupWindow {
@@ -25,7 +27,7 @@ public class HeroPopupWindow extends PopupWindow {
 		this.hero = hero;
 		this.newChoice(" ","close", 700, 500, Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_pressed.jpg"), Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok_hovered.jpg"));
 		
-		Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+		Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 		this.newImg(img, 33, 33);
 		
 		img = hero.getIcon().getScaledInstance(56, 56, 1);
@@ -37,12 +39,22 @@ public class HeroPopupWindow extends PopupWindow {
 		s = new String("XP : " + hero.getExperience().x + " / " + hero.getExperience().y);
 		this.newText(s, 100, 80);
 		
-		img = Toolkit.getDefaultToolkit().getImage("Images/popup/stats2.png").getScaledInstance(300, 370, Image.SCALE_REPLICATE);
+		img = Toolkit.getDefaultToolkit().getImage("Images/popup/stats2.png").getScaledInstance(300, 370, Image.SCALE_DEFAULT);
 		this.newImg(img, 415, 33);
 		
 		s = new String("Level : " + hero.getLevel());
 		this.newText(s, 455, 80);
 		
+		int bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "strenght"){
+						bonus++;
+					}
+				}
+			}
+		}
 		s = new String("Strenght : " + hero.getCombatStats().getStrenght());
 		this.newText(s, 455, 110);
 		s = new String("Constitution : " + hero.getCombatStats().getConstitution());
@@ -77,6 +89,87 @@ public class HeroPopupWindow extends PopupWindow {
 		drawInventory(g);
 		drawEquipment(g);
 		drawUnits(g);
+		drawBonuses(g);
+	}
+	
+	public void drawBonuses(Graphics g){
+		int bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "strenght"){
+						bonus++;
+					}
+				}
+			}
+		}
+		String s = new String(" + " + bonus);
+		g.drawString(s, 595 + getX(), 110 + getY());
+		
+		bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "constitution"){
+						bonus++;
+					}
+				}
+			}
+		}
+		
+		s = new String(" + " + bonus);
+		g.drawString(s, 595 + getX(), 130 + getY());
+		
+		bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "dexterity"){
+						bonus++;
+					}
+				}
+			}
+		}
+		
+		s = new String(" + " + bonus);
+		g.drawString(s, 595 + getX(), 160 + getY());
+		bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "intelligence"){
+						bonus++;
+					}
+				}
+			}
+		}
+		s = new String(" + " + bonus);
+		g.drawString(s, 595 + getX(), 180 + getY());
+		bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "wisdom"){
+						bonus++;
+					}
+				}
+			}
+		}
+		s = new String(" + " + bonus);
+		g.drawString(s, 595 + getX(), 210 + getY());
+		bonus = 0;
+		for(Item i : hero.getEquipment().getEquipment()){
+			if(i!=null){
+				for(String str : i.getBonuses()){
+					if(str == "charisma"){
+						bonus++;
+					}
+				}
+			}
+		}
+		s = new String(" + " + bonus);
+		g.drawString(s, 595 + getX(), 230 + getY());
+
 	}
 	
 	public void drawInventory(Graphics g){
@@ -398,6 +491,7 @@ public class HeroPopupWindow extends PopupWindow {
 		}
 		
 		if(e.getButton() == MouseEvent.BUTTON3){
+			
 			for(int i = 0;i<8;i++){
 				Point start = new Point(i * 50 +365 + super.getX() - 2, 400 + super.getY() - 2);
 				Point end = new Point(i * 50 +415 + super.getX() - 2, 450 + super.getY() - 2);
@@ -407,9 +501,201 @@ public class HeroPopupWindow extends PopupWindow {
 					}
 				}
 			}
+			
+			int plusY = -40;
+			int minX = -320;
+			
+			for(int i = invIndex; i < (invIndex + 32);i++){
+				
+				if((i-invIndex)%8 == 0){
+					plusY += 40;
+					minX += 320;
+				}
+				
+				Point start = new Point(40 + (i-invIndex)*40 + super.getX() - 2 - minX, 400 + super.getY() - 2 + plusY);
+				Point end = new Point(80 + (i-invIndex)*40 + super.getX() - 2 - minX, 440 + super.getY() - 2 + plusY);
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getInventory().get(i) != null){
+						Tooltip t = new Tooltip(mc);
+						
+						Item item = hero.getInventory().get(i);
+						
+						Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+						t.newImg(img, 3, 3);
+						
+						img = item.getImage().getScaledInstance(56, 56, 1);
+						t.newImg(img, 5, 5);
+						
+						String s = item.getName();
+						if(s == null){
+							s = "";
+						}
+						t.newText(s, 70, 30);
+						s = new String("Prize : " + item.getCost());
+						t.newText(s, 70, 45);
+						
+						int bonus = 1;
+						if(item.getBonuses().get(0) != item.getBonuses().get(1)){
+							bonus++;
+						}
+						
+						if(!(bonus == 2)){
+							s = new String("Adds 2 to " + item.getBonuses().get(0) + ".");
+							t.newText(s, 20, 115);
+						} else {
+							s = new String("Adds 1 to " + item.getBonuses().get(0) + ".");
+							t.newText(s, 20, 100);
+							s = new String("Adds 1 to " + item.getBonuses().get(1) + ".");
+							t.newText(s, 20, 115);
+						}
+						
+						mc.setTooltip(t);
+					}
+					break;
+				}
+				
+				
+				start = new Point(40 + super.getX(), 280 + super.getY());
+				end = new Point(90 + super.getX(), 330 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getLeftHand()!=null){
+						ItemTooltip(hero.getEquipment().getLeftHand(), mc);
+					}
+				}
+				
+				start = new Point(135 + super.getX(), 260 + super.getY());
+				end = new Point(185 + super.getX(), 310 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getLegs()!=null){
+						ItemTooltip(hero.getEquipment().getLegs(), mc);
+					}
+				}
+		
+				start = new Point(230 + super.getX(), 280 + super.getY());
+				end = new Point(280 + super.getX(), 330 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getRightHand()!=null){
+						ItemTooltip(hero.getEquipment().getRightHand(), mc);
+					}
+				}
+		
+				start = new Point(40 + super.getX(), 220 + super.getY());
+				end = new Point(90 + super.getX(), 270 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getFeet()!=null){
+						ItemTooltip(hero.getEquipment().getFeet(), mc);
+					}
+				}
+		
+				start = new Point(135 + super.getX(), 190 + super.getY());
+				end = new Point(185 + super.getX(), 240 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getArmor()!=null){
+						ItemTooltip(hero.getEquipment().getArmor(), mc);
+					}
+				}
+		
+				start = new Point(230 + super.getX(), 220 + super.getY());
+				end = new Point(280 + super.getX(), 270 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getNeck()!=null){
+						ItemTooltip(hero.getEquipment().getNeck(), mc);
+					}
+				}
+		
+				start = new Point(40 + super.getX(), 160 + super.getY());
+				end = new Point(90 + super.getX(), 210 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getBracers()!=null){
+						ItemTooltip(hero.getEquipment().getBracers(), mc);
+					}
+				}
+				
+				start = new Point(135 + super.getX(), 120 + super.getY());
+				end = new Point(185 + super.getX(), 170 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getHead()!=null){
+						ItemTooltip(hero.getEquipment().getHead(), mc);
+					}
+				}
+		
+				start = new Point( 230 + super.getX(), 160 + super.getY());
+				end = new Point( 280 + super.getX(), 210 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getRing1()!=null){
+						ItemTooltip(hero.getEquipment().getRing1(), mc);
+					}
+				}
+		
+				start = new Point(40 + super.getX(), 100 + super.getY());
+				end = new Point(90 + super.getX(), 150 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getGloves()!=null){
+						ItemTooltip(hero.getEquipment().getGloves(), mc);
+					}
+				}
+		
+				start = new Point( 230 + super.getX(), 100 + super.getY());
+				end = new Point( 280 + super.getX(), 150 + super.getY());
+				
+				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+					if(hero.getEquipment().getRing2()!=null){
+						ItemTooltip(hero.getEquipment().getRing2(), mc);
+					}
+				}
+				
+			}
+			
 		}
 	
 	}	
+	
+	public void ItemTooltip(Item i,MainClass mc){
+		Tooltip t = new Tooltip(mc);
+		
+		Item item = i;
+		
+		Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+		t.newImg(img, 3, 3);
+		
+		img = item.getImage().getScaledInstance(56, 56, 1);
+		t.newImg(img, 5, 5);
+		
+		String s = item.getName();
+		if(s == null){
+			s = "";
+		}
+		t.newText(s, 70, 30);
+		s = new String("Prize : " + item.getCost());
+		t.newText(s, 70, 45);
+		
+		int bonus = 1;
+		if(item.getBonuses().get(0) != item.getBonuses().get(1)){
+			bonus++;
+		}
+		
+		if(!(bonus == 2)){
+			s = new String("Adds 2 to " + item.getBonuses().get(0) + ".");
+			t.newText(s, 20, 115);
+		} else {
+			s = new String("Adds 1 to " + item.getBonuses().get(0) + ".");
+			t.newText(s, 20, 100);
+			s = new String("Adds 1 to " + item.getBonuses().get(1) + ".");
+			t.newText(s, 20, 115);
+		}
+		
+		mc.setTooltip(t);
+	}
 	
 	public void mouseReleased(MouseEvent e,MainClass mc){
 		super.mouseReleased(e, mc);
