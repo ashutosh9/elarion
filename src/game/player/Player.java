@@ -29,6 +29,7 @@ public class Player {
 		currentPlayer = false;
 		currentViewAbsX = 0;
 		currentViewAbsY = 0;
+		name = "noname";
 	}
 	
 	public Player(String s){
