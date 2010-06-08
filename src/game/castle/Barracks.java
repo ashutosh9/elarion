@@ -38,12 +38,12 @@ public class Barracks extends CastleBuilding {
 	public void drawMenu(Graphics g, CastleView castleView) {
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/buildingMenuBackground.png"),101,101,null);
 		g.setColor(black);
-		g.fillRect(351, 201, 200, 200);
+		g.fillRect(151, 151, 200, 200);
 		g.setColor(white);
-		g.drawRect(351, 201, 200, 200);
-		g.drawString("Buy Swordsman",355,205);
-		g.drawString("Cost:",355,230);
-		g.drawString("Gold: 1500",355,255);
+		g.drawRect(151, 151, 200, 200);
+		g.drawString("Buy Swordsman",155,205);
+		g.drawString("Cost:",155,230);
+		g.drawString("Gold: 1500",155,255);
 		if (upgraded) {
 			g.drawString("Upgrade Bonus: +1000XP",425,305);
 		}
