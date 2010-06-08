@@ -342,8 +342,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 
 	
 			mouseChecker();
+			
+			if(currentBuilding==null){
 			currentViewChecker();
 			autoMovementChecker();
+			}
 		}
 	}
 	}
