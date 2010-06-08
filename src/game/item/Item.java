@@ -23,6 +23,7 @@ public class Item {
 		if(image == null){
 			image = Toolkit.getDefaultToolkit().getImage("Images/items/unknown_item.jpg");
 		}
+		bonuses = new ArrayList<String>();
 	}
 
 	public Image getImage() {
