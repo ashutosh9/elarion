@@ -172,6 +172,19 @@ public class Player {
 		}
 	}
 	
+	public void unselectHeroes(){
+		for(Hero hero : heroes){
+			hero.setSelected(false);
+			hero.setPath(null);
+		}
+	}
+	
+	public void unselectCastles(){
+		for(Castle castle : castles){
+			castle.setSelected(false);
+		}
+	}
+	
 	public void selectCastle(Castle c){
 		for(Castle castle : castles){
 			if((castle.getCurrentSquare().getX() == c.getCurrentSquare().getX()) && (castle.getCurrentSquare().getY() == c.getCurrentSquare().getY())){
@@ -180,6 +193,21 @@ public class Player {
 				castle.setSelected(false);
 			}
 		}
+	}
+	
+	public Castle getSelectedCastle(){
+		int i = 0;
+		boolean selected = false;
+		for(Castle c : castles){
+			if(c.isSelected()){
+				i = castles.indexOf(c);
+				selected = true;
+			}
+		}
+		if(selected){
+			return castles.get(i);
+		} 
+		return null;
 	}
 	
 	public ArrayList<Castle> getCastles(){

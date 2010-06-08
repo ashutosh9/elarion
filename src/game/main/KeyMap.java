@@ -24,6 +24,10 @@ public class KeyMap {
 					}
 				} 
 				
+				if(keyCode == KeyEvent.VK_ENTER){
+					mc.endedTurn();
+				}
+				
 				if(keyCode == KeyEvent.VK_ESCAPE){
 					mc.exitGamePopup();
 				}
