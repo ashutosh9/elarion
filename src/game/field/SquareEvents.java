@@ -41,4 +41,12 @@ public class SquareEvents {
 		}
 	}
 	
+	public void enterBuilding(Square s, Player p, MainClass mc) {
+		if(s.getBuilding()!= null) {
+			mc.clearPath();
+			s.getBuilding().setOwner(s.getHero().getOwner());
+			mc.setCurrentBuilding(s.getBuilding());
+		}
+	}
+	
 }

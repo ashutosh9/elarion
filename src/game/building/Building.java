@@ -1,45 +1,41 @@
 package game.building;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 
 import game.field.Field;
 import game.field.Square;
 import game.main.MainClass;
 import game.player.Player;
 
-@SuppressWarnings("unused")
 public class Building {
-	private int x; 
-	private int y; 
-	private Player owner;
-	private Square currentSquare;
-	private Image icon;
-	private Image currentSprite;
-	private MainClass mc;
-	private Field field;
+	protected int x; 
+	protected int y; 
+	protected Player owner;
+	protected Square currentSquare;
+	protected Image currentSprite;
+	protected MainClass mc;
+	protected Field field;
+	protected boolean inBuilding;
+	protected Color white = new Color (255,255,255);
+	protected Color black = new Color(0,0,0);
+	protected Color gold = new Color(250,210,10);
 	
 	public Building(int x, int y,Field f, MainClass mc) {
+		owner = null;
 		this.mc = mc;
 		this.x = x;
 		this.y = y;
-		this.field = field;
+		this.field = f;
 		currentSquare = field.getSquare(x, y);
 		field.getSquare(x,y).setBuilding(this);
-		field.getSquare(x+1,y).setBuilding(this);
-		field.getSquare(x,y-1).setBuilding(this);
-		field.getSquare(x+1,y-1).setBuilding(this);
 		field.getSquare(x+1,y).setPassable(false);
 		field.getSquare(x,y-1).setPassable(false);
 		field.getSquare(x+1,y-1).setPassable(false);
 	}
 
-	public Image getIcon() {
-		return icon;
-	}
-	
-	public void setIcon(Image img){
-		icon = img;
-	}
 	
 	public Image getImage() {
 		return currentSprite;
@@ -60,85 +56,20 @@ public class Building {
 	public void turnUpdate(int turn) {
 		
 	}
-	/*
-	public BuildingEvent getEvent() {
-		return null;
-	}
-
-	public Gather getGather() {
-
-		return null;
-	}
-
-	public Square[] getOccupiedSquares() {
-
-		return null;
-	}
-
-	public boolean getPassable() {
-
-		return false;
-	}
-
-	public BuildingType getType() {
-
-		return null;
-	}
-
-	public int getX() {
-
-		return 0;
-	}
-
-	public int getY() {
-
-		return 0;
-	}
-
-	public void removeEvent() {
-
+	
+	public void draw(Graphics g) {
 		
 	}
-
-	public void removeGather() {
-
+	
+	public void mousePressed(MouseEvent e) {
 		
 	}
-
-	public void setEvent(BuildingEvent e) {
-
-		
+	
+	public boolean isInBuilding() {
+		return inBuilding;
 	}
-
-	public void setGather(Gather g) {
-
-		
+	
+	public void setInBuilding(boolean b) {
+		inBuilding = b;
 	}
-
-	public void setPassable(boolean b) {
-
-		
-	}
-
-	public void setType(BuildingType t) {
-
-		
-	}
-
-	public void setX(int x) {
-
-		
-	}
-
-	public void setY(int y) {
-
-		
-	}
-
-	public void setupSquares() {
-
-		
-	}
-
-	*/
 }
