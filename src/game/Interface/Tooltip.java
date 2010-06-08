@@ -34,7 +34,7 @@ public class Tooltip {
 		opened = true;
 		setBackground(Toolkit.getDefaultToolkit().getImage("Images/tooltip/background.jpg"));
 		setX(Math.round(((1280 - 285))));
-		setY(Math.round(((800 - 205))));
+		setY(Math.round(((800 - 235))));
 	}
 		
 	public void update(long timePassed){

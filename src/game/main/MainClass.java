@@ -106,7 +106,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		players.getCurrentPlayer().getStone().setAmount(1000);
 		players.getCurrentPlayer().newHero(h,480, 480, field);
 		//players.getCurrentPlayer().newHero(h2,481, 480, field);
-		players.getPlayer(1).newHero(h2, 485, 484, field);
+		players.getPlayer(1).newHero(h2, 30, 40, field);
 		players.getCurrentPlayer().newCastle(c);
 		players.getPlayer(1).newCastle(c2);
 		
@@ -149,7 +149,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			w.addMouseMotionListener(this);
 			loaded = false;
 			running = true;
-			screenWidth = 33;
+			screenWidth = 35;
 			screenHeight = 22;
 			load();
 			if(loaded){
@@ -297,9 +297,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getCastle() != null){
 						Castle c = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getCastle();
-						g.drawImage(c.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-1)*img.getHeight(null) -
+						g.drawImage(c.getImage(), Math.round((x-1)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-2)*img.getHeight(null) -
 								players.getCurrentPlayer().getCurrentViewAbsY()), null);
-						
 					}
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
@@ -799,8 +798,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 						if(players.getCurrentPlayer().getSelectedCastle() == players.getCurrentPlayer().getCastles().get(i/40)){
 							enterCastle(players.getCurrentPlayer().getSelectedCastle());
 						} else {
-							players.getCurrentPlayer().unselectHeroes();
 							clearPath();
+							players.getCurrentPlayer().unselectHeroes();
 							players.getCurrentPlayer().selectCastle(castles.get(i/40));
 							castleChecker();
 						}
@@ -821,11 +820,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 								for(int ix = 0; ix<3;ix++){
 									for(int iy = 0;iy<3;iy++){
 										if((c.getRootSquare().getX() + ix == s.getX()) && (c.getRootSquare().getY() + iy == s.getY())){
+											if((ix==1) && (iy==2)){
+												break;
+											}
 											if(players.getCurrentPlayer().getSelectedCastle() == c){
 												enterCastle(players.getCurrentPlayer().getSelectedCastle());
 											} else {
-												players.getCurrentPlayer().unselectHeroes();
 												clearPath();
+												players.getCurrentPlayer().unselectHeroes();
 												players.getCurrentPlayer().selectCastle(c);
 											}
 											clicked = true;
