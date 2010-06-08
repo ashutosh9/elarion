@@ -17,6 +17,7 @@ public class Equipment {
 	private Item neck;
 	private Item gloves;
 	private Item bracers;
+	private ArrayList<Item> equipment;
 	
 	public Equipment(){
 		head = null;
@@ -30,6 +31,18 @@ public class Equipment {
 		neck = null;
 		gloves = null;
 		bracers = null;
+		equipment = new ArrayList<Item>();
+		equipment.add(head);
+		equipment.add(legs);
+		equipment.add(armor);
+		equipment.add(feet);
+		equipment.add(leftHand);
+		equipment.add(rightHand);
+		equipment.add(ring1);
+		equipment.add(ring2);
+		equipment.add(neck);
+		equipment.add(gloves);
+		equipment.add(bracers);
 	}
 	
 	public void equip(Item i, ArrayList<Item> inventory){
@@ -361,6 +374,14 @@ public class Equipment {
 
 	public void setBracers(Item bracers) {
 		this.bracers = bracers;
+	}
+
+	public void setEquipment(ArrayList<Item> equipment) {
+		this.equipment = equipment;
+	}
+
+	public ArrayList<Item> getEquipment() {
+		return equipment;
 	}
 
 }

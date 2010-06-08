@@ -345,7 +345,7 @@ public class Hero extends Unit {
 	}
 	
 	public void addItem(Item i){
-		inventory.add(i);
+		inventory.add(0,i);
 	}
 	
 	public void removeItem(Item i){

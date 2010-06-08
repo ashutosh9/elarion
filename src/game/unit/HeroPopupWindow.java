@@ -255,6 +255,12 @@ public class HeroPopupWindow extends PopupWindow {
 				Point end = new Point(80 + (7)*40 + super.getX() - 2, 400 + super.getY() - 2);
 				if(mc.isWithinBounds(mc.getMousePos(), start, end)){
 					invIndex += 32;
+					for(int i=0 + invIndex;i<(32+invIndex);i++){
+						//hero.addItem(null);
+						if(hero.getInventory().get(i) == null){
+							hero.getInventory().add(i, null);
+						}
+					}
 				}
 			} 
 			
