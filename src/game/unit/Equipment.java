@@ -292,22 +292,30 @@ public class Equipment {
 			bracers = i;
 		}
 		
-		if(type == "ring"){
+		if(type == "ring1"){
 			if(inventory.contains(i)){
 				inventory.remove(inventory.indexOf(i));
 			}
-			if(ring1 == null){
-				equipment.add(0, i);
-				ring1 = i;
-			} else {
-				if(ring2 != null){
-					inventory.add(0,ring2);
-					equipment.remove(equipment.indexOf(ring2));
-					ring2 = null;
-				}
-				equipment.add(0, i);
-				ring2 = i;
+			if(ring1 != null){
+				inventory.add(0,ring1);
+				equipment.remove(equipment.indexOf(ring1));
+				ring1 = null;
 			}
+			equipment.add(0, i);
+			ring1 = i;
+		}
+		
+		if(type == "ring2"){
+			if(inventory.contains(i)){
+				inventory.remove(inventory.indexOf(i));
+			}
+			if(ring2 != null){
+				inventory.add(0,ring2);
+				equipment.remove(equipment.indexOf(ring2));
+				ring2 = null;
+			}
+			equipment.add(0, i);
+			ring2 = i;
 		}
 		
 	}
