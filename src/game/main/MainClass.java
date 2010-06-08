@@ -72,8 +72,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		turnSystem = new TurnSystem();
 		Castle c = new Castle(479,478,field,mc);
 		Castle c2 = new Castle (5,5,field,mc);
-		Hero h = new Hero(mc);
-		Hero h2 = new Hero(mc);
+		Hero h = randomHeroGenerator.getRandomHero();
+		Hero h2 = randomHeroGenerator.getRandomHero();
 		h.setName("Erag Tone");
 		h.addItem(randomItemGenerator.getRandomItem());
 		h2.setName("Kirie");
@@ -94,7 +94,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		players.getCurrentPlayer().getStone().setAmount(1000);
 		players.getCurrentPlayer().newHero(h,480, 480, field);
 		//players.getCurrentPlayer().newHero(h2,481, 480, field);
-		players.getPlayer(1).newHero(h2, 30, 40, field);
+		players.getPlayer(1).newHero(h2, 485, 484, field);
 		players.getCurrentPlayer().newCastle(c);
 		players.getPlayer(1).newCastle(c2);
 		
@@ -339,7 +339,6 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			} else {
 				tooltip = new Minimap(this,field);
 			}
-
 	
 			mouseChecker();
 			

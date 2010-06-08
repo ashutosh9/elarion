@@ -3,6 +3,7 @@ package game.battle;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 
+import game.player.Player;
 import game.unit.Hero;
 import game.unit.Unit;
 
@@ -11,7 +12,7 @@ public class Combat {
 	public Hero attacker;
 	public Hero defender;
 
-	public Combat(Hero attacker , Hero defender){
+	public Combat(Hero attacker , Hero defender,Player attacking,Player defending){
 		
 		for(Unit u : attacker.getUnits()){
 			if(u.getType() == "Warrior"){
@@ -77,12 +78,14 @@ public class Combat {
 		
 		if(attacker.gethPower() > defender.gethPower()){
 			for(Unit u : defender.getUnits() ){
-			defender.removeUnit(u);
+				defender.removeUnit(u);
+				defending.removeHero(defender);
 			}
 		}
 		if(defender.gethPower() > attacker.gethPower()){
 			for(Unit u : attacker.getUnits() ){
 				attacker.removeUnit(u);
+				attacking.removeHero(attacker);
 			}
 		}
 	
