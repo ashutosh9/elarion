@@ -63,7 +63,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public static void main(String args[]){
 		mc = new MainClass();
-		itemGen = new RandomItemGenerator();
+		itemGen = new RandomItemGenerator(mc);
 		heroGen = new RandomHeroGenerator(mc);
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
@@ -285,7 +285,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
 						Building b = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding();
-						g.drawImage(b.getImage(), Math.round((x-1)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-2)*img.getHeight(null) -
+						g.drawImage(b.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-1)*img.getHeight(null) -
 								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
 					}
