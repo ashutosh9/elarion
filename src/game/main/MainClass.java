@@ -72,6 +72,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		Hero h = new Hero(mc);
 		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
+		for (int i=0; i<35; i++) {
+			h.getInventory().set(i,itemGen.getRandomItem());
+		}
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
 		players.getCurrentPlayer().getDeadHeroes().add(heroGen.getRandomHero());

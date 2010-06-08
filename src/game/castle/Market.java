@@ -85,14 +85,16 @@ public class Market extends CastleBuilding {
 				}
 			}
 			if (owner.getCurrentSquare().getHero() != null) {
-				if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),40 + (7)*40 + xInv, 410 + yInv,36,36,null);
+				if(owner.getCurrentSquare().getHero().getInventory().size() >= (invIndex + 32)) {
+					if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
+						g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
+						g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),40 + (7)*40 + xInv - 220, 410 + yInv,36,36,null);
+					} 
 				} else {
 					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
 					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right.jpg"),40 + (7)*40 + xInv - 220, 410 + yInv,36,36,null);
 				}
-				
+			
 				if(invIndex>0){
 					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),(7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
 					g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/left_available.jpg"),(7)*40 + xInv - 220, 410 + yInv,36,36,null);
@@ -110,8 +112,10 @@ public class Market extends CastleBuilding {
 						minX += 320;
 					}
 					Image img = null;
-					if(owner.getCurrentSquare().getHero().getInventory().get(i) != null){
-						img = owner.getCurrentSquare().getHero().getInventory().get(i).getImage();
+					if(owner.getCurrentSquare().getHero().getInventory().size() >= (invIndex + 32)) {
+						if(owner.getCurrentSquare().getHero().getInventory().get(i) != null){
+							img = owner.getCurrentSquare().getHero().getInventory().get(i).getImage();
+						}
 					} else {
 						img = Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg");
 					}
@@ -189,7 +193,7 @@ public class Market extends CastleBuilding {
 			if (!clicked) {
 				for (int i=0; i<8; i++) {
 					topLeft.setLocation(157+(40*i),331);
-					bottomRight.setLocation(220+(40*i),395);
+					bottomRight.setLocation(188+(40*i),362);
 					if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 						clicked = true;
 						if (items.get(i) != null) {
@@ -209,32 +213,41 @@ public class Market extends CastleBuilding {
 					Point start = new Point(40 + (i-invIndex)*40 + xInv - 2 - minX, 400 + yInv - 2 + plusY);
 					Point end = new Point(80 + (i-invIndex)*40 + xInv - 2 - minX, 440 + yInv - 2 + plusY);
 					if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-						if(owner.getCurrentSquare().getHero().getInventory().get(i) != null){
-							if(i == selection - 8){
-								owner.getCurrentSquare().getHero().getEquipment().equip(owner.getCurrentSquare().getHero().getInventory().get(i), owner.getCurrentSquare().getHero().getInventory());
-								selection = -1;
-							} else {
-								selection = i + 8;
+						if(owner.getCurrentSquare().getHero().getInventory().size() >= i + 1) {
+							if(owner.getCurrentSquare().getHero().getInventory().get(i) != null){
+								if(i == selection - 8){
+									owner.getCurrentSquare().getHero().getEquipment().equip(owner.getCurrentSquare().getHero().getInventory().get(i), owner.getCurrentSquare().getHero().getInventory());
+									selection = -1;
+								} else {
+									selection = (i + 8);
+								}
 							}
+							break;
 						}
-						break;
 					}
 				}
 				
-				if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
-					Point start = new Point(40 + (7)*40 + xInv - 2, 360 + yInv - 2);
-					Point end = new Point(80 + (7)*40 + xInv - 2, 400 + yInv - 2);
-					if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-						invIndex += 32;
+				if (!clicked) {
+					if(owner.getCurrentSquare().getHero().getInventory().size() >= (invIndex + 32)) {
+						if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
+							Point start = new Point(40 + (7)*40 + xInv - 220, 410 + yInv);
+							Point end = new Point(40 +(7)*40 + xInv - 185, 445 + yInv);
+							if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+								System.out.print("Clicked right\n");
+							invIndex += 32;
+							}
+						} 
 					}
-				} 
-				
-				if(invIndex>0){
-					Point start = new Point((7)*40 + xInv - 2, 360 + xInv - 2);
-					Point end = new Point((8)*40 + yInv - 2, 400 + yInv - 2);
-					if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-						invIndex -=32;
-						if(invIndex < 0 ) invIndex = 0;
+				}	
+				if (!clicked) {
+					if(invIndex>0){
+						Point start = new Point((7)*40 + xInv - 220, 410 + yInv);
+						Point end = new Point((7)*40 + xInv - 170, 450 + yInv);
+						if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+							System.out.print("Clicked left\n");
+							invIndex -=32;
+							if(invIndex < 0 ) invIndex = 0;
+						}
 					}
 				}
 			}
