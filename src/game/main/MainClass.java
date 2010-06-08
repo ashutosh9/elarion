@@ -52,8 +52,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static TurnSystem turnSystem;
 	private boolean inCastle = false;
 	private CastleView castleView;
-	private static RandomItemGenerator itemGen;
-	private static RandomHeroGenerator heroGen;
+	private static RandomItemGenerator randomItemGenerator;
+	private static RandomHeroGenerator randomHeroGenerator;
 	private Tooltip tooltip;
 	private Minimap minimap;
 	private static ResourceBar resourceBar;
@@ -63,8 +63,8 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	public static void main(String args[]){
 		mc = new MainClass();
-		itemGen = new RandomItemGenerator(mc);
-		heroGen = new RandomHeroGenerator(mc);
+		randomItemGenerator = new RandomItemGenerator(mc);
+		randomHeroGenerator = new RandomHeroGenerator(mc);
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
@@ -75,12 +75,19 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		Hero h = new Hero(mc);
 		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
-		h.addItem(itemGen.getRandomItem());
+		h.addItem(randomItemGenerator.getRandomItem());
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
 		WoodMine b1 = new WoodMine(mc,30,39,field);
 		
-		players.getCurrentPlayer().getDeadHeroes().add(heroGen.getRandomHero());
+		for(int i = 0;i<12;i++){
+			h.addItem(randomItemGenerator.getRandomItem());
+		}
+		
+		players.getCurrentPlayer().getDeadHeroes().add(randomHeroGenerator.getRandomHero());
+		
+		players.getCurrentPlayer().getDeadHeroes().add(randomHeroGenerator.getRandomHero());
+
 		
 		players.getCurrentPlayer().getGold().setAmount(100000);
 		players.getCurrentPlayer().getWood().setAmount(1000);
@@ -508,11 +515,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 	
 	public RandomHeroGenerator getHeroGen() {
-		return heroGen;
+		return randomHeroGenerator;
 	}
 	
 	public RandomItemGenerator getItemGen() {
-		return itemGen;
+		return randomItemGenerator;
 	}
 	
 	public Player getCurrentPlayer() {
