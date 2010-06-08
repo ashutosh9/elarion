@@ -7,7 +7,13 @@ import game.Interface.ResourceBar;
 import game.Interface.Screen;
 import game.Interface.SideMenu;
 import game.Interface.Tooltip;
+import game.building.Archery;
+import game.building.Barracks;
 import game.building.Building;
+import game.building.GoldMine;
+import game.building.MageTower;
+import game.building.Mill;
+import game.building.StoneMine;
 import game.building.WoodMine;
 import game.castle.Castle;
 import game.core.Path;
@@ -79,6 +85,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
 		WoodMine b1 = new WoodMine(mc,30,39,field);
+		StoneMine b2 = new StoneMine(mc,32,39,field);
+		GoldMine b3 = new GoldMine(mc,34,39,field);
+		Mill b4 = new Mill(mc,36,39,field);
+		Archery b5 = new Archery(mc,38,39,field);
+		Barracks b6 = new Barracks(mc,40,39,field);
+		MageTower b7 = new MageTower(mc,42,39,field);
 		
 		for(int i = 0;i<12;i++){
 			h.addItem(randomItemGenerator.getRandomItem());
