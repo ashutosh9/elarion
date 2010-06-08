@@ -8,6 +8,7 @@ import game.Interface.Screen;
 import game.Interface.SideMenu;
 import game.Interface.Tooltip;
 import game.building.Building;
+import game.building.WoodMine;
 import game.castle.Castle;
 import game.core.Path;
 import game.core.PathNode;
@@ -51,18 +52,19 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private static TurnSystem turnSystem;
 	private boolean inCastle = false;
 	private CastleView castleView;
-	private static RandomItemGenerator randomItemGenerator;
-	private static RandomHeroGenerator randomHeroGenerator;
+	private static RandomItemGenerator itemGen;
+	private static RandomHeroGenerator heroGen;
 	private Tooltip tooltip;
 	private Minimap minimap;
 	private static ResourceBar resourceBar;
 	private static SideMenu sideMenu;
 	private PopupWindow popupWindow = null;
+	private Building currentBuilding = null;
 	
 	public static void main(String args[]){
 		mc = new MainClass();
-		randomItemGenerator = new RandomItemGenerator(mc);
-		randomHeroGenerator = new RandomHeroGenerator(mc);
+		itemGen = new RandomItemGenerator();
+		heroGen = new RandomHeroGenerator(mc);
 		field = new Field(500,500);
 		// Visibility :: will be calculated every move depending on owned buildings of the player, owned heroes, their visibility and side effects
 		//ArrayList<Player> playerList = new ArrayList<Player>(12);
@@ -73,15 +75,12 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		Hero h = new Hero(mc);
 		Hero h2 = new Hero(mc);
 		h.setName("Erag Tone");
-		h.addItem(randomItemGenerator.getRandomItem());
+		h.addItem(itemGen.getRandomItem());
 		h2.setName("Kirie");
 		h2.setIcon(Toolkit.getDefaultToolkit().getImage("Images/heroes/human/human_hero_2.jpg"));
+		WoodMine b1 = new WoodMine(mc,30,39,field);
 		
-		for(int i = 0;i<35;i++){
-			h.addItem(randomItemGenerator.getRandomItem());
-		}
-		
-		players.getCurrentPlayer().getDeadHeroes().add(randomHeroGenerator.getRandomHero());
+		players.getCurrentPlayer().getDeadHeroes().add(heroGen.getRandomHero());
 		
 		players.getCurrentPlayer().getGold().setAmount(100000);
 		players.getCurrentPlayer().getWood().setAmount(1000);
@@ -217,6 +216,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		//combatView.setCombat(false);
 		
 		//if(!combatView.isCombat()) {
+		if (currentBuilding != null) {
+			currentBuilding.draw(g);
+		} else {
 		if(inCastle){
 			castleView.draw(g);
 		} else 
@@ -276,7 +278,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					
 					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getCastle() != null){
 						Castle c = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getCastle();
-						g.drawImage(c.getImage(), Math.round((x-1)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-2)*img.getHeight(null) -
+						g.drawImage(c.getImage(), Math.round((x)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-1)*img.getHeight(null) -
+								players.getCurrentPlayer().getCurrentViewAbsY()), null);
+						
+					}
+					
+					if(field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding() != null){
+						Building b = field.getSquare((x+2+players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getBuilding();
+						g.drawImage(b.getImage(), Math.round((x-1)*img.getWidth(null) - players.getCurrentPlayer().getCurrentViewAbsX()), Math.round((y-2)*img.getHeight(null) -
 								players.getCurrentPlayer().getCurrentViewAbsY()), null);
 						
 					}
@@ -330,7 +339,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			autoMovementChecker();
 		}
 	}
-
+	}
 	public void load() {
 		setMinimap(new Minimap(this,field));
 		setTooltip(getMinimap());
@@ -499,11 +508,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	}
 	
 	public RandomHeroGenerator getHeroGen() {
-		return randomHeroGenerator;
+		return heroGen;
 	}
 	
 	public RandomItemGenerator getItemGen() {
-		return randomItemGenerator;
+		return itemGen;
 	}
 	
 	public Player getCurrentPlayer() {
@@ -530,6 +539,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		return screenHeight;
 	}
 
+	public Building getCurrentBuilding() {
+		return currentBuilding;
+	}
+	
+	public void setCurrentBuilding(Building b) {
+		currentBuilding = b;
+	}
+	
 	public void clearPath(){
 		if(players.getCurrentPlayer().getSelectedHero() != null){
 			if(players.getCurrentPlayer().getSelectedHero().getPath() != null){
@@ -696,6 +713,11 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			clicked = true;
 		}
 		
+		if(currentBuilding != null) {
+			currentBuilding.mousePressed(e);
+			clicked = true;
+		}
+		
 		if(tooltip != null){
 			tooltip.mousePressed(e, this);
 			//clicked = true;
@@ -778,16 +800,14 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 								for(int ix = 0; ix<3;ix++){
 									for(int iy = 0;iy<3;iy++){
 										if((c.getRootSquare().getX() + ix == s.getX()) && (c.getRootSquare().getY() + iy == s.getY())){
-											if(!((iy==2) && (ix==1))){
-												if(players.getCurrentPlayer().getSelectedCastle() == c){
-													enterCastle(players.getCurrentPlayer().getSelectedCastle());
-												} else {
-													players.getCurrentPlayer().unselectHeroes();
-													clearPath();
-													players.getCurrentPlayer().selectCastle(c);
-												}
-												clicked = true;
+											if(players.getCurrentPlayer().getSelectedCastle() == c){
+												enterCastle(players.getCurrentPlayer().getSelectedCastle());
+											} else {
+												players.getCurrentPlayer().unselectHeroes();
+												clearPath();
+												players.getCurrentPlayer().selectCastle(c);
 											}
+											clicked = true;
 										}
 									}
 								}
