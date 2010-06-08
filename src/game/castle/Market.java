@@ -85,7 +85,7 @@ public class Market extends CastleBuilding {
 				}
 			}
 			if (owner.getCurrentSquare().getHero() != null) {
-				if(owner.getCurrentSquare().getHero().getInventory().size() >= (invIndex + 32)) {
+				if(owner.getCurrentSquare().getHero().getInventory().size() > (invIndex + 32)) {
 					if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
 						g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/empty/button.jpg"),40 + (7)*40 + xInv - 222, 410 + yInv - 2 + 0,40,40,null);
 						g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/inventory/right_available.jpg"),40 + (7)*40 + xInv - 220, 410 + yInv,36,36,null);
@@ -112,11 +112,11 @@ public class Market extends CastleBuilding {
 						minX += 320;
 					}
 					Image img = null;
-					if(owner.getCurrentSquare().getHero().getInventory().size() >= (invIndex + 32)) {
-						if(owner.getCurrentSquare().getHero().getInventory().get(i) != null){
-							img = owner.getCurrentSquare().getHero().getInventory().get(i).getImage();
+					if(owner.getCurrentSquare().getHero().getInventory().size() > (invIndex + i)) {
+						if(owner.getCurrentSquare().getHero().getInventory().get(i + invIndex) != null){
+							img = owner.getCurrentSquare().getHero().getInventory().get(i + invIndex).getImage();
 						}
-					} else {
+					}else {
 						img = Toolkit.getDefaultToolkit().getImage("Buttons/inventory/default.jpg");
 					}
 					if(i == selection - 8){
@@ -127,7 +127,7 @@ public class Market extends CastleBuilding {
 					g.drawImage(img,40 + (i-invIndex)*40 + xInv - minX, 400 + yInv + plusY,36,36, null);
 				}	
 				
-				g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg") ,(7)*40 + xInv - 257 - 25, 360 + yInv - 2 + 15,25,25,null);
+				g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/ok/button_ok.jpg") ,(7)*40 + xInv - 225, 550 + yInv,25,25,null);
 				
 			}
 		}
@@ -181,7 +181,7 @@ public class Market extends CastleBuilding {
 		}
 		
 		if (!clicked) {
-			topLeft.setLocation(501,501);
+			topLeft.setLocation(701,501);
 			bottomRight.setLocation(760,560);
 			if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
 				castleView.setMenuBuilding(-1);
@@ -216,7 +216,6 @@ public class Market extends CastleBuilding {
 						if(owner.getCurrentSquare().getHero().getInventory().size() >= i + 1) {
 							if(owner.getCurrentSquare().getHero().getInventory().get(i) != null){
 								if(i == selection - 8){
-									owner.getCurrentSquare().getHero().getEquipment().equip(owner.getCurrentSquare().getHero().getInventory().get(i), owner.getCurrentSquare().getHero().getInventory());
 									selection = -1;
 								} else {
 									selection = (i + 8);
@@ -225,30 +224,46 @@ public class Market extends CastleBuilding {
 							break;
 						}
 					}
-				}
-				
-				if (!clicked) {
-					if(owner.getCurrentSquare().getHero().getInventory().size() >= (invIndex + 32)) {
-						if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
-							Point start = new Point(40 + (7)*40 + xInv - 220, 410 + yInv);
-							Point end = new Point(40 +(7)*40 + xInv - 185, 445 + yInv);
-							if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-								System.out.print("Clicked right\n");
-							invIndex += 32;
-							}
-						} 
-					}
 				}	
-				if (!clicked) {
-					if(invIndex>0){
-						Point start = new Point((7)*40 + xInv - 220, 410 + yInv);
-						Point end = new Point((7)*40 + xInv - 170, 450 + yInv);
+			}
+			if (!clicked) {
+				if(owner.getCurrentSquare().getHero().getInventory().size() > (invIndex + 32)) {
+					if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
+						Point start = new Point(40 + (7)*40 + xInv - 220, 410 + yInv);
+						Point end = new Point(40 +(7)*40 + xInv - 185, 445 + yInv);
 						if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-							System.out.print("Clicked left\n");
-							invIndex -=32;
-							if(invIndex < 0 ) invIndex = 0;
+						invIndex += 32;
+						}
+					} 
+				}
+			}	
+			if (!clicked) {
+				if(invIndex>0){
+					Point start = new Point((7)*40 + xInv - 220, 410 + yInv);
+					Point end = new Point((7)*40 + xInv - 170, 450 + yInv);
+					if(mc.isWithinBounds(mc.getMousePos(), start, end)){
+						invIndex -=32;
+						if(invIndex < 0 ) invIndex = 0;
+					}
+				}
+			}
+			if (!clicked) {
+				topLeft.setLocation((7)*40 + xInv - 225, 550 + yInv);
+				bottomRight.setLocation((7)*40 + xInv - 193, 582 + yInv);
+				if(mc.isWithinBounds(mc.getMousePos(), topLeft, bottomRight)) {
+					if (selection != -1) {
+						if (selection < 8) {
+							if (items.get(selection).getCost() <= owner.getCurrentSquare().getHero().getOwner().getGold().getAmount()) {
+								owner.getCurrentSquare().getHero().getInventory().add(items.get(selection));
+								owner.getCurrentSquare().getHero().getOwner().getGold().removeAmount(items.get(selection).getCost());
+								items.set(selection,null);
+							}
+						} else {
+							owner.getCurrentSquare().getHero().getOwner().getGold().addAmount(owner.getCurrentSquare().getHero().getInventory().get(selection - 8).getCost());
+							owner.getCurrentSquare().getHero().getInventory().remove(selection - 8);
 						}
 					}
+				selection = -1;
 				}
 			}
 		}

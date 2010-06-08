@@ -8,8 +8,10 @@ public class Item {
 	private Image image;
 	private String type;
 	private String name;
+	private int cost;
 	
 	public Item(String type, Image img){
+		setCost(2000);
 		name = new String("?");
 		this.type = type;
 		this.image = img;
@@ -43,6 +45,14 @@ public class Item {
 
 	public String getName() {
 		return name;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	public int getCost() {
+		return cost;
 	}
 
 }
