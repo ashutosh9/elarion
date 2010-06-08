@@ -33,7 +33,7 @@ public class Mill extends Building{
 		if (visited) {
 			g.drawString("Resources already claimed", 153, 175);
 		} else { g.drawString("+2000 gold",153,175); }
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel"),501,501,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/cancel/button_cancel.jpg"),501,501,null);
 	}
 	
 	@Override
