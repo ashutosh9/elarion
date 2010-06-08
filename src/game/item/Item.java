@@ -2,6 +2,7 @@ package game.item;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 public class Item {
 
@@ -9,6 +10,7 @@ public class Item {
 	private String type;
 	private String name;
 	private int cost;
+	private ArrayList<String> bonuses;
 	
 	public Item(String type, Image img){
 		setCost(2000);
@@ -53,6 +55,14 @@ public class Item {
 
 	public int getCost() {
 		return cost;
+	}
+
+	public void setBonuses(ArrayList<String> bonuses) {
+		this.bonuses = bonuses;
+	}
+
+	public ArrayList<String> getBonuses() {
+		return bonuses;
 	}
 
 }

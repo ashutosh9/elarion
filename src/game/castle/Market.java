@@ -3,6 +3,7 @@ package game.castle;
 import game.graphic.CastleView;
 import game.item.Item;
 import game.main.MainClass;
+import game.unit.Hero;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -77,7 +78,7 @@ public class Market extends CastleBuilding {
 		if (upgraded) {
 			for (int i=0; i<8; i++) {
 				if(items.get(i) != null) {
-					g.drawImage(items.get(i).getImage(),157+(40*i),331,null);
+					g.drawImage(items.get(i).getImage(),157+(40*i),331,36,36,null);
 					if((selection) == i) {
 						g.setColor(gold);
 						g.drawRect(157+(40*i), 331, 36, 36);
@@ -229,10 +230,16 @@ public class Market extends CastleBuilding {
 			if (!clicked) {
 				if(owner.getCurrentSquare().getHero().getInventory().size() > (invIndex + 32)) {
 					if(owner.getCurrentSquare().getHero().getInventory().get(invIndex + 32) != null ){
+						Hero hero = owner.getCurrentSquare().getHero();
 						Point start = new Point(40 + (7)*40 + xInv - 220, 410 + yInv);
 						Point end = new Point(40 +(7)*40 + xInv - 185, 445 + yInv);
 						if(mc.isWithinBounds(mc.getMousePos(), start, end)){
-						invIndex += 32;
+							invIndex += 32;
+							for(int i=0 + invIndex;i<(32+invIndex);i++){
+								if(hero.getInventory().get(i) == null){
+									hero.getInventory().add(i, null);
+								}
+							}
 						}
 					} 
 				}
@@ -254,7 +261,7 @@ public class Market extends CastleBuilding {
 					if (selection != -1) {
 						if (selection < 8) {
 							if (items.get(selection).getCost() <= owner.getCurrentSquare().getHero().getOwner().getGold().getAmount()) {
-								owner.getCurrentSquare().getHero().getInventory().add(items.get(selection));
+								owner.getCurrentSquare().getHero().addItem(items.get(selection));
 								owner.getCurrentSquare().getHero().getOwner().getGold().removeAmount(items.get(selection).getCost());
 								items.set(selection,null);
 							}
