@@ -5,6 +5,7 @@ import game.Interface.PausePopupWindow;
 import game.Interface.PopupWindow;
 import game.Interface.ResourceBar;
 import game.Interface.Screen;
+import game.Interface.SideMenu;
 import game.Interface.Tooltip;
 import game.building.Building;
 import game.castle.Castle;
@@ -13,6 +14,7 @@ import game.core.PathNode;
 import game.core.TurnPopupWindow;
 import game.core.TurnSystem;
 import game.field.Field;
+import game.field.Square;
 import game.graphic.CastleView;
 import game.item.Item;
 import game.item.RandomItemGenerator;
@@ -56,6 +58,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	private Tooltip tooltip;
 	private Minimap minimap;
 	private static ResourceBar resourceBar;
+	private static SideMenu sideMenu;
 	private PopupWindow popupWindow = null;
 	
 	public static void main(String args[]){
@@ -95,6 +98,7 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 		h2.addUnit(testUnits2.getWarrior());
 		h2.addUnit(testUnits2.getArcher());
 		resourceBar = new ResourceBar();
+		sideMenu = new SideMenu();
 
 		
 
@@ -302,48 +306,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
-			//g.drawImage(a.getImage(), 0, 0, null);
-			//g.drawImage(sprite.getImage(),Math.round(sprite.getX()),Math.round(sprite.getY()), null);
-			//g.drawImage(face1,1060,30,null);
-			//g.drawImage(bg, 0, 0, null);
-			// array list for sprite && animations - returns every animation and every sprite
 	
-			resourceBar.draw(g, mc);			
-			
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),208,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),248,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),288,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),328,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),368,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),408,18,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),448,18,null);
-			
-			
-			int h = 210;
-			for(Hero hero : players.getCurrentPlayer().getHeroes()){
-				if(hero.isSelected()){
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero_selected.jpg"),(h-2),18,null);
-				} else {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(h-2),18,null);
-				}
-				g.drawImage(hero.getIcon(),h,20,null);
-				h += 40;
-			}
-			h = 310;
-			for(Castle castle : players.getCurrentPlayer().getCastles()){
-				if(castle.isSelected()){
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/castle_selected"),(h-2),18,null);
-				} else {
-					g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/castle/castle_icon"),(h-2),18,null);
-				}
-				g.drawImage(castle.getIcon(),h,20,null);
-				h += 40;
-			}
-			
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),38,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg"),(156),40,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),78,null);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),80,null);
+			resourceBar.draw(g, mc);					
+			sideMenu.draw(g,mc);
 			
 			if(popupWindow != null){
 				popupWindow.draw(g);
@@ -467,6 +432,60 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 			players.getCurrentPlayer().setCurrentView(field.getSquare(x,y));
 		}
 
+	}
+	
+	public void castleChecker(){
+		
+		int x = players.getCurrentPlayer().getSelectedCastle().getCurrentSquare().getX() - Math.round(screenWidth / 2) - 1;
+		int y = players.getCurrentPlayer().getSelectedCastle().getCurrentSquare().getY() - Math.round(screenHeight / 2) - 1;
+		
+		if(x < 0) {
+			x = 0;
+		} else if(x > (field.getWidth() - screenWidth - 2)) {
+			x = field.getWidth() - screenWidth - 2;
+		}
+		if(y < 0) {
+			y = 0;
+		} else if(y > (field.getHeight() - screenHeight - 2)) {
+			y = field.getHeight() - screenHeight - 2;
+		}
+		
+		if(players.getCurrentPlayer().getCurrentView().getX() > (x + 2)) {
+			int tempY = players.getCurrentPlayer().getCurrentView().getY();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(x,tempY));
+		}
+		if(players.getCurrentPlayer().getCurrentView().getX() < (x - 2)) {
+			int tempY = players.getCurrentPlayer().getCurrentView().getY();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(x,tempY));
+		}
+		if(players.getCurrentPlayer().getCurrentView().getY() > (y + 2)) {
+			int tempX = players.getCurrentPlayer().getCurrentView().getX();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(tempX,y));
+		}
+		if(players.getCurrentPlayer().getCurrentView().getY() < (y - 2)) {
+			int tempX = players.getCurrentPlayer().getCurrentView().getX();
+			players.getCurrentPlayer().setCurrentView(field.getSquare(tempX,y));
+		}
+		
+		if(players.getCurrentPlayer().getCurrentView().getX() < field.getSquare(x, y).getX()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsX();
+			players.getCurrentPlayer().setCurrentViewAbsX(i + 5);
+		} else if(players.getCurrentPlayer().getCurrentView().getX() > field.getSquare(x, y).getX()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsX();
+			players.getCurrentPlayer().setCurrentViewAbsX(i - 5);
+		} else {}
+		if(players.getCurrentPlayer().getCurrentView().getY() < field.getSquare(x, y).getY()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsY();
+			players.getCurrentPlayer().setCurrentViewAbsY(i + 5);
+		} else if(players.getCurrentPlayer().getCurrentView().getY() > field.getSquare(x, y).getY()) {
+			int i = players.getCurrentPlayer().getCurrentViewAbsY();
+			players.getCurrentPlayer().setCurrentViewAbsY(i - 5);
+		} else {}
+		
+		if(players.getCurrentPlayer().getCurrentView() == field.getSquare(x,y)){
+			players.getCurrentPlayer().setCurrentView(field.getSquare(x,y));
+		}
+		
 	}
 	
 	public void endedTurn(){
@@ -716,8 +735,27 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 							popupWindow = new HeroPopupWindow(this,players.getCurrentPlayer().getHeroes().get(i/40));
 							movingHeroChecker();
 						} else {
+							players.getCurrentPlayer().unselectCastles();
 							players.getCurrentPlayer().selectHero(heroes.get(i/40));
 							movingHeroChecker();
+						}
+						clicked = true;
+					}
+				}
+				for(int i = 0; i < 280; i += 40) {
+					long x = mousePos.x;
+					long y = mousePos.y;
+					int xi = 210 + i;
+					int ximax = 210 + i + 39;
+					if((x>xi) && (x<ximax) && (y>61) && (y<101) && (i/40 < players.getCurrentPlayer().getCastles().size())){
+						ArrayList<Castle> castles = players.getCurrentPlayer().getCastles();
+						if(players.getCurrentPlayer().getSelectedCastle() == players.getCurrentPlayer().getCastles().get(i/40)){
+							enterCastle(players.getCurrentPlayer().getSelectedCastle());
+						} else {
+							players.getCurrentPlayer().unselectHeroes();
+							clearPath();
+							players.getCurrentPlayer().selectCastle(castles.get(i/40));
+							castleChecker();
 						}
 						clicked = true;
 					}
@@ -729,14 +767,44 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 					for(int y = 0; y < (screenHeight + 1);y++){		
 						if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
 								&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
-							if(field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
-								Hero hero = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero();
-								if(players.getCurrentPlayer().getHeroes().contains(hero)){
-									clearPath();
-									players.getCurrentPlayer().selectHero(players.getCurrentPlayer().getHero(hero));
-									clicked = true;
+							
+							
+							Square s = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()));
+							for(Castle c : players.getCurrentPlayer().getCastles()){
+								for(int ix = 0; ix<3;ix++){
+									for(int iy = 0;iy<3;iy++){
+										if((c.getRootSquare().getX() + ix == s.getX()) && (c.getRootSquare().getY() + iy == s.getY())){
+											if(players.getCurrentPlayer().getSelectedCastle() == c){
+												enterCastle(players.getCurrentPlayer().getSelectedCastle());
+											} else {
+												players.getCurrentPlayer().unselectHeroes();
+												clearPath();
+												players.getCurrentPlayer().selectCastle(c);
+											}
+											clicked = true;
+										}
+									}
+								}
+
+							}
+							
+							
+							if(!clicked){
+								if(field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero() != null){
+									Hero hero = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY())).getHero();
+									if(players.getCurrentPlayer().getHeroes().contains(hero)){
+										if(players.getCurrentPlayer().getSelectedHero() == hero){
+											popupWindow = new HeroPopupWindow(this,hero);
+										} else {
+											players.getCurrentPlayer().unselectCastles();
+											clearPath();
+											players.getCurrentPlayer().selectHero(players.getCurrentPlayer().getHero(hero));
+										}
+										clicked = true;
+									}
 								}
 							}
+							
 						}
 					}
 				}
@@ -808,6 +876,221 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 				}
 			}
 			
+			if(!clicked){
+				for(int i = 0; i < 280; i += 40) {
+					long x = mousePos.x;
+					long y = mousePos.y;
+					int xi = 210 + i;
+					int ximax = 210 + i + 39;
+					if((x>xi) && (x<ximax) && (y>61) && (y<101) && (i/40 < players.getCurrentPlayer().getCastles().size())){
+						if(players.getCurrentPlayer().getCastles().get(i/40) != null){
+							Castle c = players.getCurrentPlayer().getCastles().get(i/40);
+							Tooltip t = new Tooltip(this);
+							Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+							t.newImg(img, 3, 3);
+							
+							img = c.getIcon().getScaledInstance(56, 56, 1);
+							t.newImg(img, 5, 5);
+							
+							String s = "Castle";
+							
+							t.newText(s, 70, 30);
+							setTooltip(t);
+							
+							s = new String("Owner : " + c.getOwner().getName());
+							t.newText(s, 70, 45);
+							
+							s = new String("Buildings available : " + c.getBuildLimit());
+							t.newText(s, 70, 60);
+							
+							String hero = "None";
+							
+							if(c.getGarrisonSquare().getHero() != null){
+								hero = c.getGarrisonSquare().getHero().getName();
+							}
+							s = new String("Garrisoned Hero : ");
+							t.newText(s, 20, 100);
+							s = new String("		" + hero);
+							t.newText(s, 20, 115);
+							
+							hero = "None";
+							if(c.getCurrentSquare().getHero() != null){
+								hero = c.getCurrentSquare().getHero().getName();
+							}
+							s = new String("Visiting Hero : ");
+							t.newText(s, 20, 155);
+							s = new String("		" + hero);
+							t.newText(s, 20, 170);
+						}
+						clicked = true;
+					}
+				}
+			}
+			
+			if(!clicked){
+				if(isWithinBounds(getMousePos(),new Point((156-2),38),new Point((196-2),78))){
+					Tooltip t = new Tooltip(this);
+					Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+					t.newImg(img, 3, 3);
+					
+					img = Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg").getScaledInstance(56, 56, 1);
+					t.newImg(img, 5, 5);
+					
+					String s = "End Turn";
+					
+					t.newText(s, 70, 30);
+					setTooltip(t);
+					clicked = true;
+				}
+				if(isWithinBounds(getMousePos(),new Point((156-2),78),new Point((196-2),118))){
+					
+					Tooltip t = new Tooltip(this);
+					Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+					t.newImg(img, 3, 3);
+					
+					img = Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg").getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+					t.newImg(img, 5, 5);
+					
+					String s = "Menu";
+					
+					t.newText(s, 70, 30);
+					setTooltip(t);
+					clicked = true;
+				}
+			}
+			
+			if(!clicked){
+				for(int x = 0; x < (screenWidth + 1);x++){
+					for(int y = 0; y < (screenHeight + 1);y++){				
+						if((mousePos.x > (x*40 - players.getCurrentPlayer().getCurrentViewAbsX())) && (mousePos.x < ((x)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsX())) 
+								&& (mousePos.y > (y*40 - players.getCurrentPlayer().getCurrentViewAbsY())) && (mousePos.y < ((y)*40 + 40 - players.getCurrentPlayer().getCurrentViewAbsY()))){
+							Square s = field.getSquare((x + 2 +players.getCurrentPlayer().getCurrentView().getX()),(y+2+players.getCurrentPlayer().getCurrentView().getY()));
+							for(Castle c : players.getCurrentPlayer().getCastles()){
+								for(int ix = 0; ix<3;ix++){
+									for(int iy = 0;iy<3;iy++){
+										if((c.getRootSquare().getX() + ix == s.getX()) && (c.getRootSquare().getY() + iy == s.getY())){
+											Tooltip t = new Tooltip(this);
+											Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+											t.newImg(img, 3, 3);
+											
+											img = c.getIcon().getScaledInstance(56, 56, 1);
+											t.newImg(img, 5, 5);
+											
+											String str = "Castle";
+											
+											t.newText(str, 70, 30);
+											setTooltip(t);
+											
+											str = new String("Owner : " + c.getOwner().getName());
+											t.newText(str, 70, 45);
+											
+											str = new String("Buildings available : " + c.getBuildLimit());
+											t.newText(str, 70, 60);
+											
+											String hero = "None";
+											
+											if(c.getGarrisonSquare().getHero() != null){
+												hero = c.getGarrisonSquare().getHero().getName();
+											}
+											str = new String("Garrisoned Hero : ");
+											t.newText(str, 20, 100);
+											str = new String("		" + hero);
+											t.newText(str, 20, 115);
+											
+											hero = "None";
+											if(c.getCurrentSquare().getHero() != null){
+												hero = c.getCurrentSquare().getHero().getName();
+											}
+											str = new String("Visiting Hero : ");
+											t.newText(str, 20, 155);
+											str = new String("		" + hero);
+											t.newText(str, 20, 170);
+											setTooltip(t);
+											clicked = true;
+										}
+									}
+								}
+
+							}
+							if((s.getHero() != null) && (!clicked)){
+								setTooltip(new UnitTooltip(this, s.getHero()));
+							} else if((s.getResource() != null) && (!clicked)){
+								Tooltip t = new Tooltip(this);
+								if(s.getResource().getName() == "gold"){
+									Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+									t.newImg(img, 3, 3);
+									img = Toolkit.getDefaultToolkit().getImage("Buttons/resource/gold.jpg").getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+									t.newImg(img, 5, 5);
+									String string = new String("X : " + s.getX() + " , Y : " + s.getY());
+									t.newText(string, 70, 45);
+									string = "Gold";
+									t.newText(string, 70, 30);
+								}
+								if(s.getResource().getName() == "wood"){
+									Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+									t.newImg(img, 3, 3);
+									img = Toolkit.getDefaultToolkit().getImage("Buttons/resource/wood.jpg").getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+									t.newImg(img, 5, 5);
+									String string = new String("X : " + s.getX() + " , Y : " + s.getY());
+									t.newText(string, 70, 45);
+									string = "Wood";
+									t.newText(string, 70, 30);
+								}
+								if(s.getResource().getName() == "stone"){
+									Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+									t.newImg(img, 3, 3);
+									img = Toolkit.getDefaultToolkit().getImage("Buttons/resource/stone.jpg").getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+									t.newImg(img, 5, 5);
+									String string = new String("X : " + s.getX() + " , Y : " + s.getY());
+									t.newText(string, 70, 45);
+									string = "Stone";
+									t.newText(string, 70, 30);
+								}
+								setTooltip(t);
+							} else if((s.getItem() != null) && (!clicked)){
+								Tooltip t = new Tooltip(this);
+								if(s.getItem().getType() == "chest"){
+									Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+									t.newImg(img, 3, 3);
+									img = Toolkit.getDefaultToolkit().getImage("src/game/images/resource/chest.png").getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+									t.newImg(img, 9, 9);
+									String string = new String("X : " + s.getX() + " , Y : " + s.getY());
+									t.newText(string, 70, 45);
+									string = "Treasure Chest";
+									t.newText(string, 70, 30);
+								} else {
+									Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+									t.newImg(img, 3, 3);
+									img = s.getItem().getImage().getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+									t.newImg(img, 5, 5);
+									String string = new String("X : " + s.getX() + " , Y : " + s.getY());
+									t.newText(string, 70, 45);
+									string = s.getItem().getName();
+									t.newText(string, 70, 30);
+								}
+								setTooltip(t);
+								
+							} else if((s.getBuilding() != null) && (!clicked)){
+								
+							} else if(!clicked) {
+								Tooltip t = new Tooltip(this);
+								Image img = Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg").getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+								t.newImg(img, 3, 3);
+								img = Toolkit.getDefaultToolkit().getImage("src/game/images/terrain/Grass2.jpg").getScaledInstance(56, 56, Image.SCALE_SMOOTH);
+								t.newImg(img, 5, 5);
+								String string = new String("X : " + s.getX() + " , Y : " + s.getY());
+								t.newText(string, 70, 45);
+								string = "Grass";
+								t.newText(string, 70, 30);
+								setTooltip(t);
+							}
+							
+							break;
+						}
+					}
+				}					
+			}
+			
 
 			
 			
@@ -817,6 +1100,9 @@ public class MainClass implements KeyListener,MouseMotionListener,MouseListener 
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if(tooltip != null){
+			tooltip.mouseReleased(e, this);
+		}
 		if(e.getButton() == MouseEvent.BUTTON3){
 			tooltip = getMinimap();
 		}

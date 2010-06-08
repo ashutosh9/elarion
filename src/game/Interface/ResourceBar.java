@@ -18,7 +18,7 @@ public class ResourceBar {
 		Font font = new Font(Font.SERIF, Font.BOLD, 17);
 		g.setFont(font);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,20,null);
-		String string = "X: " + mc.getCurrentPlayer().getCurrentView().getX() + "   Y: " + mc.getCurrentPlayer().getCurrentView().getY();
+		String string =  mc.getCurrentPlayer().getName();
 		g.drawString(string,30,40);
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,45,null);
 		string = "Gold: " + mc.getCurrentPlayer().getGold().getAmount();
@@ -32,6 +32,11 @@ public class ResourceBar {
 		g.drawImage(Toolkit.getDefaultToolkit().getImage("src/game/images/test/ResourceBar.jpg"),20,120,null);
 		string = "Turn: " + mc.getTurnSystem().getCurrentTurn();
 		g.drawString(string,30,140);
+		
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),38,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/hourglass.jpg"),(156),40,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Images/heroes/hero.jpg"),(156-2),78,null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("Buttons/menu/menu.jpg"),(156),80,null);
 	}
 	
 }

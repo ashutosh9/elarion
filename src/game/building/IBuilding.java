@@ -16,8 +16,6 @@ public interface IBuilding {
 		
 		public abstract BuildingEvent getEvent();
 		
-		public abstract Gather getGather();
-		
 		public abstract void setImage(Image i);
 		
 		public abstract Image getImage();
@@ -33,8 +31,6 @@ public interface IBuilding {
 		public abstract void setEvent(BuildingEvent e);
 		
 		public abstract void removeEvent();
-		
-		public abstract void setGather(Gather g);
 		
 		public abstract void removeGather();
 		
