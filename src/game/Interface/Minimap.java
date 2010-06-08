@@ -18,6 +18,7 @@ public class Minimap extends Tooltip {
 	private int rectWidth;
 	private int rectHeight;
 	private Field f;
+	private boolean dragging;
 
 	public Minimap(MainClass mc,Field f) {
 		super(mc);
@@ -70,6 +71,7 @@ public class Minimap extends Tooltip {
 		visibleY =(int) Math.round(((double)mc.getCurrentPlayer().getCurrentView().getY() / (double) f.getHeight()) * 190);
 		visibleX += 40;
 		visibleY += 5;
+		dragging(mc);
 	}
 	
 	public void draw(Graphics g){
@@ -79,39 +81,49 @@ public class Minimap extends Tooltip {
 	
 	public void mousePressed(MouseEvent e,MainClass mc){
 		super.mousePressed(e, mc);
-		
-		if(mc.isWithinBounds(mc.getMousePos(), new Point((40 + getX()),(5 + getY())), new Point((240 + getX()),(195 + getY())))){
-			
-			double x;
-			double y;
-			
-			x=mc.getMousePos().x;
-			y=mc.getMousePos().y;
-			
-			x -= getX() + 40;
-			y -= getY() + 5;
-			
-			x = x / 200;
-			y = y / 190;
-			
-			x = x*f.getWidth();
-			y = y*f.getHeight();
-			
-			if(Math.round(x - mc.getScreenWidth()/2)<0){
-				x=Math.round(mc.getScreenWidth()/2) + 1;
+		dragging = true;
+	}
+	
+	public void mouseReleased(MouseEvent e,MainClass mc){
+		super.mouseReleased(e, mc);
+		dragging = false;
+	}
+	
+	private void dragging(MainClass mc){
+		if(dragging){
+			if(mc.isWithinBounds(mc.getMousePos(), new Point((40 + getX()),(5 + getY())), new Point((240 + getX()),(195 + getY())))){
+				
+				double x;
+				double y;
+				
+				x=mc.getMousePos().x;
+				y=mc.getMousePos().y;
+				
+				x -= getX() + 40;
+				y -= getY() + 5;
+				
+				x = x / 200;
+				y = y / 190;
+				
+				x = x*f.getWidth();
+				y = y*f.getHeight();
+				
+				if(Math.round(x - mc.getScreenWidth()/2)<0){
+					x=Math.round(mc.getScreenWidth()/2) + 1;
+				}
+				if(Math.round(y - mc.getScreenHeight()/2) < 0){
+					y=Math.round(mc.getScreenHeight()/2) + 1;
+				}
+				if(Math.round(x)>f.getWidth() - mc.getScreenWidth() + 3){
+					x=f.getWidth() - mc.getScreenWidth() + 14;
+				}
+				if(Math.round(y)>f.getHeight() - mc.getScreenHeight() + 3){
+					y=f.getHeight() - mc.getScreenHeight() + 8;
+				}
+	
+				mc.getCurrentPlayer().setCurrentView(f.getSquare((int)Math.round(x - mc.getScreenWidth()/2),(int)Math.round(y - mc.getScreenHeight()/2)));
+				
 			}
-			if(Math.round(y - mc.getScreenHeight()/2) < 0){
-				y=Math.round(mc.getScreenHeight()/2) + 1;
-			}
-			if(Math.round(x)>f.getWidth() - mc.getScreenWidth() + 3){
-				x=f.getWidth() - mc.getScreenWidth() + 14;
-			}
-			if(Math.round(y)>f.getHeight() - mc.getScreenHeight() + 3){
-				y=f.getHeight() - mc.getScreenHeight() + 8;
-			}
-
-			mc.getCurrentPlayer().setCurrentView(f.getSquare((int)Math.round(x - mc.getScreenWidth()/2),(int)Math.round(y - mc.getScreenHeight()/2)));
-			
 		}
 	}
 
@@ -129,6 +141,14 @@ public class Minimap extends Tooltip {
 
 	public int getRectHeight() {
 		return rectHeight;
+	}
+
+	public void setDragging(boolean dragging) {
+		this.dragging = dragging;
+	}
+
+	public boolean isDragging() {
+		return dragging;
 	}
 	
 	

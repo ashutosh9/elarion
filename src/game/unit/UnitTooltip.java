@@ -18,6 +18,9 @@ public class UnitTooltip extends Tooltip {
 		this.newImg(img, 5, 5);
 		
 		String s = u.getName();
+		if(s == null){
+			s = "";
+		}
 		
 		this.newText(s, 70, 30);
 		s = new String("XP : " + u.getExperience().x + " / " + u.getExperience().y);

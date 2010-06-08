@@ -48,6 +48,7 @@ public class Castle {
 		//Builds the structure objects
 		background = Toolkit.getDefaultToolkit().getImage("Images/castle/Background.png");
 		currentSprite = Toolkit.getDefaultToolkit().getImage("Images/castle/castle.png");
+		icon = Toolkit.getDefaultToolkit().getImage("Images/castle/castle_icon.jpg").getScaledInstance(36, 36, Image.SCALE_SMOOTH);
 		keep = new Keep(this,mc);
 		townhall = new TownHall(this,mc);
 		barracks = new Barracks(this,mc);
@@ -63,9 +64,9 @@ public class Castle {
 		buildings.add(magetower);
 		buildings.add(market);
 		buildings.add(tavern);
-		setCurrentSquare(f.getSquare(x, y+1));
 		setGarrisonSquare(f.getSquare(x, y));
 		setSwapSquare(f.getSquare(x-1,y));
+		setCurrentSquare(f.getSquare(x, y+1));
 		f.getSquare(x, y+1).setCastle(this);
 		f.getSquare(x-1, y+1).setPassable(false);
 		f.getSquare( x-1,  y).setPassable(false);
