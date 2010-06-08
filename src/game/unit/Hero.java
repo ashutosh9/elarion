@@ -338,14 +338,6 @@ public class Hero extends Unit {
 		f.getEvents().pickUpResource(getCurrentSquare(), getOwner());
 		f.getEvents().enterCastle(getCurrentSquare(), owner, mc);
 		f.getEvents().enterBuilding(getCurrentSquare(), owner, mc);
-		for(int i=-1;i<2;i++){
-			for(int j=-1;j<2;j++){
-				if((i==0) && (j==0)){
-					continue;
-				}
-				
-			}
-		}
 		
 		//remove movement points
 		setMovementPoints(getMovementPoints() - 10);
